@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "startedAt": "2026-10-29T00:42:07.940Z",
+  "finishedAt": "2026-10-29T00:42:08.581Z",
+  "generatedOn": {
+    "hostname": "Felix-Work-Macbook.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "logicalCpus": 8,
+    "cpu": "Apple M1 Pro",
+    "totalMemoryBytes": 17179869184,
+    "node": "v24.12.0"
+  },
+  "terrain": {
+    "sha256": "ca9cb7e17298217655242c801f579959dd9ff3fde1ec6e38d9564626fe9b5388",
+    "width": 160,
+    "height": 160,
+    "bbox": [
+      -103.9,
+      20.1,
+      -102.8,
+      21.15
+    ],
+    "cellSizeX": 715.4684254906417,
+    "cellSizeY": 729.7177140325578,
+    "source": "Mapzen / AWS Open Data terrain tiles"
+  },
+  "solverSha256": "8da8ca5c4372bc13f2b8b3993e2ddac88c810353fca9f0c6740123f8350ac197",
+  "parameters": {
+    "durationMinutes": 60,
+    "rainfallMmH": 40,
+    "infiltrationMmH": 3,
+    "drainageMmH": 0,
+    "dtSeconds": 10,
+    "openBoundary": true
+  },
+  "performance": {
+    "wallTimeMs": 633.916084,
+    "cpuUserMs": 653.046,
+    "cpuSystemMs": 16.282,
+    "rssBytesAfter": 86884352,
+    "nodeReportedMaxRssKiB": 84848
+  },
+  "checks": {
+    "allDepthFinite": true,
+    "allDepthNonnegative": true,
+    "allFlowXFinite": true,
+    "allFlowYFinite": true,
+    "completed": true,
+    "massBalanceRelativeError": 1.1203322237544457e-10,
+    "rainInputMatchesArea": true,
+    "pass": true
+  },
+  "stats": {
+    "rainVolumeM3": 534620143.4602177,
+    "infiltrationVolumeM3": 40096510.75913674,
+    "drainageVolumeM3": 0,
+    "outflowVolumeM3": 10876276.152903305,
+    "storedVolumeM3": 483647356.6080729,
+    "massBalanceErrorM3": -0.059895217418670654,
+    "maxDepthM": 0.13835384821402782,
+    "wetCells": 25600,
+    "activeCells": 25600,
+    "simulatedAreaM2": 13365503588.134514,
+    "steps": 360,
+    "totalSteps": 360,
+    "openBoundary": true
+  },
+  "note": "Numerical conservation/finite-values benchmark on real coarse terrain. Not validation of physical flood predictions or street-scale depths."
+}

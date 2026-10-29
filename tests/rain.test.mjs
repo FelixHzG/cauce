@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {runSimulation} from '../dist/rain-core.js';
+const terrain = z => ({width:3,height:3,cellSizeX:10,cellSizeY:10,elevation:z});
+const close = (a,b,tolerance=1e-7) => assert.ok(Math.abs(a-b)<tolerance, `${a} != ${b}`);
+const verify = result => {close(result.stats.massBalanceErrorM3,0,1e-6); assert.ok([...result.depth].every(d=>d>=0&&Number.isFinite(d)));};
+const flat = runSimulation(terrain(Array(9).fill(100)),{rainfallMmH:60,durationMinutes:60,infiltrationMmH:0,openBoundary:false});
+verify(flat);close(flat.stats.storedVolumeM3,54);flat.depth.forEach(d=>close(d,0.06));
+const slope = runSimulation(terrain([3,2,1,3,2,1,3,2,1]),{rainfallMmH:30,durationMinutes:20,infiltrationMmH:0,openBoundary:false});
+verify(slope);assert.ok(slope.depth[2]>slope.depth[0]);
+const infiltrated=runSimulation(terrain(Array(9).fill(100)),{rainfallMmH:20,durationMinutes:60,infiltrationMmH:5,drainageMmH:2,openBoundary:false});
+verify(infiltrated);close(infiltrated.stats.storedVolumeM3,11.7);close(infiltrated.stats.infiltrationVolumeM3,4.5);close(infiltrated.stats.drainageVolumeM3,1.8);
+const open = runSimulation(terrain(Array(9).fill(100)),{rainfallMmH:60,durationMinutes:60,infiltrationMmH:0});verify(open);assert.ok(open.stats.outflowVolumeM3>0);
+const masked=runSimulation(terrain([null,0,0,0,null,0,0,0,null]),{rainfallMmH:40,durationMinutes:10,infiltrationMmH:80});verify(masked);close(masked.stats.storedVolumeM3,0);assert.equal(masked.stats.activeCells,6);assert.equal(masked.depth[0],0);
+const dry=runSimulation(terrain(Array(9).fill(100)),{rainfallMmH:0,durationMinutes:60});verify(dry);close(dry.stats.maxDepthM,0);
+assert.throws(()=>runSimulation(terrain(Array(9).fill(null)),{}),/no valid/);
+console.log('Rain solver: 7 conservation, flow, infiltration, drainage, boundary, mask and dry-grid checks passed.');
