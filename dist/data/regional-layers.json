@@ -1,1 +1,73 @@
-{"layers":[]}
+{
+  "source": "OpenStreetMap contributors",
+  "sourceUrl": "https://www.openstreetmap.org/copyright",
+  "layers": [
+    {
+      "id": "regional-water-glow",
+      "url": "./data/water-network.geojson",
+      "type": "line",
+      "line": true,
+      "paint": {
+        "line-color": "#60e8ef",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          2.5,
+          13,
+          5,
+          16,
+          10
+        ],
+        "line-blur": 3,
+        "line-opacity": 0.28
+      },
+      "attribution": "© OpenStreetMap contributors"
+    },
+    {
+      "id": "regional-waterways",
+      "url": "./data/water-network.geojson",
+      "type": "line",
+      "line": true,
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "waterway"
+          ],
+          "canal",
+          "#bded8a",
+          [
+            "drain",
+            "ditch"
+          ],
+          "#e7a0d4",
+          "#60e8ef"
+        ],
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          0.6,
+          13,
+          1.6,
+          16,
+          3.2
+        ],
+        "line-opacity": 0.82
+      },
+      "attribution": "© OpenStreetMap contributors"
+    }
+  ]
+}
