@@ -44,6 +44,7 @@
   document.querySelectorAll('[data-basemap]').forEach(button => button.addEventListener('click', () => {
     if (!map.isStyleLoaded()) return;
     activeBasemap = button.dataset.basemap;
+    document.body.dataset.basemap = activeBasemap;
     for (const layer of ['satellite','streets','hillshade']) map.setLayoutProperty(layer,'visibility', (activeBasemap === 'relief' ? layer === 'hillshade' : layer === activeBasemap) ? 'visible':'none');
     document.querySelectorAll('[data-basemap]').forEach(item => item.classList.toggle('active',item === button));
   }));

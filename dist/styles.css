@@ -4,3 +4,6 @@
 .flood-legend{display:flex;gap:17px;font-size:8px;color:#7a8772;margin:12px 0 0 21px}.flood-legend i{display:inline-block;width:7px;height:7px;border-radius:2px;background:#43cec8;margin-right:5px}.flood-legend span+span i{background:#f47d66}
 
 .inegi-row{margin-top:17px}.inegi-row .water-icon{color:#8e9e4c}
+
+/* Keep map labels readable on light cartography. */
+body[data-basemap="relief"] .masthead,body[data-basemap="streets"] .masthead,body[data-basemap="relief"] .location-tag,body[data-basemap="streets"] .location-tag{color:#153e35}body[data-basemap="relief"] .masthead-rule,body[data-basemap="streets"] .masthead-rule{border-color:#153e3538}body[data-basemap="relief"] .brand svg,body[data-basemap="streets"] .brand svg{stroke:#517343}body[data-basemap="relief"] .brand-dot,body[data-basemap="streets"] .brand-dot{color:#72914d}body[data-basemap="relief"] .map-vignette,body[data-basemap="streets"] .map-vignette{background:linear-gradient(180deg,#f3f5e4b8,transparent 26%,transparent 76%,#e8edd766)}
