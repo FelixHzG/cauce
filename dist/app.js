@@ -42,13 +42,13 @@
     if (errorCounts[source] === 3) announce(source === 'terrain' || source === 'shade' ? 'Parte del relieve no está disponible. Puedes seguir explorando el mapa.' : 'Algunas teselas no cargaron. Prueba otra vista del mapa.',true,7000);
   });
   document.querySelectorAll('[data-basemap]').forEach(button => button.addEventListener('click', () => {
-    if (!map.isStyleLoaded()) return;
+    if (!loaded) return;
     activeBasemap = button.dataset.basemap;
     document.body.dataset.basemap = activeBasemap;
     for (const layer of ['satellite','streets','hillshade']) map.setLayoutProperty(layer,'visibility', (activeBasemap === 'relief' ? layer === 'hillshade' : layer === activeBasemap) ? 'visible':'none');
     document.querySelectorAll('[data-basemap]').forEach(item => item.classList.toggle('active',item === button));
   }));
-  $('#exaggeration').addEventListener('input', event => { const value = Number(event.target.value); $('#exaggeration-value').textContent = value.toFixed(1)+'×'; if (map.isStyleLoaded()) map.setTerrain(value === 0 ? null : {source:'terrain',exaggeration:value}); });
+  $('#exaggeration').addEventListener('input', event => { const value = Number(event.target.value); $('#exaggeration-value').textContent = value.toFixed(1)+'×'; if (loaded) map.setTerrain(value === 0 ? null : {source:'terrain',exaggeration:value}); });
   $('#pitch').addEventListener('input', event => { $('#pitch-value').textContent = event.target.value+'°'; map.setPitch(Number(event.target.value)); });
   map.on('pitch', () => {const value = Math.round(map.getPitch()); $('#pitch').value = String(value); $('#pitch-value').textContent = value+'°';});
   function goTo(place) { const preset = places[place]; map.flyTo({...preset,duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:2200,essential:false}); $('#place-title').textContent = preset.title; $('#place-description').textContent = preset.description; document.querySelectorAll('[data-place]').forEach(item => item.classList.toggle('active',item.dataset.place === place)); }
@@ -65,7 +65,10 @@
       const credit=document.createElement('p');credit.className='popup-note';credit.textContent='IMEPLAN · MUI 2026. Registro publicado; no es una predicción.';wrap.append(credit);
       new maplibregl.Popup({maxWidth:'280px'}).setLngLat(event.lngLat).setDOMContent(wrap).addTo(map);return;
     }
-    const elevation = map.queryTerrainElevation(event.lngLat, {exaggerated:false});
+    // MapLibre returns exaggerated elevation; normalize before displaying metres.
+    const sampledElevation = map.queryTerrainElevation(event.lngLat);
+    const terrainScale = Number(map.getTerrain()?.exaggeration ?? 1);
+    const elevation = Number.isFinite(sampledElevation) && terrainScale > 0 ? sampledElevation / terrainScale : null;
     const wrap = document.createElement('div');
     const label = document.createElement('span'); label.className = 'eyebrow'; label.textContent = 'ELEVACIÓN DEL TERRENO'; wrap.append(label);
     const number = document.createElement('div'); number.className = 'elevation-number'; number.textContent = Number.isFinite(elevation) ? Math.round(elevation).toLocaleString('es-MX') : '—'; const unit = document.createElement('small'); unit.textContent = ' m'; number.append(unit); wrap.append(number);
