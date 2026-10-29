@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cauce. · Video demo</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+:root{color-scheme:dark;--bg:#0e161a;--ink:#e8f1f0;--muted:#8fa3a6;--accent:#5ee6d0}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
+main{width:100%;max-width:1280px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+h1{margin:0;font-size:28px;letter-spacing:-.02em}h1 span{color:var(--accent)}
+p{margin:0;color:var(--muted)}
+video{display:block;width:100%;height:auto;border-radius:12px;background:#000;border:1px solid #1f2d33}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+footer{margin-top:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<header><h1>cauce<span>.</span></h1><p>Zona Metropolitana de Guadalajara · sitios de inundación + ríos y arroyos</p></header>
+<video src="cauce-zmg.mp4" poster="poster.jpg" controls autoplay muted loop playsinline preload="metadata"></video>
+<footer><span>Registros IMEPLAN 2026 y cauces OSM. Un registro no es una predicción.</span><a href="../">Abrir el atlas ↗</a></footer>
+</main>
+</body>
+</html>
