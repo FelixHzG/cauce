@@ -4,25 +4,114 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>cauce. · Video demo</title>
-<link rel="icon" href="../favicon.svg">
+<meta name="description" content="Video demo de cauce.: recorrido de 2 minutos por el atlas de inundaciones de Guadalajara: terreno INEGI de 5 m, simulaciones de lluvia, navegación que esquiva inundaciones y dónde invertir en drenaje.">
+<link rel="icon" href="/favicon.svg">
+<meta property="og:title" content="cauce. · Video demo">
+<meta property="og:image" content="https://guadalajara.vsfelix.com/labs/video/poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#0e161a;--ink:#e8f1f0;--muted:#8fa3a6;--accent:#5ee6d0}
+:root{color-scheme:dark;--bg:#0b1317;--panel:#111d22;--line:#1d2e35;--ink:#e6f0ef;--muted:#8fa3a8;--cyan:#72eee2}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
-main{width:100%;max-width:1280px}
-header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-h1{margin:0;font-size:28px;letter-spacing:-.02em}h1 span{color:var(--accent)}
-p{margin:0;color:var(--muted)}
-video{display:block;width:100%;height:auto;border-radius:12px;background:#000;border:1px solid #1f2d33}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-footer{margin-top:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 'DM Sans',system-ui,sans-serif;padding:24px 16px 56px}
+main{max-width:1240px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.mark{display:inline-flex;align-items:center;gap:10px;font:800 34px Manrope,sans-serif;letter-spacing:-2px;color:#eef7f3;text-decoration:none}
+.mark svg{width:30px;height:30px;fill:none;stroke:var(--cyan);stroke-width:2.4;stroke-linecap:round}.mark em{font-style:normal;color:var(--cyan)}
+.mark small{font:600 13px 'DM Sans';letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+header p{margin:0;color:var(--muted);max-width:620px}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:12px;background:#000;border:1px solid var(--line)}
+.chapters{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 6px;max-height:min(70vh,640px);overflow:auto}
+.chapters h2,.protos h2{font:600 12px 'DM Sans';letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:4px 10px 8px}
+.chapters a{display:flex;gap:10px;align-items:baseline;padding:5px 10px;border-radius:8px;color:var(--ink);font-size:14px}
+.chapters a:hover{background:#18272d;text-decoration:none}.chapters a.on{background:#163036}
+.chapters a time{font:500 12px ui-monospace,Consolas,monospace;color:var(--cyan);min-width:36px}
+.chapters a.sec{font-weight:600;margin-top:6px}.chapters a.sub{color:#c3d2d5;padding-left:20px}
+.note{margin:12px 0 0;color:var(--muted);font-size:13.5px}
+.protos,.facts{margin-top:30px}.facts h2{font:600 12px 'DM Sans';letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:4px 10px 8px}
+.facts-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.fact{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.fact span{color:var(--muted);font-size:13.5px}
+nav.top{display:flex;gap:16px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.proto{display:flex;flex-direction:column;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink)}
+.proto:hover{border-color:var(--cyan);text-decoration:none}.proto span{color:var(--muted);font-size:13.5px}.proto i{font-style:normal;color:var(--cyan);font-size:12.5px;margin-top:4px}
+footer{margin-top:30px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 <main>
-<header><h1>cauce<span>.</span></h1><p>Zona Metropolitana de Guadalajara · sitios de inundación + ríos y arroyos</p></header>
-<video src="cauce-zmg.mp4" poster="poster.jpg" controls autoplay muted loop playsinline preload="metadata"></video>
-<footer><span>Registros IMEPLAN 2026 y cauces OSM. Un registro no es una predicción.</span><span><a href="/labs/video/">Recorrido de los labs (2:10) ↗</a> · <a href="../">Abrir el atlas ↗</a></span></footer>
+<header>
+  <div><a class="mark" href="/"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 11c9-11 17 11 26 0M3 20c9-11 17 11 26 0M3 29c9-11 17 11 26 0"/></svg><span>cauce<em>.</em></span><small>video demo</small></a>
+  <p>Guadalajara se inunda cada temporada de lluvias y ningún navegador te avisa. cauce. junta terreno INEGI de 5 m, los 310 sitios inundables de IMEPLAN y simulaciones de lluvia para mostrar dónde se junta el agua, cómo llegar sin cruzarla y dónde hace falta drenaje. Todo lo que aparece es la interfaz real, grabada cuadro por cuadro.</p></div>
+  <nav class="top"><a href="/">Abrir el atlas ↗</a><a href="/labs/">Labs ↗</a><a href="https://github.com/FelixHzG/cauce">Código ↗</a></nav>
+</header>
+<div class="layout">
+  <div>
+    <video id="v" src="/labs/video/cauce-labs.mp4" poster="/labs/video/poster.jpg" controls playsinline preload="metadata"></video>
+    <p class="note">Los modelos son exploratorios, no pronósticos. Los registros de IMEPLAN son históricos, no avisos en vivo. Sin audio. · <a href="/labs/video/cauce-labs-vertical.mp4">Versión vertical (1080×1920)</a> · <a href="cauce-zmg.mp4">Vuelo de 12 s sobre la ZMG</a></p>
+  </div>
+  <nav class="chapters" aria-label="Capítulos">
+    <h2>Capítulos</h2>
+    <a class="sec" href="#t=0.0" data-t="0.00"><time>0:00</time><span>Apertura: lluvia sobre la ciudad</span></a>
+    <a class="sec" href="#t=7.4" data-t="7.40"><time>0:07</time><span>01 · El terreno</span></a>
+    <a class="sub" href="#t=9.1" data-t="9.10"><time>0:09</time><span>Terreno INEGI de 5 m</span></a>
+    <a class="sub" href="#t=17.8" data-t="17.80"><time>0:17</time><span>Relieve: el camino del agua</span></a>
+    <a class="sec" href="#t=21.9" data-t="21.90"><time>0:21</time><span>02 · ¿Dónde se junta el agua?</span></a>
+    <a class="sub" href="#t=23.6" data-t="23.60"><time>0:23</time><span>Relieve: ¿lo plano se inunda?</span></a>
+    <a class="sub" href="#t=29.2" data-t="29.20"><time>0:29</time><span>Lluvia sobre la ciudad · 5 m</span></a>
+    <a class="sub" href="#t=44.2" data-t="44.20"><time>0:44</time><span>Drenaje: ¿dónde sí ayuda?</span></a>
+    <a class="sec" href="#t=55.4" data-t="55.45"><time>0:55</time><span>03 · Navegar sin mojarse</span></a>
+    <a class="sub" href="#t=57.1" data-t="57.15"><time>0:57</time><span>Mochi · pastel moe</span></a>
+    <a class="sub" href="#t=65.7" data-t="65.65"><time>1:05</time><span>Papel · recortes y risografía</span></a>
+    <a class="sub" href="#t=73.4" data-t="73.35"><time>1:13</time><span>Juguete · diorama 3D</span></a>
+    <a class="sub" href="#t=82.2" data-t="82.15"><time>1:22</time><span>Neón · noche de tormenta</span></a>
+    <a class="sub" href="#t=90.7" data-t="90.65"><time>1:30</time><span>Pixel · misión de 16 bits</span></a>
+    <a class="sec" href="#t=99.0" data-t="98.95"><time>1:38</time><span>04 · ¿Dónde invertir?</span></a>
+    <a class="sub" href="#t=100.7" data-t="100.65"><time>1:40</time><span>Atlas de prioridad</span></a>
+    <a class="sub" href="#t=109.0" data-t="108.95"><time>1:48</time><span>Historia ilustrada</span></a>
+    <a class="sub" href="#t=116.9" data-t="116.85"><time>1:56</time><span>Alcaldía por un día</span></a>
+    <a class="sec" href="#t=125.3" data-t="125.25"><time>2:05</time><span>Créditos y enlaces</span></a>
+  </nav>
+</div>
+<section class="facts">
+  <h2>Lo que encontramos</h2>
+  <div class="grid facts-grid">
+<div class="fact"><b>Lo plano se inunda porque es bajo</b><span>La altura sobre el cauce más cercano predice los sitios inundables (AUC 0.79). A igual altura, lo plano no agrega nada.</span></div>
+<div class="fact"><b>66 % de las manzanas sin boca de tormenta</b><span>INEGI, Inventario Nacional de Viviendas 2020. No existe un inventario público de la red pluvial del SIAPA.</span></div>
+<div class="fact"><b>252 km² con 15 cm o más</b><span>Tormenta de 100 años (83 mm en 1 h) sobre terreno de 5 m con edificios, 73.8 millones de celdas en GPU.</span></div>
+<div class="fact"><b>El drenaje rinde con lluvias frecuentes</b><span>Más capacidad quita 54 % del área inundada con la tormenta de 2 años y 25 % con la de 100. Unos 72 km² necesitan almacenamiento.</span></div>
+<div class="fact"><b>El plan más eficiente deja fuera a quien más lo necesita</b><span>Maximizar personas por peso manda 0.3 % del beneficio a zonas de alta marginación, donde vive 12.6 % de la población expuesta.</span></div>
+  </div>
+  <p class="note">Modelos exploratorios, no pronósticos. Los registros de IMEPLAN son históricos, no avisos en vivo.</p>
+</section>
+<section class="protos">
+  <h2>Abrir cada prototipo</h2>
+  <div class="grid">
+<a class="proto" href="/labs/sim-hidro/"><b>Lluvia sobre la ciudad</b><span>simulación de aguas someras, 5 m, GPU</span><i>/labs/sim-hidro/ ↗</i></a>
+<a class="proto" href="/labs/terrain-check/"><b>Terreno INEGI 5 m</b><span>verificación del relieve</span><i>/labs/terrain-check/ ↗</i></a>
+<a class="proto" href="/labs/sim-relieve/"><b>Relieve: ¿dónde se junta el agua?</b><span>índices del terreno e hipótesis «lo plano se inunda»</span><i>/labs/sim-relieve/ ↗</i></a>
+<a class="proto" href="/labs/sim-drenaje/"><b>Drenaje: ¿dónde sí ayuda?</b><span>ensamble de 126 corridas y control de capacidad</span><i>/labs/sim-drenaje/ ↗</i></a>
+<a class="proto" href="/labs/nav-mochi/"><b>Navegación · Mochi</b><span>pastel moe</span><i>/labs/nav-mochi/ ↗</i></a>
+<a class="proto" href="/labs/nav-papel/"><b>Navegación · Papel</b><span>recortes y risografía</span><i>/labs/nav-papel/ ↗</i></a>
+<a class="proto" href="/labs/nav-juguete/"><b>Navegación · Juguete</b><span>diorama 3D</span><i>/labs/nav-juguete/ ↗</i></a>
+<a class="proto" href="/labs/nav-neon/"><b>Navegación · Neón</b><span>noche de tormenta</span><i>/labs/nav-neon/ ↗</i></a>
+<a class="proto" href="/labs/nav-pixel/"><b>Navegación · Pixel</b><span>misión de 16 bits</span><i>/labs/nav-pixel/ ↗</i></a>
+<a class="proto" href="/labs/invertir-1/"><b>Dónde invertir · Atlas de prioridad</b><span>personas expuestas × vulnerabilidad</span><i>/labs/invertir-1/ ↗</i></a>
+<a class="proto" href="/labs/invertir-2/"><b>Dónde invertir · Historia ilustrada</b><span>scrollytelling en gouache</span><i>/labs/invertir-2/ ↗</i></a>
+<a class="proto" href="/labs/invertir-3/"><b>Dónde invertir · Alcaldía por un día</b><span>juego de presupuesto</span><i>/labs/invertir-3/ ↗</i></a>
+  </div>
+</section>
+<footer><span>Datos: INEGI (MDT/MDS 5 m, Censo 2020) · IMEPLAN (Mapa Único de Inundaciones 2026) · OpenStreetMap / OpenFreeMap · Overture Maps · CONAPO · ESA WorldCover.</span><span><a href="/">guadalajara.vsfelix.com</a> · <a href="https://github.com/FelixHzG/cauce">github.com/FelixHzG/cauce</a></span></footer>
 </main>
+<script>
+const v = document.getElementById('v'), links = [...document.querySelectorAll('.chapters a')];
+function go(t, play) { const s = () => { v.currentTime = t; if (play) v.play().catch(() => {}); }; v.readyState >= 1 ? s() : v.addEventListener('loadedmetadata', s, {once: true}); }
+function fromHash() { const m = location.hash.match(/t=([\d.]+)/); if (m) go(+m[1], false); }
+links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); history.replaceState(null, '', a.getAttribute('href')); go(+a.dataset.t, true); }));
+v.addEventListener('timeupdate', () => { let cur = null; for (const a of links) if (+a.dataset.t <= v.currentTime + 0.05) cur = a; links.forEach(a => a.classList.toggle('on', a === cur)); });
+addEventListener('hashchange', fromHash); fromHash();
+</script>
 </body>
 </html>
