@@ -1,11 +1,11 @@
 {
  "source": "/srv/contorno/data/guadalajara-flood-lab/labs",
  "served": "https://guadalajara.vsfelix.com/labs/",
- "snapshot": "2026-10-30T17:31:32.703Z",
- "kept": 166,
+ "snapshot": "2026-10-30T23:07:58.758Z",
+ "kept": 167,
  "excluded": {
-  "files": 66236,
-  "bytes": 1588134502
+  "files": 66237,
+  "bytes": 1618422018
  },
  "excludedByFolder": {
   "shared/hazard/modeled": {
@@ -35,6 +35,15 @@
     "shared/terrain/hillshade/10/216/452.png"
    ]
   },
+  "video": {
+   "files": 3,
+   "bytes": 105656465,
+   "examples": [
+    "video/cauce-demo.mp4",
+    "video/cauce-labs-vertical.mp4",
+    "video/cauce-labs.mp4"
+   ]
+  },
   "shared/infra/buildings": {
    "files": 4992,
    "bytes": 102983404,
@@ -51,14 +60,6 @@
     "shared/terrain/ndsm/10/216/450.png",
     "shared/terrain/ndsm/10/216/451.png",
     "shared/terrain/ndsm/10/216/452.png"
-   ]
-  },
-  "video": {
-   "files": 2,
-   "bytes": 75368949,
-   "examples": [
-    "video/cauce-labs-vertical.mp4",
-    "video/cauce-labs.mp4"
    ]
   },
   "nav-juguete": {

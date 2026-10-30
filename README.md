@@ -6,7 +6,7 @@ Proyecto para el hackathon de Codex (octubre de 2026).
 
 | | |
 |---|---|
-| **Video demo (2:10)** | https://codex-hackaton.vsfelix.com/video-demo/ |
+| **Video demo (1:15)** | https://codex-hackaton.vsfelix.com/video-demo/ |
 | **Atlas** | https://codex-hackaton.vsfelix.com |
 | **Navegar sin mojarse** | https://codex-hackaton.vsfelix.com/labs/nav-mochi/ |
 | **Labs: navegación, simulaciones, dónde invertir** | https://codex-hackaton.vsfelix.com/labs/ |
@@ -14,6 +14,8 @@ Proyecto para el hackathon de Codex (octubre de 2026).
 Los mismos sitios responden también en `guadalajara.vsfelix.com`.
 
 [![Video demo de cauce.](docs/img/video-poster.jpg)](https://codex-hackaton.vsfelix.com/video-demo/)
+
+El video demo sigue una tarde de tormenta de la Glorieta Minerva al aeropuerto con la navegación Mochi, muestra de dónde sale su mapa de riesgo y termina en dónde invertir. En la misma página está el recorrido completo de los labs (2:10), con los cinco estilos de navegación que probamos.
 
 *In English: cauce. is a 3D flood atlas of metropolitan Guadalajara, Mexico. It combines INEGI's 5 m terrain, the 310 flood sites recorded by the metro planning agency (IMEPLAN) and rain simulations run on a home GPU, then uses them for navigation that routes around flood-prone streets and for maps of where drainage investment would help most. [English summary below](#in-english).*
 
@@ -137,5 +139,7 @@ cauce. ("riverbed") is a 3D flood atlas of metropolitan Guadalajara, Mexico, bui
 - **Where to invest** (`/labs/invertir-*`): a priority atlas with adjustable weights, an illustrated story and a budget game.
 
 Findings (exploratory, not forecasts): flat areas flood only because they are low (height above nearest drainage, AUC 0.79); 66 % of city blocks have no storm inlet; more drainage removes 54 % of flooded area in a 2-year storm but 25 % in a 100-year storm; and the most cost-efficient plan sends 0.3 % of its benefit to high-marginalization areas that hold 12.6 % of the exposed population.
+
+Video demo (1:15): https://codex-hackaton.vsfelix.com/video-demo/ (a stormy drive from Glorieta Minerva to the airport with the Mochi navigation, where its risk map comes from, and where to invest; the 2:10 tour of every prototype is on the same page).
 
 Run locally with `node serve.mjs` (Node.js 18+, no dependencies); test with `node --test tests/rain.test.mjs`.

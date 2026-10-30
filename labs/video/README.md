@@ -3,6 +3,35 @@
 Live: https://guadalajara.vsfelix.com/labs/video/ · file: `cauce-labs.mp4` (2 min 10 s, 1920×1080, 30 fps, H.264 High,
 faststart, no audio, 52.3 MB, 2-pass 3.2 Mbit/s) · `poster.jpg` · `cauce-labs-vertical.mp4` (34.8 s, 1080×1920, 23 MB) · agent: `video`.
 
+## The Mochi demo (`cauce-demo.mp4`, 2026-10-30): the submitted video
+
+Live at https://codex-hackaton.vsfelix.com/video-demo/ (and `/video-demo.mp4` redirects to it) · 1:15.5, 1920×1080,
+30 fps, H.264 High, faststart, no audio, 30.3 MB, 2-pass 3.2 Mbit/s · poster `cauce-demo-poster.jpg`. Made after the owner
+picked Mochi as the navigation design; the 2:10 tour below stays on the same page.
+
+| start | length | shot | source |
+|---|---|---|---|
+| 0:00.0 | 3.6 s | m-title | pastel card: «Navegar sin mojarse en Guadalajara» |
+| 0:03.1 | 40.0 s | m-drive | `nav-mochi` v2, the whole demo timeline t 0–40 s at 1× (1,200 frames), no added captions |
+| 0:43.0 | 2.5 s | m-hold | last drive frame held so the «¡Llegamos secos!» summary can be read |
+| 0:45.0 | 2.4 s | m-sec-modelo | card «¿Cómo sabe dónde se inunda?» |
+| 0:47.0 | 8.0 s | m-hidro | `sim-hidro` t 3–15 s at 1.5× (frames of the 2:10 tour) · caption |
+| 0:54.6 | 8.0 s | m-drenaje | `sim-drenaje` t 6–14 s · caption: the heatmap of the navigation comes from these 126 storms |
+| 1:02.2 | 2.2 s | m-sec-inv | card «¿Dónde invertir?» |
+| 1:04.0 | 6.0 s | m-inv3 | `invertir-3` t 1–7 s · caption |
+| 1:09.5 | 6.0 s | m-end | links: nav-mochi, atlas, GitHub; data credits |
+
+- Capture: `work/video/mkjobs-mochi.mjs` writes three jobs (t 0–13.4, 13.4–26.8, 26.8–40) for the three W10 workers
+  (`launchq.ps1 -Queue queue6`), ~0.45 s per frame on the RX 580, ~3 min; `w10/merge.mjs` joins them into
+  `frames/mochi2/drive`.
+- Graphics: `gfx.html` gained `theme=mochi` (Fredoka + Nunito, plum ink, candy pink, mint, Gotita) and `kind=poster`;
+  `work/video/mkmochi.mjs` writes `w10/gfx-mochi.json` and `w10/edl-mochi.json`. `edit.mjs` now takes several captions
+  per clip (`lts`).
+- Checks: `w10/check-mochi.cmd` (poster and a 4×4 sheet of stills from the final encode); SHA-256 of the copy on the VPS
+  matches W10.
+
+## The 2:10 tour (`cauce-labs.mp4`)
+
 A short montage of the cauce. labs prototypes. **Every moving image is the real interface of a prototype**, rendered
 frame by frame on W10's GPU through each prototype's own demo hook (`window.__cauceDemo.seek(t)`). Nothing was screen
 recorded, retimed by interpolation, drawn over or mocked up. The only added graphics are the title, section and end cards
