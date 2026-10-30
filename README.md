@@ -7,11 +7,11 @@ Proyecto para el hackathon de Codex (octubre de 2026).
 | | |
 |---|---|
 | **Video demo (1:15)** | https://codex-hackaton.vsfelix.com/video-demo/ |
-| **Atlas** | https://codex-hackaton.vsfelix.com |
+| **Atlas** | https://codex-hackaton.vsfelix.com/index.html |
 | **Navegar sin mojarse** | https://codex-hackaton.vsfelix.com/labs/nav-mochi/ |
 | **Labs: navegación, simulaciones, dónde invertir** | https://codex-hackaton.vsfelix.com/labs/ |
 
-Los mismos sitios responden también en `guadalajara.vsfelix.com`.
+La página de inicio abre directamente la navegación Mochi; el atlas está en `/index.html`. Los mismos sitios responden también en `guadalajara.vsfelix.com`.
 
 [![Video demo de cauce.](docs/img/video-poster.jpg)](https://codex-hackaton.vsfelix.com/video-demo/)
 
@@ -23,7 +23,7 @@ El video demo sigue una tarde de tormenta de la Glorieta Minerva al aeropuerto c
 
 ## Qué hay
 
-### 1. El atlas (`/`)
+### 1. El atlas (`/index.html`)
 
 Mapa 3D del relieve con los sitios de inundación de IMEPLAN, ríos y arroyos de OpenStreetMap, edificios en 3D, la cobertura de los modelos de terreno de INEGI y una simulación de lluvia que corre en el navegador sobre la elevación real, con balance de agua a la vista.
 
@@ -133,7 +133,7 @@ node --test tests/rain.test.mjs
 
 cauce. ("riverbed") is a 3D flood atlas of metropolitan Guadalajara, Mexico, built for the Codex hackathon (October 2026). Guadalajara floods every rainy season, and no navigation app warns you about it.
 
-- **Atlas** (`/`): 3D terrain with IMEPLAN's 310 recorded flood sites, OSM rivers and streams, 3D buildings and an in-browser rain model with a visible water balance.
+- **Atlas** (`/index.html`; the home page opens the navigation): 3D terrain with IMEPLAN's 310 recorded flood sites, OSM rivers and streams, 3D buildings and an in-browser rain model with a visible water balance.
 - **Navigation** (`/labs/nav-mochi/`): a pastel navigation mode that follows a 3D car and routes around recorded flood sites and flood-prone underpasses, plus four alternative styles explored with the same router (risograph, toy diorama, neon storm, 16-bit pixel).
 - **Simulations** (`/labs/sim-*`): a 5 m shallow-water rain model (73.8 M cells, WebGPU on a home RX 580) for 2-, 10- and 100-year storms; a terrain-index test of the hypothesis "flat areas flood"; and a 132-run storm × drainage-capacity ensemble.
 - **Where to invest** (`/labs/invertir-*`): a priority atlas with adjustable weights, an illustrated story and a budget game.
