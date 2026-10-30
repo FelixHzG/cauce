@@ -1,11 +1,11 @@
 {
  "source": "/srv/contorno/data/guadalajara-flood-lab/labs",
  "served": "https://guadalajara.vsfelix.com/labs/",
- "snapshot": "2026-10-30T06:29:05.965Z",
- "kept": 165,
+ "snapshot": "2026-10-30T17:31:32.703Z",
+ "kept": 166,
  "excluded": {
-  "files": 66235,
-  "bytes": 1586854071
+  "files": 66236,
+  "bytes": 1588134502
  },
  "excludedByFolder": {
   "shared/hazard/modeled": {
@@ -148,6 +148,13 @@
    "bytes": 1516090,
    "examples": [
     "shared/infra/osm-waterways.geojson"
+   ]
+  },
+  "nav-mochi": {
+   "files": 1,
+   "bytes": 1280431,
+   "examples": [
+    "nav-mochi/data/riesgo-modelado.geojson"
    ]
   },
   "shared/hazard/observed-gdl-reportes-2010-2022.geojson": {

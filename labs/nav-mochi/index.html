@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>cauce. · navegación mochi</title>
-<meta name="description" content="Prototipo de navegación de cauce.: rutas en auto por Guadalajara que esquivan sitios inundables registrados por IMEPLAN, con alertas tipo Waze y una copiloto gotita.">
+<meta name="description" content="Navegación de cauce.: rutas en auto por Guadalajara que esquivan sitios inundables registrados por IMEPLAN, con alertas tipo Waze y una copiloto gotita.">
 <meta name="theme-color" content="#ffeef5">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 6C32 6 10 32 10 44a22 22 0 0 0 44 0C54 32 32 6 32 6z' fill='%237cc6ff' stroke='%235b3a63' stroke-width='4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
@@ -40,31 +40,15 @@
   <div class="mv-txt"><b id="mv-dist">—</b><span id="mv-text">Preparando ruta…</span><small id="mv-street"></small></div>
 </section>
 
-<aside id="panel" class="card" aria-label="Tu viaje">
-  <div class="p-head"><h2>Tu viaje</h2><span id="engine-pill" class="tiny-pill">router</span></div>
-  <div class="trip">
-    <div><i class="dot a"></i><span id="from-name">Glorieta Minerva</span></div>
-    <div><i class="dot b"></i><span id="to-name">Aeropuerto GDL</span></div>
+<aside id="trip" class="card" aria-label="Tu viaje">
+  <div class="t-route"><span><i class="dot a"></i><b id="from-name">Glorieta Minerva</b></span><span class="t-arrow">→</span><span><i class="dot b"></i><b id="to-name">Aeropuerto GDL</b></span></div>
+  <div class="t-rows">
+    <div class="t-row safe" id="row-safe"><span class="sw"></span><span class="t-name">Ruta segura<small id="safe-sub">—</small></span><b id="safe-time">—</b></div>
+    <div class="t-row normal" id="row-normal"><span class="sw"></span><span class="t-name">Ruta normal<small id="normal-sub">—</small></span><b id="normal-time">—</b></div>
   </div>
-  <div class="label">¿Llueve?</div>
-  <div id="scenario" class="chips" role="group" aria-label="Escenario de lluvia"></div>
-  <div class="compare">
-    <button class="route-row safe" id="row-safe"><span class="swatch"></span><span class="rr-name">Ruta segura<small id="safe-sub">—</small></span><span class="rr-time" id="safe-time">—</span></button>
-    <button class="route-row normal" id="row-normal"><span class="swatch"></span><span class="rr-name">Ruta normal<small id="normal-sub">—</small></span><span class="rr-time" id="normal-time">—</span></button>
-  </div>
-  <div class="label">Lo que esquivamos</div>
-  <ul id="avoided" class="avoided"><li class="muted">—</li></ul>
-  <div class="dev actions">
-    <button id="btn-drive" class="btn primary">▶ Conducir</button>
-    <button id="btn-pick" class="btn">Cambiar ruta</button>
-  </div>
-  <details class="legend"><summary>Qué ves en el mapa</summary>
-    <div><span class="lg lg-site"></span>Sitio inundable <em>observado</em> · IMEPLAN MUI 2026</div>
-    <div><span class="lg lg-crit"></span>Zona crítica <em>observada</em> · IMEPLAN</div>
-    <div><span class="lg lg-water"></span>Ríos y canales <em>cartografiados</em> · OSM</div>
-    <div><span class="lg lg-model"></span>Agua <em>modelada</em> · exploratorio, aparece cuando exista</div>
-    <p>Los registros son históricos: dónde se ha inundado antes, no dónde hay agua ahora. No es pronóstico.</p>
-  </details>
+  <div class="t-legend"><span><i class="lg-heat"></i>riesgo modelado</span><span><i class="lg-site"></i>sitios registrados IMEPLAN</span></div>
+  <div class="t-foot"><span id="wx" class="wx">☀ seco</span> exploratorio · no es pronóstico · tiempo acelerado</div>
+  <button id="btn-pick" class="btn-pick" type="button">📍 Elegir mi destino</button>
 </aside>
 
 <div id="mascot">
@@ -84,6 +68,7 @@
 </div>
 
 <div id="toast"><span class="spin"></span><span id="toast-text">¡Recalculando!</span></div>
+<div id="skip"><span id="skip-text">⏩ 20 min después</span></div>
 
 <div id="summary" class="card">
   <div class="sm-stk" id="sm-stk"></div>
@@ -91,14 +76,10 @@
   <p id="sm-text"></p>
 </div>
 
-<div id="pick-hint" class="card">Toca el mapa para elegir el <b id="pick-what">origen</b></div>
+<div id="pick-hint" class="card">Toca el mapa para elegir tu <b>destino</b> · <button id="pick-cancel" type="button">cancelar</button></div>
 <div id="popup-root"></div>
 
-<footer id="credits">
-  <span class="honest">Registros históricos, no pronóstico · tiempo acelerado</span>
-  <span id="credit-short">IMEPLAN MUI 2026 · © OpenStreetMap · OpenFreeMap · OpenMapTiles · AWS Terrain Tiles · <span id="credit-router-s">router</span></span>
-  <span id="credit-text">Inundaciones: <a href="https://mui.imeplan.mx/" target="_blank" rel="noreferrer">IMEPLAN MUI 2026</a> · Mapa: <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · Relieve: AWS Terrain Tiles · Ruta: <span id="credit-router">OSRM (OSM)</span></span>
-</footer>
+<footer id="credits"><span class="c-short">IMEPLAN MUI 2026 · sim-drenaje · © OpenStreetMap · OpenFreeMap · OpenMapTiles · AWS Terrain · router cauce</span><span class="c-long">Inundaciones: <a href="https://mui.imeplan.mx/" target="_blank" rel="noreferrer">IMEPLAN MUI 2026</a> · riesgo: modelo sim-drenaje (cauce.) · mapa: <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · relieve AWS Terrain Tiles · ruta <span id="credit-router">router cauce (OSM)</span></span></footer>
 <div id="boot"><div class="boot-card"><div id="boot-g"></div><p>Gotita está preparando el mapa…</p></div></div>
 <script type="module" src="./js/app.js"></script>
 </body>

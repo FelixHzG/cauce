@@ -8,6 +8,7 @@ Proyecto para el hackathon de Codex (octubre de 2026).
 |---|---|
 | **Video demo (2:10)** | https://codex-hackaton.vsfelix.com/video-demo/ |
 | **Atlas** | https://codex-hackaton.vsfelix.com |
+| **Navegar sin mojarse** | https://codex-hackaton.vsfelix.com/labs/nav-mochi/ |
 | **Labs: navegación, simulaciones, dónde invertir** | https://codex-hackaton.vsfelix.com/labs/ |
 
 Los mismos sitios responden también en `guadalajara.vsfelix.com`.
@@ -32,7 +33,7 @@ Navegación de A a B con la cámara inclinada siguiendo a un coche 3D. La ruta e
 
 [![Navegación Mochi](docs/img/nav-mochi.jpg)](https://codex-hackaton.vsfelix.com/labs/nav-mochi/)
 
-El estilo principal es **Mochi**: pastel, con Gotita de copiloto. Antes de elegirlo probamos otros cuatro estilos con el mismo ruteador y los mismos datos:
+El estilo principal es **Mochi**: pastel, con Gotita de copiloto, un mapa de calor del riesgo modelado y los sitios de IMEPLAN marcados aparte. La página abre ya manejando (Minerva → Aeropuerto) y con «Elegir mi destino» puedes trazar tu propia ruta. Antes de elegirlo probamos otros cuatro estilos con el mismo ruteador y los mismos datos:
 
 | Papel · risografía | Juguete · diorama 3D | Neón · noche de tormenta | Pixel · misión de 16 bits |
 |---|---|---|---|
