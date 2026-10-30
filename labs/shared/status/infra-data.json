@@ -1,0 +1,14 @@
+{
+ "agent": "infra-data",
+ "state": "done",
+ "updated": "2026-10-30T01:14:26.307Z",
+ "message": "Done. AGEB profile (2,068 urban AGEBs, 97 fields incl. INEGI INV 2020 storm-inlet presence for 2,067) + 20 infra layers registered in /labs/shared/infra/index.json and 10 hazard entries (Guadalajara atlas reports/areas/model, Zapopan incidents/underpass risk/Tr100 tiles, press hotspots). Docs: infra/README.md (what exists / what does not), infra/ageb-profile.md (every field). Visual check: /labs/shared/infra/preview.html.",
+ "outputs": [
+  "/labs/shared/infra/ageb-profile.geojson",
+  "/labs/shared/infra/ageb-profile.md",
+  "/labs/shared/infra/README.md",
+  "/labs/shared/infra/index.json",
+  "/labs/shared/infra/preview.html",
+  "/labs/shared/hazard/index.json"
+ ]
+}

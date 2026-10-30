@@ -1,0 +1,4363 @@
+{
+ "producer": "sim-drenaje",
+ "created": "2026-10-30T05:15:39.542Z",
+ "runsDone": 126,
+ "runsFinished": 126,
+ "runsPlanned": 132,
+ "combos": [
+  {
+   "Tr": 10,
+   "infil": "mid"
+  },
+  {
+   "Tr": 2,
+   "infil": "mid"
+  },
+  {
+   "Tr": 100,
+   "infil": "mid"
+  },
+  {
+   "Tr": 5,
+   "infil": "mid"
+  },
+  {
+   "Tr": 25,
+   "infil": "mid"
+  },
+  {
+   "Tr": 50,
+   "infil": "mid"
+  },
+  {
+   "Tr": 10,
+   "infil": "low"
+  },
+  {
+   "Tr": 10,
+   "infil": "high"
+  },
+  {
+   "Tr": 2,
+   "infil": "low"
+  },
+  {
+   "Tr": 100,
+   "infil": "low"
+  },
+  {
+   "Tr": 2,
+   "infil": "high"
+  },
+  {
+   "Tr": 100,
+   "infil": "high"
+  },
+  {
+   "Tr": 5,
+   "infil": "low"
+  },
+  {
+   "Tr": 25,
+   "infil": "low"
+  },
+  {
+   "Tr": 50,
+   "infil": "low"
+  },
+  {
+   "Tr": 5,
+   "infil": "high"
+  },
+  {
+   "Tr": 25,
+   "infil": "high"
+  },
+  {
+   "Tr": 50,
+   "infil": "high"
+  }
+ ],
+ "grid": {
+  "cellSize_m": 20,
+  "width": 2397,
+  "height": 3032,
+  "crs": "EPSG:6368 (UTM 13N, ITRF2008)",
+  "activeKm2": 2116.52,
+  "drainageCellsKm2": 636.074,
+  "validUrbanKm2": 635.7
+ },
+ "design": {
+  "storms_Tr_years": [
+   2,
+   5,
+   10,
+   25,
+   50,
+   100
+  ],
+  "stormDuration_min": 60,
+  "block_min": 5,
+  "simulated_min": 120,
+  "capacities_mmh": [
+   0,
+   10,
+   20,
+   30,
+   40,
+   50,
+   60
+  ],
+  "infiltration": {
+   "mid": {
+    "ia_mm": 8,
+    "f_mmh": 15
+   },
+   "low": {
+    "ia_mm": 3,
+    "f_mmh": 5
+   },
+   "high": {
+    "ia_mm": 15,
+    "f_mmh": 35
+   }
+  },
+  "idf": {
+   "a": 43.093,
+   "b": 11.831,
+   "c": 0.885,
+   "P1_10": 64,
+   "F": 1.3530701754385965,
+   "source": "Campos-Aranda (2010), Ingenieria Investigacion y Tecnologia XI(2):179-188, Tabla 4, Guadalajara 14066"
+  },
+  "hyetographs_mmh": {
+   "2": [
+    14.492570591220158,
+    18.653315367434544,
+    25.508084313513365,
+    38.31356097826472,
+    67.7616578256393,
+    170.76470727151434,
+    100.53868910198244,
+    49.57082129131598,
+    30.80303639773885,
+    21.614132009138302,
+    16.340320955997072,
+    12.98850483935476
+   ],
+   "5": [
+    17.195939838268913,
+    22.132808449936476,
+    30.26623058233676,
+    45.46037470890187,
+    80.40156740840432,
+    202.61827356697418,
+    119.29265676742435,
+    58.817506203864696,
+    36.54887567374777,
+    25.645920531910917,
+    19.388360010304524,
+    15.411313431304848
+   ],
+   "10": [
+    19.24095972815826,
+    24.764943356486555,
+    33.86562928429791,
+    50.866730590343536,
+    89.96328988911304,
+    226.71456626145246,
+    133.4794856410779,
+    65.81235331265285,
+    40.89543529240737,
+    28.695850810543675,
+    21.69411254411915,
+    17.24409737872287
+   ],
+   "25": [
+    21.94432897520676,
+    28.244436438988146,
+    38.623775553121305,
+    58.01354432098077,
+    102.60319947187809,
+    258.5681325569123,
+    152.23345330651983,
+    75.05903822520156,
+    46.64127456841629,
+    32.727639333316375,
+    24.742151598426688,
+    19.666905970673213
+   ],
+   "50": [
+    23.9893488650967,
+    30.87657134553797,
+    42.223174255082284,
+    63.419900202422184,
+    112.1649219525867,
+    282.6644252513905,
+    166.4202821801734,
+    82.05388533399005,
+    50.987834187075805,
+    35.77756961194939,
+    27.0479041322414,
+    21.499689918090894
+   ],
+   "100": [
+    26.034368754986303,
+    33.50870625208779,
+    45.82257295704335,
+    68.82625608386385,
+    121.72664443329555,
+    306.76071794586875,
+    180.60711105382703,
+    89.0487324427782,
+    55.33439380573532,
+    38.82749989058249,
+    29.35365666605594,
+    23.332473865508916
+   ]
+  },
+  "flood_threshold_m": 0.15
+ },
+ "gapClassification": {
+  "lowCapacities": [
+   0,
+   10
+  ],
+  "highCapacities": [
+   40,
+   50,
+   60
+  ],
+  "rule": "a (persistente): f_low >= 0.25 and f_high >= 0.5*f_low; b (responde al drenaje): f_low >= 0.25 and f_high < 0.5*f_low; c (rara vez): f_low < 0.25",
+  "urbanKm2": {
+   "a": 71.7,
+   "b": 55.36,
+   "c": 508.68
+  }
+ },
+ "massBalance": {
+  "maxAbsRelResidual": 0.00003307600421481828
+ },
+ "web": {
+  "mercatorImage": {
+   "width": 2427,
+   "height": 3073,
+   "bounds": {
+    "west": -103.60134656755186,
+    "east": -103.13541534320102,
+    "north": 20.90995096616599,
+    "south": 20.357849063413695
+   },
+   "coordinates": [
+    [
+     -103.60134656755186,
+     20.90995096616599
+    ],
+    [
+     -103.13541534320102,
+     20.90995096616599
+    ],
+    [
+     -103.13541534320102,
+     20.357849063413695
+    ],
+    [
+     -103.60134656755186,
+     20.357849063413695
+    ]
+   ]
+  },
+  "depthClasses_m": [
+   0,
+   0.05,
+   0.15,
+   0.3,
+   0.5,
+   1,
+   2
+  ],
+  "depthPackBitsPerCap": 3,
+  "freqClasses": [
+   0,
+   0.05,
+   0.2,
+   0.4,
+   0.6,
+   0.8
+  ],
+  "frames_min": [
+   10,
+   20,
+   30,
+   40,
+   50,
+   60,
+   70,
+   80,
+   90,
+   100,
+   110,
+   120
+  ],
+  "frameCaps": [
+   0,
+   20,
+   40
+  ],
+  "sliderAvailable": {
+   "2": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "5": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "10": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "25": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "50": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "100": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ]
+  },
+  "tiles": {
+   "freq": 843,
+   "sens": 843,
+   "gap": 843
+  },
+  "tileZoom": [
+   9,
+   14
+  ]
+ },
+ "ageb": {
+  "count": 1948,
+  "file": "ageb-drainage.json"
+ },
+ "inletScenario": {
+  "runs": [
+   {
+    "Tr": 10,
+    "cap_mmh": 20,
+    "uniform_km2": 82.72,
+    "inlets_km2": 97.49,
+    "extra_km2": 14.77
+   },
+   {
+    "Tr": 10,
+    "cap_mmh": 40,
+    "uniform_km2": 63.24,
+    "inlets_km2": 91.19,
+    "extra_km2": 27.96
+   },
+   {
+    "Tr": 2,
+    "cap_mmh": 20,
+    "uniform_km2": 51.36,
+    "inlets_km2": 67.19,
+    "extra_km2": 15.83
+   },
+   {
+    "Tr": 2,
+    "cap_mmh": 40,
+    "uniform_km2": 34.4,
+    "inlets_km2": 60.51,
+    "extra_km2": 26.11
+   },
+   {
+    "Tr": 100,
+    "cap_mmh": 20,
+    "uniform_km2": 125.06,
+    "inlets_km2": 137.11,
+    "extra_km2": 12.05
+   },
+   {
+    "Tr": 100,
+    "cap_mmh": 40,
+    "uniform_km2": 106.25,
+    "inlets_km2": 131.43,
+    "extra_km2": 25.18
+   }
+  ],
+  "factor": {
+   "agebsWithInv": 1985,
+   "coveredShareOfDrainCells": 0.818,
+   "meanFactorCovered": 0.228
+  },
+  "rule": "capacity per drainage cell = C x (blocks with storm inlets on all frontages + 0.5 x some) / evaluated blocks of its AGEB (INEGI INV 2020); cells without INV data keep C",
+  "summary": "Tr 10, 20 mm/h: 82.72 km² uniform → 97.49 km² with inlet-weighted capacity (+14.77 km²); Tr 10, 40 mm/h: 63.24 km² uniform → 91.19 km² with inlet-weighted capacity (+27.96 km²); Tr 2, 20 mm/h: 51.36 km² uniform → 67.19 km² with inlet-weighted capacity (+15.83 km²); Tr 2, 40 mm/h: 34.4 km² uniform → 60.51 km² with inlet-weighted capacity (+26.11 km²); Tr 100, 20 mm/h: 125.06 km² uniform → 137.11 km² with inlet-weighted capacity (+12.05 km²); Tr 100, 40 mm/h: 106.25 km² uniform → 131.43 km² with inlet-weighted capacity (+25.18 km²)."
+ },
+ "curves": {
+  "mid": {
+   "2": {
+    "0": {
+     "urbanFlooded15_km2": 74.54,
+     "urbanFlooded30_km2": 34.83,
+     "urbanFloodVolume15_Mm3": 21.194
+    },
+    "10": {
+     "urbanFlooded15_km2": 62.88,
+     "urbanFlooded30_km2": 28.07,
+     "urbanFloodVolume15_Mm3": 17.145
+    },
+    "20": {
+     "urbanFlooded15_km2": 51.36,
+     "urbanFlooded30_km2": 21.71,
+     "urbanFloodVolume15_Mm3": 13.47
+    },
+    "30": {
+     "urbanFlooded15_km2": 41.97,
+     "urbanFlooded30_km2": 17.01,
+     "urbanFloodVolume15_Mm3": 10.655
+    },
+    "40": {
+     "urbanFlooded15_km2": 34.4,
+     "urbanFlooded30_km2": 13.38,
+     "urbanFloodVolume15_Mm3": 8.459
+    },
+    "50": {
+     "urbanFlooded15_km2": 28.34,
+     "urbanFlooded30_km2": 10.51,
+     "urbanFloodVolume15_Mm3": 6.795
+    },
+    "60": {
+     "urbanFlooded15_km2": 22.74,
+     "urbanFlooded30_km2": 8.12,
+     "urbanFloodVolume15_Mm3": 5.351
+    }
+   },
+   "5": {
+    "0": {
+     "urbanFlooded15_km2": 91.8,
+     "urbanFlooded30_km2": 44.82,
+     "urbanFloodVolume15_Mm3": 27.299
+    },
+    "10": {
+     "urbanFlooded15_km2": 80.75,
+     "urbanFlooded30_km2": 37.89,
+     "urbanFloodVolume15_Mm3": 23.086
+    },
+    "20": {
+     "urbanFlooded15_km2": 69.17,
+     "urbanFlooded30_km2": 31.15,
+     "urbanFloodVolume15_Mm3": 19.076
+    },
+    "30": {
+     "urbanFlooded15_km2": 58.99,
+     "urbanFlooded30_km2": 25.49,
+     "urbanFloodVolume15_Mm3": 15.815
+    },
+    "40": {
+     "urbanFlooded15_km2": 50.27,
+     "urbanFlooded30_km2": 21.04,
+     "urbanFloodVolume15_Mm3": 13.153
+    },
+    "50": {
+     "urbanFlooded15_km2": 43.35,
+     "urbanFlooded30_km2": 17.66,
+     "urbanFloodVolume15_Mm3": 11.092
+    },
+    "60": {
+     "urbanFlooded15_km2": 37.13,
+     "urbanFlooded30_km2": 14.74,
+     "urbanFloodVolume15_Mm3": 9.308
+    }
+   },
+   "10": {
+    "0": {
+     "urbanFlooded15_km2": 104.09,
+     "urbanFlooded30_km2": 52.31,
+     "urbanFloodVolume15_Mm3": 31.968
+    },
+    "10": {
+     "urbanFlooded15_km2": 93.71,
+     "urbanFlooded30_km2": 45.45,
+     "urbanFloodVolume15_Mm3": 27.71
+    },
+    "20": {
+     "urbanFlooded15_km2": 82.72,
+     "urbanFlooded30_km2": 38.68,
+     "urbanFloodVolume15_Mm3": 23.623
+    },
+    "30": {
+     "urbanFlooded15_km2": 72.5,
+     "urbanFlooded30_km2": 32.7,
+     "urbanFloodVolume15_Mm3": 20.142
+    },
+    "40": {
+     "urbanFlooded15_km2": 63.24,
+     "urbanFlooded30_km2": 27.66,
+     "urbanFloodVolume15_Mm3": 17.179
+    },
+    "50": {
+     "urbanFlooded15_km2": 55.21,
+     "urbanFlooded30_km2": 23.51,
+     "urbanFloodVolume15_Mm3": 14.716
+    },
+    "60": {
+     "urbanFlooded15_km2": 48.61,
+     "urbanFlooded30_km2": 20.33,
+     "urbanFloodVolume15_Mm3": 12.743
+    }
+   },
+   "25": {
+    "0": {
+     "urbanFlooded15_km2": 119.79,
+     "urbanFlooded30_km2": 62.2,
+     "urbanFloodVolume15_Mm3": 38.295
+    },
+    "10": {
+     "urbanFlooded15_km2": 110.6,
+     "urbanFlooded30_km2": 55.85,
+     "urbanFloodVolume15_Mm3": 34.145
+    },
+    "20": {
+     "urbanFlooded15_km2": 100.07,
+     "urbanFlooded30_km2": 48.89,
+     "urbanFloodVolume15_Mm3": 29.846
+    },
+    "30": {
+     "urbanFlooded15_km2": 90.03,
+     "urbanFlooded30_km2": 42.69,
+     "urbanFloodVolume15_Mm3": 26.125
+    },
+    "40": {
+     "urbanFlooded15_km2": 80.47,
+     "urbanFlooded30_km2": 37.13,
+     "urbanFloodVolume15_Mm3": 22.853
+    },
+    "50": {
+     "urbanFlooded15_km2": 72.02,
+     "urbanFlooded30_km2": 32.37,
+     "urbanFloodVolume15_Mm3": 20.091
+    },
+    "60": {
+     "urbanFlooded15_km2": 64.35,
+     "urbanFlooded30_km2": 28.41,
+     "urbanFloodVolume15_Mm3": 17.695
+    }
+   },
+   "50": {
+    "0": {
+     "urbanFlooded15_km2": 131.38,
+     "urbanFlooded30_km2": 69.72,
+     "urbanFloodVolume15_Mm3": 43.186
+    },
+    "10": {
+     "urbanFlooded15_km2": 122.44,
+     "urbanFlooded30_km2": 63.35,
+     "urbanFloodVolume15_Mm3": 38.946
+    },
+    "20": {
+     "urbanFlooded15_km2": 112.89,
+     "urbanFlooded30_km2": 56.78,
+     "urbanFloodVolume15_Mm3": 34.755
+    },
+    "30": {
+     "urbanFlooded15_km2": 103.08,
+     "urbanFlooded30_km2": 50.34,
+     "urbanFloodVolume15_Mm3": 30.839
+    },
+    "40": {
+     "urbanFlooded15_km2": 93.51,
+     "urbanFlooded30_km2": 44.5,
+     "urbanFloodVolume15_Mm3": 27.337
+    },
+    "50": {
+     "urbanFlooded15_km2": 85.08,
+     "urbanFlooded30_km2": 39.63,
+     "urbanFloodVolume15_Mm3": 24.474
+    },
+    "60": {
+     "urbanFlooded15_km2": 76.63,
+     "urbanFlooded30_km2": 34.88,
+     "urbanFloodVolume15_Mm3": 21.733
+    }
+   },
+   "100": {
+    "0": {
+     "urbanFlooded15_km2": 142.57,
+     "urbanFlooded30_km2": 77.05,
+     "urbanFloodVolume15_Mm3": 48.163
+    },
+    "10": {
+     "urbanFlooded15_km2": 133.99,
+     "urbanFlooded30_km2": 70.89,
+     "urbanFloodVolume15_Mm3": 43.841
+    },
+    "20": {
+     "urbanFlooded15_km2": 125.06,
+     "urbanFlooded30_km2": 64.54,
+     "urbanFloodVolume15_Mm3": 39.673
+    },
+    "30": {
+     "urbanFlooded15_km2": 115.48,
+     "urbanFlooded30_km2": 57.97,
+     "urbanFloodVolume15_Mm3": 35.566
+    },
+    "40": {
+     "urbanFlooded15_km2": 106.25,
+     "urbanFlooded30_km2": 52.02,
+     "urbanFloodVolume15_Mm3": 31.966
+    },
+    "50": {
+     "urbanFlooded15_km2": 97.63,
+     "urbanFlooded30_km2": 46.78,
+     "urbanFloodVolume15_Mm3": 28.831
+    },
+    "60": {
+     "urbanFlooded15_km2": 89.47,
+     "urbanFlooded30_km2": 42.06,
+     "urbanFloodVolume15_Mm3": 26.062
+    }
+   }
+  },
+  "low": {
+   "2": {
+    "0": {
+     "urbanFlooded15_km2": 83.86,
+     "urbanFlooded30_km2": 40.58,
+     "urbanFloodVolume15_Mm3": 24.778
+    },
+    "10": {
+     "urbanFlooded15_km2": 71.52,
+     "urbanFlooded30_km2": 33.2,
+     "urbanFloodVolume15_Mm3": 20.286
+    },
+    "20": {
+     "urbanFlooded15_km2": 59.85,
+     "urbanFlooded30_km2": 26.48,
+     "urbanFloodVolume15_Mm3": 16.404
+    },
+    "30": {
+     "urbanFlooded15_km2": 49.84,
+     "urbanFlooded30_km2": 21.34,
+     "urbanFloodVolume15_Mm3": 13.321
+    },
+    "40": {
+     "urbanFlooded15_km2": 41.82,
+     "urbanFlooded30_km2": 17.37,
+     "urbanFloodVolume15_Mm3": 10.907
+    },
+    "50": {
+     "urbanFlooded15_km2": 35.44,
+     "urbanFlooded30_km2": 14.31,
+     "urbanFloodVolume15_Mm3": 9.068
+    },
+    "60": {
+     "urbanFlooded15_km2": 29.66,
+     "urbanFlooded30_km2": 11.68,
+     "urbanFloodVolume15_Mm3": 7.511
+    }
+   },
+   "5": {
+    "0": {
+     "urbanFlooded15_km2": 100.78,
+     "urbanFlooded30_km2": 50.84,
+     "urbanFloodVolume15_Mm3": 31.085
+    },
+    "10": {
+     "urbanFlooded15_km2": 89.58,
+     "urbanFlooded30_km2": 43.48,
+     "urbanFloodVolume15_Mm3": 26.608
+    },
+    "20": {
+     "urbanFlooded15_km2": 77.78,
+     "urbanFlooded30_km2": 36.46,
+     "urbanFloodVolume15_Mm3": 22.352
+    },
+    "30": {
+     "urbanFlooded15_km2": 67.19,
+     "urbanFlooded30_km2": 30.4,
+     "urbanFloodVolume15_Mm3": 18.85
+    },
+    "40": {
+     "urbanFlooded15_km2": 58.42,
+     "urbanFlooded30_km2": 25.72,
+     "urbanFloodVolume15_Mm3": 16.092
+    },
+    "50": {
+     "urbanFlooded15_km2": 50.91,
+     "urbanFlooded30_km2": 21.97,
+     "urbanFloodVolume15_Mm3": 13.789
+    },
+    "60": {
+     "urbanFlooded15_km2": 44.59,
+     "urbanFlooded30_km2": 18.91,
+     "urbanFloodVolume15_Mm3": 11.9
+    }
+   },
+   "10": {
+    "0": {
+     "urbanFlooded15_km2": 112.81,
+     "urbanFlooded30_km2": 58.37,
+     "urbanFloodVolume15_Mm3": 35.878
+    },
+    "10": {
+     "urbanFlooded15_km2": 102.64,
+     "urbanFlooded30_km2": 51.44,
+     "urbanFloodVolume15_Mm3": 31.492
+    },
+    "20": {
+     "urbanFlooded15_km2": 91.27,
+     "urbanFlooded30_km2": 44.17,
+     "urbanFloodVolume15_Mm3": 27.103
+    },
+    "30": {
+     "urbanFlooded15_km2": 80.69,
+     "urbanFlooded30_km2": 38.03,
+     "urbanFloodVolume15_Mm3": 23.389
+    },
+    "40": {
+     "urbanFlooded15_km2": 71.34,
+     "urbanFlooded30_km2": 32.65,
+     "urbanFloodVolume15_Mm3": 20.3
+    },
+    "50": {
+     "urbanFlooded15_km2": 62.95,
+     "urbanFlooded30_km2": 28.24,
+     "urbanFloodVolume15_Mm3": 17.647
+    },
+    "60": {
+     "urbanFlooded15_km2": 56.19,
+     "urbanFlooded30_km2": 24.79,
+     "urbanFloodVolume15_Mm3": 15.565
+    }
+   },
+   "25": {
+    "0": {
+     "urbanFlooded15_km2": 128.48,
+     "urbanFlooded30_km2": 68.43,
+     "urbanFloodVolume15_Mm3": 42.442
+    },
+    "10": {
+     "urbanFlooded15_km2": 118.84,
+     "urbanFlooded30_km2": 61.63,
+     "urbanFloodVolume15_Mm3": 37.94
+    },
+    "20": {
+     "urbanFlooded15_km2": 108.49,
+     "urbanFlooded30_km2": 54.62,
+     "urbanFloodVolume15_Mm3": 33.54
+    },
+    "30": {
+     "urbanFlooded15_km2": 98.39,
+     "urbanFlooded30_km2": 48.15,
+     "urbanFloodVolume15_Mm3": 29.649
+    },
+    "40": {
+     "urbanFlooded15_km2": 88.81,
+     "urbanFlooded30_km2": 42.51,
+     "urbanFloodVolume15_Mm3": 26.25
+    },
+    "50": {
+     "urbanFlooded15_km2": 80.07,
+     "urbanFlooded30_km2": 37.47,
+     "urbanFloodVolume15_Mm3": 23.348
+    },
+    "60": {
+     "urbanFlooded15_km2": 72.16,
+     "urbanFlooded30_km2": 33.25,
+     "urbanFloodVolume15_Mm3": 20.806
+    }
+   },
+   "50": {
+    "0": {
+     "urbanFlooded15_km2": 139.45,
+     "urbanFlooded30_km2": 75.72,
+     "urbanFloodVolume15_Mm3": 47.339
+    },
+    "10": {
+     "urbanFlooded15_km2": 130.55,
+     "urbanFlooded30_km2": 69.24,
+     "urbanFloodVolume15_Mm3": 42.887
+    },
+    "20": {
+     "urbanFlooded15_km2": 121.11,
+     "urbanFlooded30_km2": 62.61,
+     "urbanFloodVolume15_Mm3": 38.566
+    },
+    "30": {
+     "urbanFlooded15_km2": 111.14,
+     "urbanFlooded30_km2": 55.93,
+     "urbanFloodVolume15_Mm3": 34.448
+    },
+    "40": {
+     "urbanFlooded15_km2": 101.87,
+     "urbanFlooded30_km2": 50.04,
+     "urbanFloodVolume15_Mm3": 30.928
+    },
+    "50": {
+     "urbanFlooded15_km2": 93.17,
+     "urbanFlooded30_km2": 44.98,
+     "urbanFloodVolume15_Mm3": 27.869
+    },
+    "60": {
+     "urbanFlooded15_km2": 84.78,
+     "urbanFlooded30_km2": 40.11,
+     "urbanFloodVolume15_Mm3": 25.072
+    }
+   },
+   "100": {
+    "0": {
+     "urbanFlooded15_km2": 150.23,
+     "urbanFlooded30_km2": 83.06,
+     "urbanFloodVolume15_Mm3": 52.381
+    },
+    "10": {
+     "urbanFlooded15_km2": 141.95,
+     "urbanFlooded30_km2": 76.85,
+     "urbanFloodVolume15_Mm3": 47.983
+    },
+    "20": {
+     "urbanFlooded15_km2": 132.77,
+     "urbanFlooded30_km2": 70.22,
+     "urbanFloodVolume15_Mm3": 43.522
+    },
+    "30": {
+     "urbanFlooded15_km2": 123.27,
+     "urbanFlooded30_km2": 63.63,
+     "urbanFloodVolume15_Mm3": 39.286
+    },
+    "40": {
+     "urbanFlooded15_km2": 114.24,
+     "urbanFlooded30_km2": 57.6,
+     "urbanFloodVolume15_Mm3": 35.626
+    },
+    "50": {
+     "urbanFlooded15_km2": 105.66,
+     "urbanFlooded30_km2": 52.22,
+     "urbanFloodVolume15_Mm3": 32.39
+    },
+    "60": {
+     "urbanFlooded15_km2": 97.42,
+     "urbanFlooded30_km2": 47.34,
+     "urbanFloodVolume15_Mm3": 29.484
+    }
+   }
+  },
+  "high": {
+   "2": {
+    "0": {
+     "urbanFlooded15_km2": 61.24,
+     "urbanFlooded30_km2": 27.25,
+     "urbanFloodVolume15_Mm3": 16.568
+    },
+    "10": {
+     "urbanFlooded15_km2": 50.09,
+     "urbanFlooded30_km2": 21.04,
+     "urbanFloodVolume15_Mm3": 12.952
+    },
+    "20": {
+     "urbanFlooded15_km2": 39.74,
+     "urbanFlooded30_km2": 15.68,
+     "urbanFloodVolume15_Mm3": 9.829
+    },
+    "30": {
+     "urbanFlooded15_km2": 31.18,
+     "urbanFlooded30_km2": 11.65,
+     "urbanFloodVolume15_Mm3": 7.337
+    },
+    "40": {
+     "urbanFlooded15_km2": 24.52,
+     "urbanFlooded30_km2": 8.59,
+     "urbanFloodVolume15_Mm3": 5.512
+    },
+    "50": {
+     "urbanFlooded15_km2": 18.9,
+     "urbanFlooded30_km2": 6.15,
+     "urbanFloodVolume15_Mm3": 4.053
+    },
+    "60": {
+     "urbanFlooded15_km2": 14.09,
+     "urbanFlooded30_km2": 4.28,
+     "urbanFloodVolume15_Mm3": 2.881
+    }
+   },
+   "5": {
+    "0": {
+     "urbanFlooded15_km2": 77.74,
+     "urbanFlooded30_km2": 36.21,
+     "urbanFloodVolume15_Mm3": 21.942
+    },
+    "10": {
+     "urbanFlooded15_km2": 67.11,
+     "urbanFlooded30_km2": 29.89,
+     "urbanFloodVolume15_Mm3": 18.176
+    },
+    "20": {
+     "urbanFlooded15_km2": 56.27,
+     "urbanFlooded30_km2": 23.79,
+     "urbanFloodVolume15_Mm3": 14.646
+    },
+    "30": {
+     "urbanFlooded15_km2": 46.73,
+     "urbanFlooded30_km2": 18.84,
+     "urbanFloodVolume15_Mm3": 11.759
+    },
+    "40": {
+     "urbanFlooded15_km2": 38.58,
+     "urbanFlooded30_km2": 14.86,
+     "urbanFloodVolume15_Mm3": 9.384
+    },
+    "50": {
+     "urbanFlooded15_km2": 32.41,
+     "urbanFlooded30_km2": 11.96,
+     "urbanFloodVolume15_Mm3": 7.619
+    },
+    "60": {
+     "urbanFlooded15_km2": 26.69,
+     "urbanFlooded30_km2": 9.35,
+     "urbanFloodVolume15_Mm3": 6.079
+    }
+   },
+   "10": {
+    "0": {
+     "urbanFlooded15_km2": 90.37,
+     "urbanFlooded30_km2": 43.37,
+     "urbanFloodVolume15_Mm3": 26.325
+    },
+    "10": {
+     "urbanFlooded15_km2": 80.14,
+     "urbanFlooded30_km2": 36.92,
+     "urbanFloodVolume15_Mm3": 22.43
+    },
+    "20": {
+     "urbanFlooded15_km2": 69.25,
+     "urbanFlooded30_km2": 30.65,
+     "urbanFloodVolume15_Mm3": 18.683
+    },
+    "30": {
+     "urbanFlooded15_km2": 59.15,
+     "urbanFlooded30_km2": 25.03,
+     "urbanFloodVolume15_Mm3": 15.436
+    },
+    "40": {
+     "urbanFlooded15_km2": 50.92,
+     "urbanFlooded30_km2": 20.74,
+     "urbanFloodVolume15_Mm3": 12.939
+    },
+    "50": {
+     "urbanFlooded15_km2": 43.34,
+     "urbanFlooded30_km2": 17.03,
+     "urbanFloodVolume15_Mm3": 10.722
+    },
+    "60": {
+     "urbanFlooded15_km2": 37.31,
+     "urbanFlooded30_km2": 14.21,
+     "urbanFloodVolume15_Mm3": 8.995
+    }
+   },
+   "25": {
+    "0": {
+     "urbanFlooded15_km2": 106.31,
+     "urbanFlooded30_km2": 52.99,
+     "urbanFloodVolume15_Mm3": 32.315
+    },
+    "10": {
+     "urbanFlooded15_km2": 96.9,
+     "urbanFlooded30_km2": 46.72,
+     "urbanFloodVolume15_Mm3": 28.334
+    },
+    "20": {
+     "urbanFlooded15_km2": 86.63,
+     "urbanFlooded30_km2": 40.19,
+     "urbanFloodVolume15_Mm3": 24.434
+    },
+    "30": {
+     "urbanFlooded15_km2": 76.69,
+     "urbanFlooded30_km2": 34.35,
+     "urbanFloodVolume15_Mm3": 20.969
+    },
+    "40": {
+     "urbanFlooded15_km2": 67.52,
+     "urbanFlooded30_km2": 29.2,
+     "urbanFloodVolume15_Mm3": 17.988
+    },
+    "50": {
+     "urbanFlooded15_km2": 59.5,
+     "urbanFlooded30_km2": 24.97,
+     "urbanFloodVolume15_Mm3": 15.502
+    },
+    "60": {
+     "urbanFlooded15_km2": 52.37,
+     "urbanFlooded30_km2": 21.41,
+     "urbanFloodVolume15_Mm3": 13.375
+    }
+   },
+   "50": {
+    "0": {
+     "urbanFlooded15_km2": 118.05,
+     "urbanFlooded30_km2": 60.34,
+     "urbanFloodVolume15_Mm3": 36.977
+    },
+    "10": {
+     "urbanFlooded15_km2": 109.37,
+     "urbanFlooded30_km2": 54.3,
+     "urbanFloodVolume15_Mm3": 33.064
+    },
+    "20": {
+     "urbanFlooded15_km2": 99.59,
+     "urbanFlooded30_km2": 47.8,
+     "urbanFloodVolume15_Mm3": 29.045
+    },
+    "30": {
+     "urbanFlooded15_km2": 89.99,
+     "urbanFlooded30_km2": 41.74,
+     "urbanFloodVolume15_Mm3": 25.441
+    },
+    "40": {
+     "urbanFlooded15_km2": 80.49,
+     "urbanFlooded30_km2": 36.26,
+     "urbanFloodVolume15_Mm3": 22.161
+    },
+    "50": {
+     "urbanFlooded15_km2": 72.37,
+     "urbanFlooded30_km2": 31.64,
+     "urbanFloodVolume15_Mm3": 19.516
+    },
+    "60": {
+     "urbanFlooded15_km2": 64.33,
+     "urbanFlooded30_km2": 27.39,
+     "urbanFloodVolume15_Mm3": 17.005
+    }
+   },
+   "100": {
+    "0": {
+     "urbanFlooded15_km2": 129.53,
+     "urbanFlooded30_km2": 67.59,
+     "urbanFloodVolume15_Mm3": 41.689
+    },
+    "10": {
+     "urbanFlooded15_km2": 121.14,
+     "urbanFlooded30_km2": 61.73,
+     "urbanFloodVolume15_Mm3": 37.765
+    },
+    "20": {
+     "urbanFlooded15_km2": 112.24,
+     "urbanFlooded30_km2": 55.59,
+     "urbanFloodVolume15_Mm3": 33.818
+    },
+    "30": {
+     "urbanFlooded15_km2": 102.35,
+     "urbanFlooded30_km2": 49.13,
+     "urbanFloodVolume15_Mm3": 29.881
+    },
+    "40": {
+     "urbanFlooded15_km2": 93.7,
+     "urbanFlooded30_km2": 43.66,
+     "urbanFloodVolume15_Mm3": 26.657
+    },
+    "50": {
+     "urbanFlooded15_km2": 84.93,
+     "urbanFlooded30_km2": 38.62,
+     "urbanFloodVolume15_Mm3": 23.643
+    },
+    "60": {
+     "urbanFlooded15_km2": 76.8,
+     "urbanFlooded30_km2": 34.02,
+     "urbanFloodVolume15_Mm3": 21.004
+    }
+   }
+  }
+ },
+ "highlights": {
+  "a_persistente": [
+   {
+    "lon": -103.36518,
+    "lat": 20.5014,
+    "cells": 1366,
+    "km2": 0.546,
+    "urbanCells": 2097
+   },
+   {
+    "lon": -103.2484,
+    "lat": 20.65382,
+    "cells": 1321,
+    "km2": 0.528,
+    "urbanCells": 2443
+   },
+   {
+    "lon": -103.44699,
+    "lat": 20.47054,
+    "cells": 1158,
+    "km2": 0.463,
+    "urbanCells": 2187
+   },
+   {
+    "lon": -103.25453,
+    "lat": 20.53646,
+    "cells": 1055,
+    "km2": 0.422,
+    "urbanCells": 1508
+   },
+   {
+    "lon": -103.47028,
+    "lat": 20.53849,
+    "cells": 947,
+    "km2": 0.379,
+    "urbanCells": 1878
+   }
+  ],
+  "b_responde": [
+   {
+    "lon": -103.33956,
+    "lat": 20.65472,
+    "cells": 1703,
+    "km2": 0.681,
+    "urbanCells": 2487
+   },
+   {
+    "lon": -103.36859,
+    "lat": 20.63242,
+    "cells": 1334,
+    "km2": 0.534,
+    "urbanCells": 2443
+   },
+   {
+    "lon": -103.29632,
+    "lat": 20.65882,
+    "cells": 1190,
+    "km2": 0.476,
+    "urbanCells": 2454
+   },
+   {
+    "lon": -103.39737,
+    "lat": 20.63269,
+    "cells": 928,
+    "km2": 0.371,
+    "urbanCells": 2411
+   },
+   {
+    "lon": -103.43584,
+    "lat": 20.62401,
+    "cells": 847,
+    "km2": 0.339,
+    "urbanCells": 2403
+   }
+  ]
+ },
+ "validation": {
+  "sitios (polígonos)": {
+   "n": 288,
+   "freq>=60%": {
+    "hitRate": 0.92,
+    "randomBaseline": 0.685,
+    "random95": [
+     0.639,
+     0.729
+    ],
+    "lift": 1.34
+   },
+   "freq>=30%": {
+    "hitRate": 0.938,
+    "randomBaseline": 0.728,
+    "random95": [
+     0.684,
+     0.778
+    ],
+    "lift": 1.29
+   },
+   "gap a or b": {
+    "hitRate": 0.951,
+    "randomBaseline": 0.722,
+    "random95": [
+     0.681,
+     0.771
+    ],
+    "lift": 1.32
+   },
+   "Tr10 C20 mid hmax>=15cm": {
+    "hitRate": 0.927,
+    "randomBaseline": 0.701,
+    "random95": [
+     0.656,
+     0.743
+    ],
+    "lift": 1.32
+   },
+   "maxFreqInFootprint": {
+    "observedMean": 0.918,
+    "randomMean": 0.685,
+    "auc": 0.669
+   },
+   "gapClassAtSites": {
+    "a_persistente": 191,
+    "b_responde": 83,
+    "c_rara": 13,
+    "fuera_urbano": 1
+   }
+  },
+  "zonas críticas (polígonos)": {
+   "n": 156,
+   "freq>=60%": {
+    "hitRate": 0.872,
+    "randomBaseline": 0.587,
+    "random95": [
+     0.526,
+     0.654
+    ],
+    "lift": 1.49
+   },
+   "freq>=30%": {
+    "hitRate": 0.897,
+    "randomBaseline": 0.642,
+    "random95": [
+     0.577,
+     0.712
+    ],
+    "lift": 1.4
+   },
+   "gap a or b": {
+    "hitRate": 0.917,
+    "randomBaseline": 0.641,
+    "random95": [
+     0.551,
+     0.712
+    ],
+    "lift": 1.43
+   },
+   "Tr10 C20 mid hmax>=15cm": {
+    "hitRate": 0.878,
+    "randomBaseline": 0.609,
+    "random95": [
+     0.538,
+     0.673
+    ],
+    "lift": 1.44
+   },
+   "maxFreqInFootprint": {
+    "observedMean": 0.865,
+    "randomMean": 0.601,
+    "auc": 0.675
+   },
+   "gapClassAtSites": {
+    "a_persistente": 94,
+    "b_responde": 49,
+    "c_rara": 13,
+    "fuera_urbano": 0
+   }
+  },
+  "puntos (radio 60 m)": {
+   "n": 288,
+   "freq>=60%": {
+    "hitRate": 0.906,
+    "randomBaseline": 0.588,
+    "random95": [
+     0.535,
+     0.642
+    ],
+    "lift": 1.54
+   },
+   "freq>=30%": {
+    "hitRate": 0.941,
+    "randomBaseline": 0.644,
+    "random95": [
+     0.59,
+     0.701
+    ],
+    "lift": 1.46
+   },
+   "gap a or b": {
+    "hitRate": 0.938,
+    "randomBaseline": 0.64,
+    "random95": [
+     0.601,
+     0.698
+    ],
+    "lift": 1.46
+   },
+   "Tr10 C20 mid hmax>=15cm": {
+    "hitRate": 0.917,
+    "randomBaseline": 0.609,
+    "random95": [
+     0.559,
+     0.674
+    ],
+    "lift": 1.5
+   },
+   "maxFreqInFootprint": {
+    "observedMean": 0.901,
+    "randomMean": 0.587,
+    "auc": 0.72
+   },
+   "gapClassAtSites": {
+    "a_persistente": 171,
+    "b_responde": 99,
+    "c_rara": 16,
+    "fuera_urbano": 2
+   }
+  },
+  "urbanShare": {
+   "a_persistente": 0.113,
+   "b_responde": 0.087,
+   "c_rara": 0.8
+  }
+ },
+ "runs": [
+  {
+   "id": "tr10-c0-mid",
+   "Tr": 10,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5417,
+   "wall_s": 30.5,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000021388206564590403,
+   "volumes_Mm3": {
+    "rain": 132.749,
+    "losses": 40.772,
+    "drainage": 0,
+    "boundaryOut": 3.079,
+    "storageEnd": 88.896,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 238.23,
+   "urbanFlooded15_km2": 104.09,
+   "urbanFlooded30_km2": 52.31,
+   "urbanFloodVolume15_Mm3": 31.968
+  },
+  {
+   "id": "tr10-c10-mid",
+   "Tr": 10,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5288,
+   "wall_s": 29,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.00001676084056475771,
+   "volumes_Mm3": {
+    "rain": 132.789,
+    "losses": 40.079,
+    "drainage": 8.832,
+    "boundaryOut": 3.056,
+    "storageEnd": 80.821,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 223.51,
+   "urbanFlooded15_km2": 93.71,
+   "urbanFlooded30_km2": 45.45,
+   "urbanFloodVolume15_Mm3": 27.71
+  },
+  {
+   "id": "tr10-c20-mid",
+   "Tr": 10,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5173,
+   "wall_s": 27.7,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000019108723563546556,
+   "volumes_Mm3": {
+    "rain": 132.807,
+    "losses": 39.694,
+    "drainage": 16.199,
+    "boundaryOut": 3.034,
+    "storageEnd": 73.878,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 208.14,
+   "urbanFlooded15_km2": 82.72,
+   "urbanFlooded30_km2": 38.68,
+   "urbanFloodVolume15_Mm3": 23.623
+  },
+  {
+   "id": "tr10-c30-mid",
+   "Tr": 10,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5106,
+   "wall_s": 27.1,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000013824052321158538,
+   "volumes_Mm3": {
+    "rain": 132.993,
+    "losses": 39.434,
+    "drainage": 22.189,
+    "boundaryOut": 3.024,
+    "storageEnd": 68.345,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 194.16,
+   "urbanFlooded15_km2": 72.5,
+   "urbanFlooded30_km2": 32.7,
+   "urbanFloodVolume15_Mm3": 20.142
+  },
+  {
+   "id": "tr10-c40-mid",
+   "Tr": 10,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5074,
+   "wall_s": 28.4,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.00001119148611492953,
+   "volumes_Mm3": {
+    "rain": 132.829,
+    "losses": 39.236,
+    "drainage": 26.902,
+    "boundaryOut": 2.999,
+    "storageEnd": 63.691,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 181.26,
+   "urbanFlooded15_km2": 63.24,
+   "urbanFlooded30_km2": 27.66,
+   "urbanFloodVolume15_Mm3": 17.179
+  },
+  {
+   "id": "tr10-c50-mid",
+   "Tr": 10,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5031,
+   "wall_s": 28.9,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.00000780624667360846,
+   "volumes_Mm3": {
+    "rain": 132.881,
+    "losses": 39.072,
+    "drainage": 30.796,
+    "boundaryOut": 2.987,
+    "storageEnd": 60.025,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 170.32,
+   "urbanFlooded15_km2": 55.21,
+   "urbanFlooded30_km2": 23.51,
+   "urbanFloodVolume15_Mm3": 14.716
+  },
+  {
+   "id": "tr10-c60-mid",
+   "Tr": 10,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4978,
+   "wall_s": 26.8,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000006104498957088522,
+   "volumes_Mm3": {
+    "rain": 132.807,
+    "losses": 38.934,
+    "drainage": 33.807,
+    "boundaryOut": 2.971,
+    "storageEnd": 57.095,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 161.17,
+   "urbanFlooded15_km2": 48.61,
+   "urbanFlooded30_km2": 20.33,
+   "urbanFloodVolume15_Mm3": 12.743
+  },
+  {
+   "id": "tr2-c0-mid",
+   "Tr": 2,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5107,
+   "wall_s": 27.6,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.00002385076022405787,
+   "volumes_Mm3": {
+    "rain": 99.948,
+    "losses": 38.542,
+    "drainage": 0,
+    "boundaryOut": 1.731,
+    "storageEnd": 59.673,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 165.19,
+   "urbanFlooded15_km2": 74.54,
+   "urbanFlooded30_km2": 34.83,
+   "urbanFloodVolume15_Mm3": 21.194
+  },
+  {
+   "id": "tr2-c10-mid",
+   "Tr": 2,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4996,
+   "wall_s": 27.2,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000014515240745118896,
+   "volumes_Mm3": {
+    "rain": 100.101,
+    "losses": 37.755,
+    "drainage": 8.348,
+    "boundaryOut": 1.719,
+    "storageEnd": 52.277,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 148.99,
+   "urbanFlooded15_km2": 62.88,
+   "urbanFlooded30_km2": 28.07,
+   "urbanFloodVolume15_Mm3": 17.145
+  },
+  {
+   "id": "tr2-c20-mid",
+   "Tr": 2,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4916,
+   "wall_s": 25.9,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000010485839870125448,
+   "volumes_Mm3": {
+    "rain": 100.094,
+    "losses": 37.325,
+    "drainage": 14.818,
+    "boundaryOut": 1.703,
+    "storageEnd": 46.248,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 133.12,
+   "urbanFlooded15_km2": 51.36,
+   "urbanFlooded30_km2": 21.71,
+   "urbanFloodVolume15_Mm3": 13.47
+  },
+  {
+   "id": "tr2-c30-mid",
+   "Tr": 2,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4821,
+   "wall_s": 25.3,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000007104306442030122,
+   "volumes_Mm3": {
+    "rain": 100.082,
+    "losses": 37.04,
+    "drainage": 19.548,
+    "boundaryOut": 1.69,
+    "storageEnd": 41.803,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 120.21,
+   "urbanFlooded15_km2": 41.97,
+   "urbanFlooded30_km2": 17.01,
+   "urbanFloodVolume15_Mm3": 10.655
+  },
+  {
+   "id": "tr2-c40-mid",
+   "Tr": 2,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4689,
+   "wall_s": 25.3,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000006240898031599274,
+   "volumes_Mm3": {
+    "rain": 100.11,
+    "losses": 36.828,
+    "drainage": 23.076,
+    "boundaryOut": 1.681,
+    "storageEnd": 38.526,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 109.8,
+   "urbanFlooded15_km2": 34.4,
+   "urbanFlooded30_km2": 13.38,
+   "urbanFloodVolume15_Mm3": 8.459
+  },
+  {
+   "id": "tr2-c50-mid",
+   "Tr": 2,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4674,
+   "wall_s": 25.2,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000005422772505188272,
+   "volumes_Mm3": {
+    "rain": 100.1,
+    "losses": 36.653,
+    "drainage": 25.73,
+    "boundaryOut": 1.671,
+    "storageEnd": 36.045,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 101.39,
+   "urbanFlooded15_km2": 28.34,
+   "urbanFlooded30_km2": 10.51,
+   "urbanFloodVolume15_Mm3": 6.795
+  },
+  {
+   "id": "tr2-c60-mid",
+   "Tr": 2,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4670,
+   "wall_s": 25.2,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000004158451673509245,
+   "volumes_Mm3": {
+    "rain": 100.033,
+    "losses": 36.511,
+    "drainage": 27.871,
+    "boundaryOut": 1.66,
+    "storageEnd": 33.991,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 93.56,
+   "urbanFlooded15_km2": 22.74,
+   "urbanFlooded30_km2": 8.12,
+   "urbanFloodVolume15_Mm3": 5.351
+  },
+  {
+   "id": "tr100-c0-mid",
+   "Tr": 100,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5852,
+   "wall_s": 32.7,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000021183837724621894,
+   "volumes_Mm3": {
+    "rain": 179.781,
+    "losses": 42.78,
+    "drainage": 0,
+    "boundaryOut": 5.732,
+    "storageEnd": 131.265,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 331.72,
+   "urbanFlooded15_km2": 142.57,
+   "urbanFlooded30_km2": 77.05,
+   "urbanFloodVolume15_Mm3": 48.163
+  },
+  {
+   "id": "tr100-c10-mid",
+   "Tr": 100,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5762,
+   "wall_s": 32,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000019823493460096708,
+   "volumes_Mm3": {
+    "rain": 179.733,
+    "losses": 42.172,
+    "drainage": 9.257,
+    "boundaryOut": 5.673,
+    "storageEnd": 122.627,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 319.29,
+   "urbanFlooded15_km2": 133.99,
+   "urbanFlooded30_km2": 70.89,
+   "urbanFloodVolume15_Mm3": 43.841
+  },
+  {
+   "id": "tr100-c20-mid",
+   "Tr": 100,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5693,
+   "wall_s": 31.6,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000019114446819909167,
+   "volumes_Mm3": {
+    "rain": 179.852,
+    "losses": 41.857,
+    "drainage": 17.278,
+    "boundaryOut": 5.633,
+    "storageEnd": 115.082,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 306.73,
+   "urbanFlooded15_km2": 125.06,
+   "urbanFlooded30_km2": 64.54,
+   "urbanFloodVolume15_Mm3": 39.673
+  },
+  {
+   "id": "tr100-c30-mid",
+   "Tr": 100,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5648,
+   "wall_s": 31.7,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.0000166690946334994,
+   "volumes_Mm3": {
+    "rain": 179.662,
+    "losses": 41.608,
+    "drainage": 24.427,
+    "boundaryOut": 5.582,
+    "storageEnd": 108.043,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 293.14,
+   "urbanFlooded15_km2": 115.48,
+   "urbanFlooded30_km2": 57.97,
+   "urbanFloodVolume15_Mm3": 35.566
+  },
+  {
+   "id": "tr100-c40-mid",
+   "Tr": 100,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5623,
+   "wall_s": 30.2,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000015170788745219264,
+   "volumes_Mm3": {
+    "rain": 179.594,
+    "losses": 41.428,
+    "drainage": 30.447,
+    "boundaryOut": 5.544,
+    "storageEnd": 102.173,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 280.38,
+   "urbanFlooded15_km2": 106.25,
+   "urbanFlooded30_km2": 52.02,
+   "urbanFloodVolume15_Mm3": 31.966
+  },
+  {
+   "id": "tr100-c50-mid",
+   "Tr": 100,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5603,
+   "wall_s": 31,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000015005028846209964,
+   "volumes_Mm3": {
+    "rain": 179.543,
+    "losses": 41.279,
+    "drainage": 35.527,
+    "boundaryOut": 5.513,
+    "storageEnd": 97.221,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 268.51,
+   "urbanFlooded15_km2": 97.63,
+   "urbanFlooded30_km2": 46.78,
+   "urbanFloodVolume15_Mm3": 28.831
+  },
+  {
+   "id": "tr100-c60-mid",
+   "Tr": 100,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5594,
+   "wall_s": 30.2,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000013647052014479072,
+   "volumes_Mm3": {
+    "rain": 179.719,
+    "losses": 41.154,
+    "drainage": 39.972,
+    "boundaryOut": 5.499,
+    "storageEnd": 93.092,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 257.65,
+   "urbanFlooded15_km2": 89.47,
+   "urbanFlooded30_km2": 42.06,
+   "urbanFloodVolume15_Mm3": 26.062
+  },
+  {
+   "id": "tr5-c0-mid",
+   "Tr": 5,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5293,
+   "wall_s": 29.3,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000017281631481566666,
+   "volumes_Mm3": {
+    "rain": 118.775,
+    "losses": 39.941,
+    "drainage": 0,
+    "boundaryOut": 2.45,
+    "storageEnd": 76.382,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 207.9,
+   "urbanFlooded15_km2": 91.8,
+   "urbanFlooded30_km2": 44.82,
+   "urbanFloodVolume15_Mm3": 27.299
+  },
+  {
+   "id": "tr5-c10-mid",
+   "Tr": 5,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5162,
+   "wall_s": 27.4,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.00002309800412805266,
+   "volumes_Mm3": {
+    "rain": 118.822,
+    "losses": 39.214,
+    "drainage": 8.655,
+    "boundaryOut": 2.431,
+    "storageEnd": 68.52,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 192.29,
+   "urbanFlooded15_km2": 80.75,
+   "urbanFlooded30_km2": 37.89,
+   "urbanFloodVolume15_Mm3": 23.086
+  },
+  {
+   "id": "tr5-c20-mid",
+   "Tr": 5,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5066,
+   "wall_s": 26.8,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000013297718064706887,
+   "volumes_Mm3": {
+    "rain": 118.747,
+    "losses": 38.816,
+    "drainage": 15.727,
+    "boundaryOut": 2.408,
+    "storageEnd": 61.795,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 176.01,
+   "urbanFlooded15_km2": 69.17,
+   "urbanFlooded30_km2": 31.15,
+   "urbanFloodVolume15_Mm3": 19.076
+  },
+  {
+   "id": "tr5-c30-mid",
+   "Tr": 5,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5018,
+   "wall_s": 27.3,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000012528986991997147,
+   "volumes_Mm3": {
+    "rain": 118.784,
+    "losses": 38.549,
+    "drainage": 21.193,
+    "boundaryOut": 2.394,
+    "storageEnd": 56.647,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 162.12,
+   "urbanFlooded15_km2": 58.99,
+   "urbanFlooded30_km2": 25.49,
+   "urbanFloodVolume15_Mm3": 15.815
+  },
+  {
+   "id": "tr5-c40-mid",
+   "Tr": 5,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4965,
+   "wall_s": 27.4,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000007822496426733133,
+   "volumes_Mm3": {
+    "rain": 118.67,
+    "losses": 38.342,
+    "drainage": 25.459,
+    "boundaryOut": 2.375,
+    "storageEnd": 52.492,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 150.01,
+   "urbanFlooded15_km2": 50.27,
+   "urbanFlooded30_km2": 21.04,
+   "urbanFloodVolume15_Mm3": 13.153
+  },
+  {
+   "id": "tr5-c50-mid",
+   "Tr": 5,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4870,
+   "wall_s": 26.2,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000005799650465470816,
+   "volumes_Mm3": {
+    "rain": 118.773,
+    "losses": 38.179,
+    "drainage": 28.769,
+    "boundaryOut": 2.368,
+    "storageEnd": 49.456,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 140.6,
+   "urbanFlooded15_km2": 43.35,
+   "urbanFlooded30_km2": 17.66,
+   "urbanFloodVolume15_Mm3": 11.092
+  },
+  {
+   "id": "tr5-c60-mid",
+   "Tr": 5,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 4775,
+   "wall_s": 25.2,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000005814683402778809,
+   "volumes_Mm3": {
+    "rain": 118.677,
+    "losses": 38.034,
+    "drainage": 31.425,
+    "boundaryOut": 2.354,
+    "storageEnd": 46.862,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 131.94,
+   "urbanFlooded15_km2": 37.13,
+   "urbanFlooded30_km2": 14.74,
+   "urbanFloodVolume15_Mm3": 9.308
+  },
+  {
+   "id": "tr25-c0-mid",
+   "Tr": 25,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5555,
+   "wall_s": 29.4,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000026695787618368818,
+   "volumes_Mm3": {
+    "rain": 151.435,
+    "losses": 41.642,
+    "drainage": 0,
+    "boundaryOut": 4.033,
+    "storageEnd": 105.756,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 276.9,
+   "urbanFlooded15_km2": 119.79,
+   "urbanFlooded30_km2": 62.2,
+   "urbanFloodVolume15_Mm3": 38.295
+  },
+  {
+   "id": "tr25-c10-mid",
+   "Tr": 25,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5441,
+   "wall_s": 28.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000018205981229284073,
+   "volumes_Mm3": {
+    "rain": 151.689,
+    "losses": 40.981,
+    "drainage": 9.03,
+    "boundaryOut": 4.017,
+    "storageEnd": 97.658,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 263.9,
+   "urbanFlooded15_km2": 110.6,
+   "urbanFlooded30_km2": 55.85,
+   "urbanFloodVolume15_Mm3": 34.145
+  },
+  {
+   "id": "tr25-c20-mid",
+   "Tr": 25,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5324,
+   "wall_s": 28.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000015020381732153215,
+   "volumes_Mm3": {
+    "rain": 151.391,
+    "losses": 40.634,
+    "drainage": 16.711,
+    "boundaryOut": 3.969,
+    "storageEnd": 90.075,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 248.75,
+   "urbanFlooded15_km2": 100.07,
+   "urbanFlooded30_km2": 48.89,
+   "urbanFloodVolume15_Mm3": 29.846
+  },
+  {
+   "id": "tr25-c30-mid",
+   "Tr": 25,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5231,
+   "wall_s": 27.2,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000017875845447649014,
+   "volumes_Mm3": {
+    "rain": 151.585,
+    "losses": 40.378,
+    "drainage": 23.216,
+    "boundaryOut": 3.955,
+    "storageEnd": 84.033,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 235.02,
+   "urbanFlooded15_km2": 90.03,
+   "urbanFlooded30_km2": 42.69,
+   "urbanFloodVolume15_Mm3": 26.125
+  },
+  {
+   "id": "tr25-c40-mid",
+   "Tr": 25,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5193,
+   "wall_s": 27.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00001320849893143136,
+   "volumes_Mm3": {
+    "rain": 151.56,
+    "losses": 40.189,
+    "drainage": 28.525,
+    "boundaryOut": 3.932,
+    "storageEnd": 78.912,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 221.88,
+   "urbanFlooded15_km2": 80.47,
+   "urbanFlooded30_km2": 37.13,
+   "urbanFloodVolume15_Mm3": 22.853
+  },
+  {
+   "id": "tr25-c50-mid",
+   "Tr": 25,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5168,
+   "wall_s": 27.3,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000012276773623608011,
+   "volumes_Mm3": {
+    "rain": 151.565,
+    "losses": 40.033,
+    "drainage": 32.947,
+    "boundaryOut": 3.913,
+    "storageEnd": 74.67,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 210.31,
+   "urbanFlooded15_km2": 72.02,
+   "urbanFlooded30_km2": 32.37,
+   "urbanFloodVolume15_Mm3": 20.091
+  },
+  {
+   "id": "tr25-c60-mid",
+   "Tr": 25,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5145,
+   "wall_s": 26.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000010017714231968813,
+   "volumes_Mm3": {
+    "rain": 151.526,
+    "losses": 39.901,
+    "drainage": 36.621,
+    "boundaryOut": 3.894,
+    "storageEnd": 71.109,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 199.83,
+   "urbanFlooded15_km2": 64.35,
+   "urbanFlooded30_km2": 28.41,
+   "urbanFloodVolume15_Mm3": 17.695
+  },
+  {
+   "id": "tr50-c0-mid",
+   "Tr": 50,
+   "cap_mmh": 0,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5680,
+   "wall_s": 29.7,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000022590274474641626,
+   "volumes_Mm3": {
+    "rain": 165.596,
+    "losses": 42.205,
+    "drainage": 0,
+    "boundaryOut": 4.838,
+    "storageEnd": 118.549,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 305.02,
+   "urbanFlooded15_km2": 131.38,
+   "urbanFlooded30_km2": 69.72,
+   "urbanFloodVolume15_Mm3": 43.186
+  },
+  {
+   "id": "tr50-c10-mid",
+   "Tr": 50,
+   "cap_mmh": 10,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5577,
+   "wall_s": 29.1,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000022260448839203197,
+   "volumes_Mm3": {
+    "rain": 165.696,
+    "losses": 41.581,
+    "drainage": 9.15,
+    "boundaryOut": 4.806,
+    "storageEnd": 110.155,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 292.18,
+   "urbanFlooded15_km2": 122.44,
+   "urbanFlooded30_km2": 63.35,
+   "urbanFloodVolume15_Mm3": 38.946
+  },
+  {
+   "id": "tr50-c20-mid",
+   "Tr": 50,
+   "cap_mmh": 20,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5480,
+   "wall_s": 28.9,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000012379525354309285,
+   "volumes_Mm3": {
+    "rain": 165.696,
+    "losses": 41.243,
+    "drainage": 17.019,
+    "boundaryOut": 4.771,
+    "storageEnd": 102.662,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 278.55,
+   "urbanFlooded15_km2": 112.89,
+   "urbanFlooded30_km2": 56.78,
+   "urbanFloodVolume15_Mm3": 34.755
+  },
+  {
+   "id": "tr50-c30-mid",
+   "Tr": 50,
+   "cap_mmh": 30,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5417,
+   "wall_s": 28.5,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000013817465444113713,
+   "volumes_Mm3": {
+    "rain": 165.749,
+    "losses": 40.99,
+    "drainage": 23.884,
+    "boundaryOut": 4.743,
+    "storageEnd": 96.13,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 264.92,
+   "urbanFlooded15_km2": 103.08,
+   "urbanFlooded30_km2": 50.34,
+   "urbanFloodVolume15_Mm3": 30.839
+  },
+  {
+   "id": "tr50-c40-mid",
+   "Tr": 50,
+   "cap_mmh": 40,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5385,
+   "wall_s": 28,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000012957147470054702,
+   "volumes_Mm3": {
+    "rain": 165.612,
+    "losses": 40.802,
+    "drainage": 29.603,
+    "boundaryOut": 4.707,
+    "storageEnd": 90.498,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 251.59,
+   "urbanFlooded15_km2": 93.51,
+   "urbanFlooded30_km2": 44.5,
+   "urbanFloodVolume15_Mm3": 27.337
+  },
+  {
+   "id": "tr50-c50-mid",
+   "Tr": 50,
+   "cap_mmh": 50,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5369,
+   "wall_s": 27.7,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000011432784390255807,
+   "volumes_Mm3": {
+    "rain": 165.793,
+    "losses": 40.651,
+    "drainage": 34.313,
+    "boundaryOut": 4.695,
+    "storageEnd": 86.131,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 240.36,
+   "urbanFlooded15_km2": 85.08,
+   "urbanFlooded30_km2": 39.63,
+   "urbanFloodVolume15_Mm3": 24.474
+  },
+  {
+   "id": "tr50-c60-mid",
+   "Tr": 50,
+   "cap_mmh": 60,
+   "infil": "mid",
+   "engine": "webgpu",
+   "steps": 5349,
+   "wall_s": 27.8,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001019547197000082,
+   "volumes_Mm3": {
+    "rain": 165.627,
+    "losses": 40.519,
+    "drainage": 38.463,
+    "boundaryOut": 4.664,
+    "storageEnd": 81.98,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 228.78,
+   "urbanFlooded15_km2": 76.63,
+   "urbanFlooded30_km2": 34.88,
+   "urbanFloodVolume15_Mm3": 21.733
+  },
+  {
+   "id": "tr10-c0-low",
+   "Tr": 10,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "cpu",
+   "steps": 5530,
+   "wall_s": 3219.3,
+   "rain_mm": 62.8,
+   "massRelResidual": 9.978991477660789e-8,
+   "volumes_Mm3": {
+    "rain": 132.751,
+    "losses": 17.046,
+    "drainage": 0,
+    "boundaryOut": 4.451,
+    "storageEnd": 111.254,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 270.16,
+   "urbanFlooded15_km2": 112.81,
+   "urbanFlooded30_km2": 58.37,
+   "urbanFloodVolume15_Mm3": 35.878
+  },
+  {
+   "id": "tr10-c10-low",
+   "Tr": 10,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5414,
+   "wall_s": 28.7,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000011687879392795947,
+   "volumes_Mm3": {
+    "rain": 132.997,
+    "losses": 16.752,
+    "drainage": 9.477,
+    "boundaryOut": 4.426,
+    "storageEnd": 102.341,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 255.91,
+   "urbanFlooded15_km2": 102.64,
+   "urbanFlooded30_km2": 51.44,
+   "urbanFloodVolume15_Mm3": 31.492
+  },
+  {
+   "id": "tr10-c20-low",
+   "Tr": 10,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5313,
+   "wall_s": 27.9,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000012347767634207248,
+   "volumes_Mm3": {
+    "rain": 132.795,
+    "losses": 16.628,
+    "drainage": 17.357,
+    "boundaryOut": 4.38,
+    "storageEnd": 94.429,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 239.76,
+   "urbanFlooded15_km2": 91.27,
+   "urbanFlooded30_km2": 44.17,
+   "urbanFloodVolume15_Mm3": 27.103
+  },
+  {
+   "id": "tr10-c30-low",
+   "Tr": 10,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5282,
+   "wall_s": 27.9,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000010931246527563025,
+   "volumes_Mm3": {
+    "rain": 132.894,
+    "losses": 16.544,
+    "drainage": 23.707,
+    "boundaryOut": 4.357,
+    "storageEnd": 88.285,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 225.44,
+   "urbanFlooded15_km2": 80.69,
+   "urbanFlooded30_km2": 38.03,
+   "urbanFloodVolume15_Mm3": 23.389
+  },
+  {
+   "id": "tr10-c40-low",
+   "Tr": 10,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5262,
+   "wall_s": 28.1,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000010520009907650878,
+   "volumes_Mm3": {
+    "rain": 132.846,
+    "losses": 16.483,
+    "drainage": 28.775,
+    "boundaryOut": 4.33,
+    "storageEnd": 83.257,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 212.66,
+   "urbanFlooded15_km2": 71.34,
+   "urbanFlooded30_km2": 32.65,
+   "urbanFloodVolume15_Mm3": 20.3
+  },
+  {
+   "id": "tr10-c50-low",
+   "Tr": 10,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5238,
+   "wall_s": 27.4,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.00000845073516377098,
+   "volumes_Mm3": {
+    "rain": 132.852,
+    "losses": 16.434,
+    "drainage": 33.02,
+    "boundaryOut": 4.309,
+    "storageEnd": 79.088,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 201.25,
+   "urbanFlooded15_km2": 62.95,
+   "urbanFlooded30_km2": 28.24,
+   "urbanFloodVolume15_Mm3": 17.647
+  },
+  {
+   "id": "tr10-c60-low",
+   "Tr": 10,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5210,
+   "wall_s": 27.2,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000007909276009629951,
+   "volumes_Mm3": {
+    "rain": 132.858,
+    "losses": 16.394,
+    "drainage": 36.326,
+    "boundaryOut": 4.291,
+    "storageEnd": 75.846,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 191.95,
+   "urbanFlooded15_km2": 56.19,
+   "urbanFlooded30_km2": 24.79,
+   "urbanFloodVolume15_Mm3": 15.565
+  },
+  {
+   "id": "tr10-c0-high",
+   "Tr": 10,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5257,
+   "wall_s": 27,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000018465795529563018,
+   "volumes_Mm3": {
+    "rain": 132.849,
+    "losses": 72.357,
+    "drainage": 0,
+    "boundaryOut": 1.617,
+    "storageEnd": 58.872,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 184.94,
+   "urbanFlooded15_km2": 90.37,
+   "urbanFlooded30_km2": 43.37,
+   "urbanFloodVolume15_Mm3": 26.325
+  },
+  {
+   "id": "tr10-c10-high",
+   "Tr": 10,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5132,
+   "wall_s": 26.5,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000015830592051260288,
+   "volumes_Mm3": {
+    "rain": 132.886,
+    "losses": 71.184,
+    "drainage": 7.971,
+    "boundaryOut": 1.604,
+    "storageEnd": 52.124,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 170.42,
+   "urbanFlooded15_km2": 80.14,
+   "urbanFlooded30_km2": 36.92,
+   "urbanFloodVolume15_Mm3": 22.43
+  },
+  {
+   "id": "tr10-c20-high",
+   "Tr": 10,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5022,
+   "wall_s": 25.6,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000011908955018761984,
+   "volumes_Mm3": {
+    "rain": 132.832,
+    "losses": 70.398,
+    "drainage": 14.61,
+    "boundaryOut": 1.587,
+    "storageEnd": 46.234,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 155.23,
+   "urbanFlooded15_km2": 69.25,
+   "urbanFlooded30_km2": 30.65,
+   "urbanFloodVolume15_Mm3": 18.683
+  },
+  {
+   "id": "tr10-c30-high",
+   "Tr": 10,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4966,
+   "wall_s": 25.7,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000010322664431321725,
+   "volumes_Mm3": {
+    "rain": 132.654,
+    "losses": 69.778,
+    "drainage": 19.927,
+    "boundaryOut": 1.57,
+    "storageEnd": 41.378,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 141.25,
+   "urbanFlooded15_km2": 59.15,
+   "urbanFlooded30_km2": 25.03,
+   "urbanFloodVolume15_Mm3": 15.436
+  },
+  {
+   "id": "tr10-c40-high",
+   "Tr": 10,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4920,
+   "wall_s": 25.6,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000010091882115841229,
+   "volumes_Mm3": {
+    "rain": 132.912,
+    "losses": 69.327,
+    "drainage": 24.121,
+    "boundaryOut": 1.57,
+    "storageEnd": 37.893,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 130.34,
+   "urbanFlooded15_km2": 50.92,
+   "urbanFlooded30_km2": 20.74,
+   "urbanFloodVolume15_Mm3": 12.939
+  },
+  {
+   "id": "tr10-c50-high",
+   "Tr": 10,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4849,
+   "wall_s": 25.2,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000007998325511859241,
+   "volumes_Mm3": {
+    "rain": 132.794,
+    "losses": 68.925,
+    "drainage": 27.469,
+    "boundaryOut": 1.556,
+    "storageEnd": 34.842,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 119.84,
+   "urbanFlooded15_km2": 43.34,
+   "urbanFlooded30_km2": 17.03,
+   "urbanFloodVolume15_Mm3": 10.722
+  },
+  {
+   "id": "tr10-c60-high",
+   "Tr": 10,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4719,
+   "wall_s": 23.9,
+   "rain_mm": 62.8,
+   "massRelResidual": 0.000006103425730901059,
+   "volumes_Mm3": {
+    "rain": 132.919,
+    "losses": 68.608,
+    "drainage": 30.13,
+    "boundaryOut": 1.553,
+    "storageEnd": 32.627,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 111.71,
+   "urbanFlooded15_km2": 37.31,
+   "urbanFlooded30_km2": 14.21,
+   "urbanFloodVolume15_Mm3": 8.995
+  },
+  {
+   "id": "tr2-c0-low",
+   "Tr": 2,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5245,
+   "wall_s": 27.7,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.00002173561026157909,
+   "volumes_Mm3": {
+    "rain": 99.987,
+    "losses": 16.596,
+    "drainage": 0,
+    "boundaryOut": 2.734,
+    "storageEnd": 80.654,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 200.63,
+   "urbanFlooded15_km2": 83.86,
+   "urbanFlooded30_km2": 40.58,
+   "urbanFloodVolume15_Mm3": 24.778
+  },
+  {
+   "id": "tr2-c10-low",
+   "Tr": 2,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5120,
+   "wall_s": 27,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000019815738643633172,
+   "volumes_Mm3": {
+    "rain": 99.923,
+    "losses": 16.245,
+    "drainage": 9.126,
+    "boundaryOut": 2.705,
+    "storageEnd": 71.845,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 183.05,
+   "urbanFlooded15_km2": 71.52,
+   "urbanFlooded30_km2": 33.2,
+   "urbanFloodVolume15_Mm3": 20.286
+  },
+  {
+   "id": "tr2-c20-low",
+   "Tr": 2,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5055,
+   "wall_s": 26.6,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000016872881024536376,
+   "volumes_Mm3": {
+    "rain": 100.215,
+    "losses": 16.107,
+    "drainage": 16.163,
+    "boundaryOut": 2.696,
+    "storageEnd": 65.247,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 167.15,
+   "urbanFlooded15_km2": 59.85,
+   "urbanFlooded30_km2": 26.48,
+   "urbanFloodVolume15_Mm3": 16.404
+  },
+  {
+   "id": "tr2-c30-low",
+   "Tr": 2,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 4995,
+   "wall_s": 26.1,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000014356828275223318,
+   "volumes_Mm3": {
+    "rain": 100.071,
+    "losses": 16.017,
+    "drainage": 21.301,
+    "boundaryOut": 2.672,
+    "storageEnd": 60.08,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 153.32,
+   "urbanFlooded15_km2": 49.84,
+   "urbanFlooded30_km2": 21.34,
+   "urbanFloodVolume15_Mm3": 13.321
+  },
+  {
+   "id": "tr2-c40-low",
+   "Tr": 2,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 4859,
+   "wall_s": 25.3,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000012111298655218021,
+   "volumes_Mm3": {
+    "rain": 100.074,
+    "losses": 15.951,
+    "drainage": 25.237,
+    "boundaryOut": 2.657,
+    "storageEnd": 56.229,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 142.24,
+   "urbanFlooded15_km2": 41.82,
+   "urbanFlooded30_km2": 17.37,
+   "urbanFloodVolume15_Mm3": 10.907
+  },
+  {
+   "id": "tr2-c50-low",
+   "Tr": 2,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 4811,
+   "wall_s": 25,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000013891701303456893,
+   "volumes_Mm3": {
+    "rain": 100.077,
+    "losses": 15.899,
+    "drainage": 28.2,
+    "boundaryOut": 2.644,
+    "storageEnd": 53.332,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 133.41,
+   "urbanFlooded15_km2": 35.44,
+   "urbanFlooded30_km2": 14.31,
+   "urbanFloodVolume15_Mm3": 9.068
+  },
+  {
+   "id": "tr2-c60-low",
+   "Tr": 2,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 4811,
+   "wall_s": 25,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000012689221472390301,
+   "volumes_Mm3": {
+    "rain": 100.065,
+    "losses": 15.857,
+    "drainage": 30.614,
+    "boundaryOut": 2.632,
+    "storageEnd": 50.96,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 125.37,
+   "urbanFlooded15_km2": 29.66,
+   "urbanFlooded30_km2": 11.68,
+   "urbanFloodVolume15_Mm3": 7.511
+  },
+  {
+   "id": "tr100-c0-low",
+   "Tr": 100,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6188,
+   "wall_s": 32.7,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.00002766974497750238,
+   "volumes_Mm3": {
+    "rain": 179.619,
+    "losses": 17.488,
+    "drainage": 0,
+    "boundaryOut": 7.726,
+    "storageEnd": 154.4,
+    "clipped": 0,
+    "residual": 0.005
+   },
+   "flooded15_km2": 358.39,
+   "urbanFlooded15_km2": 150.23,
+   "urbanFlooded30_km2": 83.06,
+   "urbanFloodVolume15_Mm3": 52.381
+  },
+  {
+   "id": "tr100-c10-low",
+   "Tr": 100,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6153,
+   "wall_s": 32.4,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.0000223877047059841,
+   "volumes_Mm3": {
+    "rain": 179.83,
+    "losses": 17.205,
+    "drainage": 9.791,
+    "boundaryOut": 7.664,
+    "storageEnd": 145.166,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 346.63,
+   "urbanFlooded15_km2": 141.95,
+   "urbanFlooded30_km2": 76.85,
+   "urbanFloodVolume15_Mm3": 47.983
+  },
+  {
+   "id": "tr100-c20-low",
+   "Tr": 100,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6115,
+   "wall_s": 32.1,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000021304949197642267,
+   "volumes_Mm3": {
+    "rain": 179.705,
+    "losses": 17.1,
+    "drainage": 18.222,
+    "boundaryOut": 7.577,
+    "storageEnd": 136.802,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 333.59,
+   "urbanFlooded15_km2": 132.77,
+   "urbanFlooded30_km2": 70.22,
+   "urbanFloodVolume15_Mm3": 43.522
+  },
+  {
+   "id": "tr100-c30-low",
+   "Tr": 100,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6085,
+   "wall_s": 31.8,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000020064825856459665,
+   "volumes_Mm3": {
+    "rain": 179.565,
+    "losses": 17.023,
+    "drainage": 25.742,
+    "boundaryOut": 7.495,
+    "storageEnd": 129.302,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 320.23,
+   "urbanFlooded15_km2": 123.27,
+   "urbanFlooded30_km2": 63.63,
+   "urbanFloodVolume15_Mm3": 39.286
+  },
+  {
+   "id": "tr100-c40-low",
+   "Tr": 100,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6076,
+   "wall_s": 31.7,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000017463988581971352,
+   "volumes_Mm3": {
+    "rain": 179.575,
+    "losses": 16.966,
+    "drainage": 32.058,
+    "boundaryOut": 7.437,
+    "storageEnd": 123.111,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 307.92,
+   "urbanFlooded15_km2": 114.24,
+   "urbanFlooded30_km2": 57.6,
+   "urbanFloodVolume15_Mm3": 35.626
+  },
+  {
+   "id": "tr100-c50-low",
+   "Tr": 100,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6067,
+   "wall_s": 31.6,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000018422215779207813,
+   "volumes_Mm3": {
+    "rain": 179.573,
+    "losses": 16.92,
+    "drainage": 37.454,
+    "boundaryOut": 7.386,
+    "storageEnd": 117.809,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 296.32,
+   "urbanFlooded15_km2": 105.66,
+   "urbanFlooded30_km2": 52.22,
+   "urbanFloodVolume15_Mm3": 32.39
+  },
+  {
+   "id": "tr100-c60-low",
+   "Tr": 100,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 6058,
+   "wall_s": 31.6,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000016701709810067275,
+   "volumes_Mm3": {
+    "rain": 179.581,
+    "losses": 16.882,
+    "drainage": 42.132,
+    "boundaryOut": 7.341,
+    "storageEnd": 113.223,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 285.28,
+   "urbanFlooded15_km2": 97.42,
+   "urbanFlooded30_km2": 47.34,
+   "urbanFloodVolume15_Mm3": 29.484
+  },
+  {
+   "id": "tr2-c0-high",
+   "Tr": 2,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4877,
+   "wall_s": 24.8,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.00001397802323649523,
+   "volumes_Mm3": {
+    "rain": 100.117,
+    "losses": 65.456,
+    "drainage": 0,
+    "boundaryOut": 0.694,
+    "storageEnd": 33.966,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 111.41,
+   "urbanFlooded15_km2": 61.24,
+   "urbanFlooded30_km2": 27.25,
+   "urbanFloodVolume15_Mm3": 16.568
+  },
+  {
+   "id": "tr2-c10-high",
+   "Tr": 2,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4751,
+   "wall_s": 24,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000011178935358950415,
+   "volumes_Mm3": {
+    "rain": 100.132,
+    "losses": 64.079,
+    "drainage": 7.338,
+    "boundaryOut": 0.684,
+    "storageEnd": 28.031,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 96.05,
+   "urbanFlooded15_km2": 50.09,
+   "urbanFlooded30_km2": 21.04,
+   "urbanFloodVolume15_Mm3": 12.952
+  },
+  {
+   "id": "tr2-c20-high",
+   "Tr": 2,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4625,
+   "wall_s": 23.3,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.00000817308370626515,
+   "volumes_Mm3": {
+    "rain": 100.229,
+    "losses": 63.171,
+    "drainage": 12.951,
+    "boundaryOut": 0.677,
+    "storageEnd": 23.429,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 82.1,
+   "urbanFlooded15_km2": 39.74,
+   "urbanFlooded30_km2": 15.68,
+   "urbanFloodVolume15_Mm3": 9.829
+  },
+  {
+   "id": "tr2-c30-high",
+   "Tr": 2,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4437,
+   "wall_s": 22.3,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000005838938814032102,
+   "volumes_Mm3": {
+    "rain": 100.053,
+    "losses": 62.486,
+    "drainage": 16.976,
+    "boundaryOut": 0.664,
+    "storageEnd": 19.926,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 70.17,
+   "urbanFlooded15_km2": 31.18,
+   "urbanFlooded30_km2": 11.65,
+   "urbanFloodVolume15_Mm3": 7.337
+  },
+  {
+   "id": "tr2-c40-high",
+   "Tr": 2,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4419,
+   "wall_s": 22,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.0000040096092566514575,
+   "volumes_Mm3": {
+    "rain": 100.085,
+    "losses": 61.988,
+    "drainage": 19.922,
+    "boundaryOut": 0.658,
+    "storageEnd": 17.517,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 61.18,
+   "urbanFlooded15_km2": 24.52,
+   "urbanFlooded30_km2": 8.59,
+   "urbanFloodVolume15_Mm3": 5.512
+  },
+  {
+   "id": "tr2-c50-high",
+   "Tr": 2,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4410,
+   "wall_s": 21.9,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.000001946044793117863,
+   "volumes_Mm3": {
+    "rain": 99.985,
+    "losses": 61.566,
+    "drainage": 22.138,
+    "boundaryOut": 0.649,
+    "storageEnd": 15.631,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 53.38,
+   "urbanFlooded15_km2": 18.9,
+   "urbanFlooded30_km2": 6.15,
+   "urbanFloodVolume15_Mm3": 4.053
+  },
+  {
+   "id": "tr2-c60-high",
+   "Tr": 2,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4405,
+   "wall_s": 21.8,
+   "rain_mm": 47.3,
+   "massRelResidual": 0.0000017152627007628228,
+   "volumes_Mm3": {
+    "rain": 100.037,
+    "losses": 61.25,
+    "drainage": 23.872,
+    "boundaryOut": 0.646,
+    "storageEnd": 14.269,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 47.08,
+   "urbanFlooded15_km2": 14.09,
+   "urbanFlooded30_km2": 4.28,
+   "urbanFloodVolume15_Mm3": 2.881
+  },
+  {
+   "id": "tr100-c0-high",
+   "Tr": 100,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5620,
+   "wall_s": 29.1,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.00001652302216650886,
+   "volumes_Mm3": {
+    "rain": 179.583,
+    "losses": 78.474,
+    "drainage": 0,
+    "boundaryOut": 3.469,
+    "storageEnd": 97.638,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 284.02,
+   "urbanFlooded15_km2": 129.53,
+   "urbanFlooded30_km2": 67.59,
+   "urbanFloodVolume15_Mm3": 41.689
+  },
+  {
+   "id": "tr100-c10-high",
+   "Tr": 100,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5518,
+   "wall_s": 28.4,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000017479483333505522,
+   "volumes_Mm3": {
+    "rain": 179.842,
+    "losses": 77.47,
+    "drainage": 8.517,
+    "boundaryOut": 3.459,
+    "storageEnd": 90.393,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 272.15,
+   "urbanFlooded15_km2": 121.14,
+   "urbanFlooded30_km2": 61.73,
+   "urbanFloodVolume15_Mm3": 37.765
+  },
+  {
+   "id": "tr100-c20-high",
+   "Tr": 100,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5413,
+   "wall_s": 27.8,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000014942255790898733,
+   "volumes_Mm3": {
+    "rain": 179.862,
+    "losses": 76.79,
+    "drainage": 15.938,
+    "boundaryOut": 3.438,
+    "storageEnd": 83.693,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 259.33,
+   "urbanFlooded15_km2": 112.24,
+   "urbanFlooded30_km2": 55.59,
+   "urbanFloodVolume15_Mm3": 33.818
+  },
+  {
+   "id": "tr100-c30-high",
+   "Tr": 100,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5311,
+   "wall_s": 27.2,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.00001307779992363701,
+   "volumes_Mm3": {
+    "rain": 179.588,
+    "losses": 76.257,
+    "drainage": 22.525,
+    "boundaryOut": 3.4,
+    "storageEnd": 77.404,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 245.21,
+   "urbanFlooded15_km2": 102.35,
+   "urbanFlooded30_km2": 49.13,
+   "urbanFloodVolume15_Mm3": 29.881
+  },
+  {
+   "id": "tr100-c40-high",
+   "Tr": 100,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5230,
+   "wall_s": 26.8,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000016121318305225958,
+   "volumes_Mm3": {
+    "rain": 179.995,
+    "losses": 75.852,
+    "drainage": 28.11,
+    "boundaryOut": 3.403,
+    "storageEnd": 72.627,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 233.58,
+   "urbanFlooded15_km2": 93.7,
+   "urbanFlooded30_km2": 43.66,
+   "urbanFloodVolume15_Mm3": 26.657
+  },
+  {
+   "id": "tr100-c50-high",
+   "Tr": 100,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5167,
+   "wall_s": 26.3,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000008999690227730257,
+   "volumes_Mm3": {
+    "rain": 179.716,
+    "losses": 75.497,
+    "drainage": 32.728,
+    "boundaryOut": 3.372,
+    "storageEnd": 68.118,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 221.22,
+   "urbanFlooded15_km2": 84.93,
+   "urbanFlooded30_km2": 38.62,
+   "urbanFloodVolume15_Mm3": 23.643
+  },
+  {
+   "id": "tr100-c60-high",
+   "Tr": 100,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5141,
+   "wall_s": 26.2,
+   "rain_mm": 84.9,
+   "massRelResidual": 0.000008145547276482596,
+   "volumes_Mm3": {
+    "rain": 179.692,
+    "losses": 75.2,
+    "drainage": 36.777,
+    "boundaryOut": 3.356,
+    "storageEnd": 64.358,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 210.16,
+   "urbanFlooded15_km2": 76.8,
+   "urbanFlooded30_km2": 34.02,
+   "urbanFloodVolume15_Mm3": 21.004
+  },
+  {
+   "id": "tr5-c0-low",
+   "Tr": 5,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5415,
+   "wall_s": 28.7,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000014251309847601504,
+   "volumes_Mm3": {
+    "rain": 118.722,
+    "losses": 16.877,
+    "drainage": 0,
+    "boundaryOut": 3.669,
+    "storageEnd": 98.174,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 241.33,
+   "urbanFlooded15_km2": 100.78,
+   "urbanFlooded30_km2": 50.84,
+   "urbanFloodVolume15_Mm3": 31.085
+  },
+  {
+   "id": "tr5-c10-low",
+   "Tr": 5,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5285,
+   "wall_s": 27.8,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.00001484188576974012,
+   "volumes_Mm3": {
+    "rain": 118.733,
+    "losses": 16.55,
+    "drainage": 9.345,
+    "boundaryOut": 3.637,
+    "storageEnd": 89.199,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 225.48,
+   "urbanFlooded15_km2": 89.58,
+   "urbanFlooded30_km2": 43.48,
+   "urbanFloodVolume15_Mm3": 26.608
+  },
+  {
+   "id": "tr5-c20-low",
+   "Tr": 5,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5188,
+   "wall_s": 27.2,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.0000155889523036901,
+   "volumes_Mm3": {
+    "rain": 118.76,
+    "losses": 16.42,
+    "drainage": 16.94,
+    "boundaryOut": 3.61,
+    "storageEnd": 81.788,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 209.11,
+   "urbanFlooded15_km2": 77.78,
+   "urbanFlooded30_km2": 36.46,
+   "urbanFloodVolume15_Mm3": 22.352
+  },
+  {
+   "id": "tr5-c30-low",
+   "Tr": 5,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5153,
+   "wall_s": 26.9,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000015249910800409106,
+   "volumes_Mm3": {
+    "rain": 118.747,
+    "losses": 16.334,
+    "drainage": 22.844,
+    "boundaryOut": 3.586,
+    "storageEnd": 75.981,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 194.56,
+   "urbanFlooded15_km2": 67.19,
+   "urbanFlooded30_km2": 30.4,
+   "urbanFloodVolume15_Mm3": 18.85
+  },
+  {
+   "id": "tr5-c40-low",
+   "Tr": 5,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5122,
+   "wall_s": 26.7,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000011923861726933558,
+   "volumes_Mm3": {
+    "rain": 118.746,
+    "losses": 16.271,
+    "drainage": 27.432,
+    "boundaryOut": 3.567,
+    "storageEnd": 71.474,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 182.5,
+   "urbanFlooded15_km2": 58.42,
+   "urbanFlooded30_km2": 25.72,
+   "urbanFloodVolume15_Mm3": 16.092
+  },
+  {
+   "id": "tr5-c50-low",
+   "Tr": 5,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5075,
+   "wall_s": 26.4,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000011659468007619392,
+   "volumes_Mm3": {
+    "rain": 118.75,
+    "losses": 16.221,
+    "drainage": 31.107,
+    "boundaryOut": 3.55,
+    "storageEnd": 67.87,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 172.17,
+   "urbanFlooded15_km2": 50.91,
+   "urbanFlooded30_km2": 21.97,
+   "urbanFloodVolume15_Mm3": 13.789
+  },
+  {
+   "id": "tr5-c60-low",
+   "Tr": 5,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 4990,
+   "wall_s": 25.9,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000010809427473272452,
+   "volumes_Mm3": {
+    "rain": 118.753,
+    "losses": 16.179,
+    "drainage": 34.052,
+    "boundaryOut": 3.535,
+    "storageEnd": 64.985,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 163.38,
+   "urbanFlooded15_km2": 44.59,
+   "urbanFlooded30_km2": 18.91,
+   "urbanFloodVolume15_Mm3": 11.9
+  },
+  {
+   "id": "tr25-c0-low",
+   "Tr": 25,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5763,
+   "wall_s": 30.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00003307600421481828,
+   "volumes_Mm3": {
+    "rain": 151.697,
+    "losses": 17.261,
+    "drainage": 0,
+    "boundaryOut": 5.621,
+    "storageEnd": 128.81,
+    "clipped": 0,
+    "residual": 0.005
+   },
+   "flooded15_km2": 307.47,
+   "urbanFlooded15_km2": 128.48,
+   "urbanFlooded30_km2": 68.43,
+   "urbanFloodVolume15_Mm3": 42.442
+  },
+  {
+   "id": "tr25-c10-low",
+   "Tr": 25,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5681,
+   "wall_s": 29.9,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000024518428055041203,
+   "volumes_Mm3": {
+    "rain": 151.528,
+    "losses": 16.96,
+    "drainage": 9.619,
+    "boundaryOut": 5.562,
+    "storageEnd": 119.384,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 293.53,
+   "urbanFlooded15_km2": 118.84,
+   "urbanFlooded30_km2": 61.63,
+   "urbanFloodVolume15_Mm3": 37.94
+  },
+  {
+   "id": "tr25-c20-low",
+   "Tr": 25,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5629,
+   "wall_s": 29.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00002198276333372888,
+   "volumes_Mm3": {
+    "rain": 151.476,
+    "losses": 16.847,
+    "drainage": 17.785,
+    "boundaryOut": 5.515,
+    "storageEnd": 111.326,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 278.93,
+   "urbanFlooded15_km2": 108.49,
+   "urbanFlooded30_km2": 54.62,
+   "urbanFloodVolume15_Mm3": 33.54
+  },
+  {
+   "id": "tr25-c30-low",
+   "Tr": 25,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5606,
+   "wall_s": 29.3,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00001925588420325519,
+   "volumes_Mm3": {
+    "rain": 151.585,
+    "losses": 16.765,
+    "drainage": 24.657,
+    "boundaryOut": 5.485,
+    "storageEnd": 104.674,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 265.08,
+   "urbanFlooded15_km2": 98.39,
+   "urbanFlooded30_km2": 48.15,
+   "urbanFloodVolume15_Mm3": 29.649
+  },
+  {
+   "id": "tr25-c40-low",
+   "Tr": 25,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5592,
+   "wall_s": 29.2,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000016989154827737666,
+   "volumes_Mm3": {
+    "rain": 151.597,
+    "losses": 16.706,
+    "drainage": 30.306,
+    "boundaryOut": 5.454,
+    "storageEnd": 99.127,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 251.98,
+   "urbanFlooded15_km2": 88.81,
+   "urbanFlooded30_km2": 42.51,
+   "urbanFloodVolume15_Mm3": 26.25
+  },
+  {
+   "id": "tr25-c50-low",
+   "Tr": 25,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5579,
+   "wall_s": 29.1,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000015025496808727855,
+   "volumes_Mm3": {
+    "rain": 151.595,
+    "losses": 16.658,
+    "drainage": 34.99,
+    "boundaryOut": 5.426,
+    "storageEnd": 94.518,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 240.24,
+   "urbanFlooded15_km2": 80.07,
+   "urbanFlooded30_km2": 37.47,
+   "urbanFloodVolume15_Mm3": 23.348
+  },
+  {
+   "id": "tr25-c60-low",
+   "Tr": 25,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5564,
+   "wall_s": 28.9,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000014391808438105915,
+   "volumes_Mm3": {
+    "rain": 151.603,
+    "losses": 16.619,
+    "drainage": 38.996,
+    "boundaryOut": 5.402,
+    "storageEnd": 90.585,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 229.61,
+   "urbanFlooded15_km2": 72.16,
+   "urbanFlooded30_km2": 33.25,
+   "urbanFloodVolume15_Mm3": 20.806
+  },
+  {
+   "id": "tr50-c0-low",
+   "Tr": 50,
+   "cap_mmh": 0,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5968,
+   "wall_s": 31.5,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000027190193563871392,
+   "volumes_Mm3": {
+    "rain": 165.524,
+    "losses": 17.378,
+    "drainage": 0,
+    "boundaryOut": 6.599,
+    "storageEnd": 141.542,
+    "clipped": 0,
+    "residual": 0.005
+   },
+   "flooded15_km2": 333.18,
+   "urbanFlooded15_km2": 139.45,
+   "urbanFlooded30_km2": 75.72,
+   "urbanFloodVolume15_Mm3": 47.339
+  },
+  {
+   "id": "tr50-c10-low",
+   "Tr": 50,
+   "cap_mmh": 10,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5916,
+   "wall_s": 31.1,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000023804620013418042,
+   "volumes_Mm3": {
+    "rain": 165.602,
+    "losses": 17.087,
+    "drainage": 9.712,
+    "boundaryOut": 6.537,
+    "storageEnd": 132.262,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 320.55,
+   "urbanFlooded15_km2": 130.55,
+   "urbanFlooded30_km2": 69.24,
+   "urbanFloodVolume15_Mm3": 42.887
+  },
+  {
+   "id": "tr50-c20-low",
+   "Tr": 50,
+   "cap_mmh": 20,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5879,
+   "wall_s": 30.8,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00002216711372663651,
+   "volumes_Mm3": {
+    "rain": 165.713,
+    "losses": 16.977,
+    "drainage": 18.021,
+    "boundaryOut": 6.482,
+    "storageEnd": 124.229,
+    "clipped": 0,
+    "residual": 0.004
+   },
+   "flooded15_km2": 307.22,
+   "urbanFlooded15_km2": 121.11,
+   "urbanFlooded30_km2": 62.61,
+   "urbanFloodVolume15_Mm3": 38.566
+  },
+  {
+   "id": "tr50-c30-low",
+   "Tr": 50,
+   "cap_mmh": 30,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5853,
+   "wall_s": 30.6,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00002040337092696838,
+   "volumes_Mm3": {
+    "rain": 165.724,
+    "losses": 16.9,
+    "drainage": 25.287,
+    "boundaryOut": 6.427,
+    "storageEnd": 117.107,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 293.45,
+   "urbanFlooded15_km2": 111.14,
+   "urbanFlooded30_km2": 55.93,
+   "urbanFloodVolume15_Mm3": 34.448
+  },
+  {
+   "id": "tr50-c40-low",
+   "Tr": 50,
+   "cap_mmh": 40,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5842,
+   "wall_s": 30.5,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001878990450053168,
+   "volumes_Mm3": {
+    "rain": 165.722,
+    "losses": 16.841,
+    "drainage": 31.272,
+    "boundaryOut": 6.381,
+    "storageEnd": 111.224,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 280.8,
+   "urbanFlooded15_km2": 101.87,
+   "urbanFlooded30_km2": 50.04,
+   "urbanFloodVolume15_Mm3": 30.928
+  },
+  {
+   "id": "tr50-c50-low",
+   "Tr": 50,
+   "cap_mmh": 50,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5832,
+   "wall_s": 30.4,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001668000170958116,
+   "volumes_Mm3": {
+    "rain": 165.728,
+    "losses": 16.795,
+    "drainage": 36.291,
+    "boundaryOut": 6.347,
+    "storageEnd": 106.292,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 269.1,
+   "urbanFlooded15_km2": 93.17,
+   "urbanFlooded30_km2": 44.98,
+   "urbanFloodVolume15_Mm3": 27.869
+  },
+  {
+   "id": "tr50-c60-low",
+   "Tr": 50,
+   "cap_mmh": 60,
+   "infil": "low",
+   "engine": "webgpu",
+   "steps": 5821,
+   "wall_s": 30.3,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000014937617081420948,
+   "volumes_Mm3": {
+    "rain": 165.741,
+    "losses": 16.756,
+    "drainage": 40.7,
+    "boundaryOut": 6.317,
+    "storageEnd": 101.965,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 257.83,
+   "urbanFlooded15_km2": 84.78,
+   "urbanFlooded30_km2": 40.11,
+   "urbanFloodVolume15_Mm3": 25.072
+  },
+  {
+   "id": "tr5-c0-high",
+   "Tr": 5,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5112,
+   "wall_s": 26.1,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.00001734032505778176,
+   "volumes_Mm3": {
+    "rain": 118.67,
+    "losses": 69.634,
+    "drainage": 0,
+    "boundaryOut": 1.19,
+    "storageEnd": 47.844,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 153.16,
+   "urbanFlooded15_km2": 77.74,
+   "urbanFlooded30_km2": 36.21,
+   "urbanFloodVolume15_Mm3": 21.942
+  },
+  {
+   "id": "tr5-c10-high",
+   "Tr": 5,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4988,
+   "wall_s": 25.3,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.00001333535640553526,
+   "volumes_Mm3": {
+    "rain": 118.832,
+    "losses": 68.403,
+    "drainage": 7.741,
+    "boundaryOut": 1.183,
+    "storageEnd": 41.504,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 138.5,
+   "urbanFlooded15_km2": 67.11,
+   "urbanFlooded30_km2": 29.89,
+   "urbanFloodVolume15_Mm3": 18.176
+  },
+  {
+   "id": "tr5-c20-high",
+   "Tr": 5,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4906,
+   "wall_s": 24.9,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000012315389786788334,
+   "volumes_Mm3": {
+    "rain": 118.719,
+    "losses": 67.537,
+    "drainage": 13.972,
+    "boundaryOut": 1.167,
+    "storageEnd": 36.042,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 123.37,
+   "urbanFlooded15_km2": 56.27,
+   "urbanFlooded30_km2": 23.79,
+   "urbanFloodVolume15_Mm3": 14.646
+  },
+  {
+   "id": "tr5-c30-high",
+   "Tr": 5,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4836,
+   "wall_s": 24.4,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.00001083302060358925,
+   "volumes_Mm3": {
+    "rain": 118.692,
+    "losses": 66.931,
+    "drainage": 18.784,
+    "boundaryOut": 1.155,
+    "storageEnd": 31.821,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 110.25,
+   "urbanFlooded15_km2": 46.73,
+   "urbanFlooded30_km2": 18.84,
+   "urbanFloodVolume15_Mm3": 11.759
+  },
+  {
+   "id": "tr5-c40-high",
+   "Tr": 5,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4719,
+   "wall_s": 23.8,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000006185272555102077,
+   "volumes_Mm3": {
+    "rain": 118.686,
+    "losses": 66.434,
+    "drainage": 22.557,
+    "boundaryOut": 1.146,
+    "storageEnd": 28.549,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 99.11,
+   "urbanFlooded15_km2": 38.58,
+   "urbanFlooded30_km2": 14.86,
+   "urbanFloodVolume15_Mm3": 9.384
+  },
+  {
+   "id": "tr5-c50-high",
+   "Tr": 5,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4609,
+   "wall_s": 23.2,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.000005798715129159332,
+   "volumes_Mm3": {
+    "rain": 118.743,
+    "losses": 66.04,
+    "drainage": 25.349,
+    "boundaryOut": 1.141,
+    "storageEnd": 26.213,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 90.64,
+   "urbanFlooded15_km2": 32.41,
+   "urbanFlooded30_km2": 11.96,
+   "urbanFloodVolume15_Mm3": 7.619
+  },
+  {
+   "id": "tr5-c60-high",
+   "Tr": 5,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4602,
+   "wall_s": 23,
+   "rain_mm": 56.1,
+   "massRelResidual": 0.0000037480884291159758,
+   "volumes_Mm3": {
+    "rain": 118.698,
+    "losses": 65.698,
+    "drainage": 27.637,
+    "boundaryOut": 1.132,
+    "storageEnd": 24.231,
+    "clipped": 0,
+    "residual": 0
+   },
+   "flooded15_km2": 82.73,
+   "urbanFlooded15_km2": 26.69,
+   "urbanFlooded30_km2": 9.35,
+   "urbanFloodVolume15_Mm3": 6.079
+  },
+  {
+   "id": "tr25-c0-high",
+   "Tr": 25,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5416,
+   "wall_s": 27.9,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00002029177669483516,
+   "volumes_Mm3": {
+    "rain": 151.386,
+    "losses": 75.212,
+    "drainage": 0,
+    "boundaryOut": 2.253,
+    "storageEnd": 73.918,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 225.12,
+   "urbanFlooded15_km2": 106.31,
+   "urbanFlooded30_km2": 52.99,
+   "urbanFloodVolume15_Mm3": 32.315
+  },
+  {
+   "id": "tr25-c10-high",
+   "Tr": 25,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5303,
+   "wall_s": 27.2,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.00001552370626904935,
+   "volumes_Mm3": {
+    "rain": 151.517,
+    "losses": 74.125,
+    "drainage": 8.223,
+    "boundaryOut": 2.241,
+    "storageEnd": 66.924,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 211.76,
+   "urbanFlooded15_km2": 96.9,
+   "urbanFlooded30_km2": 46.72,
+   "urbanFloodVolume15_Mm3": 28.334
+  },
+  {
+   "id": "tr25-c20-high",
+   "Tr": 25,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5185,
+   "wall_s": 26.6,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000014384369108664192,
+   "volumes_Mm3": {
+    "rain": 151.407,
+    "losses": 73.381,
+    "drainage": 15.237,
+    "boundaryOut": 2.22,
+    "storageEnd": 60.566,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 197.16,
+   "urbanFlooded15_km2": 86.63,
+   "urbanFlooded30_km2": 40.19,
+   "urbanFloodVolume15_Mm3": 24.434
+  },
+  {
+   "id": "tr25-c30-high",
+   "Tr": 25,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5093,
+   "wall_s": 26.1,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000009194480971641821,
+   "volumes_Mm3": {
+    "rain": 151.517,
+    "losses": 72.838,
+    "drainage": 21.124,
+    "boundaryOut": 2.209,
+    "storageEnd": 55.344,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 183.46,
+   "urbanFlooded15_km2": 76.69,
+   "urbanFlooded30_km2": 34.35,
+   "urbanFloodVolume15_Mm3": 20.969
+  },
+  {
+   "id": "tr25-c40-high",
+   "Tr": 25,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5048,
+   "wall_s": 25.7,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000007877567969789255,
+   "volumes_Mm3": {
+    "rain": 151.414,
+    "losses": 72.389,
+    "drainage": 25.893,
+    "boundaryOut": 2.193,
+    "storageEnd": 50.938,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 170.82,
+   "urbanFlooded15_km2": 67.52,
+   "urbanFlooded30_km2": 29.2,
+   "urbanFloodVolume15_Mm3": 17.988
+  },
+  {
+   "id": "tr25-c50-high",
+   "Tr": 25,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5015,
+   "wall_s": 25.5,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000007345732588110753,
+   "volumes_Mm3": {
+    "rain": 151.631,
+    "losses": 72.033,
+    "drainage": 29.888,
+    "boundaryOut": 2.191,
+    "storageEnd": 47.519,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 160.19,
+   "urbanFlooded15_km2": 59.5,
+   "urbanFlooded30_km2": 24.97,
+   "urbanFloodVolume15_Mm3": 15.502
+  },
+  {
+   "id": "tr25-c60-high",
+   "Tr": 25,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 4978,
+   "wall_s": 25.2,
+   "rain_mm": 71.6,
+   "massRelResidual": 0.000006552950052501689,
+   "volumes_Mm3": {
+    "rain": 151.514,
+    "losses": 71.705,
+    "drainage": 33.057,
+    "boundaryOut": 2.177,
+    "storageEnd": 44.574,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 150.41,
+   "urbanFlooded15_km2": 52.37,
+   "urbanFlooded30_km2": 21.41,
+   "urbanFloodVolume15_Mm3": 13.375
+  },
+  {
+   "id": "tr50-c0-high",
+   "Tr": 50,
+   "cap_mmh": 0,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5523,
+   "wall_s": 28.4,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001876385703360648,
+   "volumes_Mm3": {
+    "rain": 165.571,
+    "losses": 76.983,
+    "drainage": 0,
+    "boundaryOut": 2.825,
+    "storageEnd": 85.76,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 255.17,
+   "urbanFlooded15_km2": 118.05,
+   "urbanFlooded30_km2": 60.34,
+   "urbanFloodVolume15_Mm3": 36.977
+  },
+  {
+   "id": "tr50-c10-high",
+   "Tr": 50,
+   "cap_mmh": 10,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5417,
+   "wall_s": 27.9,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001547164522543549,
+   "volumes_Mm3": {
+    "rain": 165.818,
+    "losses": 75.971,
+    "drainage": 8.381,
+    "boundaryOut": 2.815,
+    "storageEnd": 78.648,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 242.73,
+   "urbanFlooded15_km2": 109.37,
+   "urbanFlooded30_km2": 54.3,
+   "urbanFloodVolume15_Mm3": 33.064
+  },
+  {
+   "id": "tr50-c20-high",
+   "Tr": 50,
+   "cap_mmh": 20,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5305,
+   "wall_s": 27.2,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00001657070139272332,
+   "volumes_Mm3": {
+    "rain": 165.61,
+    "losses": 75.224,
+    "drainage": 15.615,
+    "boundaryOut": 2.788,
+    "storageEnd": 71.98,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 228.66,
+   "urbanFlooded15_km2": 99.59,
+   "urbanFlooded30_km2": 47.8,
+   "urbanFloodVolume15_Mm3": 29.045
+  },
+  {
+   "id": "tr50-c30-high",
+   "Tr": 50,
+   "cap_mmh": 30,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5205,
+   "wall_s": 26.6,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000016499794737219487,
+   "volumes_Mm3": {
+    "rain": 165.736,
+    "losses": 74.693,
+    "drainage": 21.873,
+    "boundaryOut": 2.775,
+    "storageEnd": 66.391,
+    "clipped": 0,
+    "residual": 0.003
+   },
+   "flooded15_km2": 215.3,
+   "urbanFlooded15_km2": 89.99,
+   "urbanFlooded30_km2": 41.74,
+   "urbanFloodVolume15_Mm3": 25.441
+  },
+  {
+   "id": "tr50-c40-high",
+   "Tr": 50,
+   "cap_mmh": 40,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5125,
+   "wall_s": 26.1,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000010256322720775365,
+   "volumes_Mm3": {
+    "rain": 165.567,
+    "losses": 74.258,
+    "drainage": 27.071,
+    "boundaryOut": 2.751,
+    "storageEnd": 61.485,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 202.04,
+   "urbanFlooded15_km2": 80.49,
+   "urbanFlooded30_km2": 36.26,
+   "urbanFloodVolume15_Mm3": 22.161
+  },
+  {
+   "id": "tr50-c50-high",
+   "Tr": 50,
+   "cap_mmh": 50,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5092,
+   "wall_s": 25.9,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.000009797469793454096,
+   "volumes_Mm3": {
+    "rain": 165.773,
+    "losses": 73.909,
+    "drainage": 31.391,
+    "boundaryOut": 2.748,
+    "storageEnd": 57.723,
+    "clipped": 0,
+    "residual": 0.002
+   },
+   "flooded15_km2": 191.13,
+   "urbanFlooded15_km2": 72.37,
+   "urbanFlooded30_km2": 31.64,
+   "urbanFloodVolume15_Mm3": 19.516
+  },
+  {
+   "id": "tr50-c60-high",
+   "Tr": 50,
+   "cap_mmh": 60,
+   "infil": "high",
+   "engine": "webgpu",
+   "steps": 5064,
+   "wall_s": 25.7,
+   "rain_mm": 78.3,
+   "massRelResidual": 0.00000822341767611239,
+   "volumes_Mm3": {
+    "rain": 165.622,
+    "losses": 73.596,
+    "drainage": 35.069,
+    "boundaryOut": 2.728,
+    "storageEnd": 54.228,
+    "clipped": 0,
+    "residual": 0.001
+   },
+   "flooded15_km2": 180.11,
+   "urbanFlooded15_km2": 64.33,
+   "urbanFlooded30_km2": 27.39,
+   "urbanFloodVolume15_Mm3": 17.005
+  }
+ ]
+}

@@ -1,0 +1,315 @@
+{
+ "source": "/srv/contorno/data/guadalajara-flood-lab/labs",
+ "served": "https://guadalajara.vsfelix.com/labs/",
+ "snapshot": "2026-10-30T06:29:05.965Z",
+ "kept": 165,
+ "excluded": {
+  "files": 66235,
+  "bytes": 1586854071
+ },
+ "excludedByFolder": {
+  "shared/hazard/modeled": {
+   "files": 40454,
+   "bytes": 528214066,
+   "examples": [
+    "shared/hazard/modeled/sim-drenaje/ageb-drainage.json",
+    "shared/hazard/modeled/sim-drenaje/routing-flood-frequency.geojson",
+    "shared/hazard/modeled/sim-drenaje/tiles/freq/10/217/451.png"
+   ]
+  },
+  "shared/terrain/dtm": {
+   "files": 6815,
+   "bytes": 467773510,
+   "examples": [
+    "shared/terrain/dtm/10/216/450.png",
+    "shared/terrain/dtm/10/216/451.png",
+    "shared/terrain/dtm/10/216/452.png"
+   ]
+  },
+  "shared/terrain/hillshade": {
+   "files": 6815,
+   "bytes": 243829045,
+   "examples": [
+    "shared/terrain/hillshade/10/216/450.png",
+    "shared/terrain/hillshade/10/216/451.png",
+    "shared/terrain/hillshade/10/216/452.png"
+   ]
+  },
+  "shared/infra/buildings": {
+   "files": 4992,
+   "bytes": 102983404,
+   "examples": [
+    "shared/infra/buildings/14/3470/7214.pbf",
+    "shared/infra/buildings/14/3470/7215.pbf",
+    "shared/infra/buildings/14/3470/7216.pbf"
+   ]
+  },
+  "shared/terrain/ndsm": {
+   "files": 6815,
+   "bytes": 82067257,
+   "examples": [
+    "shared/terrain/ndsm/10/216/450.png",
+    "shared/terrain/ndsm/10/216/451.png",
+    "shared/terrain/ndsm/10/216/452.png"
+   ]
+  },
+  "video": {
+   "files": 2,
+   "bytes": 75368949,
+   "examples": [
+    "video/cauce-labs-vertical.mp4",
+    "video/cauce-labs.mp4"
+   ]
+  },
+  "nav-juguete": {
+   "files": 283,
+   "bytes": 36218249,
+   "examples": [
+    "nav-juguete/tiles/13/1742/3613.pbf",
+    "nav-juguete/tiles/13/1742/3614.pbf",
+    "nav-juguete/tiles/13/1742/3615.pbf"
+   ]
+  },
+  "sim-hidro": {
+   "files": 1,
+   "bytes": 7034387,
+   "examples": [
+    "sim-hidro/timelapse-tr100.mp4"
+   ]
+  },
+  "shared/infra/worldcover-urban.png": {
+   "files": 1,
+   "bytes": 5885740,
+   "examples": [
+    "shared/infra/worldcover-urban.png"
+   ]
+  },
+  "shared/infra/ageb-profile.geojson": {
+   "files": 1,
+   "bytes": 5543269,
+   "examples": [
+    "shared/infra/ageb-profile.geojson"
+   ]
+  },
+  "invertir-1": {
+   "files": 1,
+   "bytes": 5439058,
+   "examples": [
+    "invertir-1/data/agebs.json"
+   ]
+  },
+  "invertir-2": {
+   "files": 25,
+   "bytes": 5388261,
+   "examples": [
+    "invertir-2/data/frames-drenaje/f010.png",
+    "invertir-2/data/frames-drenaje/f020.png",
+    "invertir-2/data/frames-drenaje/f030.png"
+   ]
+  },
+  "shared/router/data": {
+   "files": 1,
+   "bytes": 4417156,
+   "examples": [
+    "shared/router/data/graph.bin.gz"
+   ]
+  },
+  "shared/infra/exposure-facilities.geojson": {
+   "files": 1,
+   "bytes": 3206005,
+   "examples": [
+    "shared/infra/exposure-facilities.geojson"
+   ]
+  },
+  "shared/infra/colonias-imc2020.geojson": {
+   "files": 1,
+   "bytes": 1996521,
+   "examples": [
+    "shared/infra/colonias-imc2020.geojson"
+   ]
+  },
+  "shared/infra/osm-green.geojson": {
+   "files": 1,
+   "bytes": 1602337,
+   "examples": [
+    "shared/infra/osm-green.geojson"
+   ]
+  },
+  "invertir-3": {
+   "files": 2,
+   "bytes": 1520523,
+   "examples": [
+    "invertir-3/data/board.json",
+    "invertir-3/data/labels.png"
+   ]
+  },
+  "shared/infra/osm-waterways.geojson": {
+   "files": 1,
+   "bytes": 1516090,
+   "examples": [
+    "shared/infra/osm-waterways.geojson"
+   ]
+  },
+  "shared/hazard/observed-gdl-reportes-2010-2022.geojson": {
+   "files": 1,
+   "bytes": 1226621,
+   "examples": [
+    "shared/hazard/observed-gdl-reportes-2010-2022.geojson"
+   ]
+  },
+  "shared/infra/worldcover-builtup-urban.png": {
+   "files": 1,
+   "bytes": 1019436,
+   "examples": [
+    "shared/infra/worldcover-builtup-urban.png"
+   ]
+  },
+  "shared/hazard/observed-zapopan-incidentes-2017-2025.geojson": {
+   "files": 1,
+   "bytes": 769463,
+   "examples": [
+    "shared/hazard/observed-zapopan-incidentes-2017-2025.geojson"
+   ]
+  },
+  "shared/infra/ageb-profile.csv": {
+   "files": 1,
+   "bytes": 759546,
+   "examples": [
+    "shared/infra/ageb-profile.csv"
+   ]
+  },
+  "shared/hazard/observed-imeplan-2026.geojson": {
+   "files": 1,
+   "bytes": 662339,
+   "examples": [
+    "shared/hazard/observed-imeplan-2026.geojson"
+   ]
+  },
+  "shared/hazard/water-bodies.geojson": {
+   "files": 1,
+   "bytes": 379433,
+   "examples": [
+    "shared/hazard/water-bodies.geojson"
+   ]
+  },
+  "shared/hazard/underpasses.geojson": {
+   "files": 1,
+   "bytes": 371563,
+   "examples": [
+    "shared/hazard/underpasses.geojson"
+   ]
+  },
+  "shared/infra/osm-drainage-structures.geojson": {
+   "files": 1,
+   "bytes": 268059,
+   "examples": [
+    "shared/infra/osm-drainage-structures.geojson"
+   ]
+  },
+  "shared/infra/zapopan-cuencas-urbanas.geojson": {
+   "files": 1,
+   "bytes": 266183,
+   "examples": [
+    "shared/infra/zapopan-cuencas-urbanas.geojson"
+   ]
+  },
+  "shared/infra/osm-transit.geojson": {
+   "files": 1,
+   "bytes": 250001,
+   "examples": [
+    "shared/infra/osm-transit.geojson"
+   ]
+  },
+  "shared/hazard/observed-gdl-areas-inundacion.geojson": {
+   "files": 1,
+   "bytes": 230081,
+   "examples": [
+    "shared/hazard/observed-gdl-areas-inundacion.geojson"
+   ]
+  },
+  "shared/infra/gdl-colectores-siapa.geojson": {
+   "files": 1,
+   "bytes": 192510,
+   "examples": [
+    "shared/infra/gdl-colectores-siapa.geojson"
+   ]
+  },
+  "shared/hazard/modeled-gdl-riesgo-mdte.geojson": {
+   "files": 1,
+   "bytes": 122728,
+   "examples": [
+    "shared/hazard/modeled-gdl-riesgo-mdte.geojson"
+   ]
+  },
+  "shared/infra/zapopan-arroyos-a-intervenir.geojson": {
+   "files": 1,
+   "bytes": 118873,
+   "examples": [
+    "shared/infra/zapopan-arroyos-a-intervenir.geojson"
+   ]
+  },
+  "shared/hazard/press-hotspots.geojson": {
+   "files": 1,
+   "bytes": 72666,
+   "examples": [
+    "shared/hazard/press-hotspots.geojson"
+   ]
+  },
+  "shared/infra/osm-emergency.geojson": {
+   "files": 1,
+   "bytes": 59640,
+   "examples": [
+    "shared/infra/osm-emergency.geojson"
+   ]
+  },
+  "shared/infra/pluvial-works.geojson": {
+   "files": 1,
+   "bytes": 27657,
+   "examples": [
+    "shared/infra/pluvial-works.geojson"
+   ]
+  },
+  "shared/infra/gdl-canales-pluviales.geojson": {
+   "files": 1,
+   "bytes": 24659,
+   "examples": [
+    "shared/infra/gdl-canales-pluviales.geojson"
+   ]
+  },
+  "shared/infra/smn-estaciones.geojson": {
+   "files": 1,
+   "bytes": 8473,
+   "examples": [
+    "shared/infra/smn-estaciones.geojson"
+   ]
+  },
+  "shared/infra/gdl-vasos-reguladores.geojson": {
+   "files": 1,
+   "bytes": 6904,
+   "examples": [
+    "shared/infra/gdl-vasos-reguladores.geojson"
+   ]
+  },
+  "shared/hazard/zapopan-pasos-desnivel-riesgo.geojson": {
+   "files": 1,
+   "bytes": 6193,
+   "examples": [
+    "shared/hazard/zapopan-pasos-desnivel-riesgo.geojson"
+   ]
+  },
+  "shared/infra/gdl-bases-bomberos.geojson": {
+   "files": 1,
+   "bytes": 3837,
+   "examples": [
+    "shared/infra/gdl-bases-bomberos.geojson"
+   ]
+  },
+  "shared/hazard/gdl-pasos-desnivel-atlas.geojson": {
+   "files": 1,
+   "bytes": 3379,
+   "examples": [
+    "shared/hazard/gdl-pasos-desnivel-atlas.geojson"
+   ]
+  }
+ }
+}

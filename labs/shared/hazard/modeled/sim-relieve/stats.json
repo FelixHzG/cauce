@@ -1,0 +1,3885 @@
+{
+ "id": "sim-relieve",
+ "producer": "sim-relieve",
+ "generated": "2026-10-30T00:55:24.674Z",
+ "hypothesis": {
+  "question": "En mi pueblo se inundan las zonas planas; probablemente aquí también.",
+  "headline": "En parte — pero no por ser planas: <em>por estar bajas</em>.",
+  "answer_es": "Parcialmente. Los barrios planos sí concentran más sitios inundables (el 10 % más plano de la mancha urbana tiene 2.5× los sitios esperados; AUC de la planitud a ~175 m = 0.66), pero solo porque lo plano en la ZMG suele ser lo bajo. A igual altura sobre el cauce (HAND), la planitud no distingue (AUC 0.49–0.57 por estrato) y quitarla del modelo no cambia la validación espacial (0.808 vs 0.807). La pendiente local de la calle (5 m) no dice nada (AUC 0.492). Lo que manda: HAND (AUC 0.792), luego posición baja a 2 km (0.708) y depresiones del terreno (0.682).",
+  "answer_en": "Partly. Flatter neighbourhoods do hold more flood sites (flattest decile 2.5x expected; AUC of flatness at ~175 m = 0.66), but only because flat land in the ZMG is mostly low land. Within HAND strata flatness has no skill (AUC 0.49-0.57) and dropping it from the model leaves spatial-CV AUC unchanged (0.808 vs 0.807). Street-scale slope (5 m) has none (AUC 0.492). What matters: height above nearest drainage (HAND, AUC 0.792), then low position at 2 km (0.708) and terrain depressions (0.682).",
+  "verdict": "partly-confounded",
+  "flatnessAuc5m": 0.492,
+  "flatnessAuc175m": 0.66,
+  "flatnessCi175m": [
+   0.616,
+   0.7
+  ],
+  "handAuc": 0.792,
+  "handCi": [
+   0.761,
+   0.817
+  ],
+  "flattestDecileRatio": 2.475,
+  "steepestDecileRatio": 0.234,
+  "lowestHandDecileRatio": 4.813,
+  "slopeMedian": 2.103,
+  "quadrants": {
+   "plano_bajo": {
+    "posShare": 0.407,
+    "ctlShare": 0.097,
+    "ratio": 4.208
+   },
+   "plano_alto": {
+    "posShare": 0.3,
+    "ctlShare": 0.403,
+    "ratio": 0.744
+   },
+   "inclinado_bajo": {
+    "posShare": 0.103,
+    "ctlShare": 0.019,
+    "ratio": 5.311
+   },
+   "inclinado_alto": {
+    "posShare": 0.189,
+    "ctlShare": 0.481,
+    "ratio": 0.394
+   }
+  },
+  "flatnessWithinHandStrata": [
+   {
+    "handFrom": null,
+    "handTo": 1,
+    "sites": 312,
+    "controls": 4649,
+    "aucFlatness": 0.491
+   },
+   {
+    "handFrom": 1,
+    "handTo": 3,
+    "sites": 221,
+    "controls": 4210,
+    "aucFlatness": 0.52
+   },
+   {
+    "handFrom": 3,
+    "handTo": 10,
+    "sites": 163,
+    "controls": 9969,
+    "aucFlatness": 0.552
+   },
+   {
+    "handFrom": 10,
+    "handTo": null,
+    "sites": 92,
+    "controls": 21172,
+    "aucFlatness": 0.572
+   }
+  ],
+  "flatWithinHandMin": 0.491,
+  "flatWithinHandMax": 0.572,
+  "cvWithFlat": 0.808,
+  "cvWithoutFlat": 0.807,
+  "flatnessConditionalCoefficients": [
+   {
+    "key": "slope5",
+    "coefStd": 0.257,
+    "ci95": [
+     0.104,
+     0.388
+    ],
+    "note": "steeper street-scale slope = slightly more (gutters, channel banks), no out-of-sample gain"
+   },
+   {
+    "key": "slope175",
+    "coefStd": -0.329,
+    "ci95": [
+     -0.54,
+     -0.152
+    ],
+    "note": "in-sample, conditional on HAND/TPI/depressions/TWI: flatter = slightly more sites, but no out-of-sample gain"
+   }
+  ],
+  "independentCheck": {
+   "dataset": "Zapopan civil-protection flood calls 2017-2025 (observed-zapopan-incidentes-2017-2025), not used in fitting",
+   "n": 1967,
+   "controls": 282030,
+   "aucModel": 0.635,
+   "aucFlatness": 0.547,
+   "aucHand": 0.618,
+   "streetCalls": {
+    "n": 959,
+    "auc": {
+     "susceptibilidad": 0.674,
+     "planitud (-pendiente 175 m)": 0.603,
+     "HAND bajo (-HAND min, 1 km2)": 0.661
+    },
+    "shareInScoreGe08": 0.35,
+    "areaShareScoreGe08": 0.146
+   },
+   "homeCalls": {
+    "n": 713,
+    "auc": {
+     "susceptibilidad": 0.58,
+     "planitud (-pendiente 175 m)": 0.461,
+     "HAND bajo (-HAND min, 1 km2)": 0.558
+    },
+    "shareInScoreGe08": 0.237,
+    "areaShareScoreGe08": 0.146
+   },
+   "underpassCalls": {
+    "n": 54,
+    "auc": {
+     "susceptibilidad": 0.526,
+     "planitud (-pendiente 175 m)": 0.58,
+     "HAND bajo (-HAND min, 1 km2)": 0.485
+    },
+    "shareInScoreGe08": 0.185,
+    "areaShareScoreGe08": 0.146
+   }
+  }
+ },
+ "independentCheck": {
+  "dataset": "observed-zapopan-incidentes-2017-2025 (Gobierno de Zapopan, CMPCyB), not used to fit the model",
+  "pointsInScoredZapopanBlocks": 1967,
+  "of": 2230,
+  "controls": "all scored 25 m urban blocks inside Zapopan AGEBs",
+  "nControls": 282030,
+  "results": {
+   "todos": {
+    "n": 1967,
+    "auc": {
+     "susceptibilidad": 0.635,
+     "planitud (-pendiente 175 m)": 0.547,
+     "HAND bajo (-HAND min, 1 km2)": 0.618
+    },
+    "shareInScoreGe08": 0.303,
+    "areaShareScoreGe08": 0.146
+   },
+   "vía pública": {
+    "n": 959,
+    "auc": {
+     "susceptibilidad": 0.674,
+     "planitud (-pendiente 175 m)": 0.603,
+     "HAND bajo (-HAND min, 1 km2)": 0.661
+    },
+    "shareInScoreGe08": 0.35,
+    "areaShareScoreGe08": 0.146
+   },
+   "casa habitación": {
+    "n": 713,
+    "auc": {
+     "susceptibilidad": 0.58,
+     "planitud (-pendiente 175 m)": 0.461,
+     "HAND bajo (-HAND min, 1 km2)": 0.558
+    },
+    "shareInScoreGe08": 0.237,
+    "areaShareScoreGe08": 0.146
+   },
+   "paso a desnivel": {
+    "n": 54,
+    "auc": {
+     "susceptibilidad": 0.526,
+     "planitud (-pendiente 175 m)": 0.58,
+     "HAND bajo (-HAND min, 1 km2)": 0.485
+    },
+    "shareInScoreGe08": 0.185,
+    "areaShareScoreGe08": 0.146
+   }
+  }
+ },
+ "indices": [
+  {
+   "key": "slope5",
+   "band": "slope5",
+   "label": "Planitud local (pendiente 5 m, invertida)",
+   "family": "planitud",
+   "dem": "MDT",
+   "aucOriented": 0.492,
+   "ci95": [
+    0.458,
+    0.53
+   ],
+   "aucRaw": 0.508,
+   "aucBySubsetOriented": {
+    "todos": 0.492,
+    "sitios": 0.477,
+    "zonas": 0.516,
+    "estatica": 0.514,
+    "dinamica": 0.42
+   },
+   "medianSites": 3.586,
+   "medianControls": 3.535,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 1.554,
+     "posShare": 0.093,
+     "ctlShare": 0.1,
+     "ratio": 0.925,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 2.061,
+     "posShare": 0.087,
+     "ctlShare": 0.1,
+     "ratio": 0.87,
+     "oddsRatioVsD1": 0.941
+    },
+    {
+     "decile": 3,
+     "upper": 2.516,
+     "posShare": 0.094,
+     "ctlShare": 0.1,
+     "ratio": 0.937,
+     "oddsRatioVsD1": 1.013
+    },
+    {
+     "decile": 4,
+     "upper": 2.984,
+     "posShare": 0.106,
+     "ctlShare": 0.1,
+     "ratio": 1.058,
+     "oddsRatioVsD1": 1.144
+    },
+    {
+     "decile": 5,
+     "upper": 3.535,
+     "posShare": 0.111,
+     "ctlShare": 0.1,
+     "ratio": 1.109,
+     "oddsRatioVsD1": 1.199
+    },
+    {
+     "decile": 6,
+     "upper": 4.21,
+     "posShare": 0.099,
+     "ctlShare": 0.1,
+     "ratio": 0.988,
+     "oddsRatioVsD1": 1.068
+    },
+    {
+     "decile": 7,
+     "upper": 5.154,
+     "posShare": 0.103,
+     "ctlShare": 0.1,
+     "ratio": 1.028,
+     "oddsRatioVsD1": 1.111
+    },
+    {
+     "decile": 8,
+     "upper": 6.678,
+     "posShare": 0.105,
+     "ctlShare": 0.1,
+     "ratio": 1.051,
+     "oddsRatioVsD1": 1.136
+    },
+    {
+     "decile": 9,
+     "upper": 9.879,
+     "posShare": 0.117,
+     "ctlShare": 0.1,
+     "ratio": 1.166,
+     "oddsRatioVsD1": 1.261
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.087,
+     "ctlShare": 0.1,
+     "ratio": 0.869,
+     "oddsRatioVsD1": 0.939
+    }
+   ]
+  },
+  {
+   "key": "slope75",
+   "band": "slope75",
+   "label": "Planitud de barrio (~75 m, invertida)",
+   "family": "planitud",
+   "dem": "MDT",
+   "aucOriented": 0.596,
+   "ci95": [
+    0.563,
+    0.631
+   ],
+   "aucRaw": 0.404,
+   "aucBySubsetOriented": {
+    "todos": 0.596,
+    "sitios": 0.578,
+    "zonas": 0.626,
+    "estatica": 0.608,
+    "dinamica": 0.521
+   },
+   "medianSites": 1.76,
+   "medianControls": 2.404,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0.781,
+     "posShare": 0.173,
+     "ctlShare": 0.1,
+     "ratio": 1.733,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 1.168,
+     "posShare": 0.153,
+     "ctlShare": 0.1,
+     "ratio": 1.529,
+     "oddsRatioVsD1": 0.882
+    },
+    {
+     "decile": 3,
+     "upper": 1.528,
+     "posShare": 0.112,
+     "ctlShare": 0.1,
+     "ratio": 1.125,
+     "oddsRatioVsD1": 0.649
+    },
+    {
+     "decile": 4,
+     "upper": 1.921,
+     "posShare": 0.096,
+     "ctlShare": 0.1,
+     "ratio": 0.959,
+     "oddsRatioVsD1": 0.553
+    },
+    {
+     "decile": 5,
+     "upper": 2.404,
+     "posShare": 0.089,
+     "ctlShare": 0.1,
+     "ratio": 0.893,
+     "oddsRatioVsD1": 0.515
+    },
+    {
+     "decile": 6,
+     "upper": 3.04,
+     "posShare": 0.083,
+     "ctlShare": 0.1,
+     "ratio": 0.832,
+     "oddsRatioVsD1": 0.48
+    },
+    {
+     "decile": 7,
+     "upper": 3.942,
+     "posShare": 0.091,
+     "ctlShare": 0.1,
+     "ratio": 0.91,
+     "oddsRatioVsD1": 0.525
+    },
+    {
+     "decile": 8,
+     "upper": 5.404,
+     "posShare": 0.081,
+     "ctlShare": 0.1,
+     "ratio": 0.808,
+     "oddsRatioVsD1": 0.466
+    },
+    {
+     "decile": 9,
+     "upper": 8.324,
+     "posShare": 0.079,
+     "ctlShare": 0.1,
+     "ratio": 0.795,
+     "oddsRatioVsD1": 0.459
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.042,
+     "ctlShare": 0.1,
+     "ratio": 0.417,
+     "oddsRatioVsD1": 0.241
+    }
+   ]
+  },
+  {
+   "key": "slope175",
+   "band": "slope175",
+   "label": "Planitud de zona (~175 m, invertida)",
+   "family": "planitud",
+   "dem": "MDT",
+   "aucOriented": 0.66,
+   "ci95": [
+    0.616,
+    0.7
+   ],
+   "aucRaw": 0.34,
+   "aucBySubsetOriented": {
+    "todos": 0.66,
+    "sitios": 0.646,
+    "zonas": 0.684,
+    "estatica": 0.664,
+    "dinamica": 0.606
+   },
+   "medianSites": 1.331,
+   "medianControls": 2.103,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0.73,
+     "posShare": 0.248,
+     "ctlShare": 0.1,
+     "ratio": 2.475,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 1.064,
+     "posShare": 0.156,
+     "ctlShare": 0.1,
+     "ratio": 1.557,
+     "oddsRatioVsD1": 0.629
+    },
+    {
+     "decile": 3,
+     "upper": 1.362,
+     "posShare": 0.108,
+     "ctlShare": 0.1,
+     "ratio": 1.077,
+     "oddsRatioVsD1": 0.435
+    },
+    {
+     "decile": 4,
+     "upper": 1.681,
+     "posShare": 0.101,
+     "ctlShare": 0.1,
+     "ratio": 1.011,
+     "oddsRatioVsD1": 0.408
+    },
+    {
+     "decile": 5,
+     "upper": 2.103,
+     "posShare": 0.095,
+     "ctlShare": 0.1,
+     "ratio": 0.954,
+     "oddsRatioVsD1": 0.385
+    },
+    {
+     "decile": 6,
+     "upper": 2.685,
+     "posShare": 0.092,
+     "ctlShare": 0.1,
+     "ratio": 0.921,
+     "oddsRatioVsD1": 0.372
+    },
+    {
+     "decile": 7,
+     "upper": 3.518,
+     "posShare": 0.086,
+     "ctlShare": 0.1,
+     "ratio": 0.862,
+     "oddsRatioVsD1": 0.348
+    },
+    {
+     "decile": 8,
+     "upper": 4.844,
+     "posShare": 0.045,
+     "ctlShare": 0.1,
+     "ratio": 0.447,
+     "oddsRatioVsD1": 0.181
+    },
+    {
+     "decile": 9,
+     "upper": 7.448,
+     "posShare": 0.046,
+     "ctlShare": 0.1,
+     "ratio": 0.464,
+     "oddsRatioVsD1": 0.187
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.023,
+     "ctlShare": 0.1,
+     "ratio": 0.234,
+     "oddsRatioVsD1": 0.095
+    }
+   ]
+  },
+  {
+   "key": "relief125",
+   "band": "relief125",
+   "label": "Poco relieve local (125 m, invertido)",
+   "family": "planitud",
+   "dem": "MDT",
+   "aucOriented": 0.569,
+   "ci95": [
+    0.524,
+    0.614
+   ],
+   "aucRaw": 0.431,
+   "aucBySubsetOriented": {
+    "todos": 0.569,
+    "sitios": 0.553,
+    "zonas": 0.596,
+    "estatica": 0.58,
+    "dinamica": 0.493
+   },
+   "medianSites": 2.714,
+   "medianControls": 3.14,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 1.33,
+     "posShare": 0.158,
+     "ctlShare": 0.1,
+     "ratio": 1.58,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 1.744,
+     "posShare": 0.126,
+     "ctlShare": 0.1,
+     "ratio": 1.257,
+     "oddsRatioVsD1": 0.796
+    },
+    {
+     "decile": 3,
+     "upper": 2.122,
+     "posShare": 0.094,
+     "ctlShare": 0.1,
+     "ratio": 0.94,
+     "oddsRatioVsD1": 0.595
+    },
+    {
+     "decile": 4,
+     "upper": 2.567,
+     "posShare": 0.093,
+     "ctlShare": 0.1,
+     "ratio": 0.934,
+     "oddsRatioVsD1": 0.591
+    },
+    {
+     "decile": 5,
+     "upper": 3.14,
+     "posShare": 0.096,
+     "ctlShare": 0.1,
+     "ratio": 0.958,
+     "oddsRatioVsD1": 0.606
+    },
+    {
+     "decile": 6,
+     "upper": 3.906,
+     "posShare": 0.106,
+     "ctlShare": 0.1,
+     "ratio": 1.059,
+     "oddsRatioVsD1": 0.67
+    },
+    {
+     "decile": 7,
+     "upper": 5.077,
+     "posShare": 0.123,
+     "ctlShare": 0.1,
+     "ratio": 1.227,
+     "oddsRatioVsD1": 0.777
+    },
+    {
+     "decile": 8,
+     "upper": 6.903,
+     "posShare": 0.106,
+     "ctlShare": 0.1,
+     "ratio": 1.065,
+     "oddsRatioVsD1": 0.674
+    },
+    {
+     "decile": 9,
+     "upper": 10.597,
+     "posShare": 0.061,
+     "ctlShare": 0.1,
+     "ratio": 0.611,
+     "oddsRatioVsD1": 0.387
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.037,
+     "ctlShare": 0.1,
+     "ratio": 0.369,
+     "oddsRatioVsD1": 0.234
+    }
+   ]
+  },
+  {
+   "key": "hS0",
+   "band": "hS0_min",
+   "label": "HAND, cauces ≥0.1 km² (ruteo con edificios) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.78,
+   "ci95": [
+    0.755,
+    0.802
+   ],
+   "aucRaw": 0.22,
+   "aucBySubsetOriented": {
+    "todos": 0.78,
+    "sitios": 0.779,
+    "zonas": 0.783,
+    "estatica": 0.757,
+    "dinamica": 0.79
+   },
+   "medianSites": 0.06,
+   "medianControls": 3.16,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.474,
+     "ctlShare": 0.137,
+     "ratio": 3.471,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0.34,
+     "posShare": 0.139,
+     "ctlShare": 0.065,
+     "ratio": 2.149,
+     "oddsRatioVsD1": 0.619
+    },
+    {
+     "decile": 3,
+     "upper": 1.02,
+     "posShare": 0.134,
+     "ctlShare": 0.101,
+     "ratio": 1.322,
+     "oddsRatioVsD1": 0.381
+    },
+    {
+     "decile": 4,
+     "upper": 1.94,
+     "posShare": 0.086,
+     "ctlShare": 0.098,
+     "ratio": 0.872,
+     "oddsRatioVsD1": 0.251
+    },
+    {
+     "decile": 5,
+     "upper": 3.16,
+     "posShare": 0.061,
+     "ctlShare": 0.1,
+     "ratio": 0.611,
+     "oddsRatioVsD1": 0.176
+    },
+    {
+     "decile": 6,
+     "upper": 4.86,
+     "posShare": 0.031,
+     "ctlShare": 0.1,
+     "ratio": 0.309,
+     "oddsRatioVsD1": 0.089
+    },
+    {
+     "decile": 7,
+     "upper": 7.22,
+     "posShare": 0.019,
+     "ctlShare": 0.099,
+     "ratio": 0.194,
+     "oddsRatioVsD1": 0.056
+    },
+    {
+     "decile": 8,
+     "upper": 11.08,
+     "posShare": 0.036,
+     "ctlShare": 0.1,
+     "ratio": 0.357,
+     "oddsRatioVsD1": 0.103
+    },
+    {
+     "decile": 9,
+     "upper": 19.38,
+     "posShare": 0.015,
+     "ctlShare": 0.1,
+     "ratio": 0.151,
+     "oddsRatioVsD1": 0.044
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.005,
+     "ctlShare": 0.1,
+     "ratio": 0.049,
+     "oddsRatioVsD1": 0.014
+    }
+   ]
+  },
+  {
+   "key": "hS1",
+   "band": "hS1_min",
+   "label": "HAND, cauces ≥1 km² (ruteo con edificios) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.792,
+   "ci95": [
+    0.761,
+    0.817
+   ],
+   "aucRaw": 0.208,
+   "aucBySubsetOriented": {
+    "todos": 0.792,
+    "sitios": 0.775,
+    "zonas": 0.821,
+    "estatica": 0.705,
+    "dinamica": 0.827
+   },
+   "medianSites": 0.92,
+   "medianControls": 11.02,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0.72,
+     "posShare": 0.482,
+     "ctlShare": 0.1,
+     "ratio": 4.813,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 2.54,
+     "posShare": 0.169,
+     "ctlShare": 0.1,
+     "ratio": 1.694,
+     "oddsRatioVsD1": 0.352
+    },
+    {
+     "decile": 3,
+     "upper": 4.8,
+     "posShare": 0.105,
+     "ctlShare": 0.1,
+     "ratio": 1.049,
+     "oddsRatioVsD1": 0.218
+    },
+    {
+     "decile": 4,
+     "upper": 7.64,
+     "posShare": 0.066,
+     "ctlShare": 0.1,
+     "ratio": 0.657,
+     "oddsRatioVsD1": 0.137
+    },
+    {
+     "decile": 5,
+     "upper": 11.02,
+     "posShare": 0.04,
+     "ctlShare": 0.1,
+     "ratio": 0.406,
+     "oddsRatioVsD1": 0.084
+    },
+    {
+     "decile": 6,
+     "upper": 15.06,
+     "posShare": 0.041,
+     "ctlShare": 0.1,
+     "ratio": 0.412,
+     "oddsRatioVsD1": 0.086
+    },
+    {
+     "decile": 7,
+     "upper": 20.14,
+     "posShare": 0.03,
+     "ctlShare": 0.1,
+     "ratio": 0.302,
+     "oddsRatioVsD1": 0.063
+    },
+    {
+     "decile": 8,
+     "upper": 27.92,
+     "posShare": 0.027,
+     "ctlShare": 0.1,
+     "ratio": 0.27,
+     "oddsRatioVsD1": 0.056
+    },
+    {
+     "decile": 9,
+     "upper": 44.78,
+     "posShare": 0.032,
+     "ctlShare": 0.1,
+     "ratio": 0.317,
+     "oddsRatioVsD1": 0.066
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.008,
+     "ctlShare": 0.1,
+     "ratio": 0.076,
+     "oddsRatioVsD1": 0.016
+    }
+   ]
+  },
+  {
+   "key": "hS2",
+   "band": "hS2_min",
+   "label": "HAND, cauces ≥10 km² (ruteo con edificios) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.729,
+   "ci95": [
+    0.683,
+    0.771
+   ],
+   "aucRaw": 0.271,
+   "aucBySubsetOriented": {
+    "todos": 0.729,
+    "sitios": 0.708,
+    "zonas": 0.765,
+    "estatica": 0.664,
+    "dinamica": 0.739
+   },
+   "medianSites": 6.22,
+   "medianControls": 27.44,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 3.42,
+     "posShare": 0.419,
+     "ctlShare": 0.1,
+     "ratio": 4.18,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 8.32,
+     "posShare": 0.152,
+     "ctlShare": 0.1,
+     "ratio": 1.512,
+     "oddsRatioVsD1": 0.362
+    },
+    {
+     "decile": 3,
+     "upper": 13.64,
+     "posShare": 0.06,
+     "ctlShare": 0.1,
+     "ratio": 0.597,
+     "oddsRatioVsD1": 0.143
+    },
+    {
+     "decile": 4,
+     "upper": 19.92,
+     "posShare": 0.055,
+     "ctlShare": 0.1,
+     "ratio": 0.548,
+     "oddsRatioVsD1": 0.131
+    },
+    {
+     "decile": 5,
+     "upper": 27.44,
+     "posShare": 0.074,
+     "ctlShare": 0.1,
+     "ratio": 0.737,
+     "oddsRatioVsD1": 0.176
+    },
+    {
+     "decile": 6,
+     "upper": 36.68,
+     "posShare": 0.085,
+     "ctlShare": 0.1,
+     "ratio": 0.845,
+     "oddsRatioVsD1": 0.202
+    },
+    {
+     "decile": 7,
+     "upper": 48.64,
+     "posShare": 0.064,
+     "ctlShare": 0.1,
+     "ratio": 0.641,
+     "oddsRatioVsD1": 0.153
+    },
+    {
+     "decile": 8,
+     "upper": 67,
+     "posShare": 0.033,
+     "ctlShare": 0.1,
+     "ratio": 0.328,
+     "oddsRatioVsD1": 0.078
+    },
+    {
+     "decile": 9,
+     "upper": 104.68,
+     "posShare": 0.037,
+     "ctlShare": 0.1,
+     "ratio": 0.368,
+     "oddsRatioVsD1": 0.088
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.024,
+     "ctlShare": 0.1,
+     "ratio": 0.236,
+     "oddsRatioVsD1": 0.056
+    }
+   ]
+  },
+  {
+   "key": "hT0",
+   "band": "hT0_min",
+   "label": "HAND, cauces ≥0.1 km² (MDT) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT",
+   "aucOriented": 0.776,
+   "ci95": [
+    0.751,
+    0.798
+   ],
+   "aucRaw": 0.224,
+   "aucBySubsetOriented": {
+    "todos": 0.776,
+    "sitios": 0.774,
+    "zonas": 0.78,
+    "estatica": 0.754,
+    "dinamica": 0.788
+   },
+   "medianSites": 0.1,
+   "medianControls": 3.3,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.455,
+     "ctlShare": 0.129,
+     "ratio": 3.527,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0.38,
+     "posShare": 0.144,
+     "ctlShare": 0.074,
+     "ratio": 1.956,
+     "oddsRatioVsD1": 0.555
+    },
+    {
+     "decile": 3,
+     "upper": 1.06,
+     "posShare": 0.134,
+     "ctlShare": 0.099,
+     "ratio": 1.364,
+     "oddsRatioVsD1": 0.387
+    },
+    {
+     "decile": 4,
+     "upper": 2.02,
+     "posShare": 0.087,
+     "ctlShare": 0.099,
+     "ratio": 0.873,
+     "oddsRatioVsD1": 0.248
+    },
+    {
+     "decile": 5,
+     "upper": 3.3,
+     "posShare": 0.07,
+     "ctlShare": 0.101,
+     "ratio": 0.693,
+     "oddsRatioVsD1": 0.196
+    },
+    {
+     "decile": 6,
+     "upper": 5.02,
+     "posShare": 0.036,
+     "ctlShare": 0.099,
+     "ratio": 0.358,
+     "oddsRatioVsD1": 0.102
+    },
+    {
+     "decile": 7,
+     "upper": 7.42,
+     "posShare": 0.024,
+     "ctlShare": 0.1,
+     "ratio": 0.241,
+     "oddsRatioVsD1": 0.068
+    },
+    {
+     "decile": 8,
+     "upper": 11.42,
+     "posShare": 0.026,
+     "ctlShare": 0.1,
+     "ratio": 0.263,
+     "oddsRatioVsD1": 0.075
+    },
+    {
+     "decile": 9,
+     "upper": 19.96,
+     "posShare": 0.016,
+     "ctlShare": 0.1,
+     "ratio": 0.156,
+     "oddsRatioVsD1": 0.044
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.009,
+     "ctlShare": 0.1,
+     "ratio": 0.092,
+     "oddsRatioVsD1": 0.026
+    }
+   ]
+  },
+  {
+   "key": "hT1",
+   "band": "hT1_min",
+   "label": "HAND, cauces ≥1 km² (MDT) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT",
+   "aucOriented": 0.791,
+   "ci95": [
+    0.761,
+    0.818
+   ],
+   "aucRaw": 0.209,
+   "aucBySubsetOriented": {
+    "todos": 0.791,
+    "sitios": 0.771,
+    "zonas": 0.824,
+    "estatica": 0.713,
+    "dinamica": 0.819
+   },
+   "medianSites": 0.96,
+   "medianControls": 11.04,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0.72,
+     "posShare": 0.473,
+     "ctlShare": 0.1,
+     "ratio": 4.716,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 2.58,
+     "posShare": 0.185,
+     "ctlShare": 0.1,
+     "ratio": 1.853,
+     "oddsRatioVsD1": 0.393
+    },
+    {
+     "decile": 3,
+     "upper": 4.88,
+     "posShare": 0.098,
+     "ctlShare": 0.1,
+     "ratio": 0.982,
+     "oddsRatioVsD1": 0.208
+    },
+    {
+     "decile": 4,
+     "upper": 7.66,
+     "posShare": 0.065,
+     "ctlShare": 0.1,
+     "ratio": 0.646,
+     "oddsRatioVsD1": 0.137
+    },
+    {
+     "decile": 5,
+     "upper": 11.04,
+     "posShare": 0.038,
+     "ctlShare": 0.1,
+     "ratio": 0.379,
+     "oddsRatioVsD1": 0.08
+    },
+    {
+     "decile": 6,
+     "upper": 14.94,
+     "posShare": 0.038,
+     "ctlShare": 0.1,
+     "ratio": 0.383,
+     "oddsRatioVsD1": 0.081
+    },
+    {
+     "decile": 7,
+     "upper": 20.04,
+     "posShare": 0.033,
+     "ctlShare": 0.1,
+     "ratio": 0.33,
+     "oddsRatioVsD1": 0.07
+    },
+    {
+     "decile": 8,
+     "upper": 27.96,
+     "posShare": 0.042,
+     "ctlShare": 0.1,
+     "ratio": 0.419,
+     "oddsRatioVsD1": 0.089
+    },
+    {
+     "decile": 9,
+     "upper": 44.48,
+     "posShare": 0.021,
+     "ctlShare": 0.1,
+     "ratio": 0.206,
+     "oddsRatioVsD1": 0.044
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.008,
+     "ctlShare": 0.1,
+     "ratio": 0.077,
+     "oddsRatioVsD1": 0.016
+    }
+   ]
+  },
+  {
+   "key": "hT2",
+   "band": "hT2_min",
+   "label": "HAND, cauces ≥10 km² (MDT) (invertida: más bajo = más alto)",
+   "family": "hand",
+   "dem": "MDT",
+   "aucOriented": 0.731,
+   "ci95": [
+    0.691,
+    0.771
+   ],
+   "aucRaw": 0.269,
+   "aucBySubsetOriented": {
+    "todos": 0.731,
+    "sitios": 0.709,
+    "zonas": 0.768,
+    "estatica": 0.663,
+    "dinamica": 0.74
+   },
+   "medianSites": 6.34,
+   "medianControls": 27.32,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 3.22,
+     "posShare": 0.411,
+     "ctlShare": 0.1,
+     "ratio": 4.104,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 8.04,
+     "posShare": 0.153,
+     "ctlShare": 0.1,
+     "ratio": 1.532,
+     "oddsRatioVsD1": 0.373
+    },
+    {
+     "decile": 3,
+     "upper": 13.38,
+     "posShare": 0.071,
+     "ctlShare": 0.1,
+     "ratio": 0.709,
+     "oddsRatioVsD1": 0.173
+    },
+    {
+     "decile": 4,
+     "upper": 19.76,
+     "posShare": 0.053,
+     "ctlShare": 0.1,
+     "ratio": 0.534,
+     "oddsRatioVsD1": 0.13
+    },
+    {
+     "decile": 5,
+     "upper": 27.32,
+     "posShare": 0.077,
+     "ctlShare": 0.1,
+     "ratio": 0.767,
+     "oddsRatioVsD1": 0.187
+    },
+    {
+     "decile": 6,
+     "upper": 36.4,
+     "posShare": 0.079,
+     "ctlShare": 0.1,
+     "ratio": 0.792,
+     "oddsRatioVsD1": 0.193
+    },
+    {
+     "decile": 7,
+     "upper": 47.36,
+     "posShare": 0.069,
+     "ctlShare": 0.1,
+     "ratio": 0.692,
+     "oddsRatioVsD1": 0.169
+    },
+    {
+     "decile": 8,
+     "upper": 63.36,
+     "posShare": 0.039,
+     "ctlShare": 0.1,
+     "ratio": 0.385,
+     "oddsRatioVsD1": 0.094
+    },
+    {
+     "decile": 9,
+     "upper": 101.4,
+     "posShare": 0.024,
+     "ctlShare": 0.1,
+     "ratio": 0.242,
+     "oddsRatioVsD1": 0.059
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.024,
+     "ctlShare": 0.1,
+     "ratio": 0.239,
+     "oddsRatioVsD1": 0.058
+    }
+   ]
+  },
+  {
+   "key": "dS",
+   "band": "dS_max",
+   "label": "Profundidad de depresión (con edificios)",
+   "family": "depresion",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.65,
+   "ci95": [
+    0.625,
+    0.673
+   ],
+   "aucRaw": 0.65,
+   "aucBySubsetOriented": {
+    "todos": 0.65,
+    "sitios": 0.652,
+    "zonas": 0.645,
+    "estatica": 0.643,
+    "dinamica": 0.644
+   },
+   "medianSites": 0.18,
+   "medianControls": 0.03,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.254,
+     "ctlShare": 0.423,
+     "ratio": 0.6,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 3,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 4,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 5,
+     "upper": 0.03,
+     "posShare": 0.051,
+     "ctlShare": 0.077,
+     "ratio": 0.661,
+     "oddsRatioVsD1": 1.102
+    },
+    {
+     "decile": 6,
+     "upper": 0.08,
+     "posShare": 0.09,
+     "ctlShare": 0.106,
+     "ratio": 0.853,
+     "oddsRatioVsD1": 1.422
+    },
+    {
+     "decile": 7,
+     "upper": 0.15,
+     "posShare": 0.085,
+     "ctlShare": 0.103,
+     "ratio": 0.824,
+     "oddsRatioVsD1": 1.373
+    },
+    {
+     "decile": 8,
+     "upper": 0.25,
+     "posShare": 0.092,
+     "ctlShare": 0.095,
+     "ratio": 0.963,
+     "oddsRatioVsD1": 1.605
+    },
+    {
+     "decile": 9,
+     "upper": 0.46,
+     "posShare": 0.141,
+     "ctlShare": 0.097,
+     "ratio": 1.451,
+     "oddsRatioVsD1": 2.418
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.288,
+     "ctlShare": 0.099,
+     "ratio": 2.903,
+     "oddsRatioVsD1": 4.838
+    }
+   ]
+  },
+  {
+   "key": "dSf",
+   "band": "dS_frac",
+   "label": "Fracción en depresión ≥10 cm (con edificios)",
+   "family": "depresion",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.641,
+   "ci95": [
+    0.619,
+    0.664
+   ],
+   "aucRaw": 0.641,
+   "aucBySubsetOriented": {
+    "todos": 0.641,
+    "sitios": 0.642,
+    "zonas": 0.638,
+    "estatica": 0.643,
+    "dinamica": 0.626
+   },
+   "medianSites": 0.095,
+   "medianControls": 0,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.406,
+     "ctlShare": 0.622,
+     "ratio": 0.652,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 3,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 4,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 5,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 6,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 7,
+     "upper": 0.071,
+     "posShare": 0.067,
+     "ctlShare": 0.081,
+     "ratio": 0.83,
+     "oddsRatioVsD1": 1.273
+    },
+    {
+     "decile": 8,
+     "upper": 0.16,
+     "posShare": 0.106,
+     "ctlShare": 0.101,
+     "ratio": 1.046,
+     "oddsRatioVsD1": 1.604
+    },
+    {
+     "decile": 9,
+     "upper": 0.385,
+     "posShare": 0.135,
+     "ctlShare": 0.096,
+     "ratio": 1.417,
+     "oddsRatioVsD1": 2.173
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.286,
+     "ctlShare": 0.1,
+     "ratio": 2.858,
+     "oddsRatioVsD1": 4.383
+    }
+   ]
+  },
+  {
+   "key": "dSv",
+   "band": "dS_vol",
+   "label": "Volumen de depresión en el bloque (con edificios)",
+   "family": "depresion",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.658,
+   "ci95": [
+    0.634,
+    0.683
+   ],
+   "aucRaw": 0.658,
+   "aucBySubsetOriented": {
+    "todos": 0.658,
+    "sitios": 0.66,
+    "zonas": 0.656,
+    "estatica": 0.654,
+    "dinamica": 0.645
+   },
+   "medianSites": 10.75,
+   "medianControls": 1,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.254,
+     "ctlShare": 0.423,
+     "ratio": 0.6,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 3,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 4,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 5,
+     "upper": 1,
+     "posShare": 0.05,
+     "ctlShare": 0.081,
+     "ratio": 0.62,
+     "oddsRatioVsD1": 1.033
+    },
+    {
+     "decile": 6,
+     "upper": 3.25,
+     "posShare": 0.082,
+     "ctlShare": 0.104,
+     "ratio": 0.787,
+     "oddsRatioVsD1": 1.312
+    },
+    {
+     "decile": 7,
+     "upper": 7,
+     "posShare": 0.071,
+     "ctlShare": 0.092,
+     "ratio": 0.768,
+     "oddsRatioVsD1": 1.28
+    },
+    {
+     "decile": 8,
+     "upper": 16,
+     "posShare": 0.1,
+     "ctlShare": 0.101,
+     "ratio": 0.989,
+     "oddsRatioVsD1": 1.648
+    },
+    {
+     "decile": 9,
+     "upper": 42.5,
+     "posShare": 0.123,
+     "ctlShare": 0.099,
+     "ratio": 1.247,
+     "oddsRatioVsD1": 2.078
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.32,
+     "ctlShare": 0.1,
+     "ratio": 3.211,
+     "oddsRatioVsD1": 5.352
+    }
+   ]
+  },
+  {
+   "key": "dT",
+   "band": "dT_max",
+   "label": "Profundidad de depresión (MDT)",
+   "family": "depresion",
+   "dem": "MDT",
+   "aucOriented": 0.682,
+   "ci95": [
+    0.657,
+    0.709
+   ],
+   "aucRaw": 0.682,
+   "aucBySubsetOriented": {
+    "todos": 0.682,
+    "sitios": 0.689,
+    "zonas": 0.671,
+    "estatica": 0.677,
+    "dinamica": 0.679
+   },
+   "medianSites": 0.11,
+   "medianControls": 0,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.346,
+     "ctlShare": 0.623,
+     "ratio": 0.555,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 3,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 4,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 5,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 6,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 7,
+     "upper": 0.04,
+     "posShare": 0.069,
+     "ctlShare": 0.082,
+     "ratio": 0.847,
+     "oddsRatioVsD1": 1.526
+    },
+    {
+     "decile": 8,
+     "upper": 0.12,
+     "posShare": 0.105,
+     "ctlShare": 0.1,
+     "ratio": 1.054,
+     "oddsRatioVsD1": 1.899
+    },
+    {
+     "decile": 9,
+     "upper": 0.28,
+     "posShare": 0.129,
+     "ctlShare": 0.097,
+     "ratio": 1.329,
+     "oddsRatioVsD1": 2.395
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.352,
+     "ctlShare": 0.099,
+     "ratio": 3.55,
+     "oddsRatioVsD1": 6.396
+    }
+   ]
+  },
+  {
+   "key": "dTf",
+   "band": "dT_frac",
+   "label": "Fracción en depresión ≥10 cm (MDT)",
+   "family": "depresion",
+   "dem": "MDT",
+   "aucOriented": 0.664,
+   "ci95": [
+    0.644,
+    0.689
+   ],
+   "aucRaw": 0.664,
+   "aucBySubsetOriented": {
+    "todos": 0.664,
+    "sitios": 0.671,
+    "zonas": 0.652,
+    "estatica": 0.667,
+    "dinamica": 0.659
+   },
+   "medianSites": 0.04,
+   "medianControls": 0,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 0,
+     "posShare": 0.487,
+     "ctlShare": 0.773,
+     "ratio": 0.63,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 3,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 4,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 5,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 6,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 7,
+     "upper": 0,
+     "posShare": 0,
+     "ctlShare": 0,
+     "ratio": null,
+     "oddsRatioVsD1": null
+    },
+    {
+     "decile": 8,
+     "upper": 0.04,
+     "posShare": 0.061,
+     "ctlShare": 0.062,
+     "ratio": 0.978,
+     "oddsRatioVsD1": 1.552
+    },
+    {
+     "decile": 9,
+     "upper": 0.16,
+     "posShare": 0.123,
+     "ctlShare": 0.076,
+     "ratio": 1.602,
+     "oddsRatioVsD1": 2.543
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.33,
+     "ctlShare": 0.089,
+     "ratio": 3.722,
+     "oddsRatioVsD1": 5.908
+    }
+   ]
+  },
+  {
+   "key": "aS",
+   "band": "aS_max",
+   "label": "Área drenada aguas arriba (con edificios)",
+   "family": "acumulacion",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.626,
+   "ci95": [
+    0.608,
+    0.648
+   ],
+   "aucRaw": 0.626,
+   "aucBySubsetOriented": {
+    "todos": 0.626,
+    "sitios": 0.643,
+    "zonas": 0.598,
+    "estatica": 0.621,
+    "dinamica": 0.677
+   },
+   "medianSites": 378,
+   "medianControls": 88,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 12,
+     "posShare": 0.101,
+     "ctlShare": 0.109,
+     "ratio": 0.924,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 20,
+     "posShare": 0.074,
+     "ctlShare": 0.097,
+     "ratio": 0.756,
+     "oddsRatioVsD1": 0.818
+    },
+    {
+     "decile": 3,
+     "upper": 32,
+     "posShare": 0.073,
+     "ctlShare": 0.095,
+     "ratio": 0.77,
+     "oddsRatioVsD1": 0.833
+    },
+    {
+     "decile": 4,
+     "upper": 52,
+     "posShare": 0.059,
+     "ctlShare": 0.099,
+     "ratio": 0.595,
+     "oddsRatioVsD1": 0.644
+    },
+    {
+     "decile": 5,
+     "upper": 88,
+     "posShare": 0.061,
+     "ctlShare": 0.1,
+     "ratio": 0.613,
+     "oddsRatioVsD1": 0.663
+    },
+    {
+     "decile": 6,
+     "upper": 157,
+     "posShare": 0.055,
+     "ctlShare": 0.099,
+     "ratio": 0.557,
+     "oddsRatioVsD1": 0.603
+    },
+    {
+     "decile": 7,
+     "upper": 313,
+     "posShare": 0.059,
+     "ctlShare": 0.1,
+     "ratio": 0.592,
+     "oddsRatioVsD1": 0.641
+    },
+    {
+     "decile": 8,
+     "upper": 777,
+     "posShare": 0.072,
+     "ctlShare": 0.1,
+     "ratio": 0.723,
+     "oddsRatioVsD1": 0.782
+    },
+    {
+     "decile": 9,
+     "upper": 3143,
+     "posShare": 0.11,
+     "ctlShare": 0.1,
+     "ratio": 1.105,
+     "oddsRatioVsD1": 1.196
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.335,
+     "ctlShare": 0.1,
+     "ratio": 3.348,
+     "oddsRatioVsD1": 3.623
+    }
+   ]
+  },
+  {
+   "key": "aT",
+   "band": "aT_max",
+   "label": "Área drenada aguas arriba (MDT)",
+   "family": "acumulacion",
+   "dem": "MDT",
+   "aucOriented": 0.623,
+   "ci95": [
+    0.602,
+    0.643
+   ],
+   "aucRaw": 0.623,
+   "aucBySubsetOriented": {
+    "todos": 0.623,
+    "sitios": 0.626,
+    "zonas": 0.618,
+    "estatica": 0.592,
+    "dinamica": 0.674
+   },
+   "medianSites": 254,
+   "medianControls": 74,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 9,
+     "posShare": 0.087,
+     "ctlShare": 0.111,
+     "ratio": 0.778,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 15,
+     "posShare": 0.068,
+     "ctlShare": 0.091,
+     "ratio": 0.748,
+     "oddsRatioVsD1": 0.961
+    },
+    {
+     "decile": 3,
+     "upper": 25,
+     "posShare": 0.073,
+     "ctlShare": 0.101,
+     "ratio": 0.727,
+     "oddsRatioVsD1": 0.934
+    },
+    {
+     "decile": 4,
+     "upper": 43,
+     "posShare": 0.064,
+     "ctlShare": 0.102,
+     "ratio": 0.626,
+     "oddsRatioVsD1": 0.805
+    },
+    {
+     "decile": 5,
+     "upper": 74,
+     "posShare": 0.074,
+     "ctlShare": 0.097,
+     "ratio": 0.771,
+     "oddsRatioVsD1": 0.991
+    },
+    {
+     "decile": 6,
+     "upper": 137,
+     "posShare": 0.069,
+     "ctlShare": 0.099,
+     "ratio": 0.693,
+     "oddsRatioVsD1": 0.891
+    },
+    {
+     "decile": 7,
+     "upper": 281,
+     "posShare": 0.072,
+     "ctlShare": 0.1,
+     "ratio": 0.719,
+     "oddsRatioVsD1": 0.924
+    },
+    {
+     "decile": 8,
+     "upper": 699,
+     "posShare": 0.078,
+     "ctlShare": 0.1,
+     "ratio": 0.784,
+     "oddsRatioVsD1": 1.008
+    },
+    {
+     "decile": 9,
+     "upper": 2861,
+     "posShare": 0.114,
+     "ctlShare": 0.1,
+     "ratio": 1.144,
+     "oddsRatioVsD1": 1.47
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.301,
+     "ctlShare": 0.1,
+     "ratio": 3.011,
+     "oddsRatioVsD1": 3.87
+    }
+   ]
+  },
+  {
+   "key": "twiS",
+   "band": "twiS_max",
+   "label": "Índice topográfico de humedad (con edificios)",
+   "family": "acumulacion",
+   "dem": "MDT+edif.",
+   "aucOriented": 0.636,
+   "ci95": [
+    0.619,
+    0.657
+   ],
+   "aucRaw": 0.636,
+   "aucBySubsetOriented": {
+    "todos": 0.636,
+    "sitios": 0.649,
+    "zonas": 0.615,
+    "estatica": 0.633,
+    "dinamica": 0.666
+   },
+   "medianSites": 11.654,
+   "medianControls": 9.912,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 7.398,
+     "posShare": 0.066,
+     "ctlShare": 0.1,
+     "ratio": 0.657,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 8.108,
+     "posShare": 0.081,
+     "ctlShare": 0.1,
+     "ratio": 0.805,
+     "oddsRatioVsD1": 1.225
+    },
+    {
+     "decile": 3,
+     "upper": 8.708,
+     "posShare": 0.07,
+     "ctlShare": 0.1,
+     "ratio": 0.703,
+     "oddsRatioVsD1": 1.07
+    },
+    {
+     "decile": 4,
+     "upper": 9.296,
+     "posShare": 0.064,
+     "ctlShare": 0.1,
+     "ratio": 0.639,
+     "oddsRatioVsD1": 0.973
+    },
+    {
+     "decile": 5,
+     "upper": 9.912,
+     "posShare": 0.07,
+     "ctlShare": 0.1,
+     "ratio": 0.696,
+     "oddsRatioVsD1": 1.059
+    },
+    {
+     "decile": 6,
+     "upper": 10.597,
+     "posShare": 0.063,
+     "ctlShare": 0.1,
+     "ratio": 0.634,
+     "oddsRatioVsD1": 0.965
+    },
+    {
+     "decile": 7,
+     "upper": 11.369,
+     "posShare": 0.062,
+     "ctlShare": 0.1,
+     "ratio": 0.621,
+     "oddsRatioVsD1": 0.945
+    },
+    {
+     "decile": 8,
+     "upper": 12.402,
+     "posShare": 0.091,
+     "ctlShare": 0.1,
+     "ratio": 0.909,
+     "oddsRatioVsD1": 1.384
+    },
+    {
+     "decile": 9,
+     "upper": 13.933,
+     "posShare": 0.124,
+     "ctlShare": 0.1,
+     "ratio": 1.236,
+     "oddsRatioVsD1": 1.881
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.31,
+     "ctlShare": 0.1,
+     "ratio": 3.099,
+     "oddsRatioVsD1": 4.717
+    }
+   ]
+  },
+  {
+   "key": "twiT",
+   "band": "twiT_max",
+   "label": "Índice topográfico de humedad (MDT)",
+   "family": "acumulacion",
+   "dem": "MDT",
+   "aucOriented": 0.63,
+   "ci95": [
+    0.611,
+    0.65
+   ],
+   "aucRaw": 0.63,
+   "aucBySubsetOriented": {
+    "todos": 0.63,
+    "sitios": 0.63,
+    "zonas": 0.629,
+    "estatica": 0.605,
+    "dinamica": 0.662
+   },
+   "medianSites": 11.269,
+   "medianControls": 9.785,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": 7.16,
+     "posShare": 0.068,
+     "ctlShare": 0.1,
+     "ratio": 0.677,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": 7.877,
+     "posShare": 0.066,
+     "ctlShare": 0.1,
+     "ratio": 0.66,
+     "oddsRatioVsD1": 0.975
+    },
+    {
+     "decile": 3,
+     "upper": 8.503,
+     "posShare": 0.07,
+     "ctlShare": 0.1,
+     "ratio": 0.698,
+     "oddsRatioVsD1": 1.031
+    },
+    {
+     "decile": 4,
+     "upper": 9.135,
+     "posShare": 0.077,
+     "ctlShare": 0.1,
+     "ratio": 0.774,
+     "oddsRatioVsD1": 1.143
+    },
+    {
+     "decile": 5,
+     "upper": 9.785,
+     "posShare": 0.062,
+     "ctlShare": 0.1,
+     "ratio": 0.617,
+     "oddsRatioVsD1": 0.911
+    },
+    {
+     "decile": 6,
+     "upper": 10.515,
+     "posShare": 0.076,
+     "ctlShare": 0.1,
+     "ratio": 0.761,
+     "oddsRatioVsD1": 1.124
+    },
+    {
+     "decile": 7,
+     "upper": 11.336,
+     "posShare": 0.088,
+     "ctlShare": 0.1,
+     "ratio": 0.877,
+     "oddsRatioVsD1": 1.295
+    },
+    {
+     "decile": 8,
+     "upper": 12.39,
+     "posShare": 0.094,
+     "ctlShare": 0.1,
+     "ratio": 0.936,
+     "oddsRatioVsD1": 1.383
+    },
+    {
+     "decile": 9,
+     "upper": 13.931,
+     "posShare": 0.111,
+     "ctlShare": 0.1,
+     "ratio": 1.11,
+     "oddsRatioVsD1": 1.64
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.289,
+     "ctlShare": 0.1,
+     "ratio": 2.889,
+     "oddsRatioVsD1": 4.267
+    }
+   ]
+  },
+  {
+   "key": "tpi500",
+   "band": "tpi500",
+   "label": "Posición baja 500 m (TPI invertido)",
+   "family": "posicion",
+   "dem": "MDT",
+   "aucOriented": 0.705,
+   "ci95": [
+    0.678,
+    0.723
+   ],
+   "aucRaw": 0.295,
+   "aucBySubsetOriented": {
+    "todos": 0.705,
+    "sitios": 0.713,
+    "zonas": 0.692,
+    "estatica": 0.675,
+    "dinamica": 0.762
+   },
+   "medianSites": -0.819,
+   "medianControls": -0.005,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": -2.285,
+     "posShare": 0.281,
+     "ctlShare": 0.1,
+     "ratio": 2.815,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": -1.091,
+     "posShare": 0.162,
+     "ctlShare": 0.1,
+     "ratio": 1.618,
+     "oddsRatioVsD1": 0.575
+    },
+    {
+     "decile": 3,
+     "upper": -0.564,
+     "posShare": 0.144,
+     "ctlShare": 0.1,
+     "ratio": 1.437,
+     "oddsRatioVsD1": 0.51
+    },
+    {
+     "decile": 4,
+     "upper": -0.25,
+     "posShare": 0.118,
+     "ctlShare": 0.1,
+     "ratio": 1.181,
+     "oddsRatioVsD1": 0.42
+    },
+    {
+     "decile": 5,
+     "upper": -0.005,
+     "posShare": 0.083,
+     "ctlShare": 0.1,
+     "ratio": 0.834,
+     "oddsRatioVsD1": 0.296
+    },
+    {
+     "decile": 6,
+     "upper": 0.251,
+     "posShare": 0.077,
+     "ctlShare": 0.1,
+     "ratio": 0.77,
+     "oddsRatioVsD1": 0.274
+    },
+    {
+     "decile": 7,
+     "upper": 0.574,
+     "posShare": 0.053,
+     "ctlShare": 0.1,
+     "ratio": 0.53,
+     "oddsRatioVsD1": 0.188
+    },
+    {
+     "decile": 8,
+     "upper": 1.101,
+     "posShare": 0.034,
+     "ctlShare": 0.1,
+     "ratio": 0.343,
+     "oddsRatioVsD1": 0.122
+    },
+    {
+     "decile": 9,
+     "upper": 2.384,
+     "posShare": 0.035,
+     "ctlShare": 0.1,
+     "ratio": 0.347,
+     "oddsRatioVsD1": 0.123
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.013,
+     "ctlShare": 0.1,
+     "ratio": 0.125,
+     "oddsRatioVsD1": 0.044
+    }
+   ]
+  },
+  {
+   "key": "tpi2000",
+   "band": "tpi2000",
+   "label": "Posición baja 2 km (TPI invertido)",
+   "family": "posicion",
+   "dem": "MDT",
+   "aucOriented": 0.708,
+   "ci95": [
+    0.673,
+    0.738
+   ],
+   "aucRaw": 0.292,
+   "aucBySubsetOriented": {
+    "todos": 0.708,
+    "sitios": 0.702,
+    "zonas": 0.718,
+    "estatica": 0.635,
+    "dinamica": 0.765
+   },
+   "medianSites": -4.767,
+   "medianControls": -0.844,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": -11.006,
+     "posShare": 0.221,
+     "ctlShare": 0.1,
+     "ratio": 2.21,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": -6.048,
+     "posShare": 0.202,
+     "ctlShare": 0.1,
+     "ratio": 2.015,
+     "oddsRatioVsD1": 0.912
+    },
+    {
+     "decile": 3,
+     "upper": -3.602,
+     "posShare": 0.171,
+     "ctlShare": 0.1,
+     "ratio": 1.709,
+     "oddsRatioVsD1": 0.773
+    },
+    {
+     "decile": 4,
+     "upper": -2.003,
+     "posShare": 0.141,
+     "ctlShare": 0.1,
+     "ratio": 1.405,
+     "oddsRatioVsD1": 0.636
+    },
+    {
+     "decile": 5,
+     "upper": -0.844,
+     "posShare": 0.085,
+     "ctlShare": 0.1,
+     "ratio": 0.847,
+     "oddsRatioVsD1": 0.383
+    },
+    {
+     "decile": 6,
+     "upper": 0.236,
+     "posShare": 0.067,
+     "ctlShare": 0.1,
+     "ratio": 0.671,
+     "oddsRatioVsD1": 0.304
+    },
+    {
+     "decile": 7,
+     "upper": 1.596,
+     "posShare": 0.065,
+     "ctlShare": 0.1,
+     "ratio": 0.646,
+     "oddsRatioVsD1": 0.292
+    },
+    {
+     "decile": 8,
+     "upper": 4.056,
+     "posShare": 0.019,
+     "ctlShare": 0.1,
+     "ratio": 0.188,
+     "oddsRatioVsD1": 0.085
+    },
+    {
+     "decile": 9,
+     "upper": 10.074,
+     "posShare": 0.017,
+     "ctlShare": 0.1,
+     "ratio": 0.171,
+     "oddsRatioVsD1": 0.077
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.014,
+     "ctlShare": 0.1,
+     "ratio": 0.138,
+     "oddsRatioVsD1": 0.062
+    }
+   ]
+  },
+  {
+   "key": "curv100",
+   "band": "curv100",
+   "label": "Curvatura (cóncavo = positivo)",
+   "family": "posicion",
+   "dem": "MDT",
+   "aucOriented": 0.628,
+   "ci95": [
+    0.606,
+    0.648
+   ],
+   "aucRaw": 0.628,
+   "aucBySubsetOriented": {
+    "todos": 0.628,
+    "sitios": 0.64,
+    "zonas": 0.609,
+    "estatica": 0.619,
+    "dinamica": 0.663
+   },
+   "medianSites": 0.029,
+   "medianControls": -0.001,
+   "deciles": [
+    {
+     "decile": 1,
+     "upper": -0.098,
+     "posShare": 0.047,
+     "ctlShare": 0.1,
+     "ratio": 0.468,
+     "oddsRatioVsD1": 1
+    },
+    {
+     "decile": 2,
+     "upper": -0.055,
+     "posShare": 0.067,
+     "ctlShare": 0.1,
+     "ratio": 0.671,
+     "oddsRatioVsD1": 1.434
+    },
+    {
+     "decile": 3,
+     "upper": -0.032,
+     "posShare": 0.083,
+     "ctlShare": 0.1,
+     "ratio": 0.83,
+     "oddsRatioVsD1": 1.774
+    },
+    {
+     "decile": 4,
+     "upper": -0.016,
+     "posShare": 0.067,
+     "ctlShare": 0.1,
+     "ratio": 0.67,
+     "oddsRatioVsD1": 1.432
+    },
+    {
+     "decile": 5,
+     "upper": -0.001,
+     "posShare": 0.081,
+     "ctlShare": 0.1,
+     "ratio": 0.809,
+     "oddsRatioVsD1": 1.729
+    },
+    {
+     "decile": 6,
+     "upper": 0.013,
+     "posShare": 0.075,
+     "ctlShare": 0.1,
+     "ratio": 0.745,
+     "oddsRatioVsD1": 1.592
+    },
+    {
+     "decile": 7,
+     "upper": 0.029,
+     "posShare": 0.08,
+     "ctlShare": 0.1,
+     "ratio": 0.803,
+     "oddsRatioVsD1": 1.716
+    },
+    {
+     "decile": 8,
+     "upper": 0.051,
+     "posShare": 0.101,
+     "ctlShare": 0.1,
+     "ratio": 1.006,
+     "oddsRatioVsD1": 2.15
+    },
+    {
+     "decile": 9,
+     "upper": 0.093,
+     "posShare": 0.143,
+     "ctlShare": 0.1,
+     "ratio": 1.432,
+     "oddsRatioVsD1": 3.06
+    },
+    {
+     "decile": 10,
+     "upper": null,
+     "posShare": 0.257,
+     "ctlShare": 0.1,
+     "ratio": 2.565,
+     "oddsRatioVsD1": 5.481
+    }
+   ]
+  }
+ ],
+ "model": {
+  "name": "combinado sin planitud",
+  "features": [
+   "hS1",
+   "dT",
+   "twiS",
+   "tpi500",
+   "tpi2000"
+  ],
+  "intercept": -0.7745747696056151,
+  "coefficients": [
+   {
+    "key": "hS1",
+    "band": "hS1_min",
+    "transform": "hand",
+    "label": "HAND, cauces ≥1 km² (ruteo con edificios)",
+    "family": "hand",
+    "mean": 2.3703503203653793,
+    "sd": 1.2376556986233715,
+    "coefStd": -0.857,
+    "ci95": [
+     -1.031,
+     -0.715
+    ],
+    "oddsRatioPerSD": 0.424,
+    "labelShort": "HAND (cauces ≥1 km²)"
+   },
+   {
+    "key": "dT",
+    "band": "dT_max",
+    "transform": "dep",
+    "label": "Profundidad de depresión (MDT)",
+    "family": "depresion",
+    "mean": 0.37106964640534446,
+    "sd": 0.6472729002623573,
+    "coefStd": 0.29,
+    "ci95": [
+     0.202,
+     0.374
+    ],
+    "oddsRatioPerSD": 1.336,
+    "labelShort": "profundidad de depresión"
+   },
+   {
+    "key": "twiS",
+    "band": "twiS_max",
+    "transform": "raw",
+    "label": "Índice topográfico de humedad (con edificios)",
+    "family": "acumulacion",
+    "mean": 10.348260759000123,
+    "sd": 2.631088843287161,
+    "coefStd": 0.154,
+    "ci95": [
+     0.076,
+     0.235
+    ],
+    "oddsRatioPerSD": 1.166,
+    "labelShort": "humedad topográfica"
+   },
+   {
+    "key": "tpi500",
+    "band": "tpi500",
+    "transform": "clip30",
+    "label": "Posición topográfica 500 m (bajo = negativo)",
+    "family": "posicion",
+    "mean": 0.07427933181654972,
+    "sd": 3.2353980325913203,
+    "coefStd": -0.097,
+    "ci95": [
+     -0.298,
+     0.035
+    ],
+    "oddsRatioPerSD": 0.908,
+    "labelShort": "posición 500 m"
+   },
+   {
+    "key": "tpi2000",
+    "band": "tpi2000",
+    "transform": "clip30",
+    "label": "Posición topográfica 2 km",
+    "family": "posicion",
+    "mean": -0.5812434985731235,
+    "sd": 10.067292582487038,
+    "coefStd": -0.296,
+    "ci95": [
+     -0.588,
+     -0.013
+    ],
+    "oddsRatioPerSD": 0.744,
+    "labelShort": "posición 2 km"
+   }
+  ],
+  "aucInSample": 0.812,
+  "aucSpatialCV": {
+   "features": [
+    "hS1",
+    "dT",
+    "twiS",
+    "tpi500",
+    "tpi2000"
+   ],
+   "mean": 0.807,
+   "sd": 0.001
+  },
+  "lambda": 0.01,
+  "classWeights": "balanced (sites sum = controls sum)",
+  "partialDependence": {
+   "hS1": [
+    {
+     "x": 0,
+     "rel": 1.6
+    },
+    {
+     "x": 0.542,
+     "rel": 1.43
+    },
+    {
+     "x": 1.264,
+     "rel": 1.181
+    },
+    {
+     "x": 1.758,
+     "rel": 1.006
+    },
+    {
+     "x": 2.156,
+     "rel": 0.868
+    },
+    {
+     "x": 2.487,
+     "rel": 0.759
+    },
+    {
+     "x": 2.776,
+     "rel": 0.669
+    },
+    {
+     "x": 3.051,
+     "rel": 0.59
+    },
+    {
+     "x": 3.365,
+     "rel": 0.507
+    },
+    {
+     "x": 3.824,
+     "rel": 0.4
+    },
+    {
+     "x": 4.918,
+     "rel": 0.215
+    }
+   ],
+   "dT": [
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0,
+     "rel": 0.892
+    },
+    {
+     "x": 0.336,
+     "rel": 0.956
+    },
+    {
+     "x": 0.788,
+     "rel": 1.043
+    },
+    {
+     "x": 1.335,
+     "rel": 1.148
+    },
+    {
+     "x": 2.332,
+     "rel": 1.336
+    }
+   ],
+   "twiS": [
+    {
+     "x": 6.298,
+     "rel": 0.899
+    },
+    {
+     "x": 7.398,
+     "rel": 0.924
+    },
+    {
+     "x": 8.108,
+     "rel": 0.941
+    },
+    {
+     "x": 8.708,
+     "rel": 0.955
+    },
+    {
+     "x": 9.296,
+     "rel": 0.969
+    },
+    {
+     "x": 9.912,
+     "rel": 0.984
+    },
+    {
+     "x": 10.597,
+     "rel": 1
+    },
+    {
+     "x": 11.369,
+     "rel": 1.019
+    },
+    {
+     "x": 12.402,
+     "rel": 1.043
+    },
+    {
+     "x": 13.933,
+     "rel": 1.08
+    },
+    {
+     "x": 17.038,
+     "rel": 1.154
+    }
+   ],
+   "tpi500": [
+    {
+     "x": -6.806,
+     "rel": 1.077
+    },
+    {
+     "x": -2.285,
+     "rel": 1.022
+    },
+    {
+     "x": -1.091,
+     "rel": 1.008
+    },
+    {
+     "x": -0.564,
+     "rel": 1.001
+    },
+    {
+     "x": -0.25,
+     "rel": 0.997
+    },
+    {
+     "x": -0.005,
+     "rel": 0.994
+    },
+    {
+     "x": 0.251,
+     "rel": 0.991
+    },
+    {
+     "x": 0.574,
+     "rel": 0.988
+    },
+    {
+     "x": 1.101,
+     "rel": 0.981
+    },
+    {
+     "x": 2.384,
+     "rel": 0.966
+    },
+    {
+     "x": 7.34,
+     "rel": 0.907
+    }
+   ],
+   "tpi2000": [
+    {
+     "x": -26.629,
+     "rel": 1.29
+    },
+    {
+     "x": -11.006,
+     "rel": 1.099
+    },
+    {
+     "x": -6.048,
+     "rel": 1.039
+    },
+    {
+     "x": -3.602,
+     "rel": 1.009
+    },
+    {
+     "x": -2.003,
+     "rel": 0.989
+    },
+    {
+     "x": -0.844,
+     "rel": 0.975
+    },
+    {
+     "x": 0.236,
+     "rel": 0.962
+    },
+    {
+     "x": 1.596,
+     "rel": 0.946
+    },
+    {
+     "x": 4.056,
+     "rel": 0.917
+    },
+    {
+     "x": 10.074,
+     "rel": 0.846
+    },
+    {
+     "x": 30,
+     "rel": 0.627
+    }
+   ]
+  },
+  "scoreDefinition": "score = percentile rank (0-1) of the logistic linear predictor among all 25 m urban-fabric blocks of the AOI (1,224,218 blocks). Relative index, not a probability.",
+  "capture": [
+   {
+    "scoreAtLeast": 0.5,
+    "areaShare": 0.5,
+    "observedBlockShare": 0.835
+   },
+   {
+    "scoreAtLeast": 0.7,
+    "areaShare": 0.3,
+    "observedBlockShare": 0.707
+   },
+   {
+    "scoreAtLeast": 0.8,
+    "areaShare": 0.2,
+    "observedBlockShare": 0.564
+   },
+   {
+    "scoreAtLeast": 0.9,
+    "areaShare": 0.1,
+    "observedBlockShare": 0.343
+   },
+   {
+    "scoreAtLeast": 0.95,
+    "areaShare": 0.05,
+    "observedBlockShare": 0.207
+   }
+  ],
+  "withFlatness": {
+   "features": [
+    "hS1",
+    "dT",
+    "twiS",
+    "tpi500",
+    "tpi2000",
+    "slope5",
+    "slope175"
+   ],
+   "intercept": -0.7963478520693354,
+   "coefficients": [
+    {
+     "key": "hS1",
+     "band": "hS1_min",
+     "transform": "hand",
+     "label": "HAND, cauces ≥1 km² (ruteo con edificios)",
+     "family": "hand",
+     "mean": 2.3703503203653793,
+     "sd": 1.2376556986233715,
+     "coefStd": -0.752,
+     "ci95": [
+      -0.948,
+      -0.563
+     ],
+     "oddsRatioPerSD": 0.471
+    },
+    {
+     "key": "dT",
+     "band": "dT_max",
+     "transform": "dep",
+     "label": "Profundidad de depresión (MDT)",
+     "family": "depresion",
+     "mean": 0.37106964640534446,
+     "sd": 0.6472729002623573,
+     "coefStd": 0.207,
+     "ci95": [
+      0.115,
+      0.261
+     ],
+     "oddsRatioPerSD": 1.231
+    },
+    {
+     "key": "twiS",
+     "band": "twiS_max",
+     "transform": "raw",
+     "label": "Índice topográfico de humedad (con edificios)",
+     "family": "acumulacion",
+     "mean": 10.348260759000123,
+     "sd": 2.631088843287161,
+     "coefStd": 0.196,
+     "ci95": [
+      0.108,
+      0.254
+     ],
+     "oddsRatioPerSD": 1.217
+    },
+    {
+     "key": "tpi500",
+     "band": "tpi500",
+     "transform": "clip30",
+     "label": "Posición topográfica 500 m (bajo = negativo)",
+     "family": "posicion",
+     "mean": 0.07427933181654972,
+     "sd": 3.2353980325913203,
+     "coefStd": -0.099,
+     "ci95": [
+      -0.384,
+      0.008
+     ],
+     "oddsRatioPerSD": 0.905
+    },
+    {
+     "key": "tpi2000",
+     "band": "tpi2000",
+     "transform": "clip30",
+     "label": "Posición topográfica 2 km",
+     "family": "posicion",
+     "mean": -0.5812434985731235,
+     "sd": 10.067292582487038,
+     "coefStd": -0.339,
+     "ci95": [
+      -0.606,
+      -0.15
+     ],
+     "oddsRatioPerSD": 0.712
+    },
+    {
+     "key": "slope5",
+     "band": "slope5",
+     "transform": "logp01",
+     "label": "Pendiente local (5 m)",
+     "family": "planitud",
+     "mean": 1.3545943265453309,
+     "sd": 0.7271387012423528,
+     "coefStd": 0.257,
+     "ci95": [
+      0.104,
+      0.388
+     ],
+     "oddsRatioPerSD": 1.293
+    },
+    {
+     "key": "slope175",
+     "band": "slope175",
+     "transform": "logp01",
+     "label": "Pendiente de zona (~175 m)",
+     "family": "planitud",
+     "mean": 0.8547487037784774,
+     "sd": 0.872885426236565,
+     "coefStd": -0.329,
+     "ci95": [
+      -0.54,
+      -0.152
+     ],
+     "oddsRatioPerSD": 0.72
+    }
+   ],
+   "aucSpatialCV": {
+    "features": [
+     "hS1",
+     "dT",
+     "twiS",
+     "tpi500",
+     "tpi2000",
+     "slope5",
+     "slope175"
+    ],
+    "mean": 0.808,
+    "sd": 0.003
+   }
+  },
+  "crossValidation": {
+   "scheme": "5-fold spatial block CV (3 km x 3 km blocks), 5 repeats; weighted AUC (each site weight 1)",
+   "models": {
+    "solo planitud (pendiente 5 m + 175 m)": {
+     "features": [
+      "slope5",
+      "slope175"
+     ],
+     "mean": 0.695,
+     "sd": 0.003
+    },
+    "solo HAND (hS1)": {
+     "features": [
+      "hS1"
+     ],
+     "mean": 0.788,
+     "sd": 0.001
+    },
+    "solo depresiones (dT)": {
+     "features": [
+      "dT"
+     ],
+     "mean": 0.666,
+     "sd": 0.007
+    },
+    "solo acumulación (twiS)": {
+     "features": [
+      "twiS"
+     ],
+     "mean": 0.632,
+     "sd": 0.002
+    },
+    "solo posición (TPI 500 m + 2 km)": {
+     "features": [
+      "tpi500",
+      "tpi2000"
+     ],
+     "mean": 0.71,
+     "sd": 0.003
+    },
+    "combinado": {
+     "features": [
+      "hS1",
+      "dT",
+      "twiS",
+      "tpi500",
+      "tpi2000",
+      "slope5",
+      "slope175"
+     ],
+     "mean": 0.808,
+     "sd": 0.003
+    },
+    "combinado sin planitud": {
+     "features": [
+      "hS1",
+      "dT",
+      "twiS",
+      "tpi500",
+      "tpi2000"
+     ],
+     "mean": 0.807,
+     "sd": 0.001
+    }
+   }
+  }
+ },
+ "charts": {
+  "auc": [
+   {
+    "label": "Planitud de la calle (5 m)",
+    "auc": 0.492,
+    "ci": [
+     0.458,
+     0.53
+    ],
+    "color": "planitud",
+    "note": "pendiente local, invertida"
+   },
+   {
+    "label": "Planitud de zona (~175 m)",
+    "auc": 0.66,
+    "ci": [
+     0.616,
+     0.7
+    ],
+    "color": "planitud",
+    "note": "la «planitud» de la hipótesis"
+   },
+   {
+    "label": "Área drenada (TWI)",
+    "auc": 0.636,
+    "ci": [
+     0.619,
+     0.657
+    ],
+    "color": "otro",
+    "note": "índice topográfico de humedad, ruteo con edificios"
+   },
+   {
+    "label": "Depresión del terreno",
+    "auc": 0.682,
+    "ci": [
+     0.657,
+     0.709
+    ],
+    "color": "otro",
+    "note": "profundidad de relleno, MDT"
+   },
+   {
+    "label": "Posición baja (2 km)",
+    "auc": 0.708,
+    "ci": [
+     0.673,
+     0.738
+    ],
+    "color": "otro",
+    "note": "TPI invertido"
+   },
+   {
+    "label": "Altura sobre el cauce",
+    "auc": 0.792,
+    "ci": [
+     0.761,
+     0.817
+    ],
+    "color": "hand",
+    "note": "HAND, cauces ≥ 1 km²"
+   },
+   {
+    "label": "Modelo combinado",
+    "auc": 0.807,
+    "ci": null,
+    "color": "modelo",
+    "note": "validación espacial 5×5 (bloques de 3 km), ±0.001"
+   }
+  ],
+  "deciles": [
+   {
+    "key": "planitud",
+    "label": "Planitud (pendiente ~175 m)",
+    "color": "#f2b84b",
+    "values": [
+     2.475,
+     1.557,
+     1.077,
+     1.011,
+     0.954,
+     0.921,
+     0.862,
+     0.447,
+     0.464,
+     0.234
+    ],
+    "edges": [
+     "≤ 0.73 %",
+     "≤ 1.064 %",
+     "≤ 1.362 %",
+     "≤ 1.681 %",
+     "≤ 2.103 %",
+     "≤ 2.685 %",
+     "≤ 3.518 %",
+     "≤ 4.844 %",
+     "≤ 7.448 %",
+     "> 7.448 %"
+    ]
+   },
+   {
+    "key": "hand",
+    "label": "Altura sobre el cauce (HAND)",
+    "color": "#22d8f0",
+    "values": [
+     4.813,
+     1.694,
+     1.049,
+     0.657,
+     0.406,
+     0.412,
+     0.302,
+     0.27,
+     0.317,
+     0.076
+    ],
+    "edges": [
+     "≤ 0.72 m",
+     "≤ 2.54 m",
+     "≤ 4.8 m",
+     "≤ 7.64 m",
+     "≤ 11.02 m",
+     "≤ 15.06 m",
+     "≤ 20.14 m",
+     "≤ 27.92 m",
+     "≤ 44.78 m",
+     "> 44.78 m"
+    ]
+   }
+  ]
+ },
+ "method": {
+  "text": "Casos: 472 polígonos IMEPLAN (296 sitios inundables y 176 zonas críticas con mancha urbana dentro del área; 26 quedaron fuera) rasterizados en bloques de 25 m; cada sitio pesa 1. Controles: 40,000 bloques al azar de la mancha urbana (densidad de edificios ≥ 10 % en 275 m, MDT INEGI) a menos de 4 km de algún sitio y a más de 75 m de todos. AUC ponderado con IC95 por bootstrap de sitios y de bloques de 3 km. Índices invertidos donde «más bajo/plano» es la hipótesis de riesgo.",
+  "limits": "Límites: el inventario IMEPLAN refleja reportes (sesgo de registro: calles transitadas, zonas con más quejas); el MDT INEGI es fotogramétrico (no LiDAR) y en zonas urbanas planas tiene facetas; los edificios se rasterizan por centro de celda (callejones < 5 m pueden cerrarse); no hay puentes, alcantarillas, colectores ni lluvia. El índice es relativo y estático: no es profundidad, probabilidad ni pronóstico."
+ },
+ "depressions": {
+  "patchesAll": 752849,
+  "patchesKept": 280915,
+  "urbanPatches": 103350,
+  "urbanVolume_m3": 24878949,
+  "urbanArea_m2": 46052725,
+  "ruralPatches": 177565,
+  "ruralVolume_m3": 568636006,
+  "urbanByMaxDepth": [
+   {
+    "maxDepthFrom": 0.1,
+    "maxDepthTo": 0.3,
+    "n": 26602,
+    "volume_m3": 763287
+   },
+   {
+    "maxDepthFrom": 0.3,
+    "maxDepthTo": 1,
+    "n": 62920,
+    "volume_m3": 6682533
+   },
+   {
+    "maxDepthFrom": 1,
+    "maxDepthTo": 3,
+    "n": 13308,
+    "volume_m3": 9732372
+   },
+   {
+    "maxDepthFrom": 3,
+    "maxDepthTo": null,
+    "n": 520,
+    "volume_m3": 7700758
+   }
+  ],
+  "polygons": 6298,
+  "top20": [
+   {
+    "lon": -103.30682,
+    "lat": 20.58953,
+    "volume_m3": 791651,
+    "area_m2": 852550,
+    "maxDepth_m": 4.61,
+    "urban": true,
+    "fillRain_mm": 11.3
+   },
+   {
+    "lon": -103.70016,
+    "lat": 20.76272,
+    "volume_m3": 695432,
+    "area_m2": 477125,
+    "maxDepth_m": 4.57,
+    "urban": true,
+    "fillRain_mm": 105.3
+   },
+   {
+    "lon": -103.46267,
+    "lat": 20.68179,
+    "volume_m3": 681854,
+    "area_m2": 13550,
+    "maxDepth_m": 51.14,
+    "urban": true,
+    "fillRain_mm": 41895.8
+   },
+   {
+    "lon": -103.32814,
+    "lat": 20.70501,
+    "volume_m3": 398516,
+    "area_m2": 11025,
+    "maxDepth_m": 38.27,
+    "urban": true,
+    "fillRain_mm": 50286
+   },
+   {
+    "lon": -103.34286,
+    "lat": 20.67285,
+    "volume_m3": 306999,
+    "area_m2": 164350,
+    "maxDepth_m": 5.38,
+    "urban": true,
+    "fillRain_mm": 2.9
+   },
+   {
+    "lon": -103.49501,
+    "lat": 20.79159,
+    "volume_m3": 244554,
+    "area_m2": 145275,
+    "maxDepth_m": 5.08,
+    "urban": true,
+    "fillRain_mm": 4
+   },
+   {
+    "lon": -103.47344,
+    "lat": 20.68929,
+    "volume_m3": 243613,
+    "area_m2": 10900,
+    "maxDepth_m": 24.08,
+    "urban": true,
+    "fillRain_mm": 33144.6
+   },
+   {
+    "lon": -103.35003,
+    "lat": 20.69137,
+    "volume_m3": 225666,
+    "area_m2": 69075,
+    "maxDepth_m": 6.05,
+    "urban": true,
+    "fillRain_mm": 123.4
+   },
+   {
+    "lon": -103.35364,
+    "lat": 20.79028,
+    "volume_m3": 171892,
+    "area_m2": 63025,
+    "maxDepth_m": 9.32,
+    "urban": true,
+    "fillRain_mm": 1.1
+   },
+   {
+    "lon": -103.38317,
+    "lat": 20.71089,
+    "volume_m3": 165116,
+    "area_m2": 101400,
+    "maxDepth_m": 5.8,
+    "urban": true,
+    "fillRain_mm": 6
+   },
+   {
+    "lon": -103.39466,
+    "lat": 20.70198,
+    "volume_m3": 160127,
+    "area_m2": 43675,
+    "maxDepth_m": 10.99,
+    "urban": true,
+    "fillRain_mm": 335.9
+   },
+   {
+    "lon": -103.35157,
+    "lat": 20.53448,
+    "volume_m3": 124011,
+    "area_m2": 289825,
+    "maxDepth_m": 2.09,
+    "urban": true,
+    "fillRain_mm": 0.5
+   },
+   {
+    "lon": -103.22043,
+    "lat": 20.56757,
+    "volume_m3": 109929,
+    "area_m2": 130500,
+    "maxDepth_m": 2.72,
+    "urban": true,
+    "fillRain_mm": 28
+   },
+   {
+    "lon": -103.23338,
+    "lat": 20.49539,
+    "volume_m3": 102200,
+    "area_m2": 166025,
+    "maxDepth_m": 2.74,
+    "urban": true,
+    "fillRain_mm": 0.2
+   },
+   {
+    "lon": -103.33536,
+    "lat": 20.57292,
+    "volume_m3": 101111,
+    "area_m2": 99225,
+    "maxDepth_m": 2.21,
+    "urban": true,
+    "fillRain_mm": 130.1
+   },
+   {
+    "lon": -103.41617,
+    "lat": 20.69379,
+    "volume_m3": 96642,
+    "area_m2": 9550,
+    "maxDepth_m": 11.08,
+    "urban": true,
+    "fillRain_mm": 143173.7
+   },
+   {
+    "lon": -103.41752,
+    "lat": 20.69093,
+    "volume_m3": 91053,
+    "area_m2": 26800,
+    "maxDepth_m": 8.9,
+    "urban": true,
+    "fillRain_mm": 57.1
+   },
+   {
+    "lon": -103.34497,
+    "lat": 20.55609,
+    "volume_m3": 86020,
+    "area_m2": 179950,
+    "maxDepth_m": 2.02,
+    "urban": true,
+    "fillRain_mm": 39.7
+   },
+   {
+    "lon": -103.42488,
+    "lat": 20.72584,
+    "volume_m3": 85970,
+    "area_m2": 31250,
+    "maxDepth_m": 5.75,
+    "urban": true,
+    "fillRain_mm": 58.4
+   },
+   {
+    "lon": -103.42117,
+    "lat": 20.69187,
+    "volume_m3": 85483,
+    "area_m2": 23275,
+    "maxDepth_m": 9.97,
+    "urban": true,
+    "fillRain_mm": 60.5
+   }
+  ]
+ },
+ "sample": {
+  "urbanMin": 0.1,
+  "maxDistKm": 4,
+  "seed": 7,
+  "nUrbanBlocks": 1224218,
+  "nDomainBlocks": 987285,
+  "nControls": 40000,
+  "nCandidates": 937927,
+  "nSitesUsed": 472,
+  "posBlocks": 36461,
+  "posBlocksInUrban": 20099
+ },
+ "processing": {
+  "grid": "14,760 x 16,760 cells, 5 m, EPSG:6368 (UTM 13N), full AOI [-103.756, 20.243, -103.040, 21.007] (terrain agent grid-5m.json)",
+  "dems": {
+   "MDT (T)": "dtm-5m.f32: INEGI bare-earth DTM mosaic",
+   "MDT+edif. (S)": "sim-dem-5m.f32 (DTM + buildings 3-60 m) with 57,568 enclosed courtyards (170,914 cells, <= 200 cells each) raised to DTM+3 m so they are not counted as 3 m-deep ponds"
+  },
+  "fill": {
+   "algorithm": "Priority-Flood with FIFO pit queue (Barnes, Lehman & Mulla 2014), 8-connected, edge cells as outlets; flats and filled depressions get the Priority-Flood pointer towards their spill point",
+   "S": {
+    "dem": "C:\\Users\\Felip\\contorno-compute\\labs\\sim-relieve\\out\\simp-dem-5m.f32",
+    "cells": 247377600,
+    "popped": 247377600,
+    "raisedCells": 20168132,
+    "depressionCells": 19564462,
+    "depressionVolume_m3": 605374156.5460205,
+    "maxDepth_m": 97.148193359375,
+    "depthHistogramUpper_m": [
+     0.01,
+     0.05,
+     0.1,
+     0.25,
+     0.5,
+     1,
+     3,
+     1000000000
+    ],
+    "depthHistogram": [
+     114777,
+     2646697,
+     2061413,
+     3108873,
+     2596384,
+     2575376,
+     4718915,
+     1742027
+    ],
+    "d8Steepest": 217188127,
+    "d8Pointer": 30126437,
+    "heapMax": 830678,
+    "pitMax": 3958,
+    "seconds": 157.948
+   },
+   "T": {
+    "dem": "C:\\Users\\Felip\\contorno-compute\\labs\\terrain\\out\\dtm-5m.f32",
+    "cells": 247377600,
+    "popped": 247377600,
+    "raisedCells": 19264072,
+    "depressionCells": 18661591,
+    "depressionVolume_m3": 595635017.8009033,
+    "maxDepth_m": 97.148193359375,
+    "depthHistogramUpper_m": [
+     0.01,
+     0.05,
+     0.1,
+     0.25,
+     0.5,
+     1,
+     3,
+     1000000000
+    ],
+    "depthHistogram": [
+     111610,
+     2511803,
+     1917215,
+     2863021,
+     2408639,
+     2471572,
+     4641112,
+     1736619
+    ],
+    "d8Steepest": 218113696,
+    "d8Pointer": 29200868,
+    "heapMax": 535302,
+    "pitMax": 4077,
+    "seconds": 165.159
+   }
+  },
+  "flow": {
+   "algorithm": "D8 steepest descent on the filled surface; O(N) accumulation",
+   "S": {
+    "maxOutletCells": 126606912,
+    "maxOutletKm2": 3165.1728,
+    "thresholds": [
+     {
+      "cells": 1000,
+      "km2": 0.025,
+      "streamCells": 6407558
+     },
+     {
+      "cells": 4000,
+      "km2": 0.1,
+      "streamCells": 2754658
+     },
+     {
+      "cells": 10000,
+      "km2": 0.25,
+      "streamCells": 1787088
+     },
+     {
+      "cells": 40000,
+      "km2": 1,
+      "streamCells": 916174
+     },
+     {
+      "cells": 100000,
+      "km2": 2.5,
+      "streamCells": 562695
+     },
+     {
+      "cells": 1000000,
+      "km2": 25,
+      "streamCells": 162848
+     }
+    ],
+    "seconds": 16.827
+   },
+   "T": {
+    "maxOutletCells": 126607236,
+    "maxOutletKm2": 3165.1809,
+    "thresholds": [
+     {
+      "cells": 1000,
+      "km2": 0.025,
+      "streamCells": 6351816
+     },
+     {
+      "cells": 4000,
+      "km2": 0.1,
+      "streamCells": 2726770
+     },
+     {
+      "cells": 10000,
+      "km2": 0.25,
+      "streamCells": 1772015
+     },
+     {
+      "cells": 40000,
+      "km2": 1,
+      "streamCells": 909239
+     },
+     {
+      "cells": 100000,
+      "km2": 2.5,
+      "streamCells": 561697
+     },
+     {
+      "cells": 1000000,
+      "km2": 25,
+      "streamCells": 163469
+     }
+    ],
+    "seconds": 11.631
+   }
+  },
+  "hand": {
+   "algorithm": "follow D8 to the first cell with upslope area >= threshold (or grid outlet); HAND = DTM(cell) - DTM(drain); signed",
+   "S": [
+    {
+     "thresholdCells": 4000,
+     "thresholdKm2": 0.1,
+     "streamCells": 2754658,
+     "negativeCells": 8651144,
+     "below1mCells": 43982271,
+     "mean": 33.66949820575704,
+     "maxPathCells": 1888,
+     "seconds": 17.414
+    },
+    {
+     "thresholdCells": 40000,
+     "thresholdKm2": 1,
+     "streamCells": 916174,
+     "negativeCells": 6844396,
+     "below1mCells": 29926235,
+     "mean": 69.87901103771466,
+     "maxPathCells": 2127,
+     "seconds": 17.907
+    },
+    {
+     "thresholdCells": 400000,
+     "thresholdKm2": 10,
+     "streamCells": 266790,
+     "negativeCells": 5516853,
+     "below1mCells": 22603455,
+     "mean": 136.43514382686672,
+     "maxPathCells": 2553,
+     "seconds": 17.295
+    }
+   ],
+   "T": [
+    {
+     "thresholdCells": 4000,
+     "thresholdKm2": 0.1,
+     "streamCells": 2726770,
+     "negativeCells": 8505151,
+     "below1mCells": 43497963,
+     "mean": 33.723104377187646,
+     "maxPathCells": 1874,
+     "seconds": 11.458
+    },
+    {
+     "thresholdCells": 40000,
+     "thresholdKm2": 1,
+     "streamCells": 909239,
+     "negativeCells": 6876672,
+     "below1mCells": 29831180,
+     "mean": 69.91432872527437,
+     "maxPathCells": 2061,
+     "seconds": 12.897
+    },
+    {
+     "thresholdCells": 400000,
+     "thresholdKm2": 10,
+     "streamCells": 267276,
+     "negativeCells": 5599192,
+     "below1mCells": 22634313,
+     "mean": 136.36113063608383,
+     "maxPathCells": 2489,
+     "seconds": 12.883
+    }
+   ]
+  },
+  "machine": "W10 (Ryzen 5 2600), Node 22, single-threaded per step (tiles: 3 worker threads); whole AOI ~25 min of compute"
+ },
+ "tiles": {
+  "acumulacion": {
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/acumulacion/{z}/{x}/{y}.png",
+   "minzoom": 8,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tilesWritten": 6589,
+   "bytes": 44893692,
+   "palette": [
+    [
+     0,
+     30,
+     90,
+     190,
+     110
+    ],
+    [
+     0.25,
+     50,
+     150,
+     250,
+     185
+    ],
+    [
+     0.5,
+     110,
+     210,
+     255,
+     225
+    ],
+    [
+     0.75,
+     190,
+     245,
+     255,
+     245
+    ],
+    [
+     1,
+     255,
+     255,
+     255,
+     255
+    ]
+   ]
+  },
+  "depresiones": {
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/depresiones/{z}/{x}/{y}.png",
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tilesWritten": 6357,
+   "bytes": 33558903,
+   "palette": [
+    [
+     0,
+     120,
+     215,
+     255,
+     120
+    ],
+    [
+     0.18,
+     70,
+     170,
+     255,
+     175
+    ],
+    [
+     0.41,
+     40,
+     110,
+     245,
+     215
+    ],
+    [
+     0.76,
+     55,
+     50,
+     200,
+     235
+    ],
+    [
+     1,
+     110,
+     30,
+     170,
+     245
+    ]
+   ]
+  },
+  "hand": {
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/hand/{z}/{x}/{y}.png",
+   "minzoom": 8,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tilesWritten": 6353,
+   "bytes": 128727837,
+   "palette": [
+    [
+     0,
+     0,
+     245,
+     255,
+     215
+    ],
+    [
+     0.2,
+     0,
+     190,
+     255,
+     175
+    ],
+    [
+     0.4,
+     40,
+     120,
+     245,
+     130
+    ],
+    [
+     0.7,
+     85,
+     55,
+     190,
+     70
+    ],
+    [
+     1,
+     70,
+     20,
+     120,
+     0
+    ]
+   ]
+  },
+  "planitud": {
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/planitud/{z}/{x}/{y}.png",
+   "minzoom": 8,
+   "maxzoom": 14,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tilesWritten": 1729,
+   "bytes": 45601743,
+   "palette": [
+    [
+     0,
+     120,
+     90,
+     60,
+     0
+    ],
+    [
+     0.4,
+     170,
+     130,
+     80,
+     60
+    ],
+    [
+     0.7,
+     230,
+     180,
+     90,
+     140
+    ],
+    [
+     0.9,
+     255,
+     215,
+     110,
+     195
+    ],
+    [
+     1,
+     255,
+     240,
+     170,
+     220
+    ]
+   ]
+  },
+  "susceptibilidad": {
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/susceptibilidad/{z}/{x}/{y}.png",
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tilesWritten": 2586,
+   "bytes": 37377694,
+   "palette": [
+    [
+     0,
+     30,
+     30,
+     90,
+     0
+    ],
+    [
+     0.5,
+     80,
+     50,
+     150,
+     70
+    ],
+    [
+     0.75,
+     170,
+     50,
+     150,
+     140
+    ],
+    [
+     0.9,
+     245,
+     100,
+     70,
+     200
+    ],
+    [
+     1,
+     255,
+     225,
+     110,
+     235
+    ]
+   ]
+  }
+ }
+}

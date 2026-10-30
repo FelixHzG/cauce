@@ -1,0 +1,667 @@
+{
+ "note": "Registry of hazard layers for /labs prototypes. Producers append entries; consumers load whatever is listed. kind: observed | modeled | terrain-index | water | hotspot.",
+ "layers": [
+  {
+   "id": "observed-imeplan-2026",
+   "label": "Sitios y zonas de inundación (IMEPLAN MUI 2026)",
+   "kind": "observed",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/observed-imeplan-2026.geojson",
+   "producer": "orchestrator",
+   "notes": "808 features: 310 floodable-site polygons, 188 critical-area polygons, 310 category points. Inventory of historical flooding, not a forecast."
+  },
+  {
+   "id": "water-bodies",
+   "label": "Cuerpos de agua (OSM: lagos, presas, vasos reguladores, canales)",
+   "kind": "water",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/water-bodies.geojson",
+   "producer": "router",
+   "notes": "408 OSM water areas (natural=water, landuse=reservoir|basin, waterway=riverbank|dock; pools/fountains excluded), clipped to the AOI, simplified 2 m, < 300 m² dropped. Mapped permanent water, not flooding. Properties: id, name, water, tipo, label, intermittent, area_m2.",
+   "source": {
+    "name": "OpenStreetMap",
+    "license": "ODbL 1.0",
+    "snapshot": "2026-10-29T00:55:20.000Z",
+    "extract": "https://download.openstreetmap.fr/extracts/north-america/mexico/jalisco-latest.osm.pbf"
+   },
+   "featureCount": 408,
+   "updated": "2026-10-30T00:40:20.705Z",
+   "router": {
+    "affectsBridges": false,
+    "critical": false,
+    "note": "Router: kind water default x50 on the covered fraction of an edge; bridges exempt. Not blocked by blockCritical."
+   }
+  },
+  {
+   "id": "underpasses",
+   "label": "Pasos a desnivel y vías deprimidas (OSM)",
+   "kind": "hotspot",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/underpasses.geojson",
+   "producer": "router",
+   "notes": "776 LineStrings in 404 sites (property site). confidence 'alta': road mapped below grade in OSM (tunnel=*, layer<0, cutting=*). confidence 'media': at-grade road crossed by a road/rail bridge (inferred lower road, ±45 m around the crossing). Classic flooding points, derived from road tags — not an observed flood record. Properties: id, site, label, reason, confidence, name, highway, over, osm_way_id, length_m, marker [lon,lat].",
+   "source": {
+    "name": "OpenStreetMap",
+    "license": "ODbL 1.0",
+    "snapshot": "2026-10-29T00:55:20.000Z",
+    "extract": "https://download.openstreetmap.fr/extracts/north-america/mexico/jalisco-latest.osm.pbf"
+   },
+   "featureCount": 776,
+   "sites": 404,
+   "updated": "2026-10-30T00:40:20.706Z",
+   "router": {
+    "note": "Router: confidence 'alta' x10 (x50 in safe mode with blockCritical, the default), 'media' x4, on the covered fraction of the same OSM way only (bridges above are not penalised). Set router.critical:false to opt out of blockCritical."
+   }
+  },
+  {
+   "id": "observed-zapopan-incidentes-2017-2025",
+   "label": "Servicios por inundación atendidos en Zapopan 2017–2025 (Protección Civil y Bomberos)",
+   "kind": "observed",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/observed-zapopan-incidentes-2017-2025.geojson",
+   "producer": "infra-data",
+   "notes": "2,230 dated emergency-call points (Zapopan only): vía pública 1103, casa habitación 762, paso a desnivel 84, comercio 49, edificio público 25, other/sin especificar 207. Properties fecha, hora, anio, tipo, colonia, calle, fallecidos, lesionados. Source: Gobierno de Zapopan ArcGIS Online (3 layers merged, personal fields removed). Observed incidents, not extents or depths."
+  },
+  {
+   "id": "zapopan-pasos-desnivel-riesgo",
+   "label": "Pasos a desnivel con riesgo de inundación (Zapopan)",
+   "kind": "hotspot",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/zapopan-pasos-desnivel-riesgo.geojson",
+   "producer": "infra-data",
+   "notes": "29 municipal points with riesgo alto/medio/bajo and causa (e.g. Basura). Complements the router's OSM-derived underpasses layer (hazard/underpasses.geojson), which covers the whole metro."
+  },
+  {
+   "id": "press-hotspots",
+   "label": "Puntos de inundación recurrentes — reportes de prensa 2023–2026",
+   "kind": "hotspot",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/press-hotspots.geojson",
+   "producer": "infra-data",
+   "notes": "78 points compiled from news (often reproducing municipal lists). Approximate geocodes (street crossings / named places). Label as 'reportes de prensa'; not official observations. Each has sources and nearest IMEPLAN site.",
+   "router": {
+    "default": false,
+    "reason": "approximate press geocodes"
+   }
+  },
+  {
+   "id": "observed-gdl-reportes-2010-2022",
+   "label": "Inundaciones reportadas en Guadalajara 2010–2022 (Atlas de Riesgos)",
+   "kind": "observed",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/observed-gdl-reportes-2010-2022.geojson",
+   "producer": "infra-data",
+   "notes": "3,870 dated points (street + cross street) with nivel_cm (reported water level; unit inferred cm), sector (vía pública 2,311, casa habitación ~980, ...). Municipality of Guadalajara only; source Gobierno de Guadalajara Atlas de Riesgos WMS. Observed reports.",
+   "router": {
+    "default": false,
+    "reason": "3,870 historical incident points (2010-2022) published after the router was tested; left out of hazardIds:\"all\" until the router agent evaluates it (remove this flag to opt in). Pass the id explicitly to use it."
+   }
+  },
+  {
+   "id": "observed-gdl-areas-inundacion",
+   "label": "Áreas de inundación registradas en Guadalajara (Bomberos/PC, niveles)",
+   "kind": "observed",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/observed-gdl-areas-inundacion.geojson",
+   "producer": "infra-data",
+   "notes": "198 polygons with nivel 10-30 cm, 30-100 cm or histórica; fuente Bomberos, UEPCyB, SVT, UdG, Geografía municipal. Guadalajara only."
+  },
+  {
+   "id": "modeled-gdl-riesgo-mdte",
+   "label": "Riesgo de inundación a partir de MDT (Atlas de Riesgos de Guadalajara, modelo municipal)",
+   "kind": "modeled",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled-gdl-riesgo-mdte.geojson",
+   "producer": "infra-data",
+   "notes": "112 polygons, third-party municipal terrain-based analysis (method undocumented). Modeled by the municipality, not by cauce.; label accordingly.",
+   "router": {
+    "default": false,
+    "reason": "third-party municipal model, undocumented method"
+   }
+  },
+  {
+   "id": "gdl-pasos-desnivel-atlas",
+   "label": "Pasos a desnivel del Atlas de Riesgos de Guadalajara",
+   "kind": "hotspot",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/gdl-pasos-desnivel-atlas.geojson",
+   "producer": "infra-data",
+   "notes": "11 named underpasses listed by the municipal risk atlas (e.g. Lázaro Cárdenas y Mariano Otero, Niños Héroes e Inglaterra). Subset of the router's OSM underpasses, but with official naming.",
+   "router": {
+    "default": false,
+    "reason": "duplicates underpasses (router) with official names"
+   }
+  },
+  {
+   "id": "sim-relieve-susceptibilidad",
+   "label": "Susceptibilidad del terreno a inundación (0–1, modelo validado con IMEPLAN)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/susceptibilidad/{z}/{x}/{y}.png",
+   "tiles": [
+    "/labs/shared/hazard/modeled/sim-relieve/tiles/susceptibilidad/{z}/{x}/{y}.png"
+   ],
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tileSize": 256,
+   "notes": "Percentile score (0-1) among 25 m urban blocks of a logistic model on HAND, depression depth, TWI and TPI; spatial-CV AUC 0.807. Urban fabric only. Static terrain index, not depth or probability. Palette in stats.json tiles.susceptibilidad.palette (code = 1 + 254*score).",
+   "vector": "/labs/shared/hazard/modeled/sim-relieve/susceptibilidad-alta.geojson",
+   "router": {
+    "default": false,
+    "note": "Display tiles; for routing use sim-relieve-susceptibilidad-alta."
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-susceptibilidad-alta",
+   "label": "Zonas de susceptibilidad alta del terreno (polígonos)",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/susceptibilidad-alta.geojson",
+   "notes": "978 'alta' (score >= 0.80) and 675 'muy alta' (>= 0.93) polygons from a 3x3-smoothed 25 m score, >= 5,000 m2, simplified 6 m. Nested: 'muy alta' polygons lie inside 'alta' ones. Properties: id, class, label, score, score_min, area_m2, scenario.",
+   "featureCount": 1653,
+   "router": {
+    "default": false,
+    "penalty": 1.6,
+    "note": "Opt-in: large areas; static susceptibility, not water. Suggested multipliers alta x1.4, muy alta x2 (per-feature router_cost)."
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-depresiones",
+   "label": "Depresiones del terreno donde se estanca el agua (relleno ≥ 10 cm, polígonos)",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/depresiones.geojson",
+   "notes": "6298 largest depression patches by volume (6,000 in the urban fabric + 300 outside), building-aware DEM, open ground only, fill depth >= 10 cm. Properties: id, class (somera <0.3 m / media / profunda >= 1 m), label, depth_m_min, depth_m_max, volume_m3, area_m2, contrib_area_m2, fill_rain_mm (rain depth that would fill it if all catchment rain arrived), urban, rank, scenario. Static fill, no drainage: an upper bound on ponding, not a forecast. Some deep ones are quarries/excavations.",
+   "featureCount": 6298,
+   "router": {
+    "default": false,
+    "note": "Opt-in (static terrain capacity, not observed water; 4,582 of the 6,298 are >= 1 m deep). Per-feature router_cost by class: somera 1.3, media 1.8, profunda 2.5."
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-depresiones-tiles",
+   "label": "Profundidad de depresiones (5 m, display)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/depresiones/{z}/{x}/{y}.png",
+   "tiles": [
+    "/labs/shared/hazard/modeled/sim-relieve/tiles/depresiones/{z}/{x}/{y}.png"
+   ],
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tileSize": 256,
+   "notes": "Fill depth 0.10-5 m (log palette) on open ground, building-aware DEM. Display only.",
+   "router": {
+    "default": false
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-hand",
+   "label": "Altura sobre el cauce (HAND, 5 m)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/hand/{z}/{x}/{y}.png",
+   "tiles": [
+    "/labs/shared/hazard/modeled/sim-relieve/tiles/hand/{z}/{x}/{y}.png"
+   ],
+   "minzoom": 8,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tileSize": 256,
+   "notes": "Height above nearest drainage (streams >= 1 km2 upslope, building-aware D8 routing, bare-earth DTM heights). 0-30 m log palette, transparent above 30 m. Best single predictor of IMEPLAN sites (AUC 0.792). Display only.",
+   "router": {
+    "default": false
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-acumulacion",
+   "label": "Flujo acumulado (área drenada D8, 5 m)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/acumulacion/{z}/{x}/{y}.png",
+   "tiles": [
+    "/labs/shared/hazard/modeled/sim-relieve/tiles/acumulacion/{z}/{x}/{y}.png"
+   ],
+   "minzoom": 8,
+   "maxzoom": 15,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tileSize": 256,
+   "notes": "Upslope area 0.0025-2,500 km2 (log palette), building-aware D8 (buildings as walls, so flow runs down streets). Zoom-dependent minimum area. Display only.",
+   "router": {
+    "default": false
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "sim-relieve-planitud",
+   "label": "Planitud del terreno (pendiente en ~175 m)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-relieve/tiles/planitud/{z}/{x}/{y}.png",
+   "tiles": [
+    "/labs/shared/hazard/modeled/sim-relieve/tiles/planitud/{z}/{x}/{y}.png"
+   ],
+   "minzoom": 8,
+   "maxzoom": 14,
+   "bounds": [
+    -103.75629,
+    20.24325,
+    -103.04029,
+    21.00673
+   ],
+   "tileSize": 256,
+   "notes": "Slope of the 25 m block-mean DTM over a ~175 m window; amber = flat (0.2 %), transparent above 10 %. Display only.",
+   "router": {
+    "default": false
+   },
+   "kind": "terrain-index",
+   "producer": "sim-relieve",
+   "updated": "2026-10-30T00:55:24.765Z",
+   "stats": "/labs/shared/hazard/modeled/sim-relieve/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-relieve/README.md",
+   "viewer": "/labs/sim-relieve/"
+  },
+  {
+   "id": "modeled-zapopan-peligro-tr100",
+   "label": "Peligro de inundación Tr 100 años (modelo del Gobierno de Zapopan)",
+   "kind": "modeled",
+   "type": "raster-tiles",
+   "url": "https://tiles.arcgis.com/tiles/pU6gQMCvPRlP6DPP/arcgis/rest/services/PeligroInundacionZ_Tr100_Online/MapServer/tile/{z}/{y}/{x}",
+   "tileSize": 256,
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.6439,
+    20.5798,
+    -103.3135,
+    20.9752
+   ],
+   "producer": "infra-data",
+   "attribution": "Gobierno de Zapopan (Geomática / Protección Civil y Bomberos)",
+   "notes": "Third-party municipal model (100-year return period), served as cached ArcGIS tiles (XYZ order z/y/x, PNG/JPG mixed, CORS ok for guadalajara.vsfelix.com). Method, legend and date not documented in the service; webmap \"Mancha de Inundación Área Urbana Zapopan\". Zapopan municipality only. Modeled by Zapopan, not by cauce.",
+   "router": {
+    "default": false,
+    "reason": "raster tiles without documented value encoding"
+   }
+  },
+  {
+   "id": "modeled-zapopan-mancha-tr100",
+   "label": "Mancha de inundación Tr 100 años (modelo del Gobierno de Zapopan)",
+   "kind": "modeled",
+   "type": "raster-tiles",
+   "url": "https://tiles.arcgis.com/tiles/pU6gQMCvPRlP6DPP/arcgis/rest/services/ManchaInundacionZ_Tr100_Online/MapServer/tile/{z}/{y}/{x}",
+   "tileSize": 256,
+   "minzoom": 9,
+   "maxzoom": 15,
+   "bounds": [
+    -103.6439,
+    20.5798,
+    -103.3135,
+    20.9752
+   ],
+   "producer": "infra-data",
+   "attribution": "Gobierno de Zapopan",
+   "notes": "Companion flood-extent tiles to modeled-zapopan-peligro-tr100; same caveats. Not routable (raster without documented encoding).",
+   "router": {
+    "default": false,
+    "reason": "raster tiles without documented value encoding"
+   }
+  },
+  {
+   "id": "sim-hidro-t2-profundidad",
+   "label": "Profundidad máxima modelada · lluvia Tr 2 años (37.3 mm/1 h) · sim-hidro 5 m",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T2/tiles/depth/{z}/{x}/{y}.png",
+   "minzoom": 10,
+   "maxzoom": 15,
+   "tileSize": 256,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T2",
+   "returnPeriodYears": 2,
+   "rainMm": 37.3,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "hazardMaxzoom": 15,
+   "arrivalMaxzoom": 14,
+   "extras": {
+    "hazardTiles": "/labs/shared/hazard/modeled/sim-hidro/T2/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "/labs/shared/hazard/modeled/sim-hidro/T2/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "/labs/shared/hazard/modeled/sim-hidro/T2/frames.json"
+   },
+   "notes": "2D shallow-water rain-on-grid at 5 m (73.8 M cells), 3 h simulated; colourised max depth (>= 5 cm). Exploratory model with assumed 10 mm/h urban drainage; not a forecast. Legend in README."
+  },
+  {
+   "id": "sim-hidro-t2-clases",
+   "label": "Clases de profundidad modelada (15–30, 30–60, > 60 cm) · Tr 2 años · sim-hidro",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T2/depth-classes.geojson",
+   "routing": true,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T2",
+   "returnPeriodYears": 2,
+   "rainMm": 37.3,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "properties": {
+    "class": "1|2|3",
+    "label": "agua 15–30 cm | 30–60 cm | > 60 cm",
+    "depth_m_min": "number",
+    "depth_m_max": "number|null",
+    "scenario": "T2"
+   },
+   "notes": "Routing-friendly polygons of modelled MAX depth during the storm (not depth at a given time). 10 m max-aggregated, simplified; small polygons dropped. Exploratory model."
+  },
+  {
+   "id": "sim-hidro-t10-profundidad",
+   "label": "Profundidad máxima modelada · lluvia Tr 10 años (56.2 mm/1 h) · sim-hidro 5 m",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T10/tiles/depth/{z}/{x}/{y}.png",
+   "minzoom": 10,
+   "maxzoom": 15,
+   "tileSize": 256,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T10",
+   "returnPeriodYears": 10,
+   "rainMm": 56.2,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "hazardMaxzoom": 15,
+   "arrivalMaxzoom": 14,
+   "extras": {
+    "hazardTiles": "/labs/shared/hazard/modeled/sim-hidro/T10/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "/labs/shared/hazard/modeled/sim-hidro/T10/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "/labs/shared/hazard/modeled/sim-hidro/T10/frames.json"
+   },
+   "notes": "2D shallow-water rain-on-grid at 5 m (73.8 M cells), 3 h simulated; colourised max depth (>= 5 cm). Exploratory model with assumed 10 mm/h urban drainage; not a forecast. Legend in README."
+  },
+  {
+   "id": "sim-hidro-t10-clases",
+   "label": "Clases de profundidad modelada (15–30, 30–60, > 60 cm) · Tr 10 años · sim-hidro",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T10/depth-classes.geojson",
+   "routing": true,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T10",
+   "returnPeriodYears": 10,
+   "rainMm": 56.2,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "properties": {
+    "class": "1|2|3",
+    "label": "agua 15–30 cm | 30–60 cm | > 60 cm",
+    "depth_m_min": "number",
+    "depth_m_max": "number|null",
+    "scenario": "T10"
+   },
+   "notes": "Routing-friendly polygons of modelled MAX depth during the storm (not depth at a given time). 10 m max-aggregated, simplified; small polygons dropped. Exploratory model."
+  },
+  {
+   "id": "sim-hidro-t100-profundidad",
+   "label": "Profundidad máxima modelada · lluvia Tr 100 años (83.3 mm/1 h) · sim-hidro 5 m",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T100/tiles/depth/{z}/{x}/{y}.png",
+   "minzoom": 10,
+   "maxzoom": 15,
+   "tileSize": 256,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T100",
+   "returnPeriodYears": 100,
+   "rainMm": 83.3,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "hazardMaxzoom": 15,
+   "arrivalMaxzoom": 14,
+   "extras": {
+    "hazardTiles": "/labs/shared/hazard/modeled/sim-hidro/T100/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "/labs/shared/hazard/modeled/sim-hidro/T100/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "/labs/shared/hazard/modeled/sim-hidro/T100/frames.json"
+   },
+   "notes": "2D shallow-water rain-on-grid at 5 m (73.8 M cells), 3 h simulated; colourised max depth (>= 5 cm). Exploratory model with assumed 10 mm/h urban drainage; not a forecast. Legend in README."
+  },
+  {
+   "id": "sim-hidro-t100-clases",
+   "label": "Clases de profundidad modelada (15–30, 30–60, > 60 cm) · Tr 100 años · sim-hidro",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-hidro/T100/depth-classes.geojson",
+   "routing": true,
+   "kind": "modeled",
+   "producer": "sim-hidro",
+   "scenario": "T100",
+   "returnPeriodYears": 100,
+   "rainMm": 83.3,
+   "stats": "/labs/shared/hazard/modeled/sim-hidro/stats.json",
+   "readme": "/labs/shared/hazard/modeled/sim-hidro/README.md",
+   "bounds": [
+    -103.57260889117642,
+    20.441565826143034,
+    -103.17486169957812,
+    20.851726512284916
+   ],
+   "properties": {
+    "class": "1|2|3",
+    "label": "agua 15–30 cm | 30–60 cm | > 60 cm",
+    "depth_m_min": "number",
+    "depth_m_max": "number|null",
+    "scenario": "T100"
+   },
+   "notes": "Routing-friendly polygons of modelled MAX depth during the storm (not depth at a given time). 10 m max-aggregated, simplified; small polygons dropped. Exploratory model."
+  },
+  {
+   "id": "sim-drenaje-routing",
+   "label": "Inundación frecuente en el ensamble de tormentas (modelo sim-drenaje)",
+   "type": "geojson",
+   "url": "/labs/shared/hazard/modeled/sim-drenaje/routing-flood-frequency.geojson",
+   "notes": "7749 polygons (20 m cells, simplified 12 m, ≥8 cells). class alta = flooded (≥15 cm) in ≥60 % of ensemble runs, media = 30–60 %. Properties: class, label, score (mean frequency 0–1), depth_m_mean_tr10_c20 / depth_m_max_tr10_c20 (reference run: Tr 10, 20 mm/h, mid infiltration), area_m2, scenario, threshold_m. Exploratory model, not a forecast.",
+   "router": {
+    "suggestedPenalty": {
+     "alta": 8,
+     "media": 3
+    },
+    "note": "Frequency of modeled flooding across storms and drainage capacities; not a measured flood extent."
+   },
+   "kind": "modeled",
+   "producer": "sim-drenaje",
+   "scenario": "126 runs: Tr 2/5/10/25/50/100 years (60 min) × drainage capacity 0/10/20/30/40/50/60 mm/h × infiltration mid/low/high; 20 m local-inertial rain-on-grid, flooded = max depth ≥ 15 cm",
+   "readme": "/labs/shared/hazard/modeled/sim-drenaje/README.md",
+   "stats": "/labs/shared/hazard/modeled/sim-drenaje/stats.json",
+   "bounds": [
+    -103.60135,
+    20.35785,
+    -103.13542,
+    20.90995
+   ],
+   "updated": "2026-10-30T05:19:16.055Z",
+   "forecast": false
+  },
+  {
+   "id": "sim-drenaje-frequency",
+   "label": "Frecuencia de inundación ≥15 cm en el ensamble (modelo sim-drenaje)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-drenaje/tiles/freq/{z}/{x}/{y}.png",
+   "minzoom": 9,
+   "maxzoom": 14,
+   "tileSize": 256,
+   "notes": "Share of ensemble runs with max depth ≥15 cm. Blue ramp: 5–20, 20–40, 40–60, 60–80, ≥80 %. Permanent water excluded.",
+   "legend": [
+    [
+     "5–20 %",
+     "#184f95"
+    ],
+    [
+     "20–40 %",
+     "#256abf"
+    ],
+    [
+     "40–60 %",
+     "#3987e5"
+    ],
+    [
+     "60–80 %",
+     "#6da7ec"
+    ],
+    [
+     "≥80 %",
+     "#b7d3f6"
+    ]
+   ],
+   "kind": "modeled",
+   "producer": "sim-drenaje",
+   "scenario": "126 runs: Tr 2/5/10/25/50/100 years (60 min) × drainage capacity 0/10/20/30/40/50/60 mm/h × infiltration mid/low/high; 20 m local-inertial rain-on-grid, flooded = max depth ≥ 15 cm",
+   "readme": "/labs/shared/hazard/modeled/sim-drenaje/README.md",
+   "stats": "/labs/shared/hazard/modeled/sim-drenaje/stats.json",
+   "bounds": [
+    -103.60135,
+    20.35785,
+    -103.13542,
+    20.90995
+   ],
+   "updated": "2026-10-30T05:19:16.055Z",
+   "forecast": false
+  },
+  {
+   "id": "sim-drenaje-gap",
+   "label": "Brecha de infraestructura: dónde el drenaje basta y dónde no (modelo sim-drenaje)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-drenaje/tiles/gap/{z}/{x}/{y}.png",
+   "minzoom": 9,
+   "maxzoom": 14,
+   "tileSize": 256,
+   "notes": "Urban 20 m cells. a (orange) floods even with ≥40 mm/h of drainage → storage/regrading/relocation (71.7 km²); b (aqua) floods at ≤10 mm/h but much less with ≥40 → drainage upgrade pays off (55.36 km²); c (faint gray) rarely floods. Rule: a (persistente): f_low >= 0.25 and f_high >= 0.5*f_low; b (responde al drenaje): f_low >= 0.25 and f_high < 0.5*f_low; c (rara vez): f_low < 0.25.",
+   "legend": [
+    [
+     "a · persistente",
+     "#d95926"
+    ],
+    [
+     "b · responde al drenaje",
+     "#199e70"
+    ],
+    [
+     "c · rara vez",
+     "#6b6b66"
+    ]
+   ],
+   "kind": "modeled",
+   "producer": "sim-drenaje",
+   "scenario": "126 runs: Tr 2/5/10/25/50/100 years (60 min) × drainage capacity 0/10/20/30/40/50/60 mm/h × infiltration mid/low/high; 20 m local-inertial rain-on-grid, flooded = max depth ≥ 15 cm",
+   "readme": "/labs/shared/hazard/modeled/sim-drenaje/README.md",
+   "stats": "/labs/shared/hazard/modeled/sim-drenaje/stats.json",
+   "bounds": [
+    -103.60135,
+    20.35785,
+    -103.13542,
+    20.90995
+   ],
+   "updated": "2026-10-30T05:19:16.055Z",
+   "forecast": false
+  },
+  {
+   "id": "sim-drenaje-sensitivity",
+   "label": "Sensibilidad al drenaje: cm menos por cada +10 mm/h (modelo sim-drenaje)",
+   "type": "raster-tiles",
+   "url": "/labs/shared/hazard/modeled/sim-drenaje/tiles/sens/{z}/{x}/{y}.png",
+   "minzoom": 9,
+   "maxzoom": 14,
+   "tileSize": 256,
+   "notes": "Mean reduction of max depth from 0 to 40 mm/h, per 10 mm/h (aqua, opacity steps 0.5/1/2/4/≥8 cm).",
+   "kind": "modeled",
+   "producer": "sim-drenaje",
+   "scenario": "126 runs: Tr 2/5/10/25/50/100 years (60 min) × drainage capacity 0/10/20/30/40/50/60 mm/h × infiltration mid/low/high; 20 m local-inertial rain-on-grid, flooded = max depth ≥ 15 cm",
+   "readme": "/labs/shared/hazard/modeled/sim-drenaje/README.md",
+   "stats": "/labs/shared/hazard/modeled/sim-drenaje/stats.json",
+   "bounds": [
+    -103.60135,
+    20.35785,
+    -103.13542,
+    20.90995
+   ],
+   "updated": "2026-10-30T05:19:16.055Z",
+   "forecast": false
+  }
+ ]
+}

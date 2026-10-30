@@ -1,0 +1,21 @@
+{
+ "bbox": [
+  -103.44,
+  20.6,
+  -103.29,
+  20.73
+ ],
+ "minzoom": 13,
+ "maxzoom": 15,
+ "layer": "buildings",
+ "count": 554328,
+ "fromHeightTag": 4867,
+ "fromNdsm": 549461,
+ "flooredTo3m": 113187,
+ "heightRule": "Overture height tag when present; else median of INEGI 5 m nDSM (DSM-DTM, includes trees) inside footprint; min 3 m, max 120 m",
+ "footprints": "Overture Maps buildings release 2026-10-21.0 (Google Open Buildings, Microsoft, OSM, ...)",
+ "ndsm": "C:/Users/Felip/contorno-compute/labs/terrain/out/ndsm-5m.f32 (terrain agent, 2026-10-29T23:29:34.586Z)",
+ "generated": "2026-10-30T00:25:35.014Z",
+ "bytes": 36216468,
+ "tiles": 282
+}

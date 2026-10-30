@@ -1,0 +1,16 @@
+{
+  "tilejson": "3.0.0",
+  "name": "cauce. buildings (Overture Maps 2026-10-21.0, ZMG AOI)",
+  "description": "Building footprints for the ZMG AOI bbox [-103.75,20.25,-103.05,21.0] as Mapbox Vector Tiles, layer 'buildings', z14-15 (overzoom beyond 15). Properties: s = primary source (1 OpenStreetMap, 2 Microsoft ML Buildings, 3 Google Open Buildings, 4 Esri Community Maps, 5 other); h = Overture height in m and f = floors (only when present, ~0.5%); hn = median INEGI DSM-DTM (m) over the footprint's 5 m cells, an ESTIMATE from satellite photogrammetry that includes trees and noise, not a measured building height; c = Overture class when present.",
+  "version": "1.0.0",
+  "scheme": "xyz",
+  "tiles": ["https://guadalajara.vsfelix.com/labs/shared/infra/buildings/{z}/{x}/{y}.pbf"],
+  "minzoom": 14,
+  "maxzoom": 15,
+  "bounds": [-103.75, 20.25, -103.05, 21.0],
+  "center": [-103.35, 20.67, 14],
+  "attribution": "© Overture Maps Foundation; © OpenStreetMap contributors (ODbL); Microsoft Global ML Building Footprints (ODbL); Google Open Buildings (CC BY 4.0 / ODbL); Esri Community Maps",
+  "vector_layers": [{ "id": "buildings", "fields": { "s": "Number", "h": "Number", "f": "Number", "hn": "Number", "c": "String" }, "minzoom": 14, "maxzoom": 15 }],
+  "producer": "terrain",
+  "license": "ODbL-1.0 (Overture buildings theme)"
+}

@@ -1,0 +1,203 @@
+{
+ "note": "Names and approximate positions from OpenStreetMap (ODbL). elev_m sampled from the INEGI 5 m DTM web tiles (z13 ≈ 18 m px): highest pixel within ~300 m for peaks, lowest within ~600 m for barrancas, point value otherwise.",
+ "generated": "2026-10-30T00:46:19.641Z",
+ "landmarks": [
+  {
+   "id": "primavera",
+   "name": "Sierra de La Primavera",
+   "kind": "sierra",
+   "ll": [
+    -103.545,
+    20.595
+   ],
+   "peak": "Cerro Planillas",
+   "elev_m": 2268,
+   "at": [
+    -103.545,
+    20.5953
+   ]
+  },
+  {
+   "id": "colli",
+   "name": "Cerro del Colli",
+   "kind": "cerro",
+   "ll": [
+    -103.4638,
+    20.657
+   ],
+   "elev_m": 1958,
+   "at": [
+    -103.4638,
+    20.657
+   ]
+  },
+  {
+   "id": "cuatro",
+   "name": "Cerro del Cuatro",
+   "kind": "cerro",
+   "ll": [
+    -103.3631,
+    20.5995
+   ],
+   "elev_m": 1871,
+   "at": [
+    -103.3652,
+    20.6001
+   ]
+  },
+  {
+   "id": "reina",
+   "name": "Cerro de la Reina",
+   "kind": "cerro",
+   "ll": [
+    -103.2396,
+    20.6335
+   ],
+   "elev_m": 1727,
+   "at": [
+    -103.2387,
+    20.6341
+   ]
+  },
+  {
+   "id": "viejo",
+   "name": "Cerro Viejo",
+   "kind": "cerro",
+   "ll": [
+    -103.4359,
+    20.3642
+   ],
+   "elev_m": 2957,
+   "at": [
+    -103.4365,
+    20.3645
+   ]
+  },
+  {
+   "id": "huentitan",
+   "name": "Barranca de Huentitán",
+   "kind": "barranca",
+   "ll": [
+    -103.2933,
+    20.7391
+   ],
+   "elev_m": 982,
+   "at": [
+    -103.2987,
+    20.743
+   ]
+  },
+  {
+   "id": "tepopote",
+   "name": "Cerro del Tepopote",
+   "kind": "cerro",
+   "ll": [
+    -103.5667,
+    20.7421
+   ],
+   "elev_m": 1945,
+   "at": [
+    -103.5667,
+    20.7424
+   ]
+  },
+  {
+   "id": "gato",
+   "name": "Cerro del Gato",
+   "kind": "cerro",
+   "ll": [
+    -103.3551,
+    20.4963
+   ],
+   "elev_m": 1574,
+   "at": [
+    -103.3545,
+    20.4972
+   ]
+  },
+  {
+   "id": "atemajac",
+   "name": "Río Atemajac",
+   "kind": "rio",
+   "ll": [
+    -103.3781,
+    20.7118
+   ],
+   "elev_m": 1529,
+   "at": [
+    -103.3781,
+    20.7118
+   ]
+  },
+  {
+   "id": "sjd",
+   "name": "San Juan de Dios (entubado)",
+   "kind": "rio",
+   "ll": [
+    -103.3367,
+    20.6984
+   ],
+   "elev_m": 1508,
+   "at": [
+    -103.3367,
+    20.6984
+   ]
+  },
+  {
+   "id": "pintas",
+   "name": "Canal Las Pintas",
+   "kind": "canal",
+   "ll": [
+    -103.3253,
+    20.5401
+   ],
+   "elev_m": 1524,
+   "at": [
+    -103.3253,
+    20.5401
+   ]
+  },
+  {
+   "id": "ahogado",
+   "name": "El Ahogado",
+   "kind": "rio",
+   "ll": [
+    -103.2201,
+    20.4956
+   ],
+   "elev_m": 1509,
+   "at": [
+    -103.2201,
+    20.4956
+   ]
+  },
+  {
+   "id": "centro",
+   "name": "Centro de Guadalajara",
+   "kind": "ciudad",
+   "ll": [
+    -103.3496,
+    20.6767
+   ],
+   "elev_m": 1547,
+   "at": [
+    -103.3496,
+    20.6767
+   ]
+  },
+  {
+   "id": "juntas",
+   "name": "Las Juntas",
+   "kind": "barrio",
+   "ll": [
+    -103.3391,
+    20.6067
+   ],
+   "elev_m": 1575,
+   "at": [
+    -103.3391,
+    20.6067
+   ]
+  }
+ ]
+}

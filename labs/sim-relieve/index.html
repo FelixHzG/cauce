@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>cauce. relieve — ¿dónde se junta el agua?</title>
+<meta name="description" content="Análisis estático del terreno a 5 m en la ZMG: depresiones, flujo, altura sobre el cauce y una prueba de la idea «las zonas planas son las que se inundan» contra el inventario IMEPLAN 2026.">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.1.0/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.1.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.1.0/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5.1.0/600.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+</head>
+<body>
+<div id="map" aria-label="Mapa del relieve de la Zona Metropolitana de Guadalajara"></div>
+
+<header class="brand">
+  <div class="mark">cauce<span>.</span></div>
+  <div class="brand-text">
+    <h1>¿Dónde se junta el agua?</h1>
+    <p>Relieve INEGI a 5 m · análisis estático del terreno · ZMG</p>
+  </div>
+</header>
+
+<nav class="sheet-tabs" role="tablist">
+  <button role="tab" data-tab="layers" class="on">Capas</button>
+  <button role="tab" data-tab="answer">¿Lo plano se inunda?</button>
+</nav>
+<aside class="panel layers" id="layersPanel">
+  <section class="tab-body" data-body="layers">
+    <h2>Índice del terreno <span class="tag modeled">modelado</span></h2>
+    <div class="switcher" id="switcher" role="radiogroup" aria-label="Índice"></div>
+    <div class="legend" id="legend"></div>
+    <h2 class="sp">Capas de referencia</h2>
+    <label class="toggle"><input type="checkbox" id="tObserved" checked><span class="sw obs"></span>Inundaciones observadas <small>IMEPLAN MUI 2026</small></label>
+    <label class="toggle"><input type="checkbox" id="tPolys" checked><span class="sw pol"></span>Contornos del índice <small>polígonos para el ruteador</small></label>
+    <label class="toggle"><input type="checkbox" id="t3d"><span class="sw t3d"></span>Relieve 3D <small>sin exageración</small></label>
+    <p class="fine">Exploratorio: describe la forma del terreno, no la lluvia, el drenaje ni las alcantarillas. No es un pronóstico.</p>
+  </section>
+</aside>
+
+<aside class="panel answer" id="answerPanel">
+  <section class="tab-body" data-body="answer">
+    <div class="q">La hipótesis</div>
+    <h2 class="big">«En mi pueblo se inundan las zonas planas. Seguramente aquí también.»</h2>
+    <div id="verdict" class="verdict">Cargando prueba…</div>
+    <div id="quad" class="quad" aria-label="Frecuencia de sitios inundables por combinación de planitud y altura sobre el cauce"></div>
+    <div class="chart-title">Qué tan bien separa cada índice los sitios inundables del resto de la ciudad</div>
+    <div id="aucChart" class="chart"></div>
+    <div class="chart-title">Sitios inundables por decil, contra el promedio urbano (=1)</div>
+    <div id="decileChart" class="chart"></div>
+    <details class="method">
+      <summary>Cómo se probó</summary>
+      <div id="methodText"></div>
+    </details>
+  </section>
+</aside>
+
+<div class="caption" id="caption" aria-live="polite"></div>
+<div class="tooltip" id="tip" role="tooltip"></div>
+
+<footer class="attrib">
+  <span><b>Observado:</b> IMEPLAN MUI 2026</span>
+  <span><b>Modelado:</b> cauce. sim-relieve (MDT/MDS INEGI 5 m, edificios Overture)</span>
+  <span>Mapa © OpenFreeMap · © OpenStreetMap</span>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>¿Dónde cae el próximo peso para el drenaje? · cauce.</title>
+<meta name="description" content="Historia ilustrada: de la sierra a la ciudad, siguiendo una tormenta por la Zona Metropolitana de Guadalajara para ver dónde invertir en drenaje. Exploratorio, no es pronóstico.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 110'%3E%3Cpath d='M50 4C60 22 84 46 86 70C88 92 70 106 50 106C30 106 12 92 14 70C16 46 40 22 50 4Z' fill='%234f93d6' stroke='%232b2a4a' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=Nunito:ital,wght@0,400..800;1,400..700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage" aria-hidden="true">
+  <div id="map"></div>
+  <div id="storm"></div>
+  <div id="clouds"></div>
+  <canvas id="fx"></canvas>
+  <div id="notes"></div>
+  <div id="pins"></div>
+  <div class="paper"></div>
+  <div class="vignette"></div>
+</div>
+
+<header id="top">
+  <a class="brand" href="/labs/" title="cauce. labs">cauce<span>.</span></a>
+  <span class="tag">labs · dónde invertir</span>
+</header>
+<nav id="rail" aria-label="Capítulos"></nav>
+
+<main id="story" aria-live="polite"></main>
+
+<footer id="attrib">
+  <span id="attrib-text">Relieve © INEGI (MDT 5 m) · © OpenStreetMap · OpenFreeMap · IMEPLAN MUI 2026 · INEGI Censo 2020 · CONAPO 2020 · ESA WorldCover · Overture</span>
+</footer>
+
+<div id="boot"><div class="boot-card"><div id="boot-gota"></div><p>Juntando las nubes…</p><small>Cargando relieve, censo e inventario de inundaciones</small></div></div>
+
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

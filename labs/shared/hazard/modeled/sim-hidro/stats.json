@@ -1,0 +1,725 @@
+{
+ "producer": "sim-hidro",
+ "updated": "2026-10-30T05:11:14.743Z",
+ "model": "Local-inertial 2D shallow water (Bates et al. 2010; theta-weighting de Almeida et al. 2012), rain-on-grid, WebGPU on Radeon RX 580",
+ "domain": {
+  "cells": 73800000,
+  "width": 8200,
+  "height": 9000,
+  "cellSize": 5,
+  "crs": "EPSG:6368 (UTM 13N)",
+  "originUTM": [
+   648900,
+   2306400
+  ],
+  "bboxLonLat": [
+   -103.57260889117642,
+   20.441565826143034,
+   -103.17486169957812,
+   20.851726512284916
+  ],
+  "classFractions": {
+   "water": 0.0022,
+   "built-up ground": 0.21,
+   "building roof": 0.103,
+   "tree": 0.2191,
+   "shrub": 0.0926,
+   "grass": 0.1868,
+   "crop": 0.1775,
+   "bare": 0.0087,
+   "wetland": 0
+  }
+ },
+ "sewerMmh": 10,
+ "demoSpot": {
+  "center": [
+   -103.2405,
+   20.5895
+  ],
+  "zoom": 14.1,
+  "note": "Tonalá/Tlaquepaque (Arroyo de Enmedio, Col. Jauja): densest overlap of IMEPLAN sites and modelled > 60 cm"
+ },
+ "scenarios": {
+  "T2": {
+   "available": true,
+   "returnPeriod": 2,
+   "label": "Tormenta frecuente (≈ cada 2 años)",
+   "storm": {
+    "blockS": 600,
+    "mmh": [
+     32.49,
+     86.07,
+     59.28,
+     26.75,
+     13.35,
+     5.69
+    ],
+    "depthMm": 37.3,
+    "durationMin": 60,
+    "source": "IMTA 2017 ZMG design hyetograph (Tr 25, 60 min, Zona Centro) scaled with Bell (1969) frequency ratios"
+   },
+   "simulatedMin": 180,
+   "steps": 18463,
+   "runtimeMin": 23.6,
+   "msPerStep": 76.64,
+   "massBalance": {
+    "rain_m3": 68766225,
+    "infiltration_m3": 32195389,
+    "sewer_m3": 7595670,
+    "outflow_m3": 827613,
+    "stored_m3": 28145177,
+    "clampCreated_m3": 74.1,
+    "error_m3": 2450.4,
+    "relErrorFinal": 0.00003563,
+    "relErrorWorstCheckpoint": 0.00003563
+   },
+   "massErrorPct": 0.0036,
+   "areasKm2": {
+    "ge_0_05m": 190.824,
+    "ge_0_15m": 82.29,
+    "ge_0_3m": 35.728,
+    "ge_0_6m": 12.282,
+    "ge_1m": 4.794,
+    "ge_2m": 0.997
+   },
+   "areasKm2_builtUpGround": {
+    "ge_0.05m": 72.136,
+    "ge_0.15m": 33.543,
+    "ge_0.3m": 13.153,
+    "ge_0.6m": 3.205,
+    "ge_1m": 0.832,
+    "ge_2m": 0.091
+   },
+   "hazardAreasKm2": {
+    "none": 1762.71,
+    "bajo": 45.583,
+    "vehiculos_pequenos": 19.534,
+    "personas_vehiculos": 13.438,
+    "extremo": 3.736
+   },
+   "maxDepth": {
+    "m": 34.95,
+    "lon": -103.2831,
+    "lat": 20.71029,
+    "note": "deepest cell; usually a quarry, canyon channel or closed depression"
+   },
+   "maxSpeed_ms": 20,
+   "validation": {
+    "scenario": "T2",
+    "method": "max modelled depth inside each feature (polygons dilated 5 m; points: discs) vs the same shapes moved to random built-up locations in urbanBbox >= 150 m from any observed feature (25 placements each, seed 12345)",
+    "thresholds_m": [
+     0.05,
+     0.15,
+     0.3,
+     0.6
+    ],
+    "groups": {
+     "sitiosInundables_polygons": {
+      "nObserved": 276,
+      "nRandom": 6882,
+      "medianMaxDepthObserved_m": 0.926,
+      "medianMaxDepthRandom_m": 0.56,
+      "meanWetFraction015Observed": 0.18,
+      "meanWetFraction015Random": 0.059,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.989,
+        "hitRateRandom": 0.984,
+        "lift": 1.01,
+        "zScore": 0.7
+       },
+       "0.15": {
+        "hitRateObserved": 0.971,
+        "hitRateRandom": 0.942,
+        "lift": 1.03,
+        "zScore": 2.1
+       },
+       "0.3": {
+        "hitRateObserved": 0.906,
+        "hitRateRandom": 0.794,
+        "lift": 1.14,
+        "zScore": 4.6
+       },
+       "0.6": {
+        "hitRateObserved": 0.75,
+        "hitRateRandom": 0.457,
+        "lift": 1.64,
+        "zScore": 9.8
+       }
+      }
+     },
+     "zonasCriticas_polygons": {
+      "nObserved": 156,
+      "nRandom": 3893,
+      "medianMaxDepthObserved_m": 0.697,
+      "medianMaxDepthRandom_m": 0.429,
+      "meanWetFraction015Observed": 0.187,
+      "meanWetFraction015Random": 0.059,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.981,
+        "hitRateRandom": 0.947,
+        "lift": 1.04,
+        "zScore": 1.9
+       },
+       "0.15": {
+        "hitRateObserved": 0.936,
+        "hitRateRandom": 0.846,
+        "lift": 1.11,
+        "zScore": 3.1
+       },
+       "0.3": {
+        "hitRateObserved": 0.872,
+        "hitRateRandom": 0.66,
+        "lift": 1.32,
+        "zScore": 5.6
+       },
+       "0.6": {
+        "hitRateObserved": 0.635,
+        "hitRateRandom": 0.345,
+        "lift": 1.84,
+        "zScore": 7.6
+       }
+      }
+     },
+     "points_r25m": {
+      "nObserved": 278,
+      "nRandom": 6946,
+      "medianMaxDepthObserved_m": 0.428,
+      "medianMaxDepthRandom_m": 0.242,
+      "meanWetFraction015Observed": 0.189,
+      "meanWetFraction015Random": 0.057,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.968,
+        "hitRateRandom": 0.921,
+        "lift": 1.05,
+        "zScore": 2.9
+       },
+       "0.15": {
+        "hitRateObserved": 0.856,
+        "hitRateRandom": 0.723,
+        "lift": 1.18,
+        "zScore": 5
+       },
+       "0.3": {
+        "hitRateObserved": 0.637,
+        "hitRateRandom": 0.381,
+        "lift": 1.67,
+        "zScore": 8.8
+       },
+       "0.6": {
+        "hitRateObserved": 0.367,
+        "hitRateRandom": 0.105,
+        "lift": 3.49,
+        "zScore": 14.2
+       }
+      }
+     },
+     "points_r50m": {
+      "nObserved": 278,
+      "nRandom": 6945,
+      "medianMaxDepthObserved_m": 0.664,
+      "medianMaxDepthRandom_m": 0.443,
+      "meanWetFraction015Observed": 0.147,
+      "meanWetFraction015Random": 0.059,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 1,
+        "hitRateRandom": 0.996,
+        "lift": 1,
+        "zScore": 1.1
+       },
+       "0.15": {
+        "hitRateObserved": 0.978,
+        "hitRateRandom": 0.958,
+        "lift": 1.02,
+        "zScore": 1.7
+       },
+       "0.3": {
+        "hitRateObserved": 0.892,
+        "hitRateRandom": 0.77,
+        "lift": 1.16,
+        "zScore": 4.8
+       },
+       "0.6": {
+        "hitRateObserved": 0.568,
+        "hitRateRandom": 0.29,
+        "lift": 1.96,
+        "zScore": 10.2
+       }
+      }
+     }
+    },
+    "reportedVsModelled_sites": {
+     "n": 268,
+     "spearman": 0.27,
+     "note": "reported range midpoint (cm, IMEPLAN Rango de alturas) vs modelled max depth inside each site polygon"
+    }
+   },
+   "files": {
+    "depthTiles": "T2/tiles/depth/{z}/{x}/{y}.png",
+    "hazardTiles": "T2/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "T2/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "T2/frames.json",
+    "polygons": "T2/depth-classes.geojson",
+    "run": "T2/run.json",
+    "validation": "T2/validation.json"
+   }
+  },
+  "T10": {
+   "available": true,
+   "returnPeriod": 10,
+   "label": "Tormenta fuerte (≈ cada 10 años)",
+   "storm": {
+    "blockS": 600,
+    "mmh": [
+     48.99,
+     129.78,
+     89.39,
+     40.33,
+     20.13,
+     8.58
+    ],
+    "depthMm": 56.2,
+    "durationMin": 60,
+    "source": "IMTA 2017 ZMG design hyetograph (Tr 25, 60 min, Zona Centro) scaled with Bell (1969) frequency ratios"
+   },
+   "simulatedMin": 180,
+   "steps": 18643,
+   "runtimeMin": 24.5,
+   "msPerStep": 78.9,
+   "massBalance": {
+    "rain_m3": 103689000,
+    "infiltration_m3": 34421204,
+    "sewer_m3": 8468694,
+    "outflow_m3": 3533038,
+    "stored_m3": 57261703,
+    "clampCreated_m3": 704.45,
+    "error_m3": 5066.1,
+    "relErrorFinal": 0.00004886,
+    "relErrorWorstCheckpoint": 0.00004886
+   },
+   "massErrorPct": 0.0049,
+   "areasKm2": {
+    "ge_0_05m": 317.546,
+    "ge_0_15m": 159.693,
+    "ge_0_3m": 83.187,
+    "ge_0_6m": 34.589,
+    "ge_1m": 15.694,
+    "ge_2m": 4.805
+   },
+   "areasKm2_builtUpGround": {
+    "ge_0.05m": 108.718,
+    "ge_0.15m": 59.488,
+    "ge_0.3m": 28.994,
+    "ge_0.6m": 9.329,
+    "ge_1m": 2.992,
+    "ge_2m": 0.446
+   },
+   "hazardAreasKm2": {
+    "none": 1685.307,
+    "bajo": 72.673,
+    "vehiculos_pequenos": 40.473,
+    "personas_vehiculos": 31.997,
+    "extremo": 14.55
+   },
+   "maxDepth": {
+    "m": 54.82,
+    "lon": -103.26783,
+    "lat": 20.70273,
+    "note": "deepest cell; usually a quarry, canyon channel or closed depression"
+   },
+   "maxSpeed_ms": 20,
+   "validation": {
+    "scenario": "T10",
+    "method": "max modelled depth inside each feature (polygons dilated 5 m; points: discs) vs the same shapes moved to random built-up locations in urbanBbox >= 150 m from any observed feature (25 placements each, seed 12345)",
+    "thresholds_m": [
+     0.05,
+     0.15,
+     0.3,
+     0.6
+    ],
+    "groups": {
+     "sitiosInundables_polygons": {
+      "nObserved": 276,
+      "nRandom": 6882,
+      "medianMaxDepthObserved_m": 1.386,
+      "medianMaxDepthRandom_m": 0.719,
+      "meanWetFraction015Observed": 0.333,
+      "meanWetFraction015Random": 0.105,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.993,
+        "hitRateRandom": 0.989,
+        "lift": 1,
+        "zScore": 0.6
+       },
+       "0.15": {
+        "hitRateObserved": 0.986,
+        "hitRateRandom": 0.96,
+        "lift": 1.03,
+        "zScore": 2.2
+       },
+       "0.3": {
+        "hitRateObserved": 0.953,
+        "hitRateRandom": 0.865,
+        "lift": 1.1,
+        "zScore": 4.3
+       },
+       "0.6": {
+        "hitRateObserved": 0.851,
+        "hitRateRandom": 0.59,
+        "lift": 1.44,
+        "zScore": 8.8
+       }
+      }
+     },
+     "zonasCriticas_polygons": {
+      "nObserved": 156,
+      "nRandom": 3893,
+      "medianMaxDepthObserved_m": 1.024,
+      "medianMaxDepthRandom_m": 0.555,
+      "meanWetFraction015Observed": 0.337,
+      "meanWetFraction015Random": 0.107,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.981,
+        "hitRateRandom": 0.961,
+        "lift": 1.02,
+        "zScore": 1.3
+       },
+       "0.15": {
+        "hitRateObserved": 0.968,
+        "hitRateRandom": 0.892,
+        "lift": 1.09,
+        "zScore": 3.1
+       },
+       "0.3": {
+        "hitRateObserved": 0.91,
+        "hitRateRandom": 0.747,
+        "lift": 1.22,
+        "zScore": 4.7
+       },
+       "0.6": {
+        "hitRateObserved": 0.782,
+        "hitRateRandom": 0.465,
+        "lift": 1.68,
+        "zScore": 7.9
+       }
+      }
+     },
+     "points_r25m": {
+      "nObserved": 278,
+      "nRandom": 6946,
+      "medianMaxDepthObserved_m": 0.664,
+      "medianMaxDepthRandom_m": 0.311,
+      "meanWetFraction015Observed": 0.346,
+      "meanWetFraction015Random": 0.101,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.982,
+        "hitRateRandom": 0.947,
+        "lift": 1.04,
+        "zScore": 2.6
+       },
+       "0.15": {
+        "hitRateObserved": 0.924,
+        "hitRateRandom": 0.797,
+        "lift": 1.16,
+        "zScore": 5.3
+       },
+       "0.3": {
+        "hitRateObserved": 0.802,
+        "hitRateRandom": 0.519,
+        "lift": 1.55,
+        "zScore": 9.5
+       },
+       "0.6": {
+        "hitRateObserved": 0.536,
+        "hitRateRandom": 0.192,
+        "lift": 2.78,
+        "zScore": 14.5
+       }
+      }
+     },
+     "points_r50m": {
+      "nObserved": 278,
+      "nRandom": 6945,
+      "medianMaxDepthObserved_m": 1.018,
+      "medianMaxDepthRandom_m": 0.563,
+      "meanWetFraction015Observed": 0.285,
+      "meanWetFraction015Random": 0.105,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 1,
+        "hitRateRandom": 0.998,
+        "lift": 1,
+        "zScore": 0.8
+       },
+       "0.15": {
+        "hitRateObserved": 0.996,
+        "hitRateRandom": 0.976,
+        "lift": 1.02,
+        "zScore": 2.2
+       },
+       "0.3": {
+        "hitRateObserved": 0.957,
+        "hitRateRandom": 0.863,
+        "lift": 1.11,
+        "zScore": 4.5
+       },
+       "0.6": {
+        "hitRateObserved": 0.748,
+        "hitRateRandom": 0.453,
+        "lift": 1.65,
+        "zScore": 9.9
+       }
+      }
+     }
+    },
+    "reportedVsModelled_sites": {
+     "n": 268,
+     "spearman": 0.262,
+     "note": "reported range midpoint (cm, IMEPLAN Rango de alturas) vs modelled max depth inside each site polygon"
+    }
+   },
+   "files": {
+    "depthTiles": "T10/tiles/depth/{z}/{x}/{y}.png",
+    "hazardTiles": "T10/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "T10/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "T10/frames.json",
+    "polygons": "T10/depth-classes.geojson",
+    "run": "T10/run.json",
+    "validation": "T10/validation.json"
+   }
+  },
+  "T100": {
+   "available": true,
+   "returnPeriod": 100,
+   "label": "Tormenta extrema (≈ cada 100 años)",
+   "storm": {
+    "blockS": 600,
+    "mmh": [
+     72.59,
+     192.32,
+     132.46,
+     59.76,
+     29.83,
+     12.72
+    ],
+    "depthMm": 83.3,
+    "durationMin": 60,
+    "source": "IMTA 2017 ZMG design hyetograph (Tr 25, 60 min, Zona Centro) scaled with Bell (1969) frequency ratios"
+   },
+   "simulatedMin": 180,
+   "steps": 18780,
+   "runtimeMin": 24.4,
+   "msPerStep": 77.83,
+   "massBalance": {
+    "rain_m3": 153651600,
+    "infiltration_m3": 36011288,
+    "sewer_m3": 9108303,
+    "outflow_m3": 7654592,
+    "stored_m3": 100872654,
+    "clampCreated_m3": 3002.78,
+    "error_m3": 7766.4,
+    "relErrorFinal": 0.00005055,
+    "relErrorWorstCheckpoint": 0.00005055
+   },
+   "massErrorPct": 0.0051,
+   "areasKm2": {
+    "ge_0_05m": 453.407,
+    "ge_0_15m": 251.656,
+    "ge_0_3m": 149.191,
+    "ge_0_6m": 70.822,
+    "ge_1m": 34.767,
+    "ge_2m": 11.8
+   },
+   "areasKm2_builtUpGround": {
+    "ge_0.05m": 147.478,
+    "ge_0.15m": 90.158,
+    "ge_0.3m": 51.41,
+    "ge_0.6m": 20.405,
+    "ge_1m": 7.798,
+    "ge_2m": 1.411
+   },
+   "hazardAreasKm2": {
+    "none": 1593.344,
+    "bajo": 93.568,
+    "vehiculos_pequenos": 63.99,
+    "personas_vehiculos": 59.266,
+    "extremo": 34.833
+   },
+   "maxDepth": {
+    "m": 56.77,
+    "lon": -103.26802,
+    "lat": 20.70259,
+    "note": "deepest cell; usually a quarry, canyon channel or closed depression"
+   },
+   "maxSpeed_ms": 20,
+   "validation": {
+    "scenario": "T100",
+    "method": "max modelled depth inside each feature (polygons dilated 5 m; points: discs) vs the same shapes moved to random built-up locations in urbanBbox >= 150 m from any observed feature (25 placements each, seed 12345)",
+    "thresholds_m": [
+     0.05,
+     0.15,
+     0.3,
+     0.6
+    ],
+    "groups": {
+     "sitiosInundables_polygons": {
+      "nObserved": 276,
+      "nRandom": 6882,
+      "medianMaxDepthObserved_m": 1.792,
+      "medianMaxDepthRandom_m": 0.871,
+      "meanWetFraction015Observed": 0.481,
+      "meanWetFraction015Random": 0.159,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.996,
+        "hitRateRandom": 0.992,
+        "lift": 1,
+        "zScore": 0.8
+       },
+       "0.15": {
+        "hitRateObserved": 0.989,
+        "hitRateRandom": 0.97,
+        "lift": 1.02,
+        "zScore": 1.8
+       },
+       "0.3": {
+        "hitRateObserved": 0.975,
+        "hitRateRandom": 0.901,
+        "lift": 1.08,
+        "zScore": 4.1
+       },
+       "0.6": {
+        "hitRateObserved": 0.906,
+        "hitRateRandom": 0.683,
+        "lift": 1.33,
+        "zScore": 8
+       }
+      }
+     },
+     "zonasCriticas_polygons": {
+      "nObserved": 156,
+      "nRandom": 3893,
+      "medianMaxDepthObserved_m": 1.481,
+      "medianMaxDepthRandom_m": 0.679,
+      "meanWetFraction015Observed": 0.466,
+      "meanWetFraction015Random": 0.162,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.987,
+        "hitRateRandom": 0.974,
+        "lift": 1.01,
+        "zScore": 1.1
+       },
+       "0.15": {
+        "hitRateObserved": 0.968,
+        "hitRateRandom": 0.914,
+        "lift": 1.06,
+        "zScore": 2.4
+       },
+       "0.3": {
+        "hitRateObserved": 0.949,
+        "hitRateRandom": 0.801,
+        "lift": 1.18,
+        "zScore": 4.6
+       },
+       "0.6": {
+        "hitRateObserved": 0.859,
+        "hitRateRandom": 0.554,
+        "lift": 1.55,
+        "zScore": 7.7
+       }
+      }
+     },
+     "points_r25m": {
+      "nObserved": 278,
+      "nRandom": 6946,
+      "medianMaxDepthObserved_m": 1.009,
+      "medianMaxDepthRandom_m": 0.378,
+      "meanWetFraction015Observed": 0.495,
+      "meanWetFraction015Random": 0.152,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 0.989,
+        "hitRateRandom": 0.967,
+        "lift": 1.02,
+        "zScore": 2.1
+       },
+       "0.15": {
+        "hitRateObserved": 0.953,
+        "hitRateRandom": 0.848,
+        "lift": 1.12,
+        "zScore": 4.9
+       },
+       "0.3": {
+        "hitRateObserved": 0.899,
+        "hitRateRandom": 0.614,
+        "lift": 1.46,
+        "zScore": 9.8
+       },
+       "0.6": {
+        "hitRateObserved": 0.727,
+        "hitRateRandom": 0.281,
+        "lift": 2.59,
+        "zScore": 16.5
+       }
+      }
+     },
+     "points_r50m": {
+      "nObserved": 278,
+      "nRandom": 6945,
+      "medianMaxDepthObserved_m": 1.362,
+      "medianMaxDepthRandom_m": 0.676,
+      "meanWetFraction015Observed": 0.421,
+      "meanWetFraction015Random": 0.157,
+      "byThreshold": {
+       "0.05": {
+        "hitRateObserved": 1,
+        "hitRateRandom": 0.999,
+        "lift": 1,
+        "zScore": 0.6
+       },
+       "0.15": {
+        "hitRateObserved": 1,
+        "hitRateRandom": 0.983,
+        "lift": 1.02,
+        "zScore": 2.2
+       },
+       "0.3": {
+        "hitRateObserved": 0.986,
+        "hitRateRandom": 0.911,
+        "lift": 1.08,
+        "zScore": 4.4
+       },
+       "0.6": {
+        "hitRateObserved": 0.878,
+        "hitRateRandom": 0.582,
+        "lift": 1.51,
+        "zScore": 10
+       }
+      }
+     }
+    },
+    "reportedVsModelled_sites": {
+     "n": 268,
+     "spearman": 0.271,
+     "note": "reported range midpoint (cm, IMEPLAN Rango de alturas) vs modelled max depth inside each site polygon"
+    }
+   },
+   "files": {
+    "depthTiles": "T100/tiles/depth/{z}/{x}/{y}.png",
+    "hazardTiles": "T100/tiles/hazard/{z}/{x}/{y}.png",
+    "arrivalTiles": "T100/tiles/arrival/{z}/{x}/{y}.png",
+    "frames": "T100/frames.json",
+    "polygons": "T100/depth-classes.geojson",
+    "run": "T100/run.json",
+    "validation": "T100/validation.json"
+   }
+  }
+ }
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>cauce. navegación · maqueta de juguete</title>
+<meta name="description" content="Prototipo de navegación que evita zonas inundables en Guadalajara, con estética de maqueta de juguete. Datos IMEPLAN, OSM, Overture e INEGI.">
+<meta name="theme-color" content="#f6ebd3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%232ea8ff' stroke='%232b2440' stroke-width='3'/%3E%3Cpath d='M9 16c5-5 9 5 14 0M9 24c5-5 9 5 14 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.170.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.170.0/examples/jsm/"}}</script>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<div id="map" aria-label="Mapa 3D de Guadalajara en estilo maqueta"></div>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div class="tilt tilt-top" aria-hidden="true"></div><div class="tilt tilt-bottom" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div id="flash" aria-hidden="true"></div>
+
+<div id="hud">
+  <header id="brand">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M5 13c8-8 14 8 22 0M5 21c8-8 14 8 22 0M5 29c8-8 14 8 22 0"/></svg></span>
+    <span class="wordmark">cauce<b>.</b></span>
+    <span class="tag">navegación<small>maqueta de juguete</small></span>
+  </header>
+
+  <section id="maneuver" aria-live="polite">
+    <div class="m-icon" id="m-icon"></div>
+    <div class="m-body">
+      <div class="m-dist" id="m-dist">—</div>
+      <div class="m-text" id="m-text">Cargando ruta…</div>
+    </div>
+  </section>
+
+  <div id="scenario" role="group" aria-label="Escenario de lluvia"></div>
+
+  <div id="alerts" aria-live="assertive"></div>
+
+  <section id="reroute" class="card" aria-live="polite">
+    <div class="rr-spin" aria-hidden="true"></div>
+    <div class="rr-body"><b id="rr-title">Recalculando ruta segura…</b><span id="rr-sub"></span></div>
+  </section>
+
+  <section id="compare" class="card">
+    <div class="cmp-row safe"><i class="sw sw-safe"></i><div><b>Ruta segura</b><span id="cmp-safe">—</span></div></div>
+    <div class="cmp-row fast"><i class="sw sw-fast"></i><div><b>Ruta más rápida</b><span id="cmp-fast">—</span></div></div>
+    <div class="cmp-engine" id="cmp-engine"></div>
+  </section>
+
+  <section id="eta" class="card">
+    <div class="eta-main"><b id="eta-min">—</b><span>min</span></div>
+    <div class="eta-sub"><span id="eta-km">—</span><span id="eta-clock">—</span></div>
+    <div class="eta-dest" id="eta-dest">—</div>
+  </section>
+
+  <section id="arrive" class="card">
+    <div class="ar-flag" aria-hidden="true">🏁</div>
+    <h2 id="ar-title">Llegaste</h2>
+    <p id="ar-sub"></p>
+    <ul id="ar-list"></ul>
+  </section>
+
+  <section id="intro" class="card">
+    <span class="eyebrow">De A a B sin meterte al agua</span>
+    <h1 id="intro-title">Glorieta Minerva → Catedral</h1>
+    <p id="intro-sub">Cuando llueve, la ruta evita los sitios inundables registrados.</p>
+  </section>
+
+  <aside id="legend" class="card">
+    <div class="lg-row"><i class="lg-resin obs"></i><span>Sitio inundable registrado <small>IMEPLAN MUI 2026 · histórico, no en vivo</small></span></div>
+    <div class="lg-row lg-modeled" hidden><i class="lg-resin mod"></i><span>Agua modelada <small>simulación exploratoria, no pronóstico</small></span></div>
+    <div class="lg-row"><i class="lg-tape"></i><span>Paso a desnivel o túnel <small>OSM · vía bajo nivel, no es registro de inundación</small></span></div>
+    <div class="lg-row"><i class="lg-line safe"></i>Ruta segura</div>
+    <div class="lg-row"><i class="lg-line fast"></i>Ruta rápida (cruza agua)</div>
+    <div class="lg-row"><i class="lg-bld"></i><span>Edificios <small>huellas Overture · altura MDS−MDT INEGI 5 m (incluye árboles), ×1.5 visual</small></span></div>
+  </aside>
+
+  <nav id="controls" class="card dev">
+    <label class="ctl-dest">Destino
+      <select id="dest"></select>
+    </label>
+    <button id="play" class="btn primary">▶ Conducir</button>
+    <button id="restart" class="btn">⟲</button>
+    <span id="status" class="status"></span>
+  </nav>
+
+  <footer id="attrib">
+    <span id="attrib-text"></span><span id="attrib-short"></span>
+  </footer>
+</div>
+</body>
+</html>

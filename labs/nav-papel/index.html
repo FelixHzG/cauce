@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F1E7D2">
+<title>cauce. · navegación de papel</title>
+<meta name="description" content="Prototipo de navegación que esquiva sitios con registro de inundación en Guadalajara. Papel recortado e impresión risográfica.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23F1E7D2'/%3E%3Cpath d='M5 14c8-9 15 9 23 0M5 22c8-9 15 9 23 0' fill='none' stroke='%23FF48B0' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='29' r='4' fill='%2300838A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/patrick-hand@5.2.8/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/permanent-marker@5.2.7/400.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.180.0/build/three.module.js"}}</script>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<main id="map" aria-label="Mapa de navegación"></main>
+<div id="rain" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+
+<div id="left">
+<header id="brand" class="cut">
+  <div class="sheet">
+    <div class="logo"><span class="riso">cauce<b>.</b></span><span class="tag">navegación</span></div>
+    <p class="claim">Rutas que esquivan el agua</p>
+    <p id="trip-title" class="trip-title"><span class="dot a">A</span> Glorieta Minerva <span class="arrow">→</span> <span class="dot b">B</span> Aeropuerto GDL</p>
+  </div>
+</header>
+
+<div id="scenario" class="cut" role="group" aria-label="Escenario de lluvia">
+  <div class="sheet"><span class="eyebrow">Escenario</span><div id="scenario-buttons" class="seg"></div></div>
+</div>
+
+<aside id="panel" class="cut" aria-label="Tu viaje">
+  <div class="sheet">
+    <button id="sheet-handle" class="handle" aria-label="Mostrar u ocultar detalles"><i></i></button>
+    <h2 class="hand">Tu viaje</h2>
+    <div class="ends">
+      <div><span class="dot a">A</span><span id="from-label">Glorieta Minerva</span></div>
+      <div><span class="dot b">B</span><span id="to-label">Aeropuerto GDL</span></div>
+      <button id="pick" class="ghost">✎ Elegir otros puntos en el mapa</button>
+    </div>
+    <div id="compare" class="compare"></div>
+    <div class="controls">
+      <button id="play" class="stamp">▶ Recorrer ruta</button>
+      <button id="restart" class="ghost" title="Desde el inicio">↺</button>
+    </div>
+    <input id="scrub" type="range" min="0" max="26" step="0.01" value="0" aria-label="Línea de tiempo">
+
+    <div id="avoided" class="avoided"></div>
+    <p class="honest"><b>Ojo:</b> las alertas salen del <em>inventario histórico</em> IMEPLAN 2026 (lugares donde ya se ha inundado). No son reportes en vivo ni pronóstico. Tiempos estimados por el ruteador, sin tráfico ni lluvia.</p>
+    <p id="engine" class="engine"></p>
+  </div>
+</aside>
+</div>
+
+<div id="maneuver" class="cut hidden" aria-live="polite">
+  <div class="sheet"><div id="m-arrow" class="m-arrow"></div><div class="m-text"><div id="m-dist" class="m-dist"></div><div id="m-what" class="m-what"></div><div id="m-street" class="m-street"></div></div></div>
+</div>
+
+<div id="alerts" aria-live="polite"></div>
+<div id="banner" class="cut hidden"><div class="sheet"><span id="banner-text"></span></div></div>
+
+<div id="trip" class="cut hidden">
+  <div class="sheet">
+    <div><b id="t-left">—</b><small>quedan</small></div>
+    <div><b id="t-eta">—</b><small>de camino</small></div>
+    <div class="lapse"><b id="t-lapse">×1</b><small>acelerado</small></div>
+    <div id="t-route" class="t-route"></div>
+  </div>
+</div>
+
+<div id="summary" class="cut hidden"><div class="sheet" id="summary-body"></div></div>
+
+<div id="legend" class="cut"><div class="sheet" id="legend-body"></div></div>
+<div id="attrib">cauce<b>.</b> · prototipo nav-papel · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://openfreemap.org">OpenFreeMap</a> · <a href="https://openmaptiles.org">OpenMapTiles</a> · Inundaciones: <a href="https://mui.imeplan.mx/">IMEPLAN MUI 2026</a> · Ruteo: <span id="attrib-router">OSRM</span></div>
+<div id="loading"><div class="sheet"><span class="riso">cauce<b>.</b></span><p id="loading-text">Recortando el mapa…</p></div></div>
+<div id="hint" class="hidden"></div>
+</body>
+</html>

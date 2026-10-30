@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#04050b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%2304050b%22/%3E%3Cpath d=%22M4 20q6-8 12 0t12 0%22 stroke=%22%2300f0ff%22 stroke-width=%223%22 fill=%22none%22/%3E%3C/svg%3E">
+<title>cauce. · navegación en tormenta</title>
+<meta name="description" content="Prototipo de navegación que evita zonas de inundación registradas en Guadalajara: ruta directa contra ruta segura, alertas y auto 3D. Laboratorio cauce.">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="./styles.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js"}}</script>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<div id="map" aria-label="Mapa de navegación 3D de Guadalajara"></div>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div id="flash" aria-hidden="true"></div>
+<div class="fx fx-vignette" aria-hidden="true"></div>
+<div class="fx fx-scan" aria-hidden="true"></div>
+<div id="labels" aria-hidden="true"></div>
+
+<header class="brand hud">
+  <div class="logo">cauce<span>.</span></div>
+  <div class="brand-sub"><b>NAV</b><em>//</em>TORMENTA</div>
+  <div class="engine" id="engine-tag">cargando…</div>
+</header>
+
+<section id="maneuver" class="hud panel-hud maneuver">
+  <div class="m-arrow"><svg viewBox="0 0 48 48" aria-hidden="true"><path id="arrow-path" d="M24 40V10M12 22l12-12 12 12"/></svg></div>
+  <div class="m-text">
+    <div class="m-dist" id="m-dist">—</div>
+    <div class="m-inst" id="m-inst">Preparando ruta</div>
+    <div class="m-street" id="m-street">&nbsp;</div>
+  </div>
+</section>
+
+<section id="weather" class="hud panel-hud weather">
+  <div class="w-label">LLUVIA <span class="tag">escenario</span></div>
+  <div class="w-val"><b id="rain-val">40</b><span>mm/h</span></div>
+  <div class="w-bars" id="rain-bars"></div>
+  <div class="w-layers" id="layer-tags"></div>
+</section>
+
+<div id="alerts" class="alerts" aria-live="polite"></div>
+
+<div id="reroute" class="reroute" aria-live="assertive">
+  <div class="rr-kicker">◢ ALERTA EN TU RUTA ◣</div>
+  <div class="rr-title" id="rr-title">RECALCULANDO</div>
+  <div class="rr-sub" id="rr-sub">ruta segura</div>
+</div>
+
+<section id="speed" class="hud panel-hud speed">
+  <svg viewBox="0 0 200 118" class="gauge" aria-hidden="true">
+    <path class="g-bg" d="M22 108 A 78 78 0 0 1 178 108"/>
+    <path id="g-fill" class="g-fill" d="M22 108 A 78 78 0 0 1 178 108"/>
+  </svg>
+  <div class="s-val"><b id="speed-val">0</b><span>km/h</span></div>
+  <div class="s-sub" id="speed-sub">vel. simulada</div>
+</section>
+
+<section id="legend" class="hud legend">
+  <div><i class="lg-safe"></i>Ruta segura cauce.</div>
+  <div><i class="lg-fast"></i>Ruta más rápida</div>
+  <div><i class="lg-dot site"></i>Encharcamiento registrado</div>
+  <div><i class="lg-dot critical"></i>Zona crítica IMEPLAN</div>
+  <div><i class="lg-dot underpass"></i>Paso a desnivel inundable</div>
+  <div><i class="lg-osm"></i>Paso a desnivel mapeado (OSM)</div>
+  <div id="lg-modeled" hidden><i class="lg-dot modeled"></i>Agua modelada (exploratoria)</div>
+</section>
+
+<section id="trip" class="hud panel-hud trip">
+  <div class="trip-row">
+    <div><span class="k">LLEGADA</span><b id="eta-clock">--:--</b></div>
+    <div><span class="k">RESTAN</span><b id="eta-km">—</b></div>
+    <div><span class="k">TIEMPO</span><b id="eta-min">—</b></div>
+    <div><span class="k">EVITADAS</span><b id="eta-avoid">0</b></div>
+  </div>
+  <div class="trip-bar"><div class="tb-track"></div><div class="tb-fill" id="tb-fill"></div><div class="tb-ticks" id="tb-ticks"></div><div class="tb-car" id="tb-car"></div></div>
+  <div class="trip-ends"><span id="trip-from">A</span><span id="trip-to">B</span></div>
+</section>
+
+<section id="radar-box" class="hud panel-hud radar">
+  <canvas id="radar" width="440" height="440"></canvas>
+  <div class="radar-label"><span class="k">RADAR DE AGUA</span><b id="radar-near">—</b></div>
+</section>
+
+<section id="title-card" class="title-card">
+  <div class="tc-kicker">cauce<span>.</span> laboratorio · navegación</div>
+  <h1 id="tc-title">Llegar sin cruzar el agua</h1>
+  <p id="tc-sub">Glorieta Minerva → Aeropuerto GDL</p>
+</section>
+
+<section id="compare" class="compare">
+  <div class="cmp-head" id="cmp-head">RUTA</div>
+  <div class="cmp-row fast"><i></i><div><b>Más rápida</b><span id="cmp-fast">—</span></div><em id="cmp-fast-h">—</em></div>
+  <div class="cmp-row safe"><i></i><div><b>Segura cauce.</b><span id="cmp-safe">—</span></div><em id="cmp-safe-h">—</em></div>
+  <div class="cmp-note" id="cmp-note"></div>
+</section>
+
+<aside id="panel" class="panel">
+  <button id="panel-toggle" class="panel-toggle" aria-expanded="true" aria-controls="panel-body">Ruta y escenario <span>▾</span></button>
+  <div id="panel-body" class="panel-body">
+    <label class="p-label" for="preset">Trayecto</label>
+    <select id="preset"></select>
+    <button id="pick" class="p-btn ghost">◎ Elegir origen y destino en el mapa</button>
+    <div class="p-label">Lluvia (visual)</div>
+    <div class="chips" id="rain-chips">
+      <button data-rain="15">15 mm/h</button><button data-rain="40" class="on">40 mm/h</button><button data-rain="80">80 mm/h</button>
+    </div>
+    <div class="p-label">Capas de peligro <small>(/labs/shared/hazard)</small></div>
+    <div id="hazard-toggles" class="toggles"></div>
+    <div class="p-actions">
+      <button id="drive" class="p-btn primary">▶ Conducir</button>
+      <button id="overview" class="p-btn">⟲ Vista general</button>
+    </div>
+    <div class="chips speed-chips" id="speed-chips" title="Velocidad de reproducción">
+      <button data-x="10">×10</button><button data-x="30" class="on">×30</button><button data-x="80">×80</button>
+    </div>
+    <a class="p-link" href="?demo=1">Ver demo de 25 s ↗</a>
+    <p class="p-note" id="p-note">Registros históricos IMEPLAN MUI 2026: no son pronóstico. La ruta segura es provisional hasta que el ruteador con riesgo esté listo.</p>
+  </div>
+</aside>
+
+<div id="toast" class="toast" role="status"></div>
+
+<footer class="attrib">
+  <span class="disc">Zonas: inventario histórico IMEPLAN MUI 2026, no pronóstico · lluvia, velocidad y reproducción simuladas · ruta segura provisional</span>
+  <span class="src">© OpenStreetMap · OpenFreeMap · OpenMapTiles · AWS Terrain Tiles · IMEPLAN · OSRM</span>
+</footer>
+</body>
+</html>

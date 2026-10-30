@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alcaldía por un día · cauce.</title>
+<meta name="description" content="Juguete de estrategia: reparte $2,000 millones en obras contra inundaciones en la Zona Metropolitana de Guadalajara y mira a cuántas personas proteges. Efectos ilustrativos.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 100'%3E%3Cpath d='M42 5C42 5 12 42 12 62a30 30 0 0 0 60 0C72 42 42 5 42 5z' fill='%237fd3f7' stroke='%233b3355' stroke-width='6'/%3E%3Ccircle cx='31' cy='64' r='5' fill='%233b3355'/%3E%3Ccircle cx='53' cy='64' r='5' fill='%233b3355'/%3E%3C/svg%3E">
+</head>
+<body>
+<div id="app">
+  <canvas id="board" aria-label="Mapa isométrico de la ZMG"></canvas>
+
+  <header id="hud">
+    <div class="brand card">
+      <span class="logo">cauce.</span>
+      <span class="game">Alcaldía <b>por un día</b></span>
+    </div>
+    <div class="purse card" id="purse">
+      <span class="coin" id="coinIcon"></span>
+      <div class="purse-txt"><div class="purse-amt"><b id="budgetLeft">$2,000</b> <small>millones</small></div>
+        <div class="bar"><i id="budgetBar"></i></div></div>
+    </div>
+    <button class="badge" id="modelBadge" title="¿Cómo funciona?"><span class="dot"></span><span id="modelTxt">cargando modelo…</span><span class="q">?</span></button>
+  </header>
+
+  <aside id="score" class="card">
+    <div class="sc-head">Personas protegidas</div>
+    <div class="sc-big"><span id="scPeople">0</span></div>
+    <div class="sc-sub" id="scPeopleSub">de — en zona inundable (modelo)</div>
+    <div class="sc-row">
+      <div><b id="scFac">0</b><span>escuelas, clínicas y guarderías*</span></div>
+      <div><b id="scKm2">0</b><span>hectáreas que dejan de inundarse</span></div>
+      <div><b id="scPer">—</b><span>pesos por persona</span></div>
+    </div>
+    <div class="sc-eq">
+      <div class="lbl">Equidad <small>(protegidas en marginación alta o muy alta)</small></div>
+      <div class="eqbar"><i id="eqFill"></i><em id="eqBase"></em></div>
+      <div class="eqtxt"><b id="eqVal">—</b> <span id="eqBaseTxt"></span></div>
+    </div>
+    <div class="sc-gota">
+      <div class="lbl">Contra el plan de Gota <small>(mismo gasto)</small></div>
+      <div class="stars" id="stars"></div>
+      <div class="lvl" id="lvl">Coloca tu primera obra</div>
+    </div>
+    <div class="sc-plan" id="planList"></div>
+    <div class="sc-btns">
+      <button id="btnGhost" class="ghostbtn">¿Dónde invertiría Gota?</button>
+      <button id="btnShare" class="primary">Comparte tu plan</button>
+      <button id="btnReset" class="link">Reiniciar</button>
+    </div>
+    <div class="sc-note">*Equivalente esperado en el ensamble. Estimaciones ilustrativas.</div>
+  </aside>
+  <button id="scoreChip" class="card"><span id="chipPeople">0</span> personas · <span id="chipPer">—</span></button>
+
+  <aside id="inspector" class="card hidden"></aside>
+
+  <div id="gota">
+    <div class="gota-img" id="gotaImg"></div>
+    <div class="bubble" id="bubble"><span id="bubbleTxt"></span></div>
+  </div>
+
+  <nav id="toolbar"></nav>
+
+  <div id="legend" class="card">
+    <div class="modes" id="modes">
+      <button data-mode="agua" class="on">Agua</button><button data-mode="riesgo">Riesgo</button><button data-mode="marg">Marginación</button>
+    </div>
+    <div class="leg" id="legBody"></div>
+    <label class="chk"><input type="checkbox" id="chkObs" checked> <span class="obsdot"></span> Inundación observada (IMEPLAN)</label>
+    <p class="toy"><b>Es un juguete</b> para entender trade-offs, no una herramienta de planeación. Efectos y costos son ilustrativos.</p>
+  </div>
+  <div id="compass"></div>
+  <footer id="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · <span class="long">INEGI (Censo 2020, DENUE, Marco Geoestadístico) · CONAPO · IMEPLAN MUI 2026 · ESA WorldCover · modelo sim-drenaje (<span class="brandmini">cauce.</span> labs)</span><span class="short">INEGI · CONAPO · IMEPLAN · ESA · sim-drenaje</span> · <a href="#" id="lnkInfo">fuentes y costos</a></footer>
+
+  <div id="hand"></div>
+  <div id="title" class="hidden"><div class="t1">Alcaldía <b>por un día</b></div><div class="t2">Tienes <b>$2,000 millones</b> para que menos gente se moje los pies</div></div>
+
+  <div id="cardWrap" class="modal hidden">
+    <div class="sheet">
+      <canvas id="cardCanvas" width="1200" height="660"></canvas>
+      <div class="sheet-btns"><button id="btnDl" class="primary">Descargar imagen</button><button id="btnLink">Copiar enlace</button><button id="btnClose" class="link">Seguir jugando</button></div>
+    </div>
+  </div>
+
+  <div id="infoWrap" class="modal hidden"><div class="sheet info" id="info"></div></div>
+
+  <div id="intro" class="modal hidden">
+    <div class="sheet intro">
+      <div class="intro-gota" id="introGota"></div>
+      <h1>Alcaldía <b>por un día</b></h1>
+      <p>Hoy te toca decidir. Tienes <b>$2,000 millones de pesos</b> para obras contra inundaciones en la Zona Metropolitana de Guadalajara. Elige una obra, tócala sobre una colonia y mira cuántas personas dejan de quedar en zona inundable.</p>
+      <p class="small">El agua azul viene de una simulación exploratoria (<i>sim-drenaje</i>): miles de celdas de 20 m, tormentas de 2 a 100 años y distintas capacidades de drenaje. Las personas y escuelas vienen del Censo 2020 y DENUE.</p>
+      <p class="warn"><b>Es un juguete</b> para entender trade-offs, no una herramienta de planeación. Efectos y costos son aproximados e ilustrativos.</p>
+      <button id="btnStart" class="primary big">¡A trabajar!</button>
+    </div>
+  </div>
+
+  <div id="loading"><div class="ld-gota" id="ldGota"></div><div class="ld-txt" id="ldTxt">Inflando el mapa…</div></div>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

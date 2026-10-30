@@ -1,0 +1,27 @@
+{
+ "note": "Georeference of the sim-drenaje 20 m simulation grid. Full-resolution per-cell products live on W10 only.",
+ "width": 2397,
+ "height": 3032,
+ "cellSize": 20,
+ "originX": 645980,
+ "originY": 2312820,
+ "originNote": "NW corner of the NW cell",
+ "crs": {
+  "epsg": 6368,
+  "name": "Mexico ITRF2008 / UTM zone 13N",
+  "proj4": "+proj=utm +zone=13 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs",
+  "note": "INEGI horizontal datum ITRF08 epoch 2010.0 on GRS80. Treat as WGS84 for web maps (difference well below 1 m)."
+ },
+ "rowOrder": "north-first",
+ "byteOrder": "little-endian",
+ "fullGridOffsetIn5mTerrainGrid": {
+  "row": 2116,
+  "col": 3216
+ },
+ "w10": {
+  "root": "C:\\Users\\Felip\\contorno-compute\\labs\\sim-drenaje",
+  "domain": "domain\\*.f32|*.u8 (z, phi, n, imp, bld, act, drain, water, wc)",
+  "runs": "runs\\<id>.hmax.u16(.gz) = max depth in mm (uint16), runs\\<id>.json = stats + mass balance; tr10-c{0,20,40}-mid.hNNN.u16.gz = depth snapshots every 10 min",
+  "products": "products\\grid\\freq15-pct.u8 (255 = water/inactive), flow.f32, fhigh.f32, sens-cm-per-10mmh.f32, gap.u8 (0 none, 1 a, 2 b, 3 c), water.u8"
+ }
+}

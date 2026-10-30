@@ -1,0 +1,123 @@
+{
+  "note": "INEGI terrain web layers for /labs prototypes (terrain agent). Web Mercator XYZ tiles, 256 px. Tiles exist only where they touch the 5 m grid (AOI envelope); outside, leave them absent and fall back to AWS Terrarium. Use exaggeration 1 when displaying elevation values.",
+  "producer": "terrain",
+  "updated": "2026-10-29T23:49:54.917Z",
+  "attribution": "Relieve © INEGI (Modelos Digitales de Elevación 5 m, MDT/MDS)",
+  "bounds": [
+    -103.75629,
+    20.243255,
+    -103.04029,
+    21.006726
+  ],
+  "aoiBbox": [
+    -103.75,
+    20.25,
+    -103.05,
+    21
+  ],
+  "layers": [
+    {
+      "id": "dtm-inegi-5m",
+      "label": "Relieve (MDT INEGI 5 m, terreno desnudo)",
+      "kind": "terrain",
+      "type": "raster-dem",
+      "encoding": "terrarium",
+      "url": "/labs/shared/terrain/dtm/{z}/{x}/{y}.png",
+      "tileSize": 256,
+      "minzoom": 8,
+      "maxzoom": 15,
+      "bounds": [
+        -103.75629,
+        20.243255,
+        -103.04029,
+        21.006726
+      ],
+      "resolution_m": 5,
+      "attribution": "INEGI",
+      "editions": "INEGI MDT 5 m editions 2016, 2017, 2018, 2022, 2024 (152 sheets, satellite stereo photogrammetry; imagery 2014-2022)",
+      "verticalDatum": "Orthometric metres; NAVD88 (2016-2018 eds) and GGM10 (2022-2024 eds) sheets harmonized by per-sheet constant offsets (GGM10 sheets +0.40 m mean). Effectively the NAVD88-based majority.",
+      "encodingNotes": "Same as AWS Terrarium: elevation = R*256 + G + B/256 - 32768, quantized to 1/64 m. Drop-in for MapLibre raster-dem (encoding 'terrarium').",
+      "coverage": "87.7% of the grid is INEGI; NW/NE corners north of ~20.87-20.92 N and a SW corner block are AWS Terrarium shifted onto INEGI (all outside the urban bbox). Pixels outside the grid envelope in edge tiles are AWS Terrarium.",
+      "notes": "Bare earth: buildings and trees removed by INEGI; bridges/overpasses removed. Shows faceted TIN artefacts in flat urban areas at z15."
+    },
+    {
+      "id": "hillshade-inegi-5m",
+      "label": "Sombreado del relieve (MDT INEGI 5 m)",
+      "kind": "terrain",
+      "type": "raster-tiles",
+      "url": "/labs/shared/terrain/hillshade/{z}/{x}/{y}.png",
+      "tileSize": 256,
+      "minzoom": 8,
+      "maxzoom": 15,
+      "bounds": [
+        -103.75629,
+        20.243255,
+        -103.04029,
+        21.006726
+      ],
+      "resolution_m": 5,
+      "attribution": "INEGI",
+      "encoding": "8-bit greyscale PNG (opaque); azimuth 315, altitude 45, true metres (no vertical exaggeration). Use raster-opacity ~0.3-0.5 over a basemap.",
+      "editions": "as dtm-inegi-5m"
+    },
+    {
+      "id": "ndsm-inegi-5m",
+      "label": "Altura sobre el terreno (MDS−MDT INEGI, incluye árboles)",
+      "kind": "terrain",
+      "type": "raster-tiles",
+      "url": "/labs/shared/terrain/ndsm/{z}/{x}/{y}.png",
+      "tileSize": 256,
+      "minzoom": 8,
+      "maxzoom": 15,
+      "bounds": [
+        -103.75629,
+        20.243255,
+        -103.04029,
+        21.006726
+      ],
+      "resolution_m": 5,
+      "attribution": "INEGI",
+      "encoding": "Palette RGBA PNG; transparent where DSM-DTM < 1 m or not INEGI. Colour ramp (m, colour, alpha): 1 #fde9a8 .16, 3 #f8b14a .39, 6 #f08228 .63, 10 #e8590c .78, 25 #b0174f .90, 60+ #5c0a6b .96, linear between stops. Empty tiles are written as fully transparent PNGs (no 404s inside the tile set).",
+      "legend": [
+        [
+          1,
+          "#fde9a8",
+          0.16
+        ],
+        [
+          3,
+          "#f8b14a",
+          0.39
+        ],
+        [
+          6,
+          "#f08228",
+          0.63
+        ],
+        [
+          10,
+          "#e8590c",
+          0.78
+        ],
+        [
+          25,
+          "#b0174f",
+          0.9
+        ],
+        [
+          60,
+          "#5c0a6b",
+          0.96
+        ]
+      ],
+      "editions": "INEGI MDS + MDT 5 m, same sheets/editions as the DTM",
+      "notes": "Includes trees, bridges and photogrammetric noise; not measured building heights. Lower zooms show 2x2-averaged heights."
+    }
+  ],
+  "related": {
+    "buildings": "/labs/shared/infra/buildings.json",
+    "checkPage": "/labs/terrain-check/",
+    "simulationGrid": "W10 C:\\Users\\Felip\\contorno-compute\\labs\\terrain\\out\\grid-5m.json (copy: /srv/contorno/data/guadalajara-flood-lab/work/terrain/grid-5m.json)",
+    "showcase1p5m": "W10 C:\\Users\\Felip\\contorno-compute\\labs\\terrain\\out\\grid-1p5m.json"
+  }
+}

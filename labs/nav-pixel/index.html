@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>cauce. · Misión: llegar seco — navegación 16-bit</title>
+<meta name="description" content="Prototipo de navegación que evita zonas inundables en Guadalajara, con estética de videojuego de 16 bits. Datos: OSM, OpenFreeMap, IMEPLAN MUI 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23262b44'/%3E%3Crect x='1' y='3' width='6' height='3' fill='%23e43b44'/%3E%3Crect x='2' y='2' width='4' height='2' fill='%23e43b44'/%3E%3Crect x='3' y='2' width='2' height='1' fill='%232ce8f5'/%3E%3Crect x='1' y='6' width='2' height='1' fill='%23181425'/%3E%3Crect x='5' y='6' width='2' height='1' fill='%23181425'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+</head>
+<body>
+<div id="map" aria-label="Mapa de navegación"></div>
+
+<header id="brand" class="rpg">
+  <div class="brand-mark">cauce<span>.</span></div>
+  <div class="brand-sub">NAVEGACIÓN 16-BIT</div>
+  <div class="brand-mode" id="brand-mode">Rutas que esquivan el agua</div>
+</header>
+
+<div id="maneuver" class="rpg hidden" aria-live="polite">
+  <canvas id="maneuver-arrow" width="12" height="12"></canvas>
+  <div class="maneuver-text"><b id="maneuver-dist">—</b><span id="maneuver-label">—</span></div>
+</div>
+
+<div id="banner" class="hidden"></div>
+
+<aside id="quest" class="rpg parchment" aria-label="Registro de misión">
+  <div class="quest-head"><canvas id="scroll-icon" width="11" height="9"></canvas><span>REGISTRO DE MISIÓN</span>
+    <button id="quest-close" class="px-btn small only-phone" aria-label="Cerrar registro">✕</button></div>
+  <div class="quest-title"><small id="quest-num">MISIÓN 01</small><b id="quest-name">Llegar seco al aeropuerto</b><span id="quest-route">Glorieta Minerva → Aeropuerto GDL</span></div>
+  <ul id="objectives"></ul>
+  <div class="section-label">COMPARA RUTAS</div>
+  <div id="compare"></div>
+  <div class="section-label">CLIMA · CAPAS DE PELIGRO</div>
+  <div id="scenarios" role="group" aria-label="Escenario de lluvia"></div>
+  <div id="legend"></div>
+  <div class="controls no-demo">
+    <button id="play" class="px-btn primary">▶ JUGAR MISIÓN</button>
+    <button id="pick-b" class="px-btn">✎ DESTINO</button>
+    <button id="pick-a" class="px-btn">✎ INICIO</button>
+    <button id="reset" class="px-btn" title="Volver a la misión 01">⟲</button>
+  </div>
+  <p id="router-note" class="note"></p>
+  <p class="note honesty">Los sitios y zonas son el <b>inventario histórico</b> del IMEPLAN (MUI 2026): dónde se ha inundado, no un pronóstico ni un reporte en vivo. Las capas modeladas, cuando aparezcan, se ven en morado.</p>
+</aside>
+<button id="quest-open" class="px-btn only-phone no-demo" aria-label="Abrir registro de misión">📜 MISIÓN</button>
+
+<div id="minimap-box" class="rpg">
+  <div class="mini-label">MAPA</div>
+  <canvas id="minimap" width="88" height="88"></canvas>
+</div>
+
+<div id="stats" class="rpg">
+  <div><small>RESTAN</small><b id="st-km">—</b></div>
+  <div><small>TIEMPO</small><b id="st-min">—</b></div>
+  <div><small>EVITADAS</small><b id="st-av">0</b></div>
+  <div class="speed"><small>RELOJ</small><b id="st-x">x1</b></div>
+</div>
+
+<div id="dialog" class="rpg hidden" aria-live="polite">
+  <div class="portrait"><canvas id="portrait" width="20" height="20"></canvas><span>AXO</span></div>
+  <div class="dialog-body">
+    <div id="dialog-title"></div>
+    <div id="dialog-text"></div>
+    <div id="dialog-src"></div>
+  </div>
+  <div class="dialog-next">▼</div>
+</div>
+
+<div id="card" class="rpg hidden"></div>
+<div id="loading" class="rpg"><span id="loading-text">CARGANDO MUNDO…</span><div class="bar"><i id="loading-bar"></i></div></div>
+<div id="hint" class="rpg hidden"></div>
+
+<footer id="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · <a href="https://openfreemap.org/" target="_blank" rel="noreferrer">OpenFreeMap</a> / OpenMapTiles · Relieve: <span id="dem-credit">AWS Terrain Tiles (Mapzen)</span> · Inundaciones: <a href="https://mui.imeplan.mx/" target="_blank" rel="noreferrer">IMEPLAN MUI 2026</a> · Rutas: <span id="route-credit">OSRM</span> · Paleta ENDESGA 32 · Fuentes Silkscreen / Pixelify Sans (OFL)</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

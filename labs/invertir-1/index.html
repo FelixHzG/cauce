@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dónde invertir · cauce.</title>
+<meta name="description" content="Atlas editorial exploratorio: qué AGEB urbanos de la Zona Metropolitana de Guadalajara combinan más peligro de inundación, exposición y vulnerabilidad. No es un índice oficial.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f4f0e8'/%3E%3Crect x='6' y='16' width='5' height='10' fill='%2398cfdc'/%3E%3Crect x='13.5' y='8' width='5' height='18' fill='%231f2a5e'/%3E%3Crect x='21' y='12' width='5' height='14' fill='%23d63f66'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app" class="booting">
+  <div id="map" aria-label="Mapa 3D de AGEB urbanos"></div>
+  <div id="labels" aria-hidden="true"></div>
+
+  <header id="mast">
+    <a class="brand" href="/labs/" title="cauce. labs"><span class="mark">cauce<i>.</i></span><span class="kicker">Dónde invertir</span></a>
+    <nav id="munis" aria-label="Filtrar por municipio"></nav>
+    <button id="btn-method" class="ghost" type="button">Método y fuentes</button>
+  </header>
+
+  <aside id="left" class="panel">
+    <div class="intro">
+      <p class="eyebrow">Atlas de prioridades · ZMG · exploratorio</p>
+      <h1>Dónde se cruzan el <em class="w">agua</em> y la <em class="v">necesidad</em></h1>
+      <p class="dek">Cada AGEB urbano se eleva según cuántas personas viven donde ya se ha inundado, y se colorea por <b class="w">peligro</b> × <b class="v">vulnerabilidad</b>. Mueve los pesos: el ranking cambia contigo.</p>
+    </div>
+    <div class="list-head">
+      <h2><span id="list-title">Las 25 zonas más urgentes</span></h2>
+      <p class="sub"><span id="list-scope">Toda la ZMG</span> · <span id="list-count">—</span> AGEB con puntaje <button id="btn-csv" class="link" type="button">CSV</button></p>
+      <div class="list-legend"><span class="sw w"></span>peligro <span class="sw e"></span>exposición <span class="sw v"></span>vulnerabilidad <span class="hint">· percentil por factor</span></div>
+    </div>
+    <ol id="rank" class="rank"></ol>
+  </aside>
+
+  <aside id="right" class="panel">
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="why" class="on" type="button">¿Por qué aquí?</button>
+      <button role="tab" data-tab="weights" type="button">Pesos y fórmula</button>
+    </div>
+    <section id="why" class="tabpane on"></section>
+    <section id="weights" class="tabpane"></section>
+  </aside>
+
+  <div id="mapui">
+    <div id="legend" class="card"></div>
+    <div id="heightmode" class="seg card" role="radiogroup" aria-label="Altura de las torres"></div>
+    <div id="datastatus" class="card"></div>
+    <div id="caption" aria-live="polite"></div>
+    <div id="tip" class="card" hidden></div>
+  </div>
+
+  <footer id="attrib">
+    <span class="honest">Índice exploratorio de <b>cauce.</b> — no es oficial ni una recomendación de inversión.</span>
+    <span class="src-short">© INEGI · CONAPO · IMEPLAN · ESA · OpenStreetMap · OpenFreeMap · cauce. (exploratorio)</span><span class="src">Datos: INEGI (Censo 2020, Marco Geoestadístico, DENUE, MDT 5 m) · CONAPO IMU 2020 · IMEPLAN MUI 2026 · ESA WorldCover 2021 · © OpenStreetMap · OpenFreeMap · modelos cauce. (exploratorios)</span>
+  </footer>
+
+  <div id="sheet-handle" aria-hidden="true"></div>
+  <nav id="phonetabs" aria-label="Secciones">
+    <button data-ptab="rank" class="on" type="button">Ranking</button>
+    <button data-ptab="why" type="button">¿Por qué?</button>
+    <button data-ptab="weights" type="button">Pesos</button>
+  </nav>
+
+  <div id="method" class="drawer" hidden>
+    <div class="drawer-inner"><button class="close" type="button" aria-label="Cerrar">×</button><div id="method-body"></div></div>
+  </div>
+
+  <div id="boot"><div class="boot-inner"><span class="mark">cauce<i>.</i></span><p>Cargando 2 068 AGEB…</p></div></div>
+</div>
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL 1.0",
+  "attributionUrl": "https://www.openstreetmap.org/copyright",
+  "downloadedAt": "2026-10-29T00:21:14.289Z",
+  "osmTimestamp": "2026-10-29T00:19:49Z",
+  "query": "[out:json][timeout:70];way[waterway~\"^(river|stream|drain|canal|ditch)$\"](20.40,-103.65,20.90,-103.15);out tags geom;",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "bbox": [
+    -103.65,
+    20.4,
+    -103.15,
+    20.9
+  ],
+  "rawSha256": "6c892a7475363fa91573df986658c120725b20621371b703fa71a4d394fd216d",
+  "counts": {
+    "river": 247,
+    "stream": 1240,
+    "canal": 388,
+    "drain": 349,
+    "ditch": 51
+  },
+  "note": "Mapped waterways and open drains/ditches. Not a complete storm-sewer network or a hydrological simulation. OSM attributes preserved."
+}

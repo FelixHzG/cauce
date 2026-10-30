@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cauce. · prueba del ruteador</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<style>
+  :root { --ink:#13212b; --muted:#5d6b75; --bg:#f6f4ef; --card:#fffdf8; --line:#e2ddd2; --safe:#0f8a6c; --fast:#7a8792; --hz:#2f6fde; --warn:#d9480f; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #map { position:absolute; inset:0 380px 0 0; }
+  #panel { position:absolute; top:0; right:0; bottom:0; width:380px; overflow:auto; background:var(--card); border-left:1px solid var(--line); padding:16px 18px 24px; }
+  h1 { font-size:22px; margin:0 0 2px; letter-spacing:-.02em; } h1 b { color:var(--safe); }
+  .sub { color:var(--muted); font-size:12px; margin-bottom:12px; }
+  .hint { background:#eef6f3; border:1px solid #cfe7df; border-radius:8px; padding:8px 10px; font-size:13px; margin-bottom:12px; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin:10px 0 12px; }
+  .card { border:1px solid var(--line); border-radius:10px; padding:8px 10px; background:#fff; }
+  .card h3 { margin:0 0 4px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .sw { width:18px; height:4px; border-radius:2px; display:inline-block; }
+  .big { font-size:20px; font-weight:650; } .small { font-size:12px; color:var(--muted); }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:16px 0 6px; }
+  ul { margin:0; padding-left:0; list-style:none; } li { padding:5px 0; border-bottom:1px dashed var(--line); font-size:13px; }
+  li .d { color:var(--muted); font-variant-numeric: tabular-nums; float:right; margin-left:8px; }
+  .tag { display:inline-block; font-size:11px; padding:0 6px; border-radius:9px; background:#eef2fb; color:var(--hz); margin-right:4px; }
+  .tag.hotspot { background:#fff1e6; color:var(--warn); } .tag.water { background:#e6f4fb; color:#1b6f93; }
+  label.lay { display:flex; gap:6px; align-items:center; font-size:13px; padding:2px 0; }
+  .warn { color:var(--warn); font-size:12px; }
+  #status { font-size:12px; color:var(--muted); margin-top:4px; min-height:16px; }
+  .brand { position:absolute; left:12px; top:10px; background:rgba(255,253,248,.92); border:1px solid var(--line); border-radius:8px; padding:4px 10px; font-weight:700; font-size:18px; letter-spacing:-.02em; }
+  .brand span { font-weight:400; font-size:12px; color:var(--muted); margin-left:6px; }
+  .maplibregl-ctrl-attrib { font-size:11px; }
+  @media (max-width: 720px) {
+    #map { inset:0 0 46% 0; } #panel { top:auto; left:0; width:auto; height:46%; border-left:0; border-top:1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="brand">cauce.<span>ruteo con riesgo de inundación · prueba</span></div>
+<aside id="panel">
+  <h1>Ruta <b>segura</b> vs normal</h1>
+  <div class="sub" id="engine">cargando ruteador…</div>
+  <div class="hint">Haz clic en el mapa para fijar <b>A</b> y luego <b>B</b>. La ruta normal (gris) minimiza tiempo; la segura (verde) penaliza las capas de riesgo marcadas abajo.</div>
+  <div id="layers"></div>
+  <div class="grid">
+    <div class="card"><h3><span class="sw" style="background:var(--fast)"></span>Normal</h3><div class="big" id="nT">–</div><div class="small" id="nD">–</div></div>
+    <div class="card"><h3><span class="sw" style="background:var(--safe)"></span>Segura</h3><div class="big" id="sT">–</div><div class="small" id="sD">–</div></div>
+  </div>
+  <div id="status"></div>
+  <h2>Riesgos evitados <span id="avN"></span></h2>
+  <ul id="avoided"><li class="small">—</li></ul>
+  <h2>Indicaciones (ruta segura)</h2>
+  <ul id="steps"><li class="small">—</li></ul>
+  <h2>Cerca de la ruta segura (≤ 50 m)</h2>
+  <ul id="exposure"><li class="small">—</li></ul>
+  <p class="small" style="margin-top:16px">Red vial y capas OSM © colaboradores de OpenStreetMap (ODbL) · mapa base OpenFreeMap · sitios de inundación IMEPLAN MUI 2026. Ruteo exploratorio: no es un pronóstico ni una instrucción oficial de tránsito.</p>
+</aside>
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="module">
+const qs = new URLSearchParams(location.search);
+const mod = await import(qs.get('engine') === 'next' ? '/labs/shared/router/router.next.js' : '/labs/shared/router/router.js');
+const $ = id => document.getElementById(id);
+const fmtT = s => s >= 3600 ? `${Math.floor(s / 3600)} h ${Math.round(s % 3600 / 60)} min` : `${Math.round(s / 60)} min`;
+const fmtD = m => m >= 1000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m)} m`;
+const pll = s => s && s.split(',').map(Number);
+let A = pll(qs.get('a')) || [-103.3925, 20.6743], B = pll(qs.get('b')) || [-103.3111, 20.5218];
+const state = { last: null, ready: null, router: null };
+window.__routerTest = state;
+
+const map = new maplibregl.Map({ container: 'map', style: 'https://tiles.openfreemap.org/styles/positron', center: [-103.355, 20.6], zoom: 11.2, attributionControl: { compact: false, customAttribution: 'Ruteo cauce. · IMEPLAN MUI 2026' } });
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+const loaded = new Promise(r => map.on('load', r));
+const t0 = performance.now();
+const router = await mod.loadRouter();
+const info = router.info(); state.router = router;
+$('engine').textContent = `${router.engine} · ${info.graph.nodes.toLocaleString('es-MX')} nodos · ${info.graph.edges.toLocaleString('es-MX')} tramos · ${router.thread} · carga ${Math.round(performance.now() - t0)} ms (red ${info.fetch_ms} ms, índice ${info.build_ms} ms)`;
+const preloading = router.preload(); // fetch + index hazard layers in the background
+const layersList = await router.hazards();
+const kindTag = { observed: 'observado', hotspot: 'punto crítico', water: 'agua', modeled: 'modelado', 'terrain-index': 'índice' };
+const wanted = qs.get('ids') ? qs.get('ids').split(',') : (await (await fetch('/labs/shared/hazard/index.json', { cache: 'no-cache' })).json()).layers.filter(l => !(l.router && l.router.default === false)).map(l => l.id);
+$('layers').innerHTML = '<h2 style="margin-top:0">Capas de riesgo usadas</h2>' + layersList.map(l => `<label class="lay"><input type="checkbox" value="${l.id}" ${wanted.includes(l.id) ? 'checked' : ''}> <span class="tag ${l.kind}">${kindTag[l.kind] || l.kind}</span>${l.label}</label>`).join('');
+$('layers').addEventListener('change', () => { for (const i of document.querySelectorAll('#layers input')) for (const p of ['hzf-', 'hzl-']) if (map.getLayer(p + i.value)) map.setLayoutProperty(p + i.value, 'visibility', i.checked ? 'visible' : 'none'); run(); });
+const ids = () => [...document.querySelectorAll('#layers input:checked')].map(i => i.value);
+
+await loaded;
+// hazard layers for context
+const hzStyle = { 'observed-imeplan-2026': '#2f6fde', 'water-bodies': '#5bb4d9', 'underpasses': '#d9480f' };
+const hzIndex = await (await fetch('/labs/shared/hazard/index.json', { cache: 'no-cache' })).json();
+for (const l of layersList) {
+  if (!/geojson/.test(l.type || 'geojson')) continue;
+  const url = (hzIndex.layers || []).find(x => x.id === l.id)?.url; if (!url) continue;
+  map.addSource('hz-' + l.id, { type: 'geojson', data: url });
+  const c = hzStyle[l.id] || '#8a5cd1';
+  const vis = { visibility: wanted.includes(l.id) ? 'visible' : 'none' };
+  map.addLayer({ id: 'hzf-' + l.id, type: 'fill', source: 'hz-' + l.id, layout: vis, filter: ['==', ['geometry-type'], 'Polygon'], paint: { 'fill-color': c, 'fill-opacity': 0.28 } });
+  map.addLayer({ id: 'hzl-' + l.id, type: 'line', source: 'hz-' + l.id, layout: vis, paint: { 'line-color': c, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1.5, 15, 5], 'line-opacity': 0.85 } });
+}
+map.addSource('rN', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+map.addSource('rS', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+map.addSource('av', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+map.addSource('ab', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+map.addLayer({ id: 'rN', type: 'line', source: 'rN', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#7a8792', 'line-width': 5, 'line-dasharray': [1.2, 1.4], 'line-opacity': 0.9 } });
+map.addLayer({ id: 'rS-casing', type: 'line', source: 'rS', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 9 } });
+map.addLayer({ id: 'rS', type: 'line', source: 'rS', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#0f8a6c', 'line-width': 5.5 } });
+map.addLayer({ id: 'av', type: 'circle', source: 'av', paint: { 'circle-radius': 7, 'circle-color': '#d9480f', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
+map.addLayer({ id: 'ab', type: 'circle', source: 'ab', paint: { 'circle-radius': 11, 'circle-color': '#13212b', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2.5 } });
+map.addLayer({ id: 'ab-t', type: 'symbol', source: 'ab', layout: { 'text-field': ['get', 't'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-allow-overlap': true }, paint: { 'text-color': '#fff' } });
+
+let clickState = 0;
+map.on('click', e => { const p = [+e.lngLat.lng.toFixed(5), +e.lngLat.lat.toFixed(5)]; if (clickState === 0) { A = p; B = null; clickState = 1; drawAB(); $('status').textContent = 'Ahora haz clic en el destino (B).'; } else { B = p; clickState = 0; run(); } });
+function drawAB() { map.getSource('ab').setData({ type: 'FeatureCollection', features: [A && { type: 'Feature', properties: { t: 'A' }, geometry: { type: 'Point', coordinates: A } }, B && { type: 'Feature', properties: { t: 'B' }, geometry: { type: 'Point', coordinates: B } }].filter(Boolean) }); }
+const line = c => ({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: c } }] });
+async function run() {
+  if (!A || !B) return; drawAB(); $('status').textContent = 'Calculando…';
+  const t = performance.now();
+  try {
+    const r = await router.route(A, B, { hazardIds: ids(), compare: true, mode: 'safe' });
+    const ms = Math.round(performance.now() - t); state.last = r;
+    map.getSource('rN').setData(line(r.normal.coordinates)); map.getSource('rS').setData(line(r.safe.coordinates));
+    map.getSource('av').setData({ type: 'FeatureCollection', features: r.avoided.filter(a => a.location).map(a => ({ type: 'Feature', properties: { label: a.label }, geometry: { type: 'Point', coordinates: a.location } })) });
+    $('nT').textContent = fmtT(r.normal.duration_s); $('nD').textContent = `${fmtD(r.normal.distance_m)} · cruza ${r.comparison.crossed_normal} riesgos`;
+    $('sT').textContent = fmtT(r.safe.duration_s); $('sD').textContent = `${fmtD(r.safe.distance_m)} · cruza ${r.comparison.crossed_safe} riesgos`;
+    $('status').innerHTML = `${r.comparison.same_route ? 'Ambas rutas coinciden.' : `La ruta segura añade ${fmtD(Math.max(0, r.comparison.extra_distance_m))} y ${Math.round(r.comparison.extra_duration_s / 60)} min.`} Cálculo: ${ms} ms.` + (r.warnings.length ? `<div class="warn">${r.warnings.join(' ')}</div>` : '');
+    $('avN').textContent = `(${r.avoided.length})`;
+    $('avoided').innerHTML = r.avoided.length ? r.avoided.map(a => `<li><span class="tag ${a.kind}">${kindTag[a.kind] || a.kind}</span>${a.label}</li>`).join('') : '<li class="small">La ruta normal no cruza ninguna capa marcada.</li>';
+    $('steps').innerHTML = r.steps.map(s => `<li>${s.instruction}<span class="d">${s.distance_m ? fmtD(s.distance_m) : ''}</span></li>`).join('');
+    $('exposure').innerHTML = r.exposure.length ? r.exposure.slice(0, 12).map(x => `<li><span class="tag ${x.kind}">${kindTag[x.kind] || x.kind}</span>${x.label}<span class="d">km ${(x.along_m / 1000).toFixed(1)} · ${Math.round(x.distance_m)} m</span></li>`).join('') : '<li class="small">Nada a menos de 50 m.</li>';
+    const b = new maplibregl.LngLatBounds(); for (const c of r.normal.coordinates) b.extend(c); for (const c of r.safe.coordinates) b.extend(c);
+    map.fitBounds(b, { padding: { top: 60, bottom: 40, left: 40, right: 40 }, duration: 0 });
+  } catch (e) { $('status').innerHTML = `<span class="warn">${e.message}</span>`; state.error = String(e.message); }
+}
+state.ready = (async () => { await run(); await new Promise(r => map.once('idle', r)); return { engine: router.engine, error: state.error || null, avoided: state.last && state.last.avoided.length, steps: state.last && state.last.steps.length, timing_ms: state.last && state.last.timing_ms }; })();
+</script>
+</body>
+</html>

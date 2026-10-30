@@ -1,0 +1,331 @@
+{
+  "note": "Registry of infrastructure/exposure layers for /labs prototypes. Producers append entries (read-modify-write); consumers load whatever is listed.",
+  "layers": [
+    {
+      "id": "buildings-overture",
+      "label": "Edificios (huellas Overture Maps: OSM + Microsoft + Google)",
+      "kind": "exposure",
+      "type": "vector",
+      "url": "/labs/shared/infra/buildings/{z}/{x}/{y}.pbf",
+      "tilejson": "/labs/shared/infra/buildings.json",
+      "sourceLayer": "buildings",
+      "minzoom": 14,
+      "maxzoom": 15,
+      "bounds": [
+        -103.75,
+        20.25,
+        -103.05,
+        21
+      ],
+      "producer": "terrain",
+      "notes": "1,802,174 footprints (Google 882k, Microsoft 858k, OSM 62k) from Overture release 2026-10-21.0. Properties s/h/f/hn/c, see buildings.json. hn = median INEGI DSM-DTM over the footprint (estimate incl. trees), not a measured height. Full-resolution attributes (one row per footprint, centroid, area, hn) on W10: C:\\Users\\Felip\\contorno-compute\\labs\\terrain\\out\\buildings-attrs.csv; 5 m raster buildings-5m.u8 in the same folder.",
+      "license": "ODbL-1.0",
+      "attribution": "© Overture Maps Foundation, © OpenStreetMap contributors, Microsoft, Google"
+    },
+    {
+      "id": "ageb-profile",
+      "label": "Perfil de AGEB urbanas: población, marginación, equipamiento, inundación observada, drenaje pluvial",
+      "category": "exposure",
+      "kind": "exposure",
+      "type": "geojson",
+      "url": "/labs/shared/infra/ageb-profile.geojson",
+      "doc": "/labs/shared/infra/ageb-profile.md",
+      "csv": "/labs/shared/infra/ageb-profile.csv",
+      "producer": "infra-data",
+      "source": "INEGI Censo 2020 + Marco Geoestadístico 2020; CONAPO IMU 2020; INEGI DENUE; INEGI INV 2020 (entorno urbano); IMEPLAN MUI 2026; OSM; ESA WorldCover 2021; Overture buildings",
+      "licence": "INEGI libre uso; CONAPO Libre Uso MX; ODbL (OSM-derived counts); CC BY 4.0 (WorldCover)",
+      "retrieved": "2026-10-29",
+      "features": 2068,
+      "notes": "One polygon per urban AGEB in the 10 AMG municipalities, 97 fields documented in ageb-profile.md: Censo 2020 population/households/age/disability, CONAPO IMU 2020, DENUE facility counts, IMEPLAN 2026 overlap (ids, % area), INEGI INV 2020 storm-inlet presence per block (inv_pct_sin_pluvial; 2,067/2,068 AGEBs), Guadalajara 2010-2022 and Zapopan 2017-2025 flood records (municipal, not comparable), SIAPA collectors (GDL only), OSM drainage, underpasses (router), WorldCover built-up, Overture building cover, and prio_exploratoria (editorial composite, weights in metadata; not an official index)."
+    },
+    {
+      "id": "exposure-facilities",
+      "label": "Escuelas, guarderías, hospitales, clínicas, consultorios y residencias (DENUE)",
+      "category": "exposure",
+      "kind": "exposure",
+      "type": "geojson",
+      "url": "/labs/shared/infra/exposure-facilities.geojson",
+      "producer": "infra-data",
+      "source": "INEGI DENUE Jalisco CSV https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip",
+      "licence": "INEGI Términos de libre uso",
+      "retrieved": "2026-10-29",
+      "features": 8340,
+      "notes": "Points filtered to the 10 AMG municipalities by SCIAN prefix: escuela 6111, guarderia 6244, hospital 622, clinica 6214, consultorio 62111, residencia_cuidado 623, emergencia = name contains bomberos/protección civil. publico true/false from the SCIAN public/private suffix."
+    },
+    {
+      "id": "osm-waterways",
+      "label": "Ríos, arroyos, canales y drenes mapeados (OSM)",
+      "category": "drainage",
+      "kind": "mapped",
+      "type": "geojson",
+      "url": "/labs/shared/infra/osm-waterways.geojson",
+      "provenance": "/labs/shared/infra/osm-waterways.provenance.json",
+      "producer": "infra-data",
+      "source": "OpenStreetMap via Overpass, bbox [-103.65,20.40,-103.15,20.90] (file placed by orchestrator 2026-10-28)",
+      "licence": "ODbL 1.0",
+      "retrieved": "2026-10-29",
+      "features": 2275,
+      "notes": "waterway=river|stream|canal|drain|ditch line segments. Open channels as mapped by volunteers; not the underground storm-sewer network."
+    },
+    {
+      "id": "osm-drainage-structures",
+      "label": "Estructuras de drenaje mapeadas: entubamientos, vasos, presas, cárcamos (OSM)",
+      "category": "drainage",
+      "kind": "mapped",
+      "type": "geojson",
+      "url": "/labs/shared/infra/osm-drainage-structures.geojson",
+      "producer": "infra-data",
+      "source": "OSM Jalisco extract (openstreetmap.fr, replication 2026-10-29T00:55Z; router agent's copy)",
+      "licence": "ODbL 1.0",
+      "retrieved": "2026-10-29",
+      "features": 910,
+      "notes": "kind: alcantarilla_o_entubamiento 781 (waterway in culvert/tunnel, lines), vaso_o_estanque 32 (landuse=basin, basin=*, water=basin or 'vaso regulador' in name), presa_o_compuerta 54, planta_tratamiento 30, carcamo_o_bombeo 9, boca_de_tormenta 4. Shows how little drainage is mapped; absence means unmapped, not absent."
+    },
+    {
+      "id": "osm-emergency",
+      "label": "Bomberos, protección civil, policía, hospitales, clínicas, albergues (OSM)",
+      "category": "exposure",
+      "kind": "mapped",
+      "type": "geojson",
+      "url": "/labs/shared/infra/osm-emergency.geojson",
+      "producer": "infra-data",
+      "source": "OSM Jalisco extract 2026-10-29",
+      "licence": "ODbL 1.0",
+      "retrieved": "2026-10-29",
+      "features": 282,
+      "notes": "Points (areas reduced to centroids). hospital 123, clinica 84, policia 33, punto_de_reunion 22, bomberos 15, proteccion_civil 3, albergue 2. Official shelter lists were not found as data."
+    },
+    {
+      "id": "osm-transit",
+      "label": "Tren Ligero, Mi Macro (BRT) y estaciones (OSM)",
+      "category": "mobility",
+      "kind": "mapped",
+      "type": "geojson",
+      "url": "/labs/shared/infra/osm-transit.geojson",
+      "producer": "infra-data",
+      "source": "OSM Jalisco extract 2026-10-29",
+      "licence": "ODbL 1.0",
+      "retrieved": "2026-10-29",
+      "features": 517,
+      "notes": "kind riel (railway light_rail/subway/rail/tram ways), carril_brt (highway=busway), ruta (route relations: Tren Ligero L1-L3, Mi Macro Calzada and Periférico, as MultiLineString with name/colour), estacion (points)."
+    },
+    {
+      "id": "osm-green",
+      "label": "Parques y áreas verdes ≥ 1,000 m² (OSM)",
+      "category": "surface",
+      "kind": "mapped",
+      "type": "geojson",
+      "url": "/labs/shared/infra/osm-green.geojson",
+      "producer": "infra-data",
+      "source": "OSM Jalisco extract 2026-10-29",
+      "licence": "ODbL 1.0",
+      "retrieved": "2026-10-29",
+      "features": 3395,
+      "notes": "leisure=park|garden|golf_course|nature_reserve, landuse=forest|grass|meadow|recreation_ground|orchard|village_green, natural=wood|scrub|grassland|wetland; simplified 3 m; area_m2 property."
+    },
+    {
+      "id": "zapopan-arroyos-a-intervenir",
+      "label": "Arroyos a intervenir, con riesgo y prioridad (Zapopan)",
+      "category": "drainage",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/zapopan-arroyos-a-intervenir.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Zapopan, ArcGIS Online (geomaticazapopan) Arroyos_a_intervenir_CGSM",
+      "licence": "Public web service, no licence stated; cite Gobierno de Zapopan",
+      "retrieved": "2026-10-29",
+      "features": 114,
+      "notes": "Stream reaches the municipal services coordination marked for intervention; riesgo/prioridad Alto/Medio/Bajo; cuenca name. Edited Dec 2024. Zapopan only."
+    },
+    {
+      "id": "zapopan-cuencas-urbanas",
+      "label": "Cuencas urbanas de Zapopan",
+      "category": "drainage",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/zapopan-cuencas-urbanas.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Zapopan, ArcGIS Online Cuencas_Urbanas_Zapopan",
+      "licence": "Public web service, no licence stated",
+      "retrieved": "2026-10-29",
+      "features": 18,
+      "notes": "Municipal urban catchment polygons (Atemajac/Colomos, La Venta, Río Blanco, etc.)."
+    },
+    {
+      "id": "pluvial-works",
+      "label": "Obras pluviales 2023–2026 y vasos reguladores citados (ubicación aproximada)",
+      "category": "drainage",
+      "kind": "compiled",
+      "type": "geojson",
+      "url": "/labs/shared/infra/pluvial-works.geojson",
+      "producer": "infra-data",
+      "source": "Press releases and news 2023-2026 (SIAPA, Gobierno de Jalisco, municipalities); geocoded by name via Nominatim/OSM",
+      "licence": "Facts compiled from cited sources; geocodes derived from OSM (ODbL)",
+      "retrieved": "2026-10-29",
+      "features": 31,
+      "notes": "25 works + 15 named existing vasos compiled, 31 with an approximate point. No official inventory with coordinates exists publicly. Each feature cites its source URL."
+    },
+    {
+      "id": "rain-idf",
+      "label": "Curva IDF y valores de diseño de lluvia para Guadalajara",
+      "category": "climate",
+      "kind": "reference",
+      "type": "json",
+      "url": "/labs/shared/infra/rain-idf.json",
+      "producer": "infra-data",
+      "source": "Campos-Aranda 2010 (Ingeniería Investigación y Tecnología XI(2)) station 14066; Atlas Metropolitano de Riesgos 2021; SMN normales 14065/14066/14169; UdG; Ley/Reglamento art. 86 Bis",
+      "licence": "Values cited from publications",
+      "retrieved": "2026-10-29",
+      "features": 1,
+      "notes": "One regional Chen-formula IDF (5-100 yr, 5 min-24 h) evaluated to a table (curves[0].table: T_yr,d_min,i_mm_h,depth_mm). Order-of-magnitude, not a local pluviograph fit. design_values: drainage designed for ~50 mm/h, overwhelmed above ~30 mm/h; records 114.8 mm/day (1983) and 66 mm in 30 min (1997)."
+    },
+    {
+      "id": "colonias-imc2020",
+      "label": "Colonias con índice de marginación 2020 (CONAPO)",
+      "category": "exposure",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/colonias-imc2020.geojson",
+      "producer": "infra-data",
+      "source": "CONAPO Índice de marginación por colonia 2020 (imc2020_shp.zip)",
+      "licence": "Datos abiertos Gobierno de México (Libre Uso MX)",
+      "retrieved": "2026-10-29",
+      "features": 1991,
+      "notes": "Colonia polygons with names, postcode, CONAPO population estimate, IM/IMN/GM 2020 (higher IMN = less marginalized) and the 11 component indicators (field meanings in metadata.fields). Useful for Spanish place names in UI and for colonia-level choropleths. Simplified 3 m."
+    },
+    {
+      "id": "gdl-colectores-siapa",
+      "label": "Colectores SIAPA en Guadalajara (Atlas de Riesgos municipal)",
+      "category": "drainage",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/gdl-colectores-siapa.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Guadalajara, Atlas de Riesgos, public WMS atlasriesgos:colector (fuente SIAPA)",
+      "licence": "Municipal open geodata, no explicit licence; cite Gobierno de Guadalajara / SIAPA",
+      "retrieved": "2026-10-29",
+      "features": 280,
+      "notes": "The only public geometry of SIAPA collectors found, Guadalajara municipality only. clase colector mayor / year or diameter labels (COL. 1961-1991, COL. 1.07-1.90 m?). Largely combined system; no capacity, depth or condition. Absence elsewhere = not published."
+    },
+    {
+      "id": "gdl-canales-pluviales",
+      "label": "Canales pluviales de Guadalajara (nombre, cuenca, azolve)",
+      "category": "drainage",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/gdl-canales-pluviales.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Guadalajara, Atlas de Riesgos (atlasriesgos:canal_pluvial; Obras Públicas 2011)",
+      "licence": "Municipal open geodata, cite source",
+      "retrieved": "2026-10-29",
+      "features": 24,
+      "notes": "Named storm canals (Patria-Colomos, Canal de Sur, Normalistas, Ciénega de Mata, ...), cuenca, published length and desilting volume."
+    },
+    {
+      "id": "gdl-vasos-reguladores",
+      "label": "Vasos reguladores (Atlas de Riesgos de Guadalajara)",
+      "category": "drainage",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/gdl-vasos-reguladores.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Guadalajara, Atlas de Riesgos (atlasriesgos:vaso_regulador)",
+      "licence": "Municipal open geodata, cite source",
+      "retrieved": "2026-10-29",
+      "features": 13,
+      "notes": "Polygons with names only (El Deán, Zoquipan, Gómez Farías, 5 de Mayo, Balcones del 4, Villas Miravalle, Ciénega de Mata, Presa de Osorio, ...). No capacities."
+    },
+    {
+      "id": "gdl-bases-bomberos",
+      "label": "Bases de bomberos de Guadalajara (2022)",
+      "category": "exposure",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/gdl-bases-bomberos.geojson",
+      "producer": "infra-data",
+      "source": "Gobierno de Guadalajara, Atlas de Riesgos (bases_de_bomberos_2022)",
+      "licence": "Municipal open geodata, cite source",
+      "retrieved": "2026-10-29",
+      "features": 12,
+      "notes": "Municipal fire stations with address and status."
+    },
+    {
+      "id": "worldcover-urban",
+      "label": "Cobertura del suelo 10 m (ESA WorldCover 2021): construido, árboles, pasto, cultivo, agua",
+      "category": "surface",
+      "kind": "satellite",
+      "type": "image",
+      "url": "/labs/shared/infra/worldcover-urban.png",
+      "coordinates": [
+        [
+          -103.55,
+          20.85
+        ],
+        [
+          -103.18,
+          20.85
+        ],
+        [
+          -103.18,
+          20.43
+        ],
+        [
+          -103.55,
+          20.43
+        ]
+      ],
+      "producer": "infra-data",
+      "source": "ESA WorldCover 10 m 2021 v200, tile N18W105 (https://esa-worldcover.org)",
+      "licence": "CC BY 4.0 — © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021)",
+      "retrieved": "2026-10-29",
+      "features": null,
+      "notes": "MapLibre image source: use 'coordinates' as given (rows already resampled to Web Mercator, 4440x5040 px). Palette RGBA: built-up [205,70,70], tree [34,120,60], shrub [140,160,70], grass [170,205,110], crop [230,210,110], bare [190,170,140], water [40,110,210], wetland [80,170,170]; transparent elsewhere. Full-res AOI class grid for simulations on W10: C:\\Users\\Felip\\contorno-compute\\labs\\infra-data\\out\\worldcover-aoi-10m.u8 (+ .json header, 8400x9000 uint8, EPSG:4326)."
+    },
+    {
+      "id": "worldcover-builtup-urban",
+      "label": "Superficie construida 10 m (máscara, ESA WorldCover 2021)",
+      "category": "surface",
+      "kind": "satellite",
+      "type": "image",
+      "url": "/labs/shared/infra/worldcover-builtup-urban.png",
+      "coordinates": [
+        [
+          -103.55,
+          20.85
+        ],
+        [
+          -103.18,
+          20.85
+        ],
+        [
+          -103.18,
+          20.43
+        ],
+        [
+          -103.55,
+          20.43
+        ]
+      ],
+      "producer": "infra-data",
+      "source": "ESA WorldCover 10 m 2021 v200",
+      "licence": "CC BY 4.0",
+      "retrieved": "2026-10-29",
+      "features": null,
+      "notes": "White pixels with alpha 255 where class = Built-up (50); tint with raster-color or a raster-opacity layer. Proxy for impervious cover (not a measured imperviousness)."
+    },
+    {
+      "id": "smn-estaciones",
+      "label": "Estaciones climatológicas SMN (normales 1991–2020, lluvia máxima diaria)",
+      "category": "climate",
+      "kind": "official",
+      "type": "geojson",
+      "url": "/labs/shared/infra/smn-estaciones.geojson",
+      "producer": "infra-data",
+      "source": "CONAGUA/SMN Normales climatológicas 1991-2020, nor9120_<clave>.txt (scan of Jalisco ids 14001-14420)",
+      "licence": "Datos abiertos Gobierno de México (Libre Uso MX)",
+      "retrieved": "2026-10-29",
+      "features": 14,
+      "notes": "14 daily (manual) climatological stations inside the AOI with annual/monthly normal precipitation and the record 24 h rainfall + date (e.g. 14066 Guadalajara DGE 103.5 mm 2015-07-19; 14351 Tala 133 mm 2004-08-20). Not real-time, not sub-hourly. SIAPA's and UdG's automatic gauge networks are not published as data."
+    }
+  ]
+}

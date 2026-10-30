@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>cauce. · navegación mochi</title>
+<meta name="description" content="Prototipo de navegación de cauce.: rutas en auto por Guadalajara que esquivan sitios inundables registrados por IMEPLAN, con alertas tipo Waze y una copiloto gotita.">
+<meta name="theme-color" content="#ffeef5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 6C32 6 10 32 10 44a22 22 0 0 0 44 0C54 32 32 6 32 6z' fill='%237cc6ff' stroke='%235b3a63' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.1.0/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.1.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/800.css">
+<link rel="stylesheet" href="./style.css">
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.169.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="map" aria-label="Mapa de navegación"></div>
+<div id="tint" aria-hidden="true"></div>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div id="clouds" aria-hidden="true">
+  <svg viewBox="0 0 1600 150" preserveAspectRatio="none"><g fill="#fff" stroke="#c9b4e6" stroke-width="3">
+    <path d="M-20 60c40-50 110-40 130 0 30-30 90-25 100 15 40-10 70 20 55 45H-20z"/>
+    <path d="M330 30c50-40 120-25 135 15 40-25 100-5 100 40 40 0 60 30 40 45H290c-40-10-35-60 40-100z"/>
+    <path d="M760 45c40-45 120-35 140 10 35-20 90 0 90 40 30 5 40 35 20 45H700c-30-20-10-75 60-95z"/>
+    <path d="M1140 25c55-35 125-15 135 30 45-20 105 5 100 50 35 5 50 30 30 45H1090c-35-25-15-110 50-125z"/>
+    <path d="M1480 50c40-40 110-30 140 20v80h-190c-20-40 10-90 50-100z"/></g></svg>
+</div>
+
+<header id="brand">
+  <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 12c9-10 17 10 26 0M4 21c9-10 17 10 26 0M4 30c9-10 17 10 26 0"/></svg>
+  <span class="word">cauce<b>.</b></span>
+  <span class="pill">navegación <i>✿</i> mochi</span>
+</header>
+
+<section id="maneuver" class="card" aria-live="polite">
+  <div class="mv-ico" id="mv-ico"></div>
+  <div class="mv-txt"><b id="mv-dist">—</b><span id="mv-text">Preparando ruta…</span><small id="mv-street"></small></div>
+</section>
+
+<aside id="panel" class="card" aria-label="Tu viaje">
+  <div class="p-head"><h2>Tu viaje</h2><span id="engine-pill" class="tiny-pill">router</span></div>
+  <div class="trip">
+    <div><i class="dot a"></i><span id="from-name">Glorieta Minerva</span></div>
+    <div><i class="dot b"></i><span id="to-name">Aeropuerto GDL</span></div>
+  </div>
+  <div class="label">¿Llueve?</div>
+  <div id="scenario" class="chips" role="group" aria-label="Escenario de lluvia"></div>
+  <div class="compare">
+    <button class="route-row safe" id="row-safe"><span class="swatch"></span><span class="rr-name">Ruta segura<small id="safe-sub">—</small></span><span class="rr-time" id="safe-time">—</span></button>
+    <button class="route-row normal" id="row-normal"><span class="swatch"></span><span class="rr-name">Ruta normal<small id="normal-sub">—</small></span><span class="rr-time" id="normal-time">—</span></button>
+  </div>
+  <div class="label">Lo que esquivamos</div>
+  <ul id="avoided" class="avoided"><li class="muted">—</li></ul>
+  <div class="dev actions">
+    <button id="btn-drive" class="btn primary">▶ Conducir</button>
+    <button id="btn-pick" class="btn">Cambiar ruta</button>
+  </div>
+  <details class="legend"><summary>Qué ves en el mapa</summary>
+    <div><span class="lg lg-site"></span>Sitio inundable <em>observado</em> · IMEPLAN MUI 2026</div>
+    <div><span class="lg lg-crit"></span>Zona crítica <em>observada</em> · IMEPLAN</div>
+    <div><span class="lg lg-water"></span>Ríos y canales <em>cartografiados</em> · OSM</div>
+    <div><span class="lg lg-model"></span>Agua <em>modelada</em> · exploratorio, aparece cuando exista</div>
+    <p>Los registros son históricos: dónde se ha inundado antes, no dónde hay agua ahora. No es pronóstico.</p>
+  </details>
+</aside>
+
+<div id="mascot">
+  <div class="gotita-wrap" id="gotita"></div>
+  <div id="bubble" class="bubble">
+    <div class="b-tag" id="b-tag"></div>
+    <p id="b-text"></p>
+    <small id="b-src"></small>
+  </div>
+</div>
+
+<div id="tripbar" class="card">
+  <div><b id="tb-eta">--:--</b><small>llegada</small></div>
+  <div><b id="tb-min">—</b><small>restan</small></div>
+  <div><b id="tb-km">—</b><small>distancia</small></div>
+  <span id="tb-ff" class="ff">cámara rápida</span>
+</div>
+
+<div id="toast"><span class="spin"></span><span id="toast-text">¡Recalculando!</span></div>
+
+<div id="summary" class="card">
+  <div class="sm-stk" id="sm-stk"></div>
+  <h3 id="sm-title">¡Llegamos secos!</h3>
+  <p id="sm-text"></p>
+</div>
+
+<div id="pick-hint" class="card">Toca el mapa para elegir el <b id="pick-what">origen</b></div>
+<div id="popup-root"></div>
+
+<footer id="credits">
+  <span class="honest">Registros históricos, no pronóstico · tiempo acelerado</span>
+  <span id="credit-short">IMEPLAN MUI 2026 · © OpenStreetMap · OpenFreeMap · OpenMapTiles · AWS Terrain Tiles · <span id="credit-router-s">router</span></span>
+  <span id="credit-text">Inundaciones: <a href="https://mui.imeplan.mx/" target="_blank" rel="noreferrer">IMEPLAN MUI 2026</a> · Mapa: <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · Relieve: AWS Terrain Tiles · Ruta: <span id="credit-router">OSRM (OSM)</span></span>
+</footer>
+<div id="boot"><div class="boot-card"><div id="boot-g"></div><p>Gotita está preparando el mapa…</p></div></div>
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>

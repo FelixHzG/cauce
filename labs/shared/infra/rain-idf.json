@@ -1,0 +1,606 @@
+{
+  "generated": "2026-10-29T23:59:35.513Z",
+  "scope": "Rainfall intensity-duration-frequency (IDF) and design rainfall values for Guadalajara / Zona Metropolitana de Guadalajara (ZMG), Jalisco",
+  "sources": [
+    {
+      "id": "campos2010",
+      "title": "Intensidades máximas de lluvia para diseño hidrológico urbano en la República Mexicana",
+      "publisher": "Ingeniería Investigación y Tecnología (FI-UNAM), vol. XI núm. 2, pp. 179-188, ISSN 1405-7743; author D.F. Campos-Aranda (UASLP)",
+      "year": 2010,
+      "url": "https://www.scielo.org.mx/pdf/iit/v11n2/v11n2a5.pdf",
+      "pages": "p.183 eq. (1) (Chen formula); p.184 text (a_Tr values for Aguascalientes used to verify F); p.186 Tabla 4 row 21 Guadalajara (Jal.) 14066; p.187 Simbología de la Tabla 4",
+      "kind": "peer-reviewed",
+      "notes": "Chen (1983) formula fitted from SCT (1990) isoyetas of 1-h/10-yr intensity plus annual max daily rainfall (PMD) of the station via the procedure of Campos (2007/2008). Not fitted to Guadalajara pluviograph data; the 10-station validation (Tabla 2) gave errors of roughly -30% to +60% (max +92%) at other sites."
+    },
+    {
+      "id": "atlas2021it",
+      "title": "Atlas Metropolitano de Riesgos del Área Metropolitana de Guadalajara. Informe técnico",
+      "publisher": "IMEPLAN with Instituto de Geografía, UNAM",
+      "year": 2021,
+      "url": "https://plan.jalisco.gob.mx/wp-content/uploads/2022/12/Atlas-de-Riesgos-Informe-Tecnico_2021e.pdf",
+      "pages": "printed pp.98-101 (PDF pp.50-51, precipitation percentiles, Figs. 15-19, Tabla 6); printed pp.108-109 (PDF p.55, drainage design intensity)",
+      "kind": "official",
+      "notes": "No IDF curves, equations or design storms in the report: hazard is expressed as daily-rainfall percentiles (P90/P95) and a 40 mm/day threshold. Site refuses TLS from non-Mexican IPs and from Windows schannel (TLS1.3 only); fetched with Node on the Mexican W10 host."
+    },
+    {
+      "id": "smn_nor8110_14066",
+      "title": "Normales climatológicas 1981-2010, estación 14066 GUADALAJARA (DGE)",
+      "publisher": "CONAGUA - Servicio Meteorológico Nacional",
+      "year": 2010,
+      "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Normales_Climatologicas/Normales8110/jal/nor8110_14066.txt",
+      "pages": "PRECIPITACIÓN block, rows MÁXIMA DIARIA / FECHA MÁX DIARIA",
+      "kind": "official",
+      "notes": "Station lat 20.67638889, lon -103.3461111, 1550 m."
+    },
+    {
+      "id": "smn_nor9120_14066",
+      "title": "Normales climatológicas 1991-2020, estación 14066 GUADALAJARA (DGE)",
+      "publisher": "CONAGUA - Servicio Meteorológico Nacional",
+      "year": 2020,
+      "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Normales_Climatologicas/Normales9120/jal/nor9120_14066.txt",
+      "pages": "PRECIPITACIÓN block, rows MÁXIMA DIARIA / FECHA MÁX DIARIA",
+      "kind": "official",
+      "notes": ""
+    },
+    {
+      "id": "smn_nor_14065",
+      "title": "Normales climatológicas 1981-2010 and 1991-2020, estación 14065 GUADALAJARA (OBS)",
+      "publisher": "CONAGUA - Servicio Meteorológico Nacional",
+      "year": 2020,
+      "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Normales_Climatologicas/Normales9120/jal/nor9120_14065.txt",
+      "pages": "PRECIPITACIÓN block; also .../Normales8110/jal/nor8110_14065.txt",
+      "kind": "official",
+      "notes": "Station lat 20.70638889, lon -103.3922222, 1551 m."
+    },
+    {
+      "id": "smn_nor_14169",
+      "title": "Normales climatológicas 1981-2010 and 1991-2020, estación 14169 ZAPOPAN",
+      "publisher": "CONAGUA - Servicio Meteorológico Nacional",
+      "year": 2020,
+      "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Normales_Climatologicas/Normales9120/jal/nor9120_14169.txt",
+      "pages": "PRECIPITACIÓN block; also .../Normales8110/jal/nor8110_14169.txt",
+      "kind": "official",
+      "notes": "Station lat 20.72027778, lon -103.3919444, 1560 m."
+    },
+    {
+      "id": "gacetaudg2009",
+      "title": "Cómo llueve en la zona metropolitana de Guadalajara",
+      "publisher": "Gaceta Universidad de Guadalajara",
+      "year": 2009,
+      "url": "https://www.gaceta.udg.mx/como-llueve-en-la-zona-metropolitana-de-guadalajara/",
+      "pages": "web article, 8 Jun 2009",
+      "kind": "other",
+      "notes": "University news summary of an analysis of 1940-2005 CNA and IAM-UdeG records; no station named; units written loosely as mm/m2 and mm/m2/h."
+    },
+    {
+      "id": "zapopan_86bis",
+      "title": "Iniciativa de modificación al Reglamento del Servicio de Agua Potable, Alcantarillado y Saneamiento del Municipio de Zapopan (Exp. 20/20), quoting Ley del Agua para el Estado de Jalisco y sus Municipios art. 86 Bis",
+      "publisher": "Ayuntamiento de Zapopan (regidores)",
+      "year": 2020,
+      "url": "https://www.zapopan.gob.mx/wp-content/uploads/2020/04/Exp_20_20Modif_Rgto_Serv._de_Agua.pdf",
+      "pages": "pp.3-4",
+      "kind": "official",
+      "notes": "Return periods required by state law for on-site stormwater control; the law text itself was not fetched, the quote is verbatim in this municipal document."
+    },
+    {
+      "id": "nmas2026cuaad",
+      "title": "Reportan fuerte lluvia en el Área Metropolitana de Guadalajara; hay un árbol caído",
+      "publisher": "N+ (nmas.com.mx)",
+      "year": 2026,
+      "url": "https://www.nmas.com.mx/jalisco/sociedad/reportan-fuerte-lluvia-en-el-area-metropolitana-de-guadalajara-hay-un-arbol-caido/",
+      "pages": "web article, 27 Jun 2026",
+      "kind": "other",
+      "notes": "Peak intensity quoted from UdeG academic Arturo Gleason; the averaging interval of the peak is not stated."
+    }
+  ],
+  "curves": [
+    {
+      "source_id": "campos2010",
+      "station_or_area": "Guadalajara (Jal.), pluviómetro 14066 GUADALAJARA (DGE); PMD record 1961-1991 (27 years)",
+      "lat": 20.67638889,
+      "lon": -103.3461111,
+      "form": "equation",
+      "equation": "i_t^Tr = a · P_1^10 · log10[10^(2−F) · Tr^(F−1)] / (t + b)^c   (Campos-Aranda 2010, eq. 1, Chen 1983)",
+      "params": {
+        "a": 43.093,
+        "b": 11.831,
+        "c": 0.885,
+        "P_1_10_mm": 64,
+        "F": 1.3531,
+        "F_derivation": "F = PMD100/PMD10 = 123.4/91.2; F is not printed in Tabla 4. This ratio reproduces the paper's published a_Tr values for Aguascalientes exactly (a_100/a_10 = 1681.185/1228.012 = 1.3690 = 94.6/69.1), so it is the ratio the procedure uses.",
+        "R_prom": 0.637,
+        "PMD10_mm": 91.2,
+        "PMD100_mm": 123.4,
+        "PMDmin_mm": 35.2,
+        "PMDmax_mm": 114.8,
+        "a_times_P": 2757.952
+      },
+      "units": {
+        "intensity": "mm/h",
+        "duration": "min"
+      },
+      "validity": {
+        "duration_min": [
+          5,
+          1440
+        ],
+        "return_period_yr": [
+          5,
+          100
+        ]
+      },
+      "return_periods_yr": [
+        2,
+        5,
+        10,
+        25,
+        50,
+        100
+      ],
+      "durations_min": [
+        5,
+        10,
+        15,
+        30,
+        60,
+        120,
+        180,
+        360
+      ],
+      "derived_from_equation": true,
+      "table": [
+        {
+          "T_yr": 2,
+          "d_min": 5,
+          "i_mm_h": 170.8,
+          "depth_mm": 14.2,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 10,
+          "i_mm_h": 135.7,
+          "depth_mm": 22.6,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 15,
+          "i_mm_h": 113,
+          "depth_mm": 28.3,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 30,
+          "i_mm_h": 76.3,
+          "depth_mm": 38.1,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 60,
+          "i_mm_h": 47.3,
+          "depth_mm": 47.3,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 120,
+          "i_mm_h": 27.6,
+          "depth_mm": 55.2,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 180,
+          "i_mm_h": 19.8,
+          "depth_mm": 59.5,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 2,
+          "d_min": 360,
+          "i_mm_h": 11,
+          "depth_mm": 66.2,
+          "outside_source_range": true
+        },
+        {
+          "T_yr": 5,
+          "d_min": 5,
+          "i_mm_h": 202.6,
+          "depth_mm": 16.9
+        },
+        {
+          "T_yr": 5,
+          "d_min": 10,
+          "i_mm_h": 161,
+          "depth_mm": 26.8
+        },
+        {
+          "T_yr": 5,
+          "d_min": 15,
+          "i_mm_h": 134.1,
+          "depth_mm": 33.5
+        },
+        {
+          "T_yr": 5,
+          "d_min": 30,
+          "i_mm_h": 90.5,
+          "depth_mm": 45.3
+        },
+        {
+          "T_yr": 5,
+          "d_min": 60,
+          "i_mm_h": 56.1,
+          "depth_mm": 56.1
+        },
+        {
+          "T_yr": 5,
+          "d_min": 120,
+          "i_mm_h": 32.8,
+          "depth_mm": 65.6
+        },
+        {
+          "T_yr": 5,
+          "d_min": 180,
+          "i_mm_h": 23.5,
+          "depth_mm": 70.6
+        },
+        {
+          "T_yr": 5,
+          "d_min": 360,
+          "i_mm_h": 13.1,
+          "depth_mm": 78.6
+        },
+        {
+          "T_yr": 10,
+          "d_min": 5,
+          "i_mm_h": 226.7,
+          "depth_mm": 18.9
+        },
+        {
+          "T_yr": 10,
+          "d_min": 10,
+          "i_mm_h": 180.1,
+          "depth_mm": 30
+        },
+        {
+          "T_yr": 10,
+          "d_min": 15,
+          "i_mm_h": 150.1,
+          "depth_mm": 37.5
+        },
+        {
+          "T_yr": 10,
+          "d_min": 30,
+          "i_mm_h": 101.3,
+          "depth_mm": 50.6
+        },
+        {
+          "T_yr": 10,
+          "d_min": 60,
+          "i_mm_h": 62.8,
+          "depth_mm": 62.8
+        },
+        {
+          "T_yr": 10,
+          "d_min": 120,
+          "i_mm_h": 36.7,
+          "depth_mm": 73.4
+        },
+        {
+          "T_yr": 10,
+          "d_min": 180,
+          "i_mm_h": 26.3,
+          "depth_mm": 78.9
+        },
+        {
+          "T_yr": 10,
+          "d_min": 360,
+          "i_mm_h": 14.6,
+          "depth_mm": 87.9
+        },
+        {
+          "T_yr": 25,
+          "d_min": 5,
+          "i_mm_h": 258.6,
+          "depth_mm": 21.5
+        },
+        {
+          "T_yr": 25,
+          "d_min": 10,
+          "i_mm_h": 205.4,
+          "depth_mm": 34.2
+        },
+        {
+          "T_yr": 25,
+          "d_min": 15,
+          "i_mm_h": 171.1,
+          "depth_mm": 42.8
+        },
+        {
+          "T_yr": 25,
+          "d_min": 30,
+          "i_mm_h": 115.5,
+          "depth_mm": 57.8
+        },
+        {
+          "T_yr": 25,
+          "d_min": 60,
+          "i_mm_h": 71.6,
+          "depth_mm": 71.6
+        },
+        {
+          "T_yr": 25,
+          "d_min": 120,
+          "i_mm_h": 41.8,
+          "depth_mm": 83.7
+        },
+        {
+          "T_yr": 25,
+          "d_min": 180,
+          "i_mm_h": 30,
+          "depth_mm": 90
+        },
+        {
+          "T_yr": 25,
+          "d_min": 360,
+          "i_mm_h": 16.7,
+          "depth_mm": 100.2
+        },
+        {
+          "T_yr": 50,
+          "d_min": 5,
+          "i_mm_h": 282.7,
+          "depth_mm": 23.6
+        },
+        {
+          "T_yr": 50,
+          "d_min": 10,
+          "i_mm_h": 224.5,
+          "depth_mm": 37.4
+        },
+        {
+          "T_yr": 50,
+          "d_min": 15,
+          "i_mm_h": 187.1,
+          "depth_mm": 46.8
+        },
+        {
+          "T_yr": 50,
+          "d_min": 30,
+          "i_mm_h": 126.3,
+          "depth_mm": 63.1
+        },
+        {
+          "T_yr": 50,
+          "d_min": 60,
+          "i_mm_h": 78.3,
+          "depth_mm": 78.3
+        },
+        {
+          "T_yr": 50,
+          "d_min": 120,
+          "i_mm_h": 45.7,
+          "depth_mm": 91.5
+        },
+        {
+          "T_yr": 50,
+          "d_min": 180,
+          "i_mm_h": 32.8,
+          "depth_mm": 98.4
+        },
+        {
+          "T_yr": 50,
+          "d_min": 360,
+          "i_mm_h": 18.3,
+          "depth_mm": 109.6
+        },
+        {
+          "T_yr": 100,
+          "d_min": 5,
+          "i_mm_h": 306.8,
+          "depth_mm": 25.6
+        },
+        {
+          "T_yr": 100,
+          "d_min": 10,
+          "i_mm_h": 243.7,
+          "depth_mm": 40.6
+        },
+        {
+          "T_yr": 100,
+          "d_min": 15,
+          "i_mm_h": 203,
+          "depth_mm": 50.8
+        },
+        {
+          "T_yr": 100,
+          "d_min": 30,
+          "i_mm_h": 137.1,
+          "depth_mm": 68.5
+        },
+        {
+          "T_yr": 100,
+          "d_min": 60,
+          "i_mm_h": 84.9,
+          "depth_mm": 84.9
+        },
+        {
+          "T_yr": 100,
+          "d_min": 120,
+          "i_mm_h": 49.6,
+          "depth_mm": 99.2
+        },
+        {
+          "T_yr": 100,
+          "d_min": 180,
+          "i_mm_h": 35.6,
+          "depth_mm": 106.8
+        },
+        {
+          "T_yr": 100,
+          "d_min": 360,
+          "i_mm_h": 19.8,
+          "depth_mm": 118.9
+        }
+      ],
+      "notes": "Table evaluated by this research step from the published parameters (not printed in the source). T=2 yr lies below the stated validity range (5-100 yr) and is flagged outside_source_range. Check: i(60 min, 10 yr) = 62.8 mm/h vs i_1^10 = 64.0 mm/h input. The paper is regional and isohyet-based, not a local pluviograph fit; treat as order-of-magnitude design values."
+    }
+  ],
+  "design_values": [
+    {
+      "source_id": "atlas2021it",
+      "what": "Rain intensity the AMG drainage and collectors were designed for (mostly combined sewers; criteria from the 1960s-1980s)",
+      "value": 50,
+      "units": "mm/h",
+      "notes": "With a maximum runoff coefficient of 0.5. The Atlas cites CONAGUA (2015, p.59). Printed p.109 (PDF p.55)."
+    },
+    {
+      "source_id": "atlas2021it",
+      "what": "Rain intensity above which the combined drainage is often exceeded in the rainy season",
+      "value": 30,
+      "units": "mm/h",
+      "notes": "Printed p.108-109 (PDF p.55)."
+    },
+    {
+      "source_id": "atlas2021it",
+      "what": "Runoff coefficient assumed in the original drainage design",
+      "value": 0.5,
+      "units": "dimensionless",
+      "notes": "Printed p.109 (PDF p.55)."
+    },
+    {
+      "source_id": "atlas2021it",
+      "what": "95th percentile of daily rainfall, AMG and nearby stations",
+      "value": 40,
+      "units": "mm/day",
+      "notes": "P90 is about 30 mm/day. The Atlas rain-hazard map gives the probability of exceeding 40 mm/day (2000-2018). Printed pp.99-100."
+    },
+    {
+      "source_id": "atlas2021it",
+      "what": "P95 daily rainfall at the Zapopan station, 1950-1972 / 1973-1995 / 1996-2018",
+      "value": [
+        37.5,
+        40,
+        42.5
+      ],
+      "units": "mm/day",
+      "notes": "Shows extreme daily rainfall increasing over time. Printed p.101 (PDF p.51); Tabla 6 is an image."
+    },
+    {
+      "source_id": "atlas2021it",
+      "what": "Daily-rainfall threshold the Atlas treats as critical hazard (flooding)",
+      "value": 30,
+      "units": "mm/day",
+      "notes": "Fields of 20-30 mm/day already produce flooding in places. Printed p.101."
+    },
+    {
+      "source_id": "campos2010",
+      "what": "Annual maximum daily rainfall (PMD) at station 14066, 10-yr and 100-yr return periods (GEV fit, 1961-1991)",
+      "value": {
+        "T10": 91.2,
+        "T100": 123.4
+      },
+      "units": "mm/24h",
+      "notes": "Tabla 4, row 21."
+    },
+    {
+      "source_id": "campos2010",
+      "what": "1-hour 10-year rainfall intensity used for Guadalajara (from SCT 1990 isohyets)",
+      "value": 64,
+      "units": "mm/h",
+      "notes": "Tabla 4, row 21, column i_1^10."
+    },
+    {
+      "source_id": "smn_nor8110_14066",
+      "what": "Record daily rainfall, station 14066 Guadalajara (DGE), 1981-2010 normal",
+      "value": 114.8,
+      "units": "mm/day",
+      "date": "1983-07-27",
+      "notes": "Same value as PMDmax in Campos-Aranda 2010 (1961-1991)."
+    },
+    {
+      "source_id": "smn_nor9120_14066",
+      "what": "Record daily rainfall, station 14066 Guadalajara (DGE), 1991-2020 normal",
+      "value": 103.5,
+      "units": "mm/day",
+      "date": "2015-07-19",
+      "notes": "Next highest: 91.8 mm on 2016-08-14 and 88 mm on 1997-09-24."
+    },
+    {
+      "source_id": "smn_nor_14065",
+      "what": "Record daily rainfall, station 14065 Guadalajara (OBS), in both the 1981-2010 and 1991-2020 normals",
+      "value": 100,
+      "units": "mm/day",
+      "date": "2008-09-19",
+      "notes": "Other high values: 86.7 mm on 2010-02-03; 86 mm on 1993-07-02; 85.2 mm on 1999-06-22."
+    },
+    {
+      "source_id": "smn_nor_14169",
+      "what": "Record daily rainfall, station 14169 Zapopan",
+      "value": {
+        "1981-2010": 96,
+        "1991-2020": 91
+      },
+      "units": "mm/day",
+      "date": {
+        "1981-2010": "1987-06-29",
+        "1991-2020": "2004-09-24"
+      },
+      "notes": ""
+    },
+    {
+      "source_id": "gacetaudg2009",
+      "what": "Record 30-minute rainfall events, ZMG (1940-2005 CNA/IAM records)",
+      "value": [
+        {
+          "date": "1956-07-11",
+          "depth_mm": 53,
+          "duration_min": 30
+        },
+        {
+          "date": "1997-09-24",
+          "depth_mm": 66,
+          "duration_min": 30
+        }
+      ],
+      "units": "mm in 30 min",
+      "notes": "Equivalent to 106 and 132 mm/h average over 30 min. The same article reports 39.0 mm within 15 min and gives a 66 mm/h max intensity for the typical <30-min events. The 1997-09-24 date matches an 88 mm daily maximum at station 14066 (SMN normals)."
+    },
+    {
+      "source_id": "gacetaudg2009",
+      "what": "Storm intensity the drainage was designed for, as stated by UdeG",
+      "value": 50,
+      "units": "mm/h",
+      "notes": "Agrees with the Atlas 2021 figure. The article proposes 30 and 60 mm/h as high-risk and torrential thresholds."
+    },
+    {
+      "source_id": "zapopan_86bis",
+      "what": "Jalisco state water law art. 86 Bis: design return period for the detention volume of developments over 10 ha",
+      "value": 10,
+      "units": "yr",
+      "notes": "Control devices are checked with Tr = 50 yr (2% exceedance). Device drainage is designed for a 2-yr storm lasting 120% of the time of concentration. For sites under 10 ha the operator's (SIAPA's) guidelines apply."
+    },
+    {
+      "source_id": "nmas2026cuaad",
+      "what": "Peak rainfall intensity at station CUAAD-05 (López Mateos Sur, Zapopan/Tlajomulco area), storm of Saturday 27 Jun 2026",
+      "value": 151.6,
+      "units": "mm/h",
+      "date": "2026-06-27",
+      "notes": "Press report quoting UdeG academic Arturo Gleason, who cited ~50 mm/h as the torrential threshold. The averaging interval is not given; likely a short-interval peak rate, not a 60-min mean."
+    }
+  ],
+  "not_found": [
+    "No local IDF curves or equations published by SIAPA were found. SIAPA \"Criterios y lineamientos técnicos para factibilidades\" (2014) is listed on sswm.info (chapter 5 covers infiltration), but no PDF with intensity tables was reachable on siapa.gob.mx.",
+    "Atlas Metropolitano de Riesgos 2021, both the technical report and the public version: no IDF tables, design storms or sub-daily station data. Rain hazard uses only daily P90/P95 percentiles.",
+    "UdG Sincronía article (González Salazar, Juárez and Loza Ramírez, ca. 2008), \"Curvas de intensidad, duración y periodo de retorno como herramienta de análisis\": IDF curves for ZMG stations (Guadalajara, Zapopan, La Experiencia, Tlaquepaque, Tonalá, Colomos) built from 24-h maxima. The old URL sincronia.cucsh.udg.mx/salazar.htm now redirects to a 404, and the Internet Archive was offline or rate-limited (HTTP 429) during this run. Worth retrying.",
+    "SCT (1990) isoyetas de intensidad-duración-frecuencia for Jalisco are maps only; no digital values were found beyond the i_1^10 = 64 mm/h that Campos-Aranda read from them.",
+    "CONAGUA MAPAS \"Drenaje pluvial urbano\": no Guadalajara-specific IDF found.",
+    "No thesis or journal paper with a pluviograph-fitted IDF equation for stations 14065/14066, Atemajac or Las Pintas was found (searched SciELO, Redalyc, TyCA, UNAM repositories). The TyCA 2024 paper with 243 convective events is about Santa Clara, Cuba.",
+    "IMTA 2016-2017 pluvial studies for the AMG (CONAGUA, 29.32 MDP): referenced in the Plan Integral del Agua sheet an-0039, but the studies themselves are not online.",
+    "Guadalajara municipal Gaceta of 19 Jul 2023 (said in search snippets to cite a 217.4 mm/h peak from the Zapopan station network) returned 404 and the server refused connections; value unverified and not included.",
+    "core.ac.uk papers on SIAPA/PROMIAP (ids 214798651, 483322181) returned 403; not read."
+  ]
+}

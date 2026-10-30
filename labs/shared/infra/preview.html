@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cauce. infra — vista previa de capas</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<style>
+  :root { --bg:#0f1418; --panel:#161d23ee; --ink:#e7edf1; --mute:#8fa1ad; --acc:#4fc3f7; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:13px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  #map { position:absolute; inset:0; }
+  #panel { position:absolute; top:12px; left:12px; width:330px; max-height:calc(100% - 24px); overflow:auto; background:var(--panel); border-radius:10px; padding:12px 14px; box-shadow:0 6px 24px #0008; }
+  h1 { font-size:16px; margin:0 0 2px; } h1 b { color:var(--acc); }
+  .sub { color:var(--mute); font-size:12px; margin-bottom:10px; }
+  label { display:flex; gap:6px; align-items:flex-start; margin:3px 0; cursor:pointer; }
+  label small { color:var(--mute); display:block; }
+  select { width:100%; background:#0d1216; color:var(--ink); border:1px solid #2b3742; border-radius:6px; padding:4px; margin:4px 0 8px; }
+  .sec { margin-top:10px; font-weight:600; color:var(--acc); font-size:11px; text-transform:uppercase; letter-spacing:.06em; }
+  #legend { font-size:11px; color:var(--mute); margin-top:4px; }
+  .ramp { height:8px; border-radius:4px; background:linear-gradient(90deg,#1a2a6c,#3f7cac,#f7d488,#f28c38,#b2182b); margin:3px 0; }
+  #info { position:absolute; right:12px; bottom:28px; width:300px; max-height:45%; overflow:auto; background:var(--panel); border-radius:10px; padding:10px 12px; display:none; font-size:12px; }
+  #info td { padding:1px 4px; vertical-align:top; } #info td:first-child { color:var(--mute); }
+  @media (max-width:600px){ #panel{ width:calc(100% - 48px); max-height:42%; } #info{ left:12px; width:auto; } }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="panel">
+  <h1><b>cauce.</b> infraestructura y exposición</h1>
+  <div class="sub">Vista previa de <code>/labs/shared/infra/</code> y capas observadas de <code>/labs/shared/hazard/</code>. Datos reales; nada modelado salvo donde se indica.</div>
+  <div class="sec">AGEB urbanas (coropleta)</div>
+  <select id="field"></select>
+  <div id="legend"><div class="ramp"></div><span id="lmin"></span> <span style="float:right" id="lmax"></span></div>
+  <div class="sec">Capas</div>
+  <div id="layers"></div>
+</div>
+<div id="info"></div>
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script>
+const FIELDS = [
+  ['prio_exploratoria','Prioridad exploratoria (editorial, 0–100)'], ['inv_pct_sin_pluvial','% manzanas sin alcantarilla pluvial (INEGI 2020)'],
+  ['imeplan_area_pct','% del AGEB en sitios/zonas IMEPLAN 2026'], ['imn_2020','Índice de marginación normalizado (mayor = menos marginado)'],
+  ['dens_hab_km2','Habitantes por km²'], ['pct_65_mas','% población 65+'], ['pct_0_14','% población 0–14'], ['builtup_pct','% superficie construida (WorldCover)'],
+  ['gdl_reportes_n','Reportes de inundación Guadalajara 2010–2022'], ['zap_servicios_n','Servicios por inundación Zapopan 2017–2025'],
+  ['gdl_colector_m','Metros de colector SIAPA (solo Guadalajara)'], ['n_escuela','Escuelas (DENUE)'], ['pasos_desnivel_n','Pasos a desnivel (OSM)']];
+const LAYERS = [
+  ['ageb','AGEB urbanas (coropleta)', true], ['imeplan','IMEPLAN MUI 2026 (observado)', true, '/labs/shared/hazard/observed-imeplan-2026.geojson'],
+  ['gdlrep','Reportes Guadalajara 2010–2022 (observado)', false, '/labs/shared/hazard/observed-gdl-reportes-2010-2022.geojson'],
+  ['zapinc','Servicios Zapopan 2017–2025 (observado)', false, '/labs/shared/hazard/observed-zapopan-incidentes-2017-2025.geojson'],
+  ['colector','Colectores SIAPA (Atlas GDL)', true, '/labs/shared/infra/gdl-colectores-siapa.geojson'],
+  ['canal','Canales pluviales GDL', true, '/labs/shared/infra/gdl-canales-pluviales.geojson'],
+  ['vasos','Vasos reguladores GDL', true, '/labs/shared/infra/gdl-vasos-reguladores.geojson'],
+  ['waterways','Ríos, canales y drenes (OSM)', false, '/labs/shared/infra/osm-waterways.geojson'],
+  ['arroyos','Arroyos a intervenir (Zapopan)', false, '/labs/shared/infra/zapopan-arroyos-a-intervenir.geojson'],
+  ['works','Obras pluviales 2023–26 (aprox.)', false, '/labs/shared/infra/pluvial-works.geojson'],
+  ['press','Reportes de prensa (aprox.)', false, '/labs/shared/hazard/press-hotspots.geojson'],
+  ['fac','Escuelas y salud (DENUE)', false, '/labs/shared/infra/exposure-facilities.geojson'],
+  ['transit','Tren Ligero y Mi Macro (OSM)', false, '/labs/shared/infra/osm-transit.geojson'],
+  ['wc','Cobertura del suelo 10 m (WorldCover)', false]];
+const qs = new URLSearchParams(location.search);
+const map = new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/dark', center:[-103.36,20.66], zoom:10.6, attributionControl:{compact:true,
+  customAttribution:'INEGI · CONAPO · IMEPLAN · Gob. Guadalajara · Gob. Zapopan · © OpenStreetMap · ESA WorldCover · <b>cauce.</b>'} });
+window.__map = map;
+const sel = document.getElementById('field'); for (const [k,l] of FIELDS) sel.add(new Option(l,k)); if (qs.get('field')) sel.value = qs.get('field');
+const RAMP = ['#1a2a6c','#3f7cac','#f7d488','#f28c38','#b2182b'];
+let ageb = null;
+function quantiles(k){ const v = ageb.features.map(f=>f.properties[k]).filter(x=>x!=null&&isFinite(x)).sort((a,b)=>a-b); const q=p=>v[Math.min(v.length-1,Math.floor(p*(v.length-1)))]; return [q(0),q(.25),q(.5),q(.75),q(.97)]; }
+function paint(){ if(!ageb) return; const k = sel.value; const q = quantiles(k); const cols = k==='imn_2020' ? RAMP.slice().reverse() : RAMP;
+  const stops = []; let last = -Infinity; q.forEach((v,i)=>{ if(v>last){ last=v; stops.push(v, cols[i]); } });
+  const expr = stops.length>2 ? ['interpolate',['linear'],['coalesce',['get',k],q[0]], ...stops] : cols[2];
+  map.setPaintProperty('ageb-fill','fill-color', expr);
+  map.setPaintProperty('ageb-fill','fill-opacity', ['case',['==',['get',k],null],0.05,0.62]);
+  document.querySelector('.ramp').style.background = `linear-gradient(90deg,${cols.join(',')})`;
+  document.getElementById('lmin').textContent = q[0]?.toLocaleString('es-MX'); document.getElementById('lmax').textContent = q[4]?.toLocaleString('es-MX'); }
+sel.onchange = paint;
+const box = document.getElementById('layers');
+const ON=(qs.get('on')||'').split(',');
+for (const [id,label,on] of LAYERS){ const l=document.createElement('label'); l.innerHTML=`<input type="checkbox" data-id="${id}" ${(on||ON.includes(id))?'checked':''}> <span>${label}</span>`; box.appendChild(l); }
+box.onchange = e => { const id=e.target.dataset.id; const v=e.target.checked?'visible':'none'; for (const ly of map.getStyle().layers) if (ly.id.startsWith(id+'-')) map.setLayoutProperty(ly.id,'visibility',v); };
+map.on('load', async () => {
+  const vis = id => (LAYERS.find(l=>l[0]===id)[2] || (qs.get('on')||'').split(',').includes(id)) ? 'visible':'none';
+  map.addSource('wc',{type:'image',url:'/labs/shared/infra/worldcover-urban.png',coordinates:[[-103.55,20.85],[-103.18,20.85],[-103.18,20.43],[-103.55,20.43]]});
+  map.addLayer({id:'wc-img',type:'raster',source:'wc',paint:{'raster-opacity':0.7},layout:{visibility:vis('wc')}});
+  ageb = await (await fetch('/labs/shared/infra/ageb-profile.geojson')).json();
+  map.addSource('ageb',{type:'geojson',data:ageb});
+  map.addLayer({id:'ageb-fill',type:'fill',source:'ageb',paint:{'fill-color':'#888','fill-opacity':0.6},layout:{visibility:vis('ageb')}});
+  map.addLayer({id:'ageb-line',type:'line',source:'ageb',paint:{'line-color':'#0b0f12','line-width':0.4,'line-opacity':0.6},layout:{visibility:vis('ageb')}});
+  paint();
+  const add = (id,url,layers) => { map.addSource(id,{type:'geojson',data:url}); for (const L of layers) map.addLayer({...L,id:id+'-'+L.type,source:id,layout:{...(L.layout||{}),visibility:vis(id)}}); };
+  for (const [id,,,url] of LAYERS) { if(!url) continue;
+    if (id==='imeplan') add(id,url,[{type:'fill',filter:['==',['geometry-type'],'Polygon'],paint:{'fill-color':['match',['get','category'],'Zonas Criticas','#ff2d55','#ff9f0a'],'fill-opacity':0.55}}]);
+    else if (id==='colector') add(id,url,[{type:'line',paint:{'line-color':'#5ad1ff','line-width':['match',['get','clase'],'colector mayor',2.6,1.4]}}]);
+    else if (id==='canal') add(id,url,[{type:'line',paint:{'line-color':'#a0ff6e','line-width':2.4}}]);
+    else if (id==='vasos') add(id,url,[{type:'fill',paint:{'fill-color':'#2bd9c6','fill-opacity':0.85}}]);
+    else if (id==='waterways') add(id,url,[{type:'line',paint:{'line-color':['match',['get','kind'],'river','#3fa9f5','stream','#2a6f9e','#c38bff'],'line-width':1}}]);
+    else if (id==='arroyos') add(id,url,[{type:'line',paint:{'line-color':['match',['get','prioridad'],'Alto','#ff453a','Medio','#ffd60a','#8e8e93'],'line-width':2}}]);
+    else if (id==='transit') add(id,url,[{type:'line',filter:['!=',['geometry-type'],'Point'],paint:{'line-color':['coalesce',['get','colour'],'#bf5af2'],'line-width':2}}]);
+    else { const col={gdlrep:'#ffcc00',zapinc:'#ff7a00',works:'#30d158',press:'#ff375f',fac:'#64d2ff'}[id]; add(id,url,[{type:'circle',paint:{'circle-radius':['interpolate',['linear'],['zoom'],10,1.6,15,5],'circle-color':col,'circle-opacity':0.85,'circle-stroke-width':0.4,'circle-stroke-color':'#000'}}]); }
+  }
+  map.on('click','ageb-fill', e => { const p=e.features[0].properties; const keys=['cvegeo','mun_nombre','pob','gm_2020','imeplan_ids','imeplan_area_pct','inv_pct_sin_pluvial','builtup_pct','n_escuela','gdl_reportes_n','zap_servicios_n','prio_exploratoria','prio_rank'];
+    const el=document.getElementById('info'); el.style.display='block'; el.innerHTML='<table>'+keys.map(k=>`<tr><td>${k}</td><td>${p[k]??'—'}</td></tr>`).join('')+'</table>'; });
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

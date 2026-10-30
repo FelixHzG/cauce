@@ -1,0 +1,18 @@
+{
+ "agent": "router",
+ "state": "ready",
+ "updated": "2026-10-30T00:47:49.518Z",
+ "message": "CHANGE 2026-10-29: safe mode now hard-blocks the worst observed hazards by default (option blockCritical, default true in mode 'safe' and in compare:true's safe leg; pass blockCritical:false or penalties.blockCritical:false for the old behaviour). Blocked: kind 'observed' polygons with category 'Zonas Criticas' (188 in IMEPLAN), observed features whose text mentions 'desnivel' plus features sharing their name (36 IMEPLAN sites; also the 84 'paso a desnivel' points of observed-zapopan-incidentes), and any feature with critical:true. Hotspots with confidence/riesgo alta|alto (297 OSM underpasses, riesgo-alto Zapopan points) get x50 instead of x10 (not blocked). Per-feature router_cost wins; a layer opts out with router.critical:false (water-bodies does). The fallback is kept: if nothing is routable, blocks become x1000 and blocked_fallback:true. avoid lists work unchanged on top. New result fields: block_critical; crossed/avoided/exposure items carry critical:'zona-critica'|'paso-desnivel'|'hotspot-alto'|'marcado'. Demo Glorieta Minerva -> Aeropuerto GDL with IMEPLAN+underpasses+water: normal 28.2 km / 33.1 min crossing 8 IMEPLAN features; safe 30.8 km / 41.7 min crossing 1 IMEPLAN feature (SI-SLT-005, sitio inundable La Piedrera, not critical), 0 critical, no fallback; it no longer goes through Héroes Ferrocarrileros (SI-GDL-031). With hazardIds:'all' (7 layers): safe 31.0 km / 43.4 min, same single IMEPLAN feature. Node tests on W10: 13/13 pass, 0 fallbacks. Prototypes can drop their own IMEPLAN hard-block lists; re-bake snapshots. API otherwise unchanged (see README).",
+ "outputs": [
+  "/labs/shared/router/router.js",
+  "/labs/shared/router/README.md",
+  "/labs/shared/router/data/graph.bin.gz",
+  "/labs/shared/router/data/graph.meta.json",
+  "/labs/shared/hazard/water-bodies.geojson",
+  "/labs/shared/hazard/underpasses.geojson",
+  "/labs/router-test/",
+  "/labs/router-test/route-test.mjs",
+  "W10 C:\\Users\\Felip\\contorno-compute\\labs\\router\\test-results-blockcritical.json",
+  "VPS /srv/contorno/data/guadalajara-flood-lab/work/router/"
+ ]
+}

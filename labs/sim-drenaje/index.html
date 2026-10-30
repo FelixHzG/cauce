@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>cauce. · Drenaje: dónde sí ayuda</title>
+<meta name="description" content="Ensamble de tormentas sobre Guadalajara: dónde más capacidad de drenaje reduce la inundación y dónde no basta. Modelo exploratorio, no pronóstico.">
+<meta name="theme-color" content="#0e1316">
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+<script defer src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<div id="map" aria-label="Mapa"></div>
+
+<aside id="panel" aria-label="Controles">
+  <header class="brand">
+    <a class="mark" href="/labs/" title="cauce. labs">cauce<span>.</span></a>
+    <span class="tag">labs · drenaje</span>
+    <button id="collapse" class="ghost" aria-label="Plegar panel">▾</button>
+  </header>
+  <h1>¿Dónde ayuda más drenaje?</h1>
+  <p class="lede">126 tormentas simuladas sobre la ciudad a 20 m. Mueve la capacidad del drenaje y mira qué zonas se secan… y cuáles no.</p>
+
+  <nav id="modes" class="seg" role="tablist" aria-label="Capa">
+    <button data-mode="depth" class="on" role="tab">Agua</button>
+    <button data-mode="freq" role="tab">Frecuencia</button>
+    <button data-mode="gap" role="tab">Brecha</button>
+    <button data-mode="sens" role="tab">Sensibilidad</button>
+    <button data-mode="ageb" role="tab">AGEB</button>
+  </nav>
+
+  <section id="stormBox" class="box">
+    <div class="lbl">Tormenta de diseño · 60 min <span class="hint" id="stormMm"></span></div>
+    <div id="storms" class="chips"></div>
+    <button id="play" class="play" hidden>▶ minuto a minuto</button>
+  </section>
+
+  <section id="capBox" class="box">
+    <div class="lbl">Capacidad del drenaje urbano <b id="capVal">0 mm/h</b></div>
+    <div class="pipe">
+      <div class="band" id="nowBand" title="Rango estimado actual (Atlas Metropolitano de Riesgos 2021; no medido)"></div>
+      <input id="cap" type="range" min="0" max="6" step="1" value="0" aria-label="Capacidad de drenaje">
+    </div>
+    <div class="ticks" id="capTicks"></div>
+    <div class="note"><span class="sw band-sw"></span> 20–30 mm/h ≈ capacidad actual estimada (inferida, no medida)</div>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><div class="v" id="kpiArea">–</div><div class="k" id="kpiAreaK">km² urbanos con ≥15 cm</div></div>
+    <div class="kpi"><div class="v" id="kpiDelta">–</div><div class="k" id="kpiDeltaK">vs. sin drenaje</div></div>
+  </section>
+
+  <section class="box chartbox">
+    <div class="lbl" id="chartTitle">Área urbana inundada (≥15 cm) según capacidad</div>
+    <div id="chart"></div>
+  </section>
+
+  <section id="legend" class="box legend"></section>
+
+  <label class="toggle"><input type="checkbox" id="obs" checked><span class="sw ring"></span> Sitios observados (IMEPLAN MUI 2026) — dato real, no modelo</label>
+
+  <p class="fine" id="fine">Modelo exploratorio de lluvia sobre malla de 20 m (MDT INEGI 5 m agregado, edificios como porosidad). Drenaje representado como una extracción uniforme en celdas urbanas; no hay red de colectores real. No es pronóstico. <a href="README.md">Método y límites</a></p>
+</aside>
+
+<div id="caption" aria-live="polite"></div>
+<div id="probe" class="probe" hidden></div>
+<div id="loading">Cargando ensamble…</div>
+</body>
+</html>

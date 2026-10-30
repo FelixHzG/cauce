@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cauce. · verificación de terreno INEGI</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.css">
+<style>
+  :root { --ink:#16201c; --paper:#f4f1ea; --accent:#0e7c66; --muted:#5d6b66; }
+  html,body { margin:0; height:100%; background:#d9d4c7; font:14px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink); }
+  #map { position:absolute; inset:0; }
+  .panel { position:absolute; top:12px; left:12px; width:300px; max-height:calc(100% - 24px); overflow:auto; background:rgba(244,241,234,.94);
+    border:1px solid rgba(22,32,28,.15); border-radius:10px; padding:14px 16px; box-shadow:0 6px 24px rgba(0,0,0,.18); box-sizing:border-box; }
+  .brand { font-weight:800; font-size:22px; letter-spacing:-.5px; } .brand b { color:var(--accent); }
+  h1 { font-size:13px; font-weight:600; margin:2px 0 10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+  label.t { display:flex; gap:8px; align-items:center; margin:6px 0; cursor:pointer; }
+  .views { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px; }
+  .views button { border:1px solid rgba(22,32,28,.25); background:#fff; border-radius:999px; padding:4px 10px; font:inherit; font-size:12px; cursor:pointer; }
+  .views button.on { background:var(--ink); color:#fff; }
+  .legend { margin-top:10px; font-size:12px; }
+  .ramp { height:10px; border-radius:3px; background:linear-gradient(90deg,rgba(253,233,168,.16),rgba(248,177,74,.39) 18%,rgba(240,130,40,.63) 35%,rgba(232,89,12,.78) 50%,rgba(176,23,79,.9) 75%,rgba(92,10,107,.96)); }
+  .ticks { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+  .readout { margin-top:10px; padding:8px 10px; background:#fff; border-radius:8px; font-variant-numeric:tabular-nums; font-size:12px; min-height:34px; }
+  .note { font-size:11px; color:var(--muted); margin-top:10px; }
+  body.shot .panel { display:none; }
+  @media (max-width:600px) { .panel { top:auto; bottom:46px; left:8px; right:8px; width:auto; max-height:46%; padding:10px 12px; } .brand { font-size:18px; } }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="panel">
+  <div class="brand">cauce<b>.</b></div>
+  <h1>Verificación de terreno INEGI</h1>
+  <label class="t"><input type="checkbox" id="t-terrain" checked> Relieve 3D: MDT INEGI 5 m (sin exageración)</label>
+  <label class="t"><input type="checkbox" id="t-hill" checked> Sombreado del MDT</label>
+  <label class="t"><input type="checkbox" id="t-ndsm" checked> Altura sobre el terreno</label>
+  <label class="t"><input type="checkbox" id="t-bld"> Huellas de edificios (Overture)</label>
+  <label class="t"><input type="checkbox" id="t-aws"> Comparar con relieve global (AWS)</label>
+  <div class="views" id="views"></div>
+  <div class="legend">
+    <div>Altura sobre el terreno (MDS−MDT INEGI, incluye árboles)</div>
+    <div class="ramp"></div><div class="ticks"><span>1 m</span><span>3</span><span>6</span><span>10</span><span>25</span><span>60+ m</span></div>
+  </div>
+  <div class="readout" id="readout">Toca el mapa para leer la elevación.</div>
+  <div class="note">MDT/MDS INEGI 5 m (2016–2024, fotogrametría satelital), alturas ortométricas armonizadas entre hojas. Fuera de la cobertura INEGI se rellena con el relieve global (Terrarium). Página de control técnico, no es un pronóstico.</div>
+</div>
+<script src="https://unpkg.com/maplibre-gl@5.20.0/dist/maplibre-gl.js"></script>
+<script>
+const base = location.origin + '/labs/shared/';
+const VIEWS = {
+  zmg:      { label:'ZMG',        center:[-103.375,20.655], zoom:10.6, pitch:45, bearing:-10 },
+  centro:   { label:'Centro',     center:[-103.3475,20.6745], zoom:15.2, pitch:62, bearing:-25 },
+  barranca: { label:'Barranca',   center:[-103.300,20.742], zoom:13.4, pitch:68, bearing:150 },
+  norte:    { label:'Zapopan',    center:[-103.405,20.735], zoom:14.6, pitch:55, bearing:20 },
+  costura:  { label:'Costura de hojas', center:[-103.420,20.875], zoom:13.2, pitch:0, bearing:0 },
+};
+const q = new URLSearchParams(location.search);
+if (q.has('shot')) document.body.classList.add('shot');
+const start = VIEWS[q.get('view')] ?? VIEWS.zmg;
+const map = new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/liberty', center:start.center, zoom:start.zoom, pitch:start.pitch, bearing:start.bearing,
+  maxPitch:80, hash:false, attributionControl:{ compact:true }, canvasContextAttributes:{ preserveDrawingBuffer:true } });
+map.addControl(new maplibregl.NavigationControl({ visualizePitch:true }), 'top-right');
+const ATTR = 'Relieve © <a href="https://www.inegi.org.mx/">INEGI</a> (MDT/MDS 5 m)';
+map.on('load', async () => {
+  const idx = await fetch(base + 'terrain/index.json').then(r => r.json()).catch(() => null);
+  const L = id => idx?.layers?.find(l => l.id === id);
+  const firstSymbol = map.getStyle().layers.find(l => l.type === 'symbol')?.id;
+  for (const l of map.getStyle().layers) if (l.type === 'fill-extrusion') map.setLayoutProperty(l.id, 'visibility', 'none');
+  const bounds = L('dtm-inegi-5m')?.bounds ?? [-103.757,20.243,-103.040,21.007];
+  map.addSource('inegi-dem', { type:'raster-dem', tiles:[base + 'terrain/dtm/{z}/{x}/{y}.png'], tileSize:256, minzoom:8, maxzoom:15, encoding:'terrarium', bounds, attribution:ATTR });
+  map.addSource('aws-dem', { type:'raster-dem', tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], tileSize:256, maxzoom:15, encoding:'terrarium', attribution:'AWS Terrain Tiles (Mapzen)' });
+  map.addSource('hill', { type:'raster', tiles:[base + 'terrain/hillshade/{z}/{x}/{y}.png'], tileSize:256, minzoom:8, maxzoom:15, bounds, attribution:ATTR });
+  map.addSource('ndsm', { type:'raster', tiles:[base + 'terrain/ndsm/{z}/{x}/{y}.png'], tileSize:256, minzoom:8, maxzoom:15, bounds });
+  map.addSource('bld', { type:'vector', tiles:[base + 'infra/buildings/{z}/{x}/{y}.pbf'], minzoom:14, maxzoom:15, bounds,
+    attribution:'Edificios © <a href="https://overturemaps.org">Overture Maps</a> (OSM, Microsoft, Google Open Buildings)' });
+  map.addLayer({ id:'hill', type:'raster', source:'hill', paint:{ 'raster-opacity':0.42 } }, firstSymbol);
+  map.addLayer({ id:'ndsm', type:'raster', source:'ndsm', paint:{ 'raster-opacity':0.82, 'raster-resampling':'nearest' } }, firstSymbol);
+  map.addLayer({ id:'bld', type:'line', source:'bld', 'source-layer':'buildings', layout:{ visibility:'none' }, paint:{ 'line-color':'#0b3d33', 'line-width':0.7, 'line-opacity':0.8 } }, firstSymbol);
+  map.setTerrain({ source:'inegi-dem', exaggeration:1 });
+  const tog = (id, fn) => document.getElementById(id).addEventListener('change', e => fn(e.target.checked));
+  const terrainSrc = () => document.getElementById('t-aws').checked ? 'aws-dem' : 'inegi-dem';
+  tog('t-terrain', on => map.setTerrain(on ? { source:terrainSrc(), exaggeration:1 } : null));
+  tog('t-aws', () => { if (document.getElementById('t-terrain').checked) map.setTerrain({ source:terrainSrc(), exaggeration:1 }); });
+  tog('t-hill', on => map.setLayoutProperty('hill', 'visibility', on ? 'visible' : 'none'));
+  tog('t-ndsm', on => map.setLayoutProperty('ndsm', 'visibility', on ? 'visible' : 'none'));
+  tog('t-bld', on => map.setLayoutProperty('bld', 'visibility', on ? 'visible' : 'none'));
+  if (q.get('bld') === '1') { document.getElementById('t-bld').checked = true; map.setLayoutProperty('bld', 'visibility', 'visible'); }
+  if (q.get('ndsm') === '0') { document.getElementById('t-ndsm').checked = false; map.setLayoutProperty('ndsm', 'visibility', 'none'); }
+  if (q.get('aws') === '1') { document.getElementById('t-aws').checked = true; map.setTerrain({ source:'aws-dem', exaggeration:1 }); }
+  const vb = document.getElementById('views');
+  for (const [k, v] of Object.entries(VIEWS)) { const b = document.createElement('button'); b.textContent = v.label; b.onclick = () => { [...vb.children].forEach(x => x.classList.remove('on')); b.classList.add('on'); map.flyTo({ ...v, duration:2500 }); }; vb.append(b); }
+  map.on('click', e => {
+    const el = map.queryTerrainElevation(e.lngLat);
+    document.getElementById('readout').innerHTML = `${e.lngLat.lat.toFixed(5)}°, ${e.lngLat.lng.toFixed(5)}°<br>Elevación del relieve 3D: <b>${el == null ? '—' : el.toFixed(1) + ' m'}</b> (${terrainSrc() === 'aws-dem' ? 'AWS global' : 'MDT INEGI'})`;
+  });
+  window.__terrainCheck.loaded = true;
+});
+const idle = () => new Promise(res => { map.once('idle', () => requestAnimationFrame(() => res(true))); map.triggerRepaint(); });
+window.__terrainCheck = { map, loaded:false, idle, view: name => { map.jumpTo(VIEWS[name]); return idle(); } };
+</script>
+</body>
+</html>
