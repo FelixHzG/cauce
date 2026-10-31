@@ -23,6 +23,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 #brand .word b{color:var(--pink)}
 #brand .pill{font-family:var(--fh);font-weight:500;font-size:12.5px;background:var(--pink2);color:#b0477a;border-radius:999px;padding:4px 10px;white-space:nowrap}
 #brand .pill i{font-style:normal;color:#ff6fa6}
+/* the brand opens /labs/ in a new tab; on hover the pill says where it goes (both labels share one grid cell so the pill keeps its width) */
+#brand{color:inherit;text-decoration:none;cursor:pointer;transition:transform .15s,border-color .15s}
+#brand:hover,#brand:focus-visible{transform:translateY(-2px);border-color:var(--pink);outline:none}
+#brand .pill{display:inline-grid;text-align:center;transition:background-color .15s,color .15s}
+#brand .pill>span{grid-area:1/1}
+#brand .p-go{visibility:hidden}
+#brand:hover .pill,#brand:focus-visible .pill{background:#ec5f98;color:#fff}
+#brand:hover .pill i,#brand:focus-visible .pill i{color:#fff}
+#brand:hover .p-name,#brand:focus-visible .p-name{visibility:hidden}
+#brand:hover .p-go,#brand:focus-visible .p-go{visibility:visible}
 
 /* maneuver */
 #maneuver{position:absolute;left:50%;top:18px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:9px 22px 9px 9px;width:min(440px,calc(100% - 760px));min-width:340px;z-index:5}
